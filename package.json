@@ -8,27 +8,27 @@
     "watch": "webpack --watch",
     "clean": "rm -rf dist",
     "compile": "npx tsc",
-    "getEvents": "node ./dist/getEvents.js"
+    "buildAndRun": "npm run build && npm run compile && curl -o dist/basic.ics https://calendar.google.com/calendar/ical/finos.org_fac8mo1rfc6ehscg0d80fi8jig%40group.calendar.google.com/public/basic.ics"
   },
   "keywords": [],
   "author": "TheJuanAndOnly99",
   "license": "Apache-2.0",
   "devDependencies": {
     "@types/node": "^20.4.4",
-    "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4",
     "css-loader": "^4.3.0",
     "html-webpack-plugin": "^5.5.0",
-    "style-loader": "^3.3.1"
+    "style-loader": "^3.3.1",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.8",
     "@fullcalendar/daygrid": "^6.1.8",
+    "@fullcalendar/icalendar": "^6.1.8",
     "@fullcalendar/interaction": "^6.1.8",
     "@fullcalendar/list": "^6.1.8",
     "@fullcalendar/timegrid": "^6.1.8",
     "fullcalendar": "^6.1.8",
-    "googleapis": "^122.0.0",
-    "typescript": "^5.1.6"
+    "tippy.js": "^6.3.7"
   }
 }
