@@ -29,6 +29,7 @@
     "@fullcalendar/list": "^6.1.8",
     "@fullcalendar/timegrid": "^6.1.8",
     "fullcalendar": "^6.1.8",
-    "tippy.js": "^6.3.7"
+    "tippy.js": "^6.3.7",
+    "typescript": "^5.2.2"
   }
 }
