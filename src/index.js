@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     const modalContent = document.createElement('div');
                     modalContent.classList.add('modal-content');
-                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br>Start: ${info.event.start.toLocaleString()}<br></br>End: ${info.event.end.toLocaleString()}<br><br>${info.event.extendedProps.description}<br>`;
+                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br>Start: ${info.event.start.toString()}<br></br>End: ${info.event.end.toString()}<br><br>${info.event.extendedProps.description}<br>`;
                     modalContainer.appendChild(modalContent);
 
                     // Add a close button to the popup
