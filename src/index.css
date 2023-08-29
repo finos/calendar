@@ -45,6 +45,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     z-index: 9999; /* Ensure the tooltip is displayed above the calendar */
     min-width: 18em;
+    max-width: 22em;
 }
 
 .fc .fc-button-primary {
