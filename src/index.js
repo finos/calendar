@@ -3,11 +3,13 @@ import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import iCalendarPlugin from '@fullcalendar/icalendar';
-import tippy from 'tippy.js'; 
-import 'tippy.js/dist/tippy.css'; 
+import tippy from 'tippy.js';
+import 'tippy.js/dist/tippy.css';
 import './index.css';
 
-document.addEventListener('DOMContentLoaded', function() {
+console.log('view.js loaded')
+
+document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
 
     // Get the current date as a string in the format 'YYYY-MM-DD'
@@ -18,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         events: {
             url: 'basic.ics',
             format: 'ics'
-        },  
+        },
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
@@ -49,15 +51,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     const modalContent = document.createElement('div');
                     modalContent.classList.add('modal-content');
                     modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${info.event.start.toLocaleString()} EST<br><strong>End:</strong> ${info.event.end.toLocaleString()} EST<br><br>${info.event.extendedProps.description}<br>`;
-                    modalContainer.appendChild(modalContent);
 
                     // Add a "Download ICS" button to the popup
                     const downloadButton = document.createElement('button');
                     downloadButton.innerHTML = 'Download ICS';
                     downloadButton.classList.add('modal-download');
                     downloadButton.addEventListener('click', () => {
-                        // Generate and trigger the download of the ICS file
-                        generateAndDownloadICS(info.event);
+                        // Generate and trigger the ICS file download
+                        const icsData = generateICSData(info.event);
+                        downloadICS(info.event.title, icsData);
                     });
                     modalContent.appendChild(downloadButton);
 
@@ -68,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     closeButton.addEventListener('click', () => instance.hide());
                     modalContent.appendChild(closeButton);
 
+                    modalContainer.appendChild(modalContent);
                     instance.setContent(modalContainer);
                 },
             });
@@ -75,47 +78,34 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     calendar.render();
-
-
-    // Function to generate ICS data from the event, including recurring events
-    function generateAndDownloadICS(event) {
-        const startDate = event.start.toISOString();
-        const endDate = event.end.toISOString();
-
-        // Remove HTML tags from the description
-        const descriptionWithoutHTML = event.extendedProps.description.replace(/<\/?[^>]+(>|$)/g, "");
-
-        const icsData = `BEGIN:VCALENDAR
-VERSION:2.0
-BEGIN:VEVENT
-UID:${generateUID()}   // Generate a unique ID for the event
-DTSTAMP:${new Date().toISOString().replace(/-|:|\.\d+/g, "") + "Z"}
-DTSTART:${startDate}
-DTEND:${endDate}
-SUMMARY:${event.title}
-DESCRIPTION:${descriptionWithoutHTML}
-END:VEVENT
-END:VCALENDAR`;
-
-        // Create a Blob from the ICS data
-        const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
-
-        // Create a download link for the Blob
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = `${event.title}.ics`;
-
-        // Simulate a click on the link to trigger the download
-        link.click();
-    }
-
-    // Function to generate a unique UID for the event
-    function generateUID() {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-            var r = Math.random() * 16 | 0,
-                v = c === 'x' ? r : (r & 0x3 | 0x8);
-            return v.toString(16);
-        });
-    }
 });
 
+// Function to generate ICS data from the event
+function generateICSData(event) {
+    const startDate = event.start.toISOString().replace(/-/g, '').replace(/:/g, '').slice(0, -5);
+    const endDate = event.end.toISOString().replace(/-/g, '').replace(/:/g, '').slice(0, -5);
+    const cleanDescription = event.extendedProps.description.replace(/<\/?[^>]+(>|$)/g, "");
+
+    return `BEGIN:VCALENDAR
+            VERSION:2.0
+            BEGIN:VEVENT
+            DTSTAMP:${startDate}Z
+            DTSTART:${startDate}Z
+            DTEND:${endDate}Z
+            SUMMARY:${event.title}
+            DESCRIPTION:${cleanDescription}
+            END:VEVENT
+            END:VCALENDAR`;
+            }
+
+// Function to trigger the download of the ICS file
+function downloadICS(fileName, data) {
+    const blob = new Blob([data], { type: 'text/calendar' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${fileName}.ics`;
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+}
