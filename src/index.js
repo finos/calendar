@@ -83,8 +83,23 @@ function generateICSData(event) {
     const startDate = event.start.toISOString().replace(/-/g, '').replace(/:/g, '').slice(0, -5);
     const endDate = event.end.toISOString().replace(/-/g, '').replace(/:/g, '').slice(0, -5);
     const cleanDescription = event.extendedProps.description.replace(/<\/?[^>]+(>|$)/g, "");
-    
-    return `BEGIN:VCALENDAR
+
+    // Check if it's a recurring event
+    if (event._def.recurringDef) {
+        const rrule = event._def.recurringDef.rrule;
+        return `BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+DTSTAMP:${startDate}Z
+DTSTART:${startDate}Z
+DTEND:${endDate}Z
+SUMMARY:${event.title}
+DESCRIPTION:${cleanDescription}
+RRULE:${rrule}
+END:VEVENT
+END:VCALENDAR`;
+}
+return `BEGIN:VCALENDAR
 VERSION:2.0
 BEGIN:VEVENT
 DTSTAMP:${startDate}Z
