@@ -81,13 +81,13 @@ document.addEventListener('DOMContentLoaded', function() {
 // Function to generate and download ICS file
 function generateICSFile(event) {
     const eventTitle = event.title;
-    const startDate = event.start;
-    const endDate = event.end;
+    const startDate = event.start.toISOString();
+    const endDate = event.end.toISOString();
     const descriptionWithoutHTML = event.extendedProps.description.replace(/<\/?[^>]+(>|$)/g, "");
 
     const eventObj = {
-        start: startDate,
-        end: endDate,
+        start: [startDate.getFullYear(), startDate.getMonth() + 1, startDate.getDate()],
+        end: [endDate.getFullYear(), endDate.getMonth() + 1, endDate.getDate()],
         title: eventTitle,
         description: descriptionWithoutHTML,
     };
