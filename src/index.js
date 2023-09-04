@@ -7,8 +7,6 @@ import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 import './index.css';
 
-console.log('view.js loaded')
-
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
 
@@ -86,16 +84,16 @@ function generateICSData(event) {
     const endDate = event.end.toISOString().replace(/-/g, '').replace(/:/g, '').slice(0, -5);
 
     return `BEGIN:VCALENDAR
-            VERSION:2.0
-            BEGIN:VEVENT
-            DTSTAMP:${startDate}Z
-            DTSTART:${startDate}Z
-            DTEND:${endDate}Z
-            SUMMARY:${event.title}
-            DESCRIPTION:${event.extendedProps.description}
-            END:VEVENT
-            END:VCALENDAR`;
-            }
+VERSION:2.0
+BEGIN:VEVENT
+DTSTAMP:${startDate}Z
+DTSTART:${startDate}Z
+DTEND:${endDate}Z
+SUMMARY:${event.title}
+DESCRIPTION:${event.extendedProps.description}
+END:VEVENT
+END:VCALENDAR`;
+}
 
 // Function to trigger the download of the ICS file
 function downloadICS(fileName, data) {
