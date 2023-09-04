@@ -80,19 +80,40 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Function to generate ICS data from the event
 function generateICSData(event) {
-    const startDate = event.start.toISOString().replace(/-/g, '').replace(/:/g, '').slice(0, -5);
-    const endDate = event.end.toISOString().replace(/-/g, '').replace(/:/g, '').slice(0, -5);
+    const eventTitle = event.title;
+    const startDate = event.start.toISOString().replace(/-|:/g, '').slice(0, -5);
+    const endDate = event.end.toISOString().replace(/-|:/g, '').slice(0, -5);
 
-    return `BEGIN:VCALENDAR
+    const rrule = event._def.recurringDef;
+
+    let icsData = `BEGIN:VCALENDAR
 VERSION:2.0
 BEGIN:VEVENT
 DTSTAMP:${startDate}Z
 DTSTART:${startDate}Z
 DTEND:${endDate}Z
-SUMMARY:${event.title}
+SUMMARY:${eventTitle}
 DESCRIPTION:${event.extendedProps.description}
-END:VEVENT
-END:VCALENDAR`;
+`;
+
+    // If it's a recurring event, add RRULE information
+    if (rrule) {
+        const freq = rrule.freq;
+        const interval = rrule.interval || 1;
+        const until = rrule.until ? rrule.until.toISOString().replace(/-|:/g, '').slice(0, -5) : '';
+        
+        icsData += `RRULE:FREQ=${freq};INTERVAL=${interval}`;
+        
+        if (until) {
+            icsData += `;UNTIL=${until}`;
+        }
+        
+        icsData += '\n';
+    }
+
+    icsData += 'END:VEVENT\nEND:VCALENDAR';
+
+    return icsData;
 }
 
 // Function to trigger the download of the ICS file
