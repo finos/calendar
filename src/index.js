@@ -6,7 +6,7 @@ import iCalendarPlugin from '@fullcalendar/icalendar';
 import tippy from 'tippy.js'; 
 import 'tippy.js/dist/tippy.css'; 
 import './index.css';
-import { createEvent, toBlob, saveAs } from 'ics';
+import * as ics from 'ics'
 
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
@@ -86,17 +86,23 @@ function generateICSFile(event) {
     const descriptionWithoutHTML = event.extendedProps.description.replace(/<\/?[^>]+(>|$)/g, "");
 
     const eventObj = {
-        start: [startDate.getFullYear(), startDate.getMonth() + 1, startDate.getDate()],
-        end: [endDate.getFullYear(), endDate.getMonth() + 1, endDate.getDate()],
+        start: startDate,
+        end: endDate,
         title: eventTitle,
         description: descriptionWithoutHTML,
     };
 
-    const { error, value } = createEvent(eventObj);
+    const { error, value } = ics.createEvent(eventObj);
 
     if (!error) {
-        const blob = toBlob(value);
-        saveAs(blob, `${eventTitle}.ics`);
+        const blob = new Blob([ics(value)], { type: 'text/calendar' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${eventTitle}.ics`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
     } else {
         console.error('Error generating ICS file:', error);
     }
