@@ -91,24 +91,25 @@ function generateICSData(event) {
 VERSION:2.0
 BEGIN:VEVENT
 DTSTAMP:${startDate}Z
-DTSTART:${startDate}Z
-DTEND:${endDate}Z
+DTSTART:${startDate}T${startDate}Z
+DTEND:${endDate}T${endDate}Z
 SUMMARY:${event.title}
 DESCRIPTION:${cleanDescription}
 RRULE:${rrule}
 END:VEVENT
 END:VCALENDAR`;
-}
-return `BEGIN:VCALENDAR
+        } else {
+        return `BEGIN:VCALENDAR
 VERSION:2.0
 BEGIN:VEVENT
 DTSTAMP:${startDate}Z
-DTSTART:${startDate}Z
-DTEND:${endDate}Z
+DTSTART:${startDate}T${startDate}Z
+DTEND:${endDate}T${endDate}Z
 SUMMARY:${event.title}
 DESCRIPTION:${cleanDescription}
 END:VEVENT
 END:VCALENDAR`;
+    }
 }
 
 // Function to trigger the download of the ICS file
