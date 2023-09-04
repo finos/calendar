@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     downloadButton.classList.add('modal-download');
                     downloadButton.addEventListener('click', () => {
                         // Generate and trigger the ICS file download
-                        generateICSData(info.event);
+                        generateICSFile(info.event);
                     });
                     modalContent.appendChild(downloadButton);
 
