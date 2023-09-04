@@ -6,6 +6,7 @@ import iCalendarPlugin from '@fullcalendar/icalendar';
 import tippy from 'tippy.js'; 
 import 'tippy.js/dist/tippy.css'; 
 import './index.css';
+import { createEvent, toBlob, saveAs } from 'ics';
 
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
@@ -57,8 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     downloadButton.classList.add('modal-download');
                     downloadButton.addEventListener('click', () => {
                         // Generate and trigger the ICS file download
-                        const icsData = generateICSData(info.event);
-                        downloadICS(info.event.title, icsData);
+                        generateICSData(info.event);
                     });
                     modalContent.appendChild(downloadButton);
 
@@ -78,52 +78,26 @@ document.addEventListener('DOMContentLoaded', function() {
     calendar.render();
 });
 
-// Function to generate ICS data from the event
-function generateICSData(event) {
+// Function to generate and download ICS file
+function generateICSFile(event) {
     const eventTitle = event.title;
-    const startDate = event.start.toISOString().replace(/-|:/g, '').slice(0, -5);
-    const endDate = event.end.toISOString().replace(/-|:/g, '').slice(0, -5);
+    const startDate = event.start;
+    const endDate = event.end;
+    const descriptionWithoutHTML = event.extendedProps.description.replace(/<\/?[^>]+(>|$)/g, "");
 
-    const rrule = event._def.recurringDef;
+    const eventObj = {
+        start: startDate,
+        end: endDate,
+        title: eventTitle,
+        description: descriptionWithoutHTML,
+    };
 
-    let icsData = `BEGIN:VCALENDAR
-VERSION:2.0
-BEGIN:VEVENT
-DTSTAMP:${startDate}Z
-DTSTART:${startDate}Z
-DTEND:${endDate}Z
-SUMMARY:${eventTitle}
-DESCRIPTION:${event.extendedProps.description}
-`;
+    const { error, value } = createEvent(eventObj);
 
-    // If it's a recurring event, add RRULE information
-    if (rrule) {
-        const freq = rrule.freq;
-        const interval = rrule.interval || 1;
-        const until = rrule.until ? rrule.until.toISOString().replace(/-|:/g, '').slice(0, -5) : '';
-        
-        icsData += `RRULE:FREQ=${freq};INTERVAL=${interval}`;
-        
-        if (until) {
-            icsData += `;UNTIL=${until}`;
-        }
-        
-        icsData += '\n';
+    if (!error) {
+        const blob = toBlob(value);
+        saveAs(blob, `${eventTitle}.ics`);
+    } else {
+        console.error('Error generating ICS file:', error);
     }
-
-    icsData += 'END:VEVENT\nEND:VCALENDAR';
-
-    return icsData;
-}
-
-// Function to trigger the download of the ICS file
-function downloadICS(fileName, data) {
-    const blob = new Blob([data], { type: 'text/calendar' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${fileName}.ics`;
-    document.body.appendChild(a);
-    a.click();
-    window.URL.revokeObjectURL(url);
 }
