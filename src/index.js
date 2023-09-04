@@ -6,7 +6,6 @@ import iCalendarPlugin from '@fullcalendar/icalendar';
 import tippy from 'tippy.js'; 
 import 'tippy.js/dist/tippy.css'; 
 import './index.css';
-import * as ics from 'ics'
 
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
@@ -58,8 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     downloadButton.classList.add('modal-download');
                     downloadButton.addEventListener('click', () => {
                         // Generate and trigger the download of the ICS file
-                        const icsData = generateICSData(info.event);
-                        downloadICS(info.event.title, icsData);
+                        generateAndDownloadICS(info.event);
                     });
                     modalContent.appendChild(downloadButton);
 
@@ -79,45 +77,45 @@ document.addEventListener('DOMContentLoaded', function() {
     calendar.render();
 
 
-       // Function to generate ICS data from the event, including recurring events
-    function generateICSData(event) {
+    // Function to generate ICS data from the event, including recurring events
+    function generateAndDownloadICS(event) {
         const startDate = event.start.toISOString();
         const endDate = event.end.toISOString();
 
         // Remove HTML tags from the description
         const descriptionWithoutHTML = event.extendedProps.description.replace(/<\/?[^>]+(>|$)/g, "");
 
-        let icsData = `BEGIN:VCALENDAR
-                        VERSION:2.0
-                        BEGIN:VEVENT
-                        DTSTAMP:${startDate}Z
-                        DTSTART:${startDate}Z
-                        DTEND:${endDate}Z
-                        SUMMARY:${event.title}
-                        DESCRIPTION:${descriptionWithoutHTML}
-                        `;
+        const icsData = `BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+UID:${generateUID()}   // Generate a unique ID for the event
+DTSTAMP:${new Date().toISOString().replace(/-|:|\.\d+/g, "") + "Z"}
+DTSTART:${startDate}
+DTEND:${endDate}
+SUMMARY:${event.title}
+DESCRIPTION:${descriptionWithoutHTML}
+END:VEVENT
+END:VCALENDAR`;
 
-        // Check if it's a recurring event
-        if (event._def.recurringDef) {
-            const rrule = event._def.recurringDef.rrule;
-            icsData += `RRULE:${rrule}\n`;
-        }
+        // Create a Blob from the ICS data
+        const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
 
-        icsData += 'END:VEVENT\nEND:VCALENDAR';
+        // Create a download link for the Blob
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = `${event.title}.ics`;
 
-        return icsData;
+        // Simulate a click on the link to trigger the download
+        link.click();
     }
 
-    // Function to trigger the download of the ICS file
-    function downloadICS(fileName, data) {
-        const blob = new Blob([data], { type: 'text/calendar' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `${fileName}.ics`;
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
+    // Function to generate a unique UID for the event
+    function generateUID() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0,
+                v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
     }
 });
 
