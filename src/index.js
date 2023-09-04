@@ -57,8 +57,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     downloadButton.innerHTML = 'Download ICS';
                     downloadButton.classList.add('modal-download');
                     downloadButton.addEventListener('click', () => {
-                        // Generate and trigger the ICS file download
-                        generateICSFile(info.event);
+                        // Generate and trigger the download of the ICS file
+                        const icsData = generateICSData(info.event);
+                        downloadICS(info.event.title, icsData);
                     });
                     modalContent.appendChild(downloadButton);
 
@@ -76,34 +77,47 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     calendar.render();
-});
 
-// Function to generate and download ICS file
-function generateICSFile(event) {
-    const eventTitle = event.title;
-    const startDate = new Date(event.start);
-    const endDate = new Date(event.end);
-    const descriptionWithoutHTML = event.extendedProps.description.replace(/<\/?[^>]+(>|$)/g, "");
 
-    const eventObj = {
-        start: startDate,
-        end: endDate,
-        title: eventTitle,
-        description: descriptionWithoutHTML,
-    };
+       // Function to generate ICS data from the event, including recurring events
+    function generateICSData(event) {
+        const startDate = event.start.toISOString();
+        const endDate = event.end.toISOString();
 
-    const { error, value } = ics.createEvent(eventObj);
+        // Remove HTML tags from the description
+        const descriptionWithoutHTML = event.extendedProps.description.replace(/<\/?[^>]+(>|$)/g, "");
 
-    if (!error) {
-        const blob = new Blob([ics(value)], { type: 'text/calendar' });
+        let icsData = `BEGIN:VCALENDAR
+                        VERSION:2.0
+                        BEGIN:VEVENT
+                        DTSTAMP:${startDate}Z
+                        DTSTART:${startDate}Z
+                        DTEND:${endDate}Z
+                        SUMMARY:${event.title}
+                        DESCRIPTION:${descriptionWithoutHTML}
+                        `;
+
+        // Check if it's a recurring event
+        if (event._def.recurringDef) {
+            const rrule = event._def.recurringDef.rrule;
+            icsData += `RRULE:${rrule}\n`;
+        }
+
+        icsData += 'END:VEVENT\nEND:VCALENDAR';
+
+        return icsData;
+    }
+
+    // Function to trigger the download of the ICS file
+    function downloadICS(fileName, data) {
+        const blob = new Blob([data], { type: 'text/calendar' });
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `${eventTitle}.ics`;
+        a.download = `${fileName}.ics`;
         document.body.appendChild(a);
         a.click();
         window.URL.revokeObjectURL(url);
-    } else {
-        console.error('Error generating ICS file:', error);
     }
-}
+});
+

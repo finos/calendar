@@ -59,3 +59,7 @@ body {
     color: #fff;
     padding: 0.1em
 } 
+
+.modal-download {
+    margin-right: 1em;
+}
