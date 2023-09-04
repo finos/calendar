@@ -82,7 +82,8 @@ document.addEventListener('DOMContentLoaded', function () {
 function generateICSData(event) {
     const startDate = event.start.toISOString().replace(/-/g, '').replace(/:/g, '').slice(0, -5);
     const endDate = event.end.toISOString().replace(/-/g, '').replace(/:/g, '').slice(0, -5);
-
+    const cleanDescription = event.extendedProps.description.replace(/<\/?[^>]+(>|$)/g, "");
+    
     return `BEGIN:VCALENDAR
 VERSION:2.0
 BEGIN:VEVENT
@@ -90,7 +91,7 @@ DTSTAMP:${startDate}Z
 DTSTART:${startDate}Z
 DTEND:${endDate}Z
 SUMMARY:${event.title}
-DESCRIPTION:${event.extendedProps.description}
+DESCRIPTION:${cleanDescription}
 END:VEVENT
 END:VCALENDAR`;
 }
