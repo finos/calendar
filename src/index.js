@@ -85,7 +85,7 @@ function generateICSData(event) {
     const cleanDescription = event.extendedProps.description.replace(/<\/?[^>]+(>|$)/g, "");
     // get event recurrence rule
     const recurrenceRule = event.rrule;
-    console.log(`recurrenceRule: `, recurrenceRule);
+    console.log(`recurrenceRule: `, recurrenceRule.toString());
 
 
     return `BEGIN:VCALENDAR
