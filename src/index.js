@@ -3,7 +3,6 @@ import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import iCalendarPlugin from '@fullcalendar/icalendar';
-import rrulePlugin from '@fullcalendar/rrule'
 import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 import './index.css';
@@ -15,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const currentDate = new Date().toISOString().slice(0, 10);
 
     var calendar = new Calendar(calendarEl, {
-        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin, iCalendarPlugin, rrulePlugin],
+        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin, iCalendarPlugin],
         events: {
             url: 'basic.ics',
             format: 'ics'
@@ -84,13 +83,6 @@ function generateICSData(event) {
     const startDate = event.start.toISOString().replace(/-/g, '').replace(/:/g, '').slice(0, -5);
     const endDate = event.end.toISOString().replace(/-/g, '').replace(/:/g, '').slice(0, -5);
     const cleanDescription = event.extendedProps.description.replace(/<\/?[^>]+(>|$)/g, "");
-    // get event recurrence rule
-    const recurrenceRule = event.rrule;
-    console.log(`recurrenceRule: `, recurrenceRule);
-    console.log(`recurrenceRule: `, recurrenceRule.toString());
-    console.log(`recurrenceRule: `, recurrenceRule.valueOf());
-    console.log(`recurrenceRule: `, recurrenceRule.toText());
-
 
     return `BEGIN:VCALENDAR
 VERSION:2.0
