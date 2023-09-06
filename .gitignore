@@ -1,5 +1,5 @@
 calendar-service-account.json
 
-node_modules
+node_modules/
 
 dist/
