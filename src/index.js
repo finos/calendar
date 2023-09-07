@@ -55,8 +55,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     const formattedStartTime = new Date(startTime);
                     const formatedEndTime = new Date(endTime);
 
+                    // Get the timezone from the browser
+                    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                    console.log(`timeZone: ${timeZone}`)
+
                     // Format the date in a more readable format
                     const options = {
+                    timeZone: timeZone,
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
