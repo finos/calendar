@@ -7,7 +7,6 @@ import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 import './index.css';
 import moment from 'moment-timezone';
-import { start } from 'repl';
 
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
