@@ -50,11 +50,17 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.log(info.event.start);
 
                     const startTime = moment(info.event.start).tz('America/New_York').format();
-                    const endTime = moment(info.event.end).tz('America/New_York').format();
-
                     console.log(`startTime`, startTime);
+                    const endTime = moment(info.event.end).tz('America/New_York').format();
+                    console.log(`endTime`, endTime);
+
+                    const startDateObject = new Date(startTime);
+                    console.log(`startDateObject`, startDateObject);
+                    const endDateObject = new Date(endTime);
+                    console.log(`endDateObject`, endDateObject);
 
                     const userTimeZone = moment.tz.guess();
+                    console.log(`userTimeZone`, userTimeZone);
 
                     const formatter = new Intl.DateTimeFormat('en-US', {
                     timeZone: userTimeZone,
@@ -67,10 +73,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     timeZoneName: 'short'
                     });
 
-                    const formattedStartTime = formatter.format(startTime);
+                    const formattedStartTime = formatter.format(startDateObject);
                     console.log(`formattedStartTime`, formattedStartTime);
                     
-                    const formattedEndTime = formatter.format(endTime);
+                    const formattedEndTime = formatter.format(endDateObject);
                     console.log(`formattedEndTime `,formattedEndTime);
 
                     const modalContent = document.createElement('div');
