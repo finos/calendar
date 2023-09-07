@@ -50,6 +50,18 @@ document.addEventListener('DOMContentLoaded', function () {
                     const startTime = moment(info.event.start).tz('America/New_York').format();
                     const endTime = moment(info.event.end).tz('America/New_York').format();
 
+                    const month = startTime.toLocaleString('default', { month: 'long' });
+                    const day = startTime.getstartTime();
+                    const hours = startTime.getHours();
+                    const minutes = startTime.getMinutes();
+                    const timeZone = startTime.toLocaleString('default', { timeZoneName: 'short' });
+
+                    console.log(`month: ${month}`);
+                    console.log(`day: ${day}`);
+                    console.log(`hours: ${hours}`);
+                    console.log(`minutes: ${minutes}`);
+                    console.log(`timeZone: ${timeZone}`);
+
                     // console.log(`startTime: ${startTime}`);
                     // console.log(`endTime: ${endTime}`);
 
