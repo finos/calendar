@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     const startTime = moment(info.event.start).tz('America/New_York').format("MMMM D h:mm A");
                     console.log(`startTime`, startTime);
-                    const endTime = moment.tz(info.event.end, userTimeZone).format("MMMM D h:mm A");
+                    const endTime = moment(info.event.end).tz(userTimeZone).format("MMMM D h:mm A");
                     console.log(`endTime`, endTime);
 
                     const modalContent = document.createElement('div');
