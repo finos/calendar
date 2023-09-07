@@ -78,9 +78,25 @@ document.addEventListener('DOMContentLoaded', function () {
                     // const finalStartTime = formattedStartTime.toLocaleString(undefined, options);
                     // const finalEndTime = formatedEndTime.toLocaleString(undefined, options);
 
+                    // Format the date without seconds
+                    const options = {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    timeZoneName: 'short',
+                    };
+
+                    const formattedStartTime = startTime.toLocaleString(undefined, options);
+                    const formattedEndTime = endTime.toLocaleString(undefined, options);
+
+                    console.log(`formattedStartTime: ${formattedStartTime}`);
+                    console.log(`formattedEndTime: ${formattedEndTime}`);
+
                     const modalContent = document.createElement('div');
                     modalContent.classList.add('modal-content');
-                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTime}<br><strong>End:</strong> ${endTime}<br><br>${info.event.extendedProps.description}<br>`;
+                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${formattedStartTime}<br><strong>End:</strong> ${formattedEndTime}<br><br>${info.event.extendedProps.description}<br>`;
                     // modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTime}<br><strong>End:</strong> ${endTime}<br><br>${info.event.extendedProps.description}<br>`;
 
                     // Add a "Download ICS" button to the popup
