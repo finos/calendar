@@ -95,6 +95,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     const finalStartTime = startTime.toLocaleString(undefined, options);
                     const finalEndTime = endTime.toLocaleString(undefined, options);
 
+                    const hours = finalStartTime.getHours();
+                    console.log(`hours: ${hours}`);
+
                     console.log(`finalStartTime: ${finalStartTime}`);
                     console.log(`finalEndTime: ${finalEndTime}`);
 
