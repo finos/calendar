@@ -50,12 +50,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     const startTime = moment(info.event.start).tz('America/New_York').format();
                     const endTime = moment(info.event.end).tz('America/New_York').format();
 
-                    const startTime12 = new Date(startTime).toLocaleString({ hour: 'numeric', minute: 'numeric', hour12: true });
-                    const endTime12 = new Date(endTime).toLocaleString({ hour: 'numeric', minute: 'numeric', hour12: true });
-
                     const modalContent = document.createElement('div');
                     modalContent.classList.add('modal-content');
-                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTime12}<br><strong>End:</strong> ${endTime12}<br><br>${info.event.extendedProps.description}<br>`;
+                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTime}<br><strong>End:</strong> ${endTime}<br><br>${info.event.extendedProps.description}<br>`;
 
                     // Add a "Download ICS" button to the popup
                     const downloadButton = document.createElement('button');
