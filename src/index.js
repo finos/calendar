@@ -49,25 +49,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     const startTime = moment(info.event.start).tz('America/New_York').format();
                     const endTime = moment(info.event.end).tz('America/New_York').format();
-
-                    const month = startTime.toLocaleString('default', { month: 'long' });
-                    const day = startTime.getstartTime();
-                    const hours = startTime.getHours();
-                    const minutes = startTime.getMinutes();
-                    const timeZone = startTime.toLocaleString('default', { timeZoneName: 'short' });
-
-                    console.log(`month: ${month}`);
-                    console.log(`day: ${day}`);
-                    console.log(`hours: ${hours}`);
-                    console.log(`minutes: ${minutes}`);
-                    console.log(`timeZone: ${timeZone}`);
+                    
 
                     // console.log(`startTime: ${startTime}`);
                     // console.log(`endTime: ${endTime}`);
 
-                    // // Parse the ISO date string
-                    // const formattedStartTime = new Date(startTime);
-                    // const formatedEndTime = new Date(endTime);
+                    // Parse the ISO date string
+                    const formattedStartTime = new Date(startTime);
+                    const formatedEndTime = new Date(endTime);
+
+                    console.log(`formattedStartTime: ${formattedStartTime}`);
+                    console.log(`formatedEndTime: ${formatedEndTime}`);
 
                     // console.log(`formattedStartTime: ${formattedStartTime}`);
                     // console.log(`formatedEndTime: ${formatedEndTime}`);
@@ -100,15 +92,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     timeZoneName: 'short',
                     };
 
-                    const formattedStartTime = startTime.toLocaleString(undefined, options);
-                    const formattedEndTime = endTime.toLocaleString(undefined, options);
+                    const finalStartTime = startTime.toLocaleString(undefined, options);
+                    const finalEndTime = endTime.toLocaleString(undefined, options);
 
-                    console.log(`formattedStartTime: ${formattedStartTime}`);
-                    console.log(`formattedEndTime: ${formattedEndTime}`);
+                    console.log(`finalStartTime: ${finalStartTime}`);
+                    console.log(`finalEndTime: ${finalEndTime}`);
 
                     const modalContent = document.createElement('div');
                     modalContent.classList.add('modal-content');
-                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${formattedStartTime}<br><strong>End:</strong> ${formattedEndTime}<br><br>${info.event.extendedProps.description}<br>`;
+                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${finalStartTime}<br><strong>End:</strong> ${finalEndTime}<br><br>${info.event.extendedProps.description}<br>`;
                     // modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTime}<br><strong>End:</strong> ${endTime}<br><br>${info.event.extendedProps.description}<br>`;
 
                     // Add a "Download ICS" button to the popup
