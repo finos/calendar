@@ -48,8 +48,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     modalContainer.classList.add('fc-event-tooltip');
 
                     const userTimeZone = moment.tz.guess();
-                    const startTime = moment(info.event.start).tz(userTimeZone).format('h:mm A');
-                    const endTime = moment(info.event.end).tz('America/New_York').format('h:mm A');
+                    const startTime = moment(info.event.start).tz('America/New_York').format('HH:mm');
+                    const endTime = moment(info.event.end).tz('America/New_York').format('HH:mm');
 
                     const modalContent = document.createElement('div');
                     modalContent.classList.add('modal-content');
