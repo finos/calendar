@@ -32,8 +32,9 @@ document.addEventListener('DOMContentLoaded', function () {
         editable: true,
         dayMaxEvents: false, // allow "more" link when too many events
         eventContent: function (info) {
-            const startTime = moment(info.event.start).tz('America/New_York').format('LT z');
-            const endTime = moment(info.event.end).tz('America/New_York').format('LT z');
+            const startTime = moment(info.event.start).tz('America/New_York').format('hh:mm a z');
+            const endTime = moment(info.event.end).tz('America/New_York').format('hh:mm a z');
+    
             return {
                 html: `<b class="fc-event-title">${info.event.title}</b>`
             };
