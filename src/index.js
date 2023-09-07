@@ -47,13 +47,17 @@ document.addEventListener('DOMContentLoaded', function () {
                     modalContainer.classList.add('modal-container');
                     modalContainer.classList.add('fc-event-tooltip');
 
-                    const userTimeZone = moment.tz.guess();
-                    console.log(userTimeZone);
-                    const startTime = moment(info.event.start).tz(userTimeZone).format('h:mm A');
-                    const endTime = moment(info.event.end).tz(userTimeZone).format('h:mm A');
+                    const startTime = moment(info.event.start).tz('America/New_York').format();
+                    const endTime = moment(info.event.end).tz('America/New_York').format();
+
+                    // get StartTime in 12 hour format without moment.js
+                    const startTime12 = new Date(startTime).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+                    // get EndTime in 12 hour format without moment.js
+                    const endTime12 = new Date(endTime).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });s
+
                     const modalContent = document.createElement('div');
                     modalContent.classList.add('modal-content');
-                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTime}<br><strong>End:</strong> ${endTime}<br><br>${info.event.extendedProps.description}<br>`;
+                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTime12}<br><strong>End:</strong> ${endTime12}<br><br>${info.event.extendedProps.description}<br>`;
 
                     // Add a "Download ICS" button to the popup
                     const downloadButton = document.createElement('button');
