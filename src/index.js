@@ -47,63 +47,18 @@ document.addEventListener('DOMContentLoaded', function () {
                     modalContainer.classList.add('modal-container');
                     modalContainer.classList.add('fc-event-tooltip');
 
+                    console.log(info.event.start);
+
                     const startTime = moment(info.event.start).tz('America/New_York').format();
                     const endTime = moment(info.event.end).tz('America/New_York').format();
+
+                    console.log(startTime);
+
+
                     
-
-                    // console.log(`startTime: ${startTime}`);
-                    // console.log(`endTime: ${endTime}`);
-
-                    // Parse the ISO date string
-                    const formattedStartTime = new Date(startTime);
-                    const formatedEndTime = new Date(endTime);
-
-                    console.log(`formattedStartTime: ${formattedStartTime}`);
-                    console.log(`formatedEndTime: ${formatedEndTime}`);
-
-                    // console.log(`formattedStartTime: ${formattedStartTime}`);
-                    // console.log(`formatedEndTime: ${formatedEndTime}`);
-
-                    // // Get the timezone from the browser
-                    // const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                    // console.log(`timeZone: ${timeZone}`)
-
-                    // // Format the date in a more readable format
-                    // const options = {
-                    // timeZone: timeZone,
-                    // year: 'numeric',
-                    // month: 'long',
-                    // day: 'numeric',
-                    // hour: '2-digit',
-                    // minute: '2-digit',
-                    // timeZoneName: 'short',
-                    // };
-
-                    // const finalStartTime = formattedStartTime.toLocaleString(undefined, options);
-                    // const finalEndTime = formatedEndTime.toLocaleString(undefined, options);
-
-                    // Format the date without seconds
-                    const options = {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    timeZoneName: 'short',
-                    };
-
-                    const finalStartTime = startTime.toLocaleString(undefined, options);
-                    const finalEndTime = endTime.toLocaleString(undefined, options);
-
-                    const hours = finalStartTime.getHours();
-                    console.log(`hours: ${hours}`);
-
-                    console.log(`finalStartTime: ${finalStartTime}`);
-                    console.log(`finalEndTime: ${finalEndTime}`);
-
                     const modalContent = document.createElement('div');
                     modalContent.classList.add('modal-content');
-                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${finalStartTime}<br><strong>End:</strong> ${finalEndTime}<br><br>${info.event.extendedProps.description}<br>`;
+                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTime}<br><strong>End:</strong> ${endTime}<br><br>${info.event.extendedProps.description}<br>`;
                     // modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTime}<br><strong>End:</strong> ${endTime}<br><br>${info.event.extendedProps.description}<br>`;
 
                     // Add a "Download ICS" button to the popup
