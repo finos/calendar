@@ -50,13 +50,38 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.log(info.event.start)
                     console.log(info.event.start.toLocaleString())
 
-                    // const userTimeZone = moment.tz.guess();
+                    const userTimeZone = moment.tz.guess();
                     // const startTime = moment(info.event.start).tz('America/New_York').format('HH:mm');
                     // const endTime = moment(info.event.end).tz('America/New_York').format('HH:mm');
 
+
+                    const startTime = info.event.start;
+                    const endTime = info.event.end;
+
+                    // Specify your local time zone
+                    const timeZone = userTimeZone; // Change this to your desired time zone
+
+                    // Options for formatting
+                    const options = {
+                    timeZone: timeZone,
+                    year: 'numeric',
+                    month: 'numeric',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: 'numeric',
+                    hour12: true, // To display in 12-hour format
+                    };
+
+                    // Format the date in the local time zone
+                    const localStartTime = startTime.toLocaleString(undefined, options);
+                    const localEndTime = endTime.toLocaleString(undefined, options);
+
+                    console.log(localDateTime);
+
                     const modalContent = document.createElement('div');
                     modalContent.classList.add('modal-content');
-                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${info.event.start.toLocaleString()} EST<br><strong>End:</strong> ${info.event.end.toLocaleString()} EST<br><br>${info.event.extendedProps.description}<br>`;
+                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${localStartTime} EST<br><strong>End:</strong> ${localEndTime} EST<br><br>${info.event.extendedProps.description}<br>`;
                     // modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTime}<br><strong>End:</strong> ${endTime}<br><br>${info.event.extendedProps.description}<br>`;
 
                     // Add a "Download ICS" button to the popup
