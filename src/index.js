@@ -49,9 +49,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     console.log(info.event.start);
 
-                    const startTime = moment(info.event.start).tz('America/New_York').format();
+                    const startTime = moment(info.event.start).format();
                     console.log(`startTime`, startTime);
-                    const endTime = moment(info.event.end).tz('America/New_York').format();
+                    const endTime = moment(info.event.end).format();
                     console.log(`endTime`, endTime);
 
                     const startDateObject = new Date(startTime);
