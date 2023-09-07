@@ -47,16 +47,17 @@ document.addEventListener('DOMContentLoaded', function () {
                     modalContainer.classList.add('modal-container');
                     modalContainer.classList.add('fc-event-tooltip');
 
-                    const userTimeZone = moment.tz.guess();
-                    // const startTime = moment(info.event.start).tz('America/New_York').format('HH:mm');
-                    // const endTime = moment(info.event.end).tz('America/New_York').format('HH:mm');
+                    const startTime = moment(info.event.start).tz('America/New_York').format();
+                    const endTime = moment(info.event.end).tz('America/New_York').format();
 
 
-                    const startTime = info.event.start;
-                    const endTime = info.event.end;
+                    // const startTime = info.event.start;
+                    // const endTime = info.event.end;
                     console.log(`Start time: ${startTime}`)
                     console.log(`End time: ${endTime}`)
 
+                    
+                    const userTimeZone = moment.tz.guess();
                     const timeZone = userTimeZone;
                     console.log(`timeZone`, timeZone);
 
