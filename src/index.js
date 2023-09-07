@@ -49,14 +49,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     const userTimeZone = moment.tz.guess();
 
-                    const startTime = moment(info.event.start).tz('America/New_York').format("MMMM D hh:mm A");
+                    const startTime = moment(info.event.start).tz('America/New_York').format("MMMM D h:mm A");
                     console.log(`startTime`, startTime);
-                    const endTime = moment.tz(info.event.end, 'America/New_York').format("MMMM D hh:mm A");
+                    // Add 12 hours to the time
+                    const startTimePlus12 = startTime.add(12, 'hours');
+                    const endTime = moment.tz(info.event.end, 'America/New_York').format("MMMM D h:mm A");
                     console.log(`endTime`, endTime);
 
                     const modalContent = document.createElement('div');
                     modalContent.classList.add('modal-content');
-                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTime}<br><strong>End:</strong> ${endTime}<br><br>${info.event.extendedProps.description}<br>`;
+                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTimePlus12}<br><strong>End:</strong> ${endTime}<br><br>${info.event.extendedProps.description}<br>`;
                     // modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTime}<br><strong>End:</strong> ${endTime}<br><br>${info.event.extendedProps.description}<br>`;
 
                     // Add a "Download ICS" button to the popup
