@@ -51,37 +51,26 @@ document.addEventListener('DOMContentLoaded', function () {
                     const endTime = moment(info.event.end).tz('America/New_York').format();
 
 
-                    // const startTime = info.event.start;
-                    // const endTime = info.event.end;
-                    console.log(`Start time: ${startTime}`)
-                    console.log(`End time: ${endTime}`)
+                    // Parse the ISO date string
+                    const formattedStartTime = new Date(startTime);
+                    const formatedEndTime = new Date(endTime);
 
-                    
-                    const userTimeZone = moment.tz.guess();
-                    const timeZone = userTimeZone;
-                    console.log(`timeZone`, timeZone);
-
-                    // Options for formatting
+                    // Format the date in a more readable format
                     const options = {
-                    timeZone: timeZone,
                     year: 'numeric',
-                    month: 'numeric',
+                    month: 'long',
                     day: 'numeric',
-                    hour: 'numeric',
-                    minute: 'numeric',
-                    second: 'numeric',
-                    hour12: true, // To display in 12-hour format
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    timeZoneName: 'short',
                     };
 
-                    // Format the date in the local time zone
-                    const localStartTime = startTime.toLocaleString(undefined, options);
-                    console.log(`localStartTime`, localStartTime);
-                    const localEndTime = endTime.toLocaleString(undefined, options);
-                    console.log(`localEndTime`, localEndTime);
+                    const finalStartTime = formattedStartTime.toLocaleString(undefined, options);
+                    const finalEndTime = formatedEndTime.toLocaleString(undefined, options);
 
                     const modalContent = document.createElement('div');
                     modalContent.classList.add('modal-content');
-                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${localStartTime} EST<br><strong>End:</strong> ${localEndTime} EST<br><br>${info.event.extendedProps.description}<br>`;
+                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${finalStartTime} EST<br><strong>End:</strong> ${finalEndTime} EST<br><br>${info.event.extendedProps.description}<br>`;
                     // modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTime}<br><strong>End:</strong> ${endTime}<br><br>${info.event.extendedProps.description}<br>`;
 
                     // Add a "Download ICS" button to the popup
