@@ -50,10 +50,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     const startTime = moment(info.event.start).tz('America/New_York').format();
                     const endTime = moment(info.event.end).tz('America/New_York').format();
 
+                    console.log(`startTime: ${startTime}`);
+                    console.log(`endTime: ${endTime}`);
 
                     // Parse the ISO date string
                     const formattedStartTime = new Date(startTime);
                     const formatedEndTime = new Date(endTime);
+
+                    console.log(`formattedStartTime: ${formattedStartTime}`);
+                    console.log(`formatedEndTime: ${formatedEndTime}`);
 
                     // Get the timezone from the browser
                     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -75,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     const modalContent = document.createElement('div');
                     modalContent.classList.add('modal-content');
-                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${finalStartTime} EST<br><strong>End:</strong> ${finalEndTime} EST<br><br>${info.event.extendedProps.description}<br>`;
+                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${finalStartTime}<br><strong>End:</strong> ${finalEndTime}<br><br>${info.event.extendedProps.description}<br>`;
                     // modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTime}<br><strong>End:</strong> ${endTime}<br><br>${info.event.extendedProps.description}<br>`;
 
                     // Add a "Download ICS" button to the popup
