@@ -7,6 +7,7 @@ import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 import './index.css';
 import moment from 'moment-timezone';
+import { start } from 'repl';
 
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
@@ -49,13 +50,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     console.log(info.event.start);
 
-                    const startTime = moment(info.event.start).format();
+                    const startTime = moment.utc(info.event.start).format();
                     console.log(`startTime`, startTime);
-                    const endTime = moment(info.event.end).format();
+                    const endTime = moment.utc(info.event.end).format();
                     console.log(`endTime`, endTime);
 
                     const startDateObject = new Date(startTime);
                     console.log(`startDateObject`, startDateObject);
+                    startDateObject.setTimeZone('America/New_York');
                     const endDateObject = new Date(endTime);
                     console.log(`endDateObject`, endDateObject);
 
