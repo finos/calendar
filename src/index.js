@@ -77,8 +77,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     const localStartTime = startTime.toLocaleString(undefined, options);
                     const localEndTime = endTime.toLocaleString(undefined, options);
 
-                    console.log(localDateTime);
-
                     const modalContent = document.createElement('div');
                     modalContent.classList.add('modal-content');
                     modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${localStartTime} EST<br><strong>End:</strong> ${localEndTime} EST<br><br>${info.event.extendedProps.description}<br>`;
