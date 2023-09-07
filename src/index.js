@@ -47,9 +47,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     modalContainer.classList.add('modal-container');
                     modalContainer.classList.add('fc-event-tooltip');
 
-                    console.log(info.event.start)
-                    console.log(info.event.start.toLocaleString())
-
                     const userTimeZone = moment.tz.guess();
                     // const startTime = moment(info.event.start).tz('America/New_York').format('HH:mm');
                     // const endTime = moment(info.event.end).tz('America/New_York').format('HH:mm');
@@ -57,9 +54,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     const startTime = info.event.start;
                     const endTime = info.event.end;
+                    console.log(`Start time: ${startTime}`)
+                    console.log(`End time: ${endTime}`)
 
-                    // Specify your local time zone
-                    const timeZone = userTimeZone; // Change this to your desired time zone
+                    const timeZone = userTimeZone;
+                    console.log(`timeZone`, timeZone);
 
                     // Options for formatting
                     const options = {
@@ -75,7 +74,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     // Format the date in the local time zone
                     const localStartTime = startTime.toLocaleString(undefined, options);
+                    console.log(`localStartTime`, localStartTime);
                     const localEndTime = endTime.toLocaleString(undefined, options);
+                    console.log(`localEndTime`, localEndTime);
 
                     const modalContent = document.createElement('div');
                     modalContent.classList.add('modal-content');
