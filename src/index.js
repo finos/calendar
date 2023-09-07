@@ -50,10 +50,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     const startTime = moment(info.event.start).tz('America/New_York').format();
                     const endTime = moment(info.event.end).tz('America/New_York').format();
 
-                    // get StartTime in 12 hour format without moment.js
-                    const startTime12 = new Date(startTime).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-                    // get EndTime in 12 hour format without moment.js
-                    const endTime12 = new Date(endTime).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+                    const startTime12 = new Date(startTime).toLocaleString({ hour: 'numeric', minute: 'numeric', hour12: true });
+                    const endTime12 = new Date(endTime).toLocaleString({ hour: 'numeric', minute: 'numeric', hour12: true });
 
                     const modalContent = document.createElement('div');
                     modalContent.classList.add('modal-content');
