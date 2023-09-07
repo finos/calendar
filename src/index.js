@@ -50,40 +50,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     console.log(info.event.start);
 
-                    const startTime = moment.utc(info.event.start).format();
+                    const startTime = moment(info.event.start).format();
                     console.log(`startTime`, startTime);
-                    const endTime = moment.utc(info.event.end).format();
+                    const endTime = moment(info.event.end).format();
                     console.log(`endTime`, endTime);
-
-                    const startDateObject = new Date(startTime);
-                    console.log(`startDateObject`, startDateObject);
-                    startDateObject.setTimeZone('America/New_York');
-                    const endDateObject = new Date(endTime);
-                    console.log(`endDateObject`, endDateObject);
-
-                    const userTimeZone = moment.tz.guess();
-                    console.log(`userTimeZone`, userTimeZone);
-
-                    const formatter = new Intl.DateTimeFormat('en-US', {
-                    timeZone: userTimeZone,
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    second: '2-digit',
-                    timeZoneName: 'short'
-                    });
-
-                    const formattedStartTime = formatter.format(startDateObject);
-                    console.log(`formattedStartTime`, formattedStartTime);
-                    
-                    const formattedEndTime = formatter.format(endDateObject);
-                    console.log(`formattedEndTime `,formattedEndTime);
 
                     const modalContent = document.createElement('div');
                     modalContent.classList.add('modal-content');
-                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${formattedStartTime}<br><strong>End:</strong> ${formattedEndTime}<br><br>${info.event.extendedProps.description}<br>`;
+                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTime}<br><strong>End:</strong> ${endTime}<br><br>${info.event.extendedProps.description}<br>`;
                     // modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTime}<br><strong>End:</strong> ${endTime}<br><br>${info.event.extendedProps.description}<br>`;
 
                     // Add a "Download ICS" button to the popup
