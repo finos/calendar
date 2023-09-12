@@ -50,6 +50,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.log(info.event.start)
                     console.log(info.event.start.toLocaleString())
 
+                    const originalTime = moment('2023-09-07T12:00:00').tz('America/New_York');
+
+                    // Convert to the user's local time
+                    const localTime = originalTime.local();
+
+                    // Format and display the local time
+                    console.log('Local Time:', localTime.format('YYYY-MM-DD HH:mm:ss'));
+
                     // const userTimeZone = moment.tz.guess();
                     // const startTime = moment(info.event.start).tz('America/New_York').format('HH:mm');
                     // const endTime = moment(info.event.end).tz('America/New_York').format('HH:mm');
