@@ -47,8 +47,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     modalContainer.classList.add('modal-container');
                     modalContainer.classList.add('fc-event-tooltip');
 
+                    // Get user Timezone
+                    const userTimeZone = moment.tz.guess();
+
+
                     const test = new Date(info.event.start);
                     console.log(moment(test).format('lll'));
+                    const localTime = moment(test).tz(moment.tz.guess()).format('lll');
+                    console.log(localTime);
+                    
 
                     // const userTimeZone = moment.tz.guess();
                     const startTime = moment(info.event.start, 'ddd DD-MMM-YYYY, hh:mm A').tz('America/New_York').format('lll');
