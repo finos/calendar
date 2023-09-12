@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
         editable: true,
         dayMaxEvents: false, // allow "more" link when too many events
         titleFormat: 'LLLL d, yyyy',
-        timeZone: 'local',
+        timeZone: 'UTC',
         eventContent: function (info) {
             return {
                 html: `<b class="fc-event-title">${info.event.title}</b>`
