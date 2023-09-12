@@ -1,4 +1,4 @@
-import { Calendar } from '@fullcalendar/core';
+import { Calendar, formatDate } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -6,7 +6,6 @@ import iCalendarPlugin from '@fullcalendar/icalendar';
 import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 import './index.css';
-import moment from 'moment-timezone';
 
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
@@ -47,19 +46,22 @@ document.addEventListener('DOMContentLoaded', function () {
                     modalContainer.classList.add('modal-container');
                     modalContainer.classList.add('fc-event-tooltip');
 
-                    // Get user Timezone
-                    const userTimeZone = moment.tz.guess();
+                    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                    console.log(userTimeZone);
 
-
-                    const test = new Date(info.event.start);
-                    console.log(moment(test).format('lll'));
-                    const localTime = moment(test).local()
-                    console.log(localTime);
+                    let str = formatDate(info.event.start, {
+                        month: 'long',
+                        year: 'numeric',
+                        day: 'numeric',
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        timeZoneName: 'short',
+                        timeZone: userTimeZone,
+                        locale: 'en-US'
+                    })
                     
-
-                    // const userTimeZone = moment.tz.guess();
-                    const startTime = moment(info.event.start, 'ddd DD-MMM-YYYY, hh:mm A').tz('America/New_York').format('lll');
-                    const endTime = moment(info.event.end, 'ddd DD-MMM-YYYY, hh:mm A').tz('America/New_York').format('lll');
+                    const startTime = info.event.start
+                    const endTime = info.event.end
 
                     const modalContent = document.createElement('div');
                     modalContent.classList.add('modal-content');
