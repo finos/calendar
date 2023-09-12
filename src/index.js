@@ -59,6 +59,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         timeZone: userTimeZone,
                         locale: 'en-US'
                     })
+
+                    console.log(`str`, str)
                     
                     const startTime = info.event.start
                     const endTime = info.event.end
