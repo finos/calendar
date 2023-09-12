@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     const test = new Date(info.event.start);
                     console.log(moment(test).format('lll'));
-                    const localTime = moment(test).tz(moment.tz.guess()).format('lll');
+                    const localTime = moment(test).local()
                     console.log(localTime);
                     
 
