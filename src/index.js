@@ -47,9 +47,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     modalContainer.classList.add('modal-container');
                     modalContainer.classList.add('fc-event-tooltip');
 
-                    console.log(info.event.start)
-                    console.log(info.event.start.toLocaleString())
-
                     // const userTimeZone = moment.tz.guess();
                     const startTime = moment(info.event.start).tz('America/New_York').format('HH:mm');
                     const endTime = moment(info.event.end).tz('America/New_York').format('HH:mm');
