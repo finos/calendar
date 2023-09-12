@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
         editable: true,
         dayMaxEvents: false, // allow "more" link when too many events
         titleFormat: 'LLLL d, yyyy',
+        timeZone: 'local',
         eventContent: function (info) {
             return {
                 html: `<b class="fc-event-title">${info.event.title}</b>`
@@ -97,8 +98,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     calendar.render();
-    
-    calendar.setOption('timeZone', 'local');
 });
 
 // Function to generate ICS data from the event
