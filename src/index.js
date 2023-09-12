@@ -50,22 +50,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.log(info.event.start)
                     console.log(info.event.start.toLocaleString())
 
-                    const originalTime = moment('2023-09-07T12:00:00').tz('America/New_York');
-
-                    // Convert to the user's local time
-                    const localTime = originalTime.local();
-
-                    // Format and display the local time
-                    console.log('Local Time:', localTime.format('YYYY-MM-DD HH:mm:ss'));
-
                     // const userTimeZone = moment.tz.guess();
-                    // const startTime = moment(info.event.start).tz('America/New_York').format('HH:mm');
-                    // const endTime = moment(info.event.end).tz('America/New_York').format('HH:mm');
+                    const startTime = moment(info.event.start).tz('America/New_York').format('HH:mm');
+                    const endTime = moment(info.event.end).tz('America/New_York').format('HH:mm');
 
                     const modalContent = document.createElement('div');
                     modalContent.classList.add('modal-content');
-                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${info.event.start.toLocaleString()} EST<br><strong>End:</strong> ${info.event.end.toLocaleString()} EST<br><br>${info.event.extendedProps.description}<br>`;
-                    // modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTime}<br><strong>End:</strong> ${endTime}<br><br>${info.event.extendedProps.description}<br>`;
+                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTime}<br><strong>End:</strong> ${endTime}<br><br>${info.event.extendedProps.description}<br>`;
 
                     // Add a "Download ICS" button to the popup
                     const downloadButton = document.createElement('button');
