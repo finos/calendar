@@ -27,9 +27,9 @@
     "@fullcalendar/icalendar": "^6.1.8",
     "@fullcalendar/interaction": "^6.1.8",
     "@fullcalendar/list": "^6.1.8",
+    "@fullcalendar/luxon3": "^6.1.8",
     "@fullcalendar/timegrid": "^6.1.8",
     "fullcalendar": "^6.1.8",
-    "luxon": "^3.4.3",
     "tippy.js": "^6.3.7",
     "typescript": "^5.2.2"
   }

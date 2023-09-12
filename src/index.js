@@ -3,6 +3,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import iCalendarPlugin from '@fullcalendar/icalendar';
+import luxonPlugin from '@fullcalendar/luxon3'
 import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 import './index.css';
@@ -14,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const currentDate = new Date().toISOString().slice(0, 10);
 
     var calendar = new Calendar(calendarEl, {
-        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin, iCalendarPlugin],
+        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin, iCalendarPlugin, luxonPlugin],
         events: {
             url: 'basic.ics',
             format: 'ics'
@@ -29,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
         navLinks: true, // can click day/week names to navigate views
         editable: true,
         dayMaxEvents: false, // allow "more" link when too many events
+        titleFormat: 'LLLL d, yyyy',
         eventContent: function (info) {
             return {
                 html: `<b class="fc-event-title">${info.event.title}</b>`
@@ -95,6 +97,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     calendar.render();
+    
+    calendar.setOption('timeZone', 'local');
 });
 
 // Function to generate ICS data from the event
