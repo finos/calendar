@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
         navLinks: true, // can click day/week names to navigate views
         editable: true,
         dayMaxEvents: false, // allow "more" link when too many events
-        titleFormat: 'LLLL d, yyyy',
         timeZone: 'America/New_York',
         eventContent: function (info) {
             return {
@@ -48,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const modalContainer = document.createElement('div');
                     modalContainer.classList.add('modal-container');
                     modalContainer.classList.add('fc-event-tooltip');
-                    
+
                     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
                     console.log(userTimeZone);
 
