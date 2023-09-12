@@ -48,10 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const modalContainer = document.createElement('div');
                     modalContainer.classList.add('modal-container');
                     modalContainer.classList.add('fc-event-tooltip');
-
-                    let m = toMoment(info.date, calendar)
-                    console.log(m.format())
-
+                    
                     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
                     console.log(userTimeZone);
 
