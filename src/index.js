@@ -53,18 +53,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     
                     const modalContent = document.createElement('div');
                     modalContent.classList.add('modal-content');
-                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTime}<br><strong>End:</strong> ${endTime}<br><br>${info.event.extendedProps.description}<br>`;
 
-                    // Add a "Download ICS" button to the popup
-                    const downloadButton = document.createElement('button');
-                    downloadButton.innerHTML = 'Download ICS';
-                    downloadButton.classList.add('modal-download');
-                    downloadButton.addEventListener('click', () => {
-                        // Generate and trigger the ICS file download
-                        const icsData = generateICSData(info.event);
-                        downloadICS(info.event.title, icsData);
-                    });
-                    modalContent.appendChild(downloadButton);
+                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTime}<br><strong>End:</strong> ${endTime}<br><br>${info.event.extendedProps.description}<br>`;
+                    modalContainer.appendChild(modalContent);
 
                     // Add a close button to the popup
                     const closeButton = document.createElement('button');
@@ -82,33 +73,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
     calendar.render();
 });
-
-// Function to generate ICS data from the event
-function generateICSData(event) {
-    const startDate = event.start.toISOString().replace(/-/g, '').replace(/:/g, '').slice(0, -5);
-    const endDate = event.end.toISOString().replace(/-/g, '').replace(/:/g, '').slice(0, -5);
-    const cleanDescription = event.extendedProps.description.replace(/<\/?[^>]+(>|$)/g, "");
-
-    return `BEGIN:VCALENDAR
-VERSION:2.0
-BEGIN:VEVENT
-DTSTAMP:${startDate}Z
-DTSTART:${startDate}Z
-DTEND:${endDate}Z
-SUMMARY:${event.title}
-DESCRIPTION:${cleanDescription}
-END:VEVENT
-END:VCALENDAR`;
-}
-
-// Function to trigger the download of the ICS file
-function downloadICS(fileName, data) {
-    const blob = new Blob([data], { type: 'text/calendar' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${fileName}.ics`;
-    document.body.appendChild(a);
-    a.click();
-    window.URL.revokeObjectURL(url);
-}
