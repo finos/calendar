@@ -3,6 +3,7 @@
 This code builds the page hosted on https://calendar.finos.org , which is also embedded on https://www.finos.org/calendar .
 
 ## Prerequisites
+
 - Node.js and npm installed on your machine.
 
 ## Getting Started (work in progress, see https://github.com/finos/calendar/issues/9 )
@@ -18,4 +19,10 @@ cd calendar
 
 ```bash
 npm install
+```
+
+### Run development server
+
+```bash
+npm run start
 ```
