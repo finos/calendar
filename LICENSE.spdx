@@ -1,0 +1,7 @@
+SPDXVersion: SPDX-2.0
+DataLicense: CC0-1.0
+Creator: Juan Estrella
+PackageName: FINOS Calendar
+PackageOriginator: FINOS
+PackageHomePage: https://github.com/finos/calendar
+PackageLicenseDeclared: Apache-2.0
