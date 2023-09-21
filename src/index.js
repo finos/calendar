@@ -68,8 +68,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         minute: '2-digit',
                         timeZoneName: 'short'
                     });
-                    
-                    
+
+                    console.log(formattedStartTime);
+                    console.log(formattedEndTime);
+
                     const modalContent = document.createElement('div');
                     modalContent.classList.add('modal-content');
                     modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${formattedStartTime}<br><strong>End:</strong> ${formattedEndTime}<br><br>${info.event.extendedProps.description}<br>`;
