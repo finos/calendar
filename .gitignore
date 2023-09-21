@@ -2,7 +2,6 @@
 calendar-service-account.json
 dist/
 
-
 # Node
 .npm
 npm-debug.log*

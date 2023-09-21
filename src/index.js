@@ -8,7 +8,7 @@ import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 import './index.css';
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
     // Get the current date as a string in the format 'YYYY-MM-DD'
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
             left: 'prev,next today',
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        },
+        }, 
         dayMaxEventRows: 999,
         initialDate: currentDate,
         navLinks: true, // can click day/week names to navigate views
@@ -75,8 +75,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     const modalContent = document.createElement('div');
                     modalContent.classList.add('modal-content');
                     modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${formattedStartTime}<br><strong>End:</strong> ${formattedEndTime}<br><br>${info.event.extendedProps.description}<br>`;
-
-                    modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTime}<br><strong>End:</strong> ${endTime}<br><br>${info.event.extendedProps.description}<br>`;
                     modalContainer.appendChild(modalContent);
 
                     // Add a close button to the popup
@@ -86,7 +84,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     closeButton.addEventListener('click', () => instance.hide());
                     modalContent.appendChild(closeButton);
 
-                    modalContainer.appendChild(modalContent);
                     instance.setContent(modalContainer);
                 },
             });
