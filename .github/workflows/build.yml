@@ -6,7 +6,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: "0 */3 * * *"
+    - cron: '0 */3 * * *'
 
 jobs:
   build:
@@ -23,11 +23,7 @@ jobs:
       - name: Build
         run: |
           npm install
-          npx webpack
-          npm run compile
-
-      - name: Download ICS file
-        run: curl -o dist/basic.ics https://calendar.google.com/calendar/ical/finos.org_fac8mo1rfc6ehscg0d80fi8jig%40group.calendar.google.com/public/basic.ics
+          npm run build
 
       - name: Add CNAME in dist folder
         run: cp CNAME dist
