@@ -3,7 +3,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import iCalendarPlugin from '@fullcalendar/icalendar';
-import momentTimezonePlugin from '@fullcalendar/moment-timezone';
+
 import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 import './index.css';
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const currentDate = new Date().toISOString().slice(0, 10);
 
     var calendar = new Calendar(calendarEl, {
-        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin, iCalendarPlugin, momentTimezonePlugin],
+        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin, iCalendarPlugin],
         events: {
             url: 'basic.ics',
             format: 'ics'
@@ -74,10 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     const modalContent = document.createElement('div');
                     modalContent.classList.add('modal-content');
-<<<<<<< HEAD
                     modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${formattedStartTime}<br><strong>End:</strong> ${formattedEndTime}<br><br>${info.event.extendedProps.description}<br>`;
-=======
->>>>>>> 03106aefe4f21d259c02804a0ff9c76b249f935d
 
                     modalContent.innerHTML = `<b>${info.event.title}</b><br></br><strong>Start:</strong> ${startTime}<br><strong>End:</strong> ${endTime}<br><br>${info.event.extendedProps.description}<br>`;
                     modalContainer.appendChild(modalContent);
