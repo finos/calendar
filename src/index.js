@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         month: 'long',
                         day: 'numeric',
                         minute: '2-digit',
-                        timeZoneName: 'abbreviated'
+                        timeZoneName: 'medium'
                     });
 
                     const formattedEndTime = formatDate(endTime, {
