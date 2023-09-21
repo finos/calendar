@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         month: 'long',
                         day: 'numeric',
                         minute: '2-digit',
-                        timeZoneName: 'short'
+                        timeZoneName: 'long'
                     });
 
                     console.log(formattedStartTime);
