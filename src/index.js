@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
             left: 'prev,next today',
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        }, 
+        },
         dayMaxEventRows: 999,
         initialDate: currentDate,
         navLinks: true, // can click day/week names to navigate views
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         month: 'long',
                         day: 'numeric',
                         minute: '2-digit',
-                        timeZoneName: 'short'
+                        timeZoneName: 'abbreviated'
                     });
 
                     const formattedEndTime = formatDate(endTime, {
@@ -66,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         month: 'long',
                         day: 'numeric',
                         minute: '2-digit',
-                        timeZoneName: 'long'
                     });
 
                     console.log(formattedStartTime);
