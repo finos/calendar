@@ -11,6 +11,8 @@
 # production
 /build
 
+/public/basic.ics
+
 # misc
 .DS_Store
 .env.local
