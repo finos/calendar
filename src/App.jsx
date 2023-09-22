@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import FullCalendar from '@fullcalendar/react';
 import iCalendarPlugin from '@fullcalendar/icalendar';
@@ -12,7 +13,9 @@ function renderEventContent(info) {
 
 function App() {
   // Get the current date as a string in the format 'YYYY-MM-DD'
-  const currentDate = new Date().toISOString().slice(0, 10);
+  const [currentDate, setCurrentDate] = useState(
+    new Date().toISOString().slice(0, 10)
+  );
 
   return (
     <div className="App">
