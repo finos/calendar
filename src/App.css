@@ -2,5 +2,21 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.finos-calendar-event-details {
+  flex-grow: 1;
+  flex-basis: 10rem;
+}
+
+.finos-calendar {
+  flex-grow: 999;
+  flex-basis: 0;
+  align-items: stretch;
 }
