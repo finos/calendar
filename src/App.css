@@ -5,18 +5,19 @@
 }
 
 .main {
-  display: flex;
-  justify-content: space-between;
-  gap: 3rem;
+  display: relative;
 }
 
 .finos-calendar-event-details {
-  flex-grow: 1;
-  flex-basis: 10rem;
-}
-
-.finos-calendar {
-  flex-grow: 999;
-  flex-basis: 0;
-  align-items: stretch;
+  position: absolute;
+  width: 25%;
+  height: 70vh;
+  top: 12vh;
+  right: 0;
+  background: #fff;
+  border: #333;
+  overflow: auto;
+  z-index: 900;
+  padding: 2rem;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.75);
 }
