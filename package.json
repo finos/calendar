@@ -4,6 +4,7 @@
   "description": "FINOS Community Calendar",
   "license": "Apache-2.0",
   "scripts": {
+    "start": "npm run dev",
     "dev": "npm run get-cal && vite",
     "build": "vite build",
     "buildAndRun": "npm run get-cal && npm run build",

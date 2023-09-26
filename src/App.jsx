@@ -8,6 +8,28 @@ import parse from 'html-react-parser';
 
 import './App.css';
 
+const KEY_NAME_ESC = 'Escape';
+const KEY_EVENT_TYPE = 'keyup';
+
+function useEscapeKey(handleClose) {
+  const handleEscKey = useCallback(
+    (event) => {
+      if (event.key === KEY_NAME_ESC) {
+        handleClose();
+      }
+    },
+    [handleClose]
+  );
+
+  useEffect(() => {
+    document.addEventListener(KEY_EVENT_TYPE, handleEscKey, false);
+
+    return () => {
+      document.removeEventListener(KEY_EVENT_TYPE, handleEscKey, false);
+    };
+  }, [handleEscKey]);
+}
+
 function App() {
   // Get the current date as a string in the format 'YYYY-MM-DD'
   const [currentDate, setCurrentDate] = useState(
@@ -19,6 +41,7 @@ function App() {
   const handleEventClick = useCallback((clickInfo) => {
     setEventDetails(clickInfo.event);
     setShowEventDetails(true);
+    useEscapeKey(() => setShowEventDetails(false));
   });
 
   const renderEventDetails = () => (
