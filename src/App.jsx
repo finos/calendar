@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { createRef, useCallback, useMemo, useState } from 'react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import FullCalendar from '@fullcalendar/react';
 import iCalendarPlugin from '@fullcalendar/icalendar';
@@ -11,12 +11,17 @@ import useEscKey from './hooks/useEscKey';
 import './App.css';
 
 function App() {
-  // Get the current date as a string in the format 'YYYY-MM-DD'
-  const [currentDate, setCurrentDate] = useState(
-    new Date().toISOString().slice(0, 10)
-  );
+  const calendarRef = createRef();
+  const [loading, setLoading] = useState(true);
   const [showEventDetails, setShowEventDetails] = useState(false);
   const [eventDetails, setEventDetails] = useState(false);
+
+  const currentDate = useMemo(() => new Date());
+  const localTimezone = useMemo(
+    () => currentDate.getTimezoneOffset(),
+    [currentDate]
+  );
+
   useEscKey(() => setShowEventDetails(false));
 
   const handleEventClick = useCallback((clickInfo) => {
@@ -26,10 +31,16 @@ function App() {
 
   const renderEventDetails = () => (
     <div className="finos-calendar-event-details">
-      <button onClick={() => setShowEventDetails(false)}>Close</button>
+      <button
+        onClick={() => setShowEventDetails(false)}
+        className="fc-button finos-calendar-event-details-close"
+      >
+        X
+      </button>
       <h2>{eventDetails.title}</h2>
       <div>
-        <strong>Start:</strong> {eventDetails.start.toLocaleString()} EST
+        <strong>Start:</strong> {eventDetails.start.toLocaleString()}{' '}
+        {localTimezone}
       </div>
       <div>
         <strong>End:</strong> {eventDetails.end.toLocaleString()} EST
@@ -41,6 +52,7 @@ function App() {
   const renderFullCalendar = useMemo(
     () => (
       <FullCalendar
+        ref={calendarRef}
         plugins={[
           dayGridPlugin,
           timeGridPlugin,
@@ -58,12 +70,12 @@ function App() {
           right: 'dayGridMonth,timeGridWeek,timeGridDay',
         }}
         dayMaxEventRows={999}
-        initialDate={currentDate}
+        initialDate={new Date().toISOString().slice(0, 10)}
         navLinks
         editable
         dayMaxEvents
-        // eventContent={renderEventContent}
         eventClick={handleEventClick}
+        loading={(isLoading) => setLoading(isLoading)}
       />
     ),
     []
@@ -73,6 +85,8 @@ function App() {
     <div className="App main">
       <div className="finos-calendar">{renderFullCalendar}</div>
       {showEventDetails && renderEventDetails()}
+      {loading && <div className="finos-calendar-overlay" />}
+      {loading && <div className="finos-calendar-loading">Loading...</div>}
     </div>
   );
 }
