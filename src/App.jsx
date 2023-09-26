@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState, Suspense } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import FullCalendar from '@fullcalendar/react';
 import iCalendarPlugin from '@fullcalendar/icalendar';
@@ -6,29 +6,9 @@ import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import parse from 'html-react-parser';
 
+import useEscKey from './hooks/useEscKey';
+
 import './App.css';
-
-const KEY_NAME_ESC = 'Escape';
-const KEY_EVENT_TYPE = 'keyup';
-
-function useEscapeKey(handleClose) {
-  const handleEscKey = useCallback(
-    (event) => {
-      if (event.key === KEY_NAME_ESC) {
-        handleClose();
-      }
-    },
-    [handleClose]
-  );
-
-  useEffect(() => {
-    document.addEventListener(KEY_EVENT_TYPE, handleEscKey, false);
-
-    return () => {
-      document.removeEventListener(KEY_EVENT_TYPE, handleEscKey, false);
-    };
-  }, [handleEscKey]);
-}
 
 function App() {
   // Get the current date as a string in the format 'YYYY-MM-DD'
@@ -37,11 +17,11 @@ function App() {
   );
   const [showEventDetails, setShowEventDetails] = useState(false);
   const [eventDetails, setEventDetails] = useState(false);
+  useEscKey(() => setShowEventDetails(false));
 
   const handleEventClick = useCallback((clickInfo) => {
     setEventDetails(clickInfo.event);
     setShowEventDetails(true);
-    useEscapeKey(() => setShowEventDetails(false));
   });
 
   const renderEventDetails = () => (
