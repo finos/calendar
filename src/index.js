@@ -58,7 +58,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         day: 'numeric',
                         minute: '2-digit',
                         timeZoneName: 'long',
-                        timeZone: 'auto'
                     });
 
                     const formattedEndTime = formatDate(endTime, {
@@ -68,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         day: 'numeric',
                         minute: '2-digit',
                         timeZoneName: 'long',
-                        timeZone: 'auto'
                     });
 
                     const modalContent = document.createElement('div');
