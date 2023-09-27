@@ -1,4 +1,5 @@
 import { createRef, useCallback, useMemo, useState } from 'react';
+import { formatDate } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import FullCalendar from '@fullcalendar/react';
 import iCalendarPlugin from '@fullcalendar/icalendar';
@@ -6,21 +7,17 @@ import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import parse from 'html-react-parser';
 
+import { DATE } from './constants';
 import useEscKey from './hooks/useEscKey';
 
 import './App.css';
 
 function App() {
   const calendarRef = createRef();
+
   const [loading, setLoading] = useState(true);
   const [showEventDetails, setShowEventDetails] = useState(false);
   const [eventDetails, setEventDetails] = useState(false);
-
-  const currentDate = useMemo(() => new Date());
-  const localTimezone = useMemo(
-    () => currentDate.getTimezoneOffset(),
-    [currentDate]
-  );
 
   useEscKey(() => setShowEventDetails(false));
 
@@ -29,25 +26,29 @@ function App() {
     setShowEventDetails(true);
   });
 
-  const renderEventDetails = () => (
-    <div className="finos-calendar-event-details">
-      <button
-        onClick={() => setShowEventDetails(false)}
-        className="fc-button finos-calendar-event-details-close"
-      >
-        X
-      </button>
-      <h2>{eventDetails.title}</h2>
-      <div>
-        <strong>Start:</strong> {eventDetails.start.toLocaleString()}{' '}
-        {localTimezone}
+  const renderEventDetails = () => {
+    const formattedStartTime = formatDate(eventDetails.start, DATE.formatDate);
+    const formattedEndTime = formatDate(eventDetails.end, DATE.formatDate);
+
+    return (
+      <div className="finos-calendar-event-details">
+        <button
+          onClick={() => setShowEventDetails(false)}
+          className="fc-button finos-calendar-event-details-close"
+        >
+          X
+        </button>
+        <h2>{eventDetails.title}</h2>
+        <div>
+          <strong>Start:</strong> {formattedStartTime}
+        </div>
+        <div>
+          <strong>End:</strong> {formattedEndTime}
+        </div>
+        {parse(eventDetails.extendedProps.description)}
       </div>
-      <div>
-        <strong>End:</strong> {eventDetails.end.toLocaleString()} EST
-      </div>
-      {parse(eventDetails.extendedProps.description)}
-    </div>
-  );
+    );
+  };
 
   const renderFullCalendar = useMemo(
     () => (
