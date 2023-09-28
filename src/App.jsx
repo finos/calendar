@@ -1,5 +1,4 @@
 import { createRef, useCallback, useMemo, useState } from 'react';
-import { formatDate } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import FullCalendar from '@fullcalendar/react';
 import iCalendarPlugin from '@fullcalendar/icalendar';
@@ -7,7 +6,6 @@ import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import parse from 'html-react-parser';
 
-import { DATE } from './constants';
 import useEscKey from './hooks/useEscKey';
 
 import './App.css';
@@ -27,9 +25,6 @@ function App() {
   });
 
   const renderEventDetails = () => {
-    const formattedStartTime = formatDate(eventDetails.start, DATE.formatDate);
-    const formattedEndTime = formatDate(eventDetails.end, DATE.formatDate);
-
     return (
       <div className="finos-calendar-event-details">
         <button
@@ -40,10 +35,10 @@ function App() {
         </button>
         <h2>{eventDetails.title}</h2>
         <div>
-          <strong>Start:</strong> {formattedStartTime}
+          <strong>Start:</strong> {eventDetails.start.toLocaleString()} EST
         </div>
         <div>
-          <strong>End:</strong> {formattedEndTime}
+          <strong>End:</strong> {eventDetails.end.toLocaleString()} EST
         </div>
         {parse(eventDetails.extendedProps.description)}
       </div>
