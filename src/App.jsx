@@ -4,13 +4,16 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import FullCalendar from '@fullcalendar/react';
 import iCalendarPlugin from '@fullcalendar/icalendar';
 import interactionPlugin from '@fullcalendar/interaction';
-import timeGridPlugin from '@fullcalendar/timegrid';
+import momentTimezonePlugin from '@fullcalendar/moment-timezone';
 import parse from 'html-react-parser';
+import timeGridPlugin from '@fullcalendar/timegrid';
 
 import { DATE } from './constants';
 import useEscKey from './hooks/useEscKey';
 
 import './App.css';
+
+const htmlRegex = /<\/*html-blob>/;
 
 function App() {
   const calendarRef = createRef();
@@ -29,6 +32,12 @@ function App() {
   const renderEventDetails = () => {
     const formattedStartTime = formatDate(eventDetails.start, DATE.formatDate);
     const formattedEndTime = formatDate(eventDetails.end, DATE.formatDate);
+    const description = eventDetails.extendedProps.description.replace(
+      htmlRegex,
+      ''
+    );
+
+    console.log(description);
 
     return (
       <div className="finos-calendar-event-details">
@@ -45,7 +54,7 @@ function App() {
         <div>
           <strong>End:</strong> {formattedEndTime}
         </div>
-        {parse(eventDetails.extendedProps.description)}
+        {parse(description)}
       </div>
     );
   };
@@ -56,9 +65,10 @@ function App() {
         ref={calendarRef}
         plugins={[
           dayGridPlugin,
-          timeGridPlugin,
-          interactionPlugin,
           iCalendarPlugin,
+          interactionPlugin,
+          momentTimezonePlugin,
+          timeGridPlugin,
         ]}
         initialView="dayGridMonth"
         events={{
