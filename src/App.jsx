@@ -3,7 +3,6 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import FullCalendar from '@fullcalendar/react';
 import iCalendarPlugin from '@fullcalendar/icalendar';
 import interactionPlugin from '@fullcalendar/interaction';
-import momentTimezonePlugin from '@fullcalendar/moment-timezone';
 import parse from 'html-react-parser';
 import timeGridPlugin from '@fullcalendar/timegrid';
 
