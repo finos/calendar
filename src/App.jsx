@@ -60,7 +60,6 @@ function App() {
           dayGridPlugin,
           iCalendarPlugin,
           interactionPlugin,
-          momentTimezonePlugin,
           timeGridPlugin,
         ]}
         initialView="dayGridMonth"
