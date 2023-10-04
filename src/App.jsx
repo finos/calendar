@@ -5,6 +5,7 @@ import iCalendarPlugin from '@fullcalendar/icalendar';
 import interactionPlugin from '@fullcalendar/interaction';
 import parse from 'html-react-parser';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import momentTimezonePlugin from '@fullcalendar/moment-timezone'
 
 import useEscKey from './hooks/useEscKey';
 
@@ -42,10 +43,10 @@ function App() {
         </button>
         <h2>{eventDetails.title}</h2>
         <div>
-          <strong>Start:</strong> {eventDetails.start.toLocaleString()} EST
+          <strong>Start:</strong> {eventDetails.start.toString()}
         </div>
         <div>
-          <strong>End:</strong> {eventDetails.end.toLocaleString()} EST
+          <strong>End:</strong> {eventDetails.end.toString()}
         </div>
         {parse(description)}
       </div>
@@ -61,6 +62,7 @@ function App() {
           iCalendarPlugin,
           interactionPlugin,
           timeGridPlugin,
+          momentTimezonePlugin,
         ]}
         initialView="dayGridMonth"
         events={{
@@ -77,6 +79,7 @@ function App() {
         navLinks
         editable
         dayMaxEvents
+        timeZone='America/New_York'
         eventClick={handleEventClick}
         loading={(isLoading) => setLoading(isLoading)}
       />

@@ -21,6 +21,7 @@
     "@fullcalendar/daygrid": "^6.1.8",
     "@fullcalendar/icalendar": "^6.1.8",
     "@fullcalendar/interaction": "^6.1.8",
+    "@fullcalendar/moment-timezone": "^6.1.9",
     "@fullcalendar/react": "^6.1.8",
     "@fullcalendar/timegrid": "^6.1.8",
     "html-react-parser": "^4.2.2",
