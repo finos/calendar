@@ -24,5 +24,7 @@ npm install
 ### Run development server
 
 ```bash
-npm run start
+npm run dev
 ```
+
+Open browser to `http://localhost:5173/`.

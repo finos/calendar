@@ -1,39 +1,40 @@
 {
   "name": "calendar",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "FINOS Community Calendar",
-  "private": true,
-  "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch",
-    "clean": "rm -rf dist",
-    "compile": "npx tsc",
-    "start": "nodemon --watch './src/**/*.js' --exec npm run dev",
-    "dev": "npm run buildAndRun && http-server dist/",
-    "buildAndRun": "npm run build && npm run compile && curl -o dist/basic.ics https://calendar.google.com/calendar/ical/finos.org_fac8mo1rfc6ehscg0d80fi8jig%40group.calendar.google.com/public/basic.ics"
-  },
-  "keywords": [],
-  "author": "TheJuanAndOnly99",
   "license": "Apache-2.0",
-  "devDependencies": {
-    "@types/node": "^20.4.4",
-    "css-loader": "^6.0.0",
-    "html-webpack-plugin": "^5.5.0",
-    "http-server": "^14.1.1",
-    "nodemon": "^3.0.1",
-    "style-loader": "^3.3.1",
-    "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4"
+  "engines": {
+    "node": "^18.14.0",
+    "npm": "^9.3.1"
+  },
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "npm run get-cal && vite",
+    "build": "vite build",
+    "buildAndRun": "npm run get-cal && npm run build",
+    "get-cal": "curl -o public/basic.ics https://calendar.google.com/calendar/ical/finos.org_fac8mo1rfc6ehscg0d80fi8jig%40group.calendar.google.com/public/basic.ics",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.8",
     "@fullcalendar/daygrid": "^6.1.8",
     "@fullcalendar/icalendar": "^6.1.8",
     "@fullcalendar/interaction": "^6.1.8",
-    "@fullcalendar/list": "^6.1.8",
+    "@fullcalendar/react": "^6.1.8",
     "@fullcalendar/timegrid": "^6.1.8",
-    "fullcalendar": "^6.1.8",
-    "tippy.js": "^6.3.7",
-    "typescript": "^5.2.2"
+    "html-react-parser": "^4.2.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.0.3",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "vite": "^4.4.5"
   }
 }
