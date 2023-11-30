@@ -46,11 +46,6 @@ async function listEvents() {
 			// Map events to a simplified array of event data
 			const mappedEvents = mapEvents(events.data.items);
 
-			// Filter events without a title (including null or undefined titles)
-			// const filteredEvents = mappedEvents.filter(
-			// 	(event) => event.title !== undefined && event.title !== ''
-			// );
-
 			// Save the events to a file
 			saveEventsToFile(mappedEvents);
 			allEvents.push(...mappedEvents);
@@ -98,8 +93,6 @@ function mapEvents(events) {
 						start       : eventData.start.dateTime,
 						end         : eventData.end.dateTime,
 						uid         : eventData.id
-						// rruleId     : eventData.recurringEventId,
-						// rrule       : eventData.rsecurrence ? eventData.recurrence[0] : null
 					};
 				}
 			}
