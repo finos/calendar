@@ -82,7 +82,7 @@ let eventsProcessed = [];
 function mapEvents(events) {
 	return events
 		.map((eventData) => {
-			console.log(eventData);
+			// console.log(eventData);
 			if (eventData.status === 'confirmed') {
 				let eventKey = eventData.start.dateTime + '_' + eventData.id.split('_')[0];
 				if (!eventsProcessed.includes(eventKey)) {
