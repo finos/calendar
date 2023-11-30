@@ -3,8 +3,9 @@ name: Build
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
+    # TODO - uncomment when merging to main branch (!!)
+    # branches:
+    #   - main
   schedule:
     - cron: "0 */3 * * *"
 
@@ -28,14 +29,21 @@ jobs:
       - name: Download ICS file
         run: curl -o dist/basic.ics https://calendar.google.com/calendar/ical/finos.org_fac8mo1rfc6ehscg0d80fi8jig%40group.calendar.google.com/public/basic.ics
 
+      - name: Setup environment
+        run: gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" \ --output calendar-service-account.json calendar-service-account.json.gpg
+        env:
+          PASSPHRASE: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_PASSPHRASE }}
+
       - name: Convert ICS file
-        run: node ics2events.js
+        run: node src/googleapi2events.js
 
       - name: Add CNAME in dist folder
         run: cp CNAME dist
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.ACCESS_TOKEN }}
-          publish_dir: dist # Replace 'dist' with the folder containing your built static files
+      # Disable to avoid risking to influence the live environement (even though it should not)
+      # TODO - re-enable when merging to main branch (!!)
+      # - name: Deploy to GitHub Pages
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     github_token: ${{ secrets.ACCESS_TOKEN }}
+      #     publish_dir: dist
