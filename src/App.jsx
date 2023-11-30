@@ -25,12 +25,12 @@ function App() {
 	const handleEventClick = useCallback((clickInfo) => {
 		setEventDetails(clickInfo.event);
 		setShowEventDetails(true);
-		console.log('event', clickInfo.event);
+		// console.log('event', clickInfo.event);
 	});
 
 	function downloadICSFile() {
-		console.log("print ics");
-		console.log(eventDetails.extendedProps.ics);
+		// console.log("print ics");
+		// console.log(eventDetails.extendedProps.ics);
 		const file = new Blob([eventDetails.extendedProps.ics], {type: 'text/calendar'});
 		const element = document.createElement("a");
 		element.href = URL.createObjectURL(file);
@@ -53,8 +53,7 @@ function App() {
 			<div className="finos-calendar-event-details">
 				<button
 					onClick={() => setShowEventDetails(false)}
-					className="fc-button finos-calendar-event-details-close"
-				>
+					className="fc-button finos-calendar-event-details-close">
 					X
 				</button>
 				<button
