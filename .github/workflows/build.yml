@@ -35,7 +35,7 @@ jobs:
           PASSPHRASE: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_PASSPHRASE }}
 
       - name: Convert ICS file
-        run: node src/googleapi2events.js
+        run: npm run getEvents
 
       - name: Add CNAME in dist folder
         run: cp CNAME dist
