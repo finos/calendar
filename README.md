@@ -9,9 +9,8 @@ The calendar is visualized in HTML using React and [FullCalendar](https://fullca
 ## Prerequisites
 
 - Node.js and npm installed on your machine.
-- `gpg`
 
-## Getting Started (work in progress, see https://github.com/finos/calendar/issues/9 )
+## Getting Started
 
 1. Clone the repository:
 
@@ -43,3 +42,7 @@ npm run dev
 ```
 
 Open browser to `http://localhost:5173/`.
+
+### Live environment
+
+https://calendar.finos.org is served by Github Pages and deployed by the [build.yml](.github/workflows/build.yml) Github Action.
