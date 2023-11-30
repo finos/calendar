@@ -5,6 +5,7 @@ import iCalendarPlugin from '@fullcalendar/icalendar';
 import interactionPlugin from '@fullcalendar/interaction';
 import parse from 'html-react-parser';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import rrulePlugin from '@fullcalendar/rrule';
 
 import useEscKey from './hooks/useEscKey';
 
@@ -24,7 +25,14 @@ function App() {
   const handleEventClick = useCallback((clickInfo) => {
     setEventDetails(clickInfo.event);
     setShowEventDetails(true);
+    console.log('event', clickInfo.event);
   });
+
+  function printDate(date) {
+    if (date) {
+      return date.toString();
+    } else return "NONE";
+  }
 
   const renderEventDetails = () => {
     const description = eventDetails.extendedProps.description.replace(
@@ -41,11 +49,12 @@ function App() {
           X
         </button>
         <h2>{eventDetails.title}</h2>
+        <div>{eventDetails.extendedProps.uid}</div>
         <div>
-          <strong>Start:</strong> {eventDetails.start.toLocaleString()} EST
+          <strong>Start:</strong> {printDate(eventDetails.start)}
         </div>
         <div>
-          <strong>End:</strong> {eventDetails.end.toLocaleString()} EST
+          <strong>End:</strong> {printDate(eventDetails.end)}
         </div>
         {parse(description)}
       </div>
@@ -61,12 +70,10 @@ function App() {
           iCalendarPlugin,
           interactionPlugin,
           timeGridPlugin,
+          rrulePlugin,
         ]}
         initialView="dayGridMonth"
-        events={{
-          url: 'basic.ics',
-          format: 'ics',
-        }}
+        events="dist/events.json"
         headerToolbar={{
           left: 'prev,next today',
           center: 'title',
