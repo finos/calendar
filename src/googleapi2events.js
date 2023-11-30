@@ -1,5 +1,6 @@
 import { google } from 'googleapis';
 import fs from 'fs';
+import ical from 'ical-generator';
 
 // Replace with the path to your service account JSON file
 const SERVICE_ACCOUNT_FILE = './calendar-service-account.json';
@@ -18,7 +19,7 @@ const auth = new google.auth.GoogleAuth({
 	scopes  : SCOPES
 });
 
-export const allEvents = [];
+// export const allEvents = [];
 
 // Function to retrieve events and return a promise
 async function listEvents() {
@@ -48,7 +49,7 @@ async function listEvents() {
 
 			// Save the events to a file
 			saveEventsToFile(mappedEvents);
-			allEvents.push(...mappedEvents);
+			// allEvents.push(...mappedEvents);
 		}
 		else {
 			console.log('No events found.');
@@ -59,9 +60,8 @@ async function listEvents() {
 	}
 }
 
-const eventsFilePath = './dist/events.json';
-
 function saveEventsToFile(events) {
+	const eventsFilePath = './dist/events.json';
 	try {
 		// Convert events array to JSON string
 		const eventsJson = JSON.stringify(events, null, 2);
@@ -76,10 +76,30 @@ function saveEventsToFile(events) {
 	}
 }
 
-let eventsProcessed = [];
+function addICS(fcEvent, eventData) {
+	const calendar = ical({name: eventData.summary});
+	// A method is required for outlook to display event as an invitation
+	// calendar.method(ICalCalendarMethod.REQUEST);
+	let icsEvent = {
+		start: eventData.start.dateTime,
+		end: eventData.end.dateTime,
+		summary: eventData.summary,
+		description: eventData.description,
+		// recurrenceId: eventData.recurringEventId.split('_')[1],
+	}
+	if (eventData.recurrence) {
+		icsEvent.repeating = eventData.recurrence[0];
+		console.log(icsEvent);
+	}
+
+	calendar.createEvent(icsEvent);
+	fcEvent.ics = calendar.toString()
+	return fcEvent;
+}
 
 // Function to map events to a simplified array of event data
 function mapEvents(events) {
+	let eventsProcessed = [];
 	return events
 		.map((eventData) => {
 			// console.log(eventData);
@@ -87,13 +107,15 @@ function mapEvents(events) {
 				let eventKey = eventData.start.dateTime + '_' + eventData.id.split('_')[0];
 				if (!eventsProcessed.includes(eventKey)) {
 					eventsProcessed.push(eventKey);
-					return {
+					let fcEvent = {
 						title       : eventData.summary ? eventData.summary : null,
 						description : eventData.description,
 						start       : eventData.start.dateTime,
 						end         : eventData.end.dateTime,
-						uid         : eventData.id
+						uid         : eventData.id,
 					};
+					fcEvent = addICS(fcEvent, eventData);
+					return fcEvent;
 				}
 			}
 		})

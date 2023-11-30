@@ -28,6 +28,17 @@ function App() {
 		console.log('event', clickInfo.event);
 	});
 
+	function downloadICSFile() {
+		console.log("print ics");
+		console.log(eventDetails.extendedProps.ics);
+		const file = new Blob([eventDetails.extendedProps.ics], {type: 'text/calendar'});
+		const element = document.createElement("a");
+		element.href = URL.createObjectURL(file);
+		element.download = "finos-event.ics";
+		document.body.appendChild(element);
+		element.click();
+	}
+
 	function printDate(date) {
 		if (date) {
 			return date.toString();
@@ -46,6 +57,12 @@ function App() {
 				>
 					X
 				</button>
+				<button
+					onClick={() => downloadICSFile()}
+					className="fc-button">
+					Download ICS
+				</button>
+
 				<h2>{eventDetails.title}</h2>
 				<div>
 					<strong>Start:</strong> {printDate(eventDetails.start)}
