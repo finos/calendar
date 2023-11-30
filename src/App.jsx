@@ -95,9 +95,7 @@ function App() {
 				eventClick={handleEventClick}
 				loading={(isLoading) => setLoading(isLoading)}
 			/>
-		),
-		[]
-	);
+		),[]);
 
 	return (
 		<div className="App main">
