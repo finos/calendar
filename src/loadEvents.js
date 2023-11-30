@@ -31,7 +31,7 @@ async function listEvents() {
 
 		const maxResults = 2500;
 
-		const singleEvents = true;
+		const singleEvents = false;
 
 		const timeMin = '2021-01-01T00:00:00Z';
 
@@ -47,12 +47,12 @@ async function listEvents() {
 			const mappedEvents = mapEvents(events.data.items);
 
 			// Filter events without a title (including null or undefined titles)
-			const filteredEvents = mappedEvents.filter(
-				(event) => event.title !== undefined && event.title !== ''
-			);
+			// const filteredEvents = mappedEvents.filter(
+			// 	(event) => event.title !== undefined && event.title !== ''
+			// );
 
 			// Save the events to a file
-			saveEventsToFile(filteredEvents);
+			saveEventsToFile(mappedEvents);
 			allEvents.push(...mappedEvents);
 		}
 		else {
@@ -64,7 +64,7 @@ async function listEvents() {
 	}
 }
 
-const eventsFilePath = './events.json';
+const eventsFilePath = './dist/events.json';
 
 function saveEventsToFile(events) {
 	try {
@@ -81,18 +81,30 @@ function saveEventsToFile(events) {
 	}
 }
 
+let eventsProcessed = [];
+
 // Function to map events to a simplified array of event data
 function mapEvents(events) {
-	return events.map((eventData) => {
-		return {
-			title       : eventData.summary,
-			description : eventData.description,
-			start       : eventData.start.dateTime,
-			end         : eventData.end.dateTime,
-			uid         : eventData.id,
-			rrule       : eventData.recurringEventId
-		};
-	});
+	return events
+		.map((eventData) => {
+			console.log(eventData);
+			if (eventData.status === 'confirmed') {
+				let eventKey = eventData.start.dateTime + '_' + eventData.id.split('_')[0];
+				if (!eventsProcessed.includes(eventKey)) {
+					eventsProcessed.push(eventKey);
+					return {
+						title       : eventData.summary ? eventData.summary : null,
+						description : eventData.description,
+						start       : eventData.start.dateTime,
+						end         : eventData.end.dateTime,
+						uid         : eventData.id
+						// rruleId     : eventData.recurringEventId,
+						// rrule       : eventData.rsecurrence ? eventData.recurrence[0] : null
+					};
+				}
+			}
+		})
+		.filter(Boolean);
 }
 
 // Main function to initiate the events retrieval
