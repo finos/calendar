@@ -35,10 +35,16 @@ gpg --symmetric --cipher-algo AES256 calendar-service-account.json
 npm install
 ```
 
+### Import events from Google API
+
+```bash
+npm run getEvents
+```
+
 ### Run development server
 
 ```bash
-npm run dev
+npm start
 ```
 
 Open browser to `http://localhost:5173/`.
