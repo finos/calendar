@@ -39,9 +39,18 @@ function App() {
 		element.click();
 	}
 
+	const dateOptions = {
+		weekday: 'long',
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+		hour: '2-digit',
+		minute:'2-digit'
+	  };
 	function printDate(date) {
 		if (date) {
-			return date.toString();
+			return date.toLocaleDateString(undefined, dateOptions)
+			// return date.toString();
 		}
 		else return 'NONE';
 	}
