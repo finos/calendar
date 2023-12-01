@@ -43,14 +43,23 @@ function App() {
 		weekday: 'long',
 		year: 'numeric',
 		month: 'long',
-		day: 'numeric',
+		day: 'numeric'
+ 	};
+	 const timeOptions = {
 		hour: '2-digit',
 		minute:'2-digit'
-	  };
+ 	};
 	function printDate(date) {
 		if (date) {
 			return date.toLocaleDateString(undefined, dateOptions)
-			// return date.toString();
+		}
+		else return 'NONE';
+	}
+
+	function printTime(date) {
+		if (date) {
+			const str = date.toLocaleDateString(undefined, timeOptions)
+			return str.split(',')[1].trim();
 		}
 		else return 'NONE';
 	}
@@ -58,6 +67,16 @@ function App() {
 	const renderEventDetails = () => {
 		const description = eventDetails.extendedProps.description.replace(htmlRegex, '');
 
+		let eventTime = '';
+		const fromDate = printDate(eventDetails.start);
+		const toDate = printDate(eventDetails.end);
+		const fromTime = printTime(eventDetails.start);
+		const toTime = printTime(eventDetails.end);
+		if (fromDate == toDate) {
+			eventTime = fromDate + ' ' + fromTime + ' - ' + toTime;
+		} else {
+			eventTime = "<strong>From:</strong> " + fromDate + ' - ' + toDate + '<br/>' + "<strong>To:</strong> " + fromTime + ' ' + toTime;
+		}
 		return (
 			<div className="finos-calendar-event-details">
 				<button
@@ -72,12 +91,7 @@ function App() {
 				</button>
 
 				<h2>{eventDetails.title}</h2>
-				<div>
-					<strong>Start:</strong> {printDate(eventDetails.start)}
-				</div>
-				<div>
-					<strong>End:</strong> {printDate(eventDetails.end)}
-				</div>
+				<div>{eventTime}</div>
 				<br />
 				{parse(description)}
 			</div>
