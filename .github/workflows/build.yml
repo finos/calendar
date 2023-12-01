@@ -30,15 +30,12 @@ jobs:
           npm install
           npm run build
 
-      - name: Download ICS file
-        run: curl -o dist/basic.ics https://calendar.google.com/calendar/ical/finos.org_fac8mo1rfc6ehscg0d80fi8jig%40group.calendar.google.com/public/basic.ics
-
       - name: Setup environment
         run: gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output calendar-service-account.json calendar-service-account.json.gpg
         env:
           PASSPHRASE: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_PASSPHRASE }}
 
-      - name: Convert ICS file
+      - name: Get events from Google API
         run: npm run getEvents
 
       - name: Add CNAME in dist folder

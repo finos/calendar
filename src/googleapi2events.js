@@ -44,8 +44,13 @@ async function listEvents() {
 		});
 
 		if (events.data.items && events.data.items.length > 0) {
+			const eventsMap = new Map();
+			for (const eventData of events.data.items) {
+				eventsMap.set(eventData.id, eventData)
+			}
+
 			// Map events to a simplified array of event data
-			const mappedEvents = mapEvents(events.data.items);
+			const mappedEvents = mapEvents(eventsMap);
 
 			// Save the events to a file
 			saveEventsToFile(mappedEvents);
@@ -76,7 +81,25 @@ function saveEventsToFile(events) {
 	}
 }
 
-function addICS(fcEvent, eventData) {
+function hasRecurrence(eventData) {
+	return eventData.recurrence &&
+		!eventData.recurrence[0].startsWith('EXDATE');
+}
+
+function getRecurrence(eventData, events) {
+	let repeating = null;
+	if (hasRecurrence(eventData)) {
+		repeating = eventData.recurrence[0];
+	} else if (eventData.recurringEventId) {
+		const rootEvent = events.get(eventData.recurringEventId);
+		if (rootEvent && hasRecurrence(rootEvent)) {
+			repeating = rootEvent.recurrence[0];
+		}
+	}
+	return repeating;
+}
+
+function addICS(fcEvent, eventData, events) {
 	const calendar = ical({name: eventData.summary});
 	// A method is required for outlook to display event as an invitation
 	// calendar.method(ICalCalendarMethod.REQUEST);
@@ -84,13 +107,21 @@ function addICS(fcEvent, eventData) {
 		start: eventData.start.dateTime,
 		end: eventData.end.dateTime,
 		summary: eventData.summary,
-		description: eventData.description,
-		// recurrenceId: eventData.recurringEventId.split('_')[1],
+		description: eventData.description
 	}
-	if (eventData.recurrence) {
-		icsEvent.repeating = eventData.recurrence[0];
-		console.log(icsEvent);
+
+	const repeating = getRecurrence(eventData, events);
+	if (repeating) {
+		icsEvent.repeating = repeating;
 	}
+
+	// For debugging purposes
+	// if (eventData.start &&
+	// 	eventData.start.dateTime &&
+	// 	eventData.start.dateTime.startsWith("2023-12-05")) {
+	// 	console.log(eventData);
+	// 	console.log(icsEvent);
+	// }
 
 	calendar.createEvent(icsEvent);
 	fcEvent.ics = calendar.toString()
@@ -100,9 +131,8 @@ function addICS(fcEvent, eventData) {
 // Function to map events to a simplified array of event data
 function mapEvents(events) {
 	let eventsProcessed = [];
-	return events
+	return Array.from(events.values()).flat()
 		.map((eventData) => {
-			// console.log(eventData);
 			if (eventData.status === 'confirmed') {
 				let eventKey = eventData.start.dateTime + '_' + eventData.id.split('_')[0];
 				if (!eventsProcessed.includes(eventKey)) {
@@ -113,8 +143,9 @@ function mapEvents(events) {
 						start       : eventData.start.dateTime,
 						end         : eventData.end.dateTime,
 						uid         : eventData.id,
+						repeating   : getRecurrence(eventData, events)
 					};
-					fcEvent = addICS(fcEvent, eventData);
+					fcEvent = addICS(fcEvent, eventData, events);
 					return fcEvent;
 				}
 			}
