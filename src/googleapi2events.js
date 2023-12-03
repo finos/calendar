@@ -27,22 +27,33 @@ async function listEvents() {
 		// Create a Calendar API client
 		const calendar = google.calendar({ version: 'v3', auth });
 
-		const events = await calendar.events.list({
+		const eventsPast = await calendar.events.list({
 			calendarId: 'finos.org_fac8mo1rfc6ehscg0d80fi8jig@group.calendar.google.com',
 			maxResults: 2500,
-			singleEvents: false,
-			timeMin: '2021-01-01T00:00:00Z',
-			timeMax: '2025-01-01T00:00:00Z'
+			singleEvents: true,
+			timeMax: '2024-01-01T00:00:00Z',
 		});
+		console.log('Past Events retrieved:', eventsPast.data.items.length);
 
-		if (events.data.items && events.data.items.length > 0) {
+		const eventsFuture = await calendar.events.list({
+			calendarId: 'finos.org_fac8mo1rfc6ehscg0d80fi8jig@group.calendar.google.com',
+			maxResults: 2500,
+			singleEvents: true,
+			timeMin: '2024-01-01T00:00:00Z',
+		});
+		console.log('Future Events retrieved:', eventsFuture.data.items.length);
+
+		const eventItems = eventsPast.data.items.concat(eventsFuture.data.items);
+
+		if (eventItems && eventItems.length > 0) {
 			const eventsMap = new Map();
-			for (const eventData of events.data.items) {
+			for (const eventData of eventItems) {
 				eventsMap.set(eventData.id, eventData)
 			}
-			console.log('Events retrieved:', eventsMap.size);
+			console.log('Events parsed:', eventsMap.size);
 			// Map events to a simplified array of event data
 			const mappedEvents = mapEvents(eventsMap);
+			console.log('Events rendered out:', mappedEvents.length);
 
 			// Save the events to a file
 			saveEventsToFile(mappedEvents);
@@ -123,7 +134,7 @@ function addICS(fcEvent, eventData, events) {
 // Function to map events to a simplified array of event data
 function mapEvents(events) {
 	let eventsProcessed = [];
-	return Array.from(events.values()).flat()
+	return Array.from(events.values())
 		.map((eventData) => {
 			if (eventData.status === 'confirmed') {
 				let eventKey = eventData.start.dateTime + '_' + eventData.id.split('_')[0];
@@ -140,7 +151,7 @@ function mapEvents(events) {
 					fcEvent = addICS(fcEvent, eventData, events);
 					return fcEvent;
 				}
-			}
+			} else return null;
 		})
 		.filter(Boolean);
 }
