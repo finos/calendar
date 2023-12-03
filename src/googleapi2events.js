@@ -40,6 +40,7 @@ async function listEvents() {
 			maxResults: 2500,
 			singleEvents: true,
 			timeMin: '2024-01-01T00:00:00Z',
+			timeMax: '2025-01-01T00:00:00Z',
 		});
 		console.log('Future Events retrieved:', eventsFuture.data.items.length);
 
@@ -134,7 +135,8 @@ function addICS(fcEvent, eventData, events) {
 // Function to map events to a simplified array of event data
 function mapEvents(events) {
 	let eventsProcessed = [];
-	return Array.from(events.values())
+	let eventsNotProcessed = [];
+	const ret = Array.from(events.values())
 		.map((eventData) => {
 			if (eventData.status === 'confirmed') {
 				let eventKey = eventData.start.dateTime + '_' + eventData.id.split('_')[0];
@@ -151,9 +153,14 @@ function mapEvents(events) {
 					fcEvent = addICS(fcEvent, eventData, events);
 					return fcEvent;
 				}
-			} else return null;
+			} else {
+				eventsNotProcessed.push(eventData);
+				return null;
+			}
 		})
 		.filter(Boolean);
+	console.log('Events not processed:', eventsNotProcessed.length);
+	return ret;
 }
 
 // Main function to initiate the events retrieval
