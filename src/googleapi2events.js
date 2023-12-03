@@ -4,6 +4,9 @@ import ical from 'ical-generator';
 import {ICalCalendarMethod} from 'ical-generator';
 import { convert } from 'html-to-text';
 
+// The FINOS Community Calendar ID
+const calendarId = 'finos.org_fac8mo1rfc6ehscg0d80fi8jig@group.calendar.google.com';
+
 // Replace with the path to your service account JSON file
 const SERVICE_ACCOUNT_FILE = './calendar-service-account.json';
 
@@ -21,74 +24,35 @@ const auth = new google.auth.GoogleAuth({
 	scopes  : SCOPES
 });
 
-// Function to retrieve events and return a promise
-async function listEvents() {
-	try {
-		// Create a Calendar API client
-		const calendar = google.calendar({ version: 'v3', auth });
+// Create a Calendar API client
+const calendar = google.calendar({ version: 'v3', auth });
 
-		const eventsPast = await calendar.events.list({
-			calendarId: 'finos.org_fac8mo1rfc6ehscg0d80fi8jig@group.calendar.google.com',
-			maxResults: 2500,
-			singleEvents: true,
-			timeMax: '2024-01-01T00:00:00Z',
-		});
-		console.log('Past Events retrieved:', eventsPast.data.items.length);
-
-		const eventsFuture = await calendar.events.list({
-			calendarId: 'finos.org_fac8mo1rfc6ehscg0d80fi8jig@group.calendar.google.com',
-			maxResults: 2500,
-			singleEvents: true,
-			timeMin: '2024-01-01T00:00:00Z',
-			timeMax: '2025-01-01T00:00:00Z',
-		});
-		console.log('Future Events retrieved:', eventsFuture.data.items.length);
-
-		const eventItems = eventsPast.data.items.concat(eventsFuture.data.items);
-
-		if (eventItems && eventItems.length > 0) {
-			const eventsMap = new Map();
-			for (const eventData of eventItems) {
-				eventsMap.set(eventData.id, eventData)
-			}
-			console.log('Events parsed:', eventsMap.size);
-			// Map events to a simplified array of event data
-			const mappedEvents = mapEvents(eventsMap);
-			console.log('Events rendered out:', mappedEvents.length);
-
-			// Save the events to a file
-			saveEventsToFile(mappedEvents);
-		}
-		else {
-			console.log('No events found.');
-		}
-	} catch (error) {
-		console.error('Error retrieving calendar events:', error);
-		throw error; // Rethrow the error to be handled by the caller
-	}
-}
+// Used to divide API requests in 2: past and future,
+// to avoid the 2500 events limit
+// This can be easily improved (TODO)
+const cutoffDate = '2024-01-01T00:00:00Z';
+const limitFutureDate = '2026-01-01T00:00:00Z';
 
 function saveEventsToFile(events) {
 	const eventsFilePath = './dist/events.json';
-	try {
-		// Convert events array to JSON string
-		const eventsJson = JSON.stringify(events, null, 2);
 
-		// Write the JSON string to the file
-		fs.writeFileSync(eventsFilePath, eventsJson);
+	// Convert events array to JSON string
+	const eventsJson = JSON.stringify(events, null, 2);
 
-		console.log('Events saved to file:', eventsFilePath);
-	} catch (error) {
-		console.error('Error saving events to file:', error);
-		throw error; // Rethrow the error to be handled by the caller
-	}
+	// Write the JSON string to the file
+	fs.writeFileSync(eventsFilePath, eventsJson);
+
+	console.log('Events saved to file:', eventsFilePath);
 }
 
+// Check if an event has valid recurrence data
 function hasRecurrence(eventData) {
 	return eventData.recurrence &&
 		!eventData.recurrence[0].startsWith('EXDATE');
 }
 
+// Resolve recurrence data from the
+// root event (recurringEventId)
 function getRecurrence(eventData, events) {
 	let repeating = null;
 	if (hasRecurrence(eventData)) {
@@ -102,18 +66,21 @@ function getRecurrence(eventData, events) {
 	return repeating;
 }
 
+// Returns a string with the ICS format of the event
+// Includes HTML to text conversion, and recurrence data
 function addICS(fcEvent, eventData, events) {
 	const calendar = ical({name: eventData.summary});
 	// ICalCalendarMethod is required by outlook
 	// to display events as invitations
 	calendar.method(ICalCalendarMethod.REQUEST);
 
+	// Convert HTML to text, and wrap text
+	// to 130 characters
 	const options = {
 		wordwrap: 130,
 		selectors: [{
 			selector: 'a', options: {
-				hideLinkHrefIfSameAsText: true,
-				// ignoreHref: true,
+				hideLinkHrefIfSameAsText: true
 			}}]};
 
 	let icsEvent = {
@@ -122,66 +89,128 @@ function addICS(fcEvent, eventData, events) {
 		summary: eventData.summary,
 		description: convert(eventData.description, options)
 	}
-
 	const repeating = getRecurrence(eventData, events);
 	if (repeating) {
 		icsEvent.repeating = repeating;
 	}
-
-	// For debugging purposes
-	// if (eventData.start &&
-	// 	eventData.start.dateTime &&
-	// 	eventData.start.dateTime.startsWith("2023-12-05")) {
-	// 	console.log(eventData);
-	// 	console.log(icsEvent);
-	// }
 
 	calendar.createEvent(icsEvent);
 	fcEvent.ics = calendar.toString()
 	return fcEvent;
 }
 
-// Function to map events to a simplified array of event data
-function mapEvents(events) {
+// Adds static options for Google API calls
+function getApiOptions(options) {
+	options.set('maxResults', 2500);
+	options.set('calendarId', calendarId);
+	return Object.fromEntries(options);
+}
+
+// Returns the events from the Google Calendar API
+// If results hit the limit of 2500 entries, an error is thrown
+// Accepts additional options to pass to the API
+async function getGoogleEvents(queryName, dynamicOptions) {
+	const itemsAsync = await calendar.events.list(
+		getApiOptions(dynamicOptions))
+	const items = itemsAsync.data.items;
+
+	if (items.length == 0) {
+		throw new Error(queryName + 'No events returned!');
+	} else if (items.length == 2500) {
+		throw new Error(queryName + ' Events retrieved reached API limit!', items.length);
+	} else {
+		console.log(queryName +' Events retrieved:', items.length);
+	}
+	return items;
+}
+
+// Fetches events from Google API and transforms them
+// into FullCalendar events, generating a events.json file
+// The events are fetched in 2 batches, to avoid the
+// 2500 events limit.
+// Another API call is made to fetch recurring events,
+// which are used to generate the correct ICS (iCal) format
+async function parseGoogleEvents() {
+	// Fetch events before the cutoff date
+	const eventsPast = await getGoogleEvents(
+		"Past Cutoff",
+		new Map([
+			['singleEvents', true],
+			['timeMax', cutoffDate]]));
+	// Fetch events after the cutoff date
+	const eventsFuture = await getGoogleEvents(
+		"Future Cutoff",
+		new Map([
+			['singleEvents', true],
+			['timeMin', cutoffDate],
+			['timeMax', limitFutureDate]]));
+
+	// Fetch all events, including recurring ones
+	// These events are used for resolving the recurrence of events
+	// They are not used for rendering the events in the calendar
+	const recurringEvents = await getGoogleEvents(
+		"Recurring",
+		new Map([['singleEvents', false]]));
+	const recurringEventsMap = new Map();
+	for (const eventData of recurringEvents) {
+		recurringEventsMap.set(eventData.id, eventData)
+	}
+
+	// Merge past and future events, to generate
+	// the FullCalendar events JSON
+	const eventItems = eventsPast.concat(eventsFuture);
+	console.log('Events fetched:', eventItems.length);
+
+	// Map events to a simplified array of event data
+	const mappedEvents = mapEvents(eventItems, recurringEventsMap);
+	console.log('Events returned:', mappedEvents.length);
+
+	// Save the events to a file
+	saveEventsToFile(mappedEvents);
+}
+
+// Maps Google API events to FullCalendar events
+// Generates and attaches the ICS format of the event
+function mapEvents(events, recurringEventsMap) {
 	let eventsProcessed = [];
 	let eventsNotProcessed = [];
-	const ret = Array.from(events.values())
-		.map((eventData) => {
-			if (eventData.status === 'confirmed') {
-				let eventKey = eventData.start.dateTime + '_' + eventData.id.split('_')[0];
-				if (!eventsProcessed.includes(eventKey)) {
-					eventsProcessed.push(eventKey);
-					let fcEvent = {
-						title       : eventData.summary ? eventData.summary : null,
-						description : eventData.description,
-						start       : eventData.start.dateTime,
-						end         : eventData.end.dateTime,
-						uid         : eventData.id,
-						repeating   : getRecurrence(eventData, events)
-					};
-					fcEvent = addICS(fcEvent, eventData, events);
-					return fcEvent;
-				}
-			} else {
-				eventsNotProcessed.push(eventData);
-				return null;
+	const ret = events.map((eventData) => {
+		if (eventData.status === 'confirmed') {
+			let eventKey = eventData.start.dateTime + '_' + eventData.id.split('_')[0];
+			if (!eventsProcessed.includes(eventKey)) {
+				eventsProcessed.push(eventKey);
+				let fcEvent = {
+					title       : eventData.summary,
+					description : eventData.description,
+					start       : eventData.start.dateTime,
+					end         : eventData.end.dateTime,
+					uid         : eventData.id,
+					location	: eventData.location,
+					repeating   : getRecurrence(
+						eventData, recurringEventsMap)
+				};
+				fcEvent = addICS(
+					fcEvent,
+					eventData,
+					recurringEventsMap);
+				return fcEvent;
 			}
-		})
-		.filter(Boolean);
+		} else {
+			eventsNotProcessed.push(eventData);
+			return null;
+		}
+	}).filter(Boolean); // Remove null values
 	console.log('Events not processed:', eventsNotProcessed.length);
 	return ret;
 }
 
-// Main function to initiate the events retrieval
 async function main() {
 	try {
-		await listEvents(); // Wait for the listEvents() function to finish
-		console.log('All events retrieved');
-		// Any code that depends on the events should be placed here
+		await parseGoogleEvents();
+		console.log('All events retrieved from Google Calendar API!');
 	} catch (error) {
-		// Handle errors
 		console.error('Error occurred:', error);
 	}
 }
 
-main(); // Call the main function to start the events retrieval process
+main();
