@@ -27,20 +27,12 @@ async function listEvents() {
 		// Create a Calendar API client
 		const calendar = google.calendar({ version: 'v3', auth });
 
-		// Example usage: Get the ID of an existing calendar
-		const calendarId = 'finos.org_fac8mo1rfc6ehscg0d80fi8jig@group.calendar.google.com';
-
-		const maxResults = 2500;
-
-		const singleEvents = false;
-
-		const timeMin = '2021-01-01T00:00:00Z';
-
 		const events = await calendar.events.list({
-			calendarId,
-			maxResults,
-			singleEvents,
-			timeMin
+			calendarId: 'finos.org_fac8mo1rfc6ehscg0d80fi8jig@group.calendar.google.com',
+			maxResults: 2500,
+			singleEvents: false,
+			timeMin: '2021-01-01T00:00:00Z',
+			timeMax: '2025-01-01T00:00:00Z'
 		});
 
 		if (events.data.items && events.data.items.length > 0) {
@@ -48,7 +40,7 @@ async function listEvents() {
 			for (const eventData of events.data.items) {
 				eventsMap.set(eventData.id, eventData)
 			}
-
+			console.log('Events retrieved:', eventsMap.size);
 			// Map events to a simplified array of event data
 			const mappedEvents = mapEvents(eventsMap);
 
