@@ -169,13 +169,26 @@ async function parseGoogleEvents() {
 	saveEventsToFile(mappedEvents);
 }
 
+function hasAcceptedEvent(eventData) {
+	if (eventData.attendees) {
+		for (const attendee of eventData.attendees) {
+			if (attendee.email == calendarId) {
+				return attendee.responseStatus == 'accepted';
+			}
+		}
+	}
+	return true;
+}
+
 // Maps Google API events to FullCalendar events
 // Generates and attaches the ICS format of the event
 function mapEvents(events, recurringEventsMap) {
 	let eventsProcessed = [];
 	let eventsNotProcessed = [];
+	console.log('Example event:', events[1900]);
 	const ret = events.map((eventData) => {
-		if (eventData.status === 'confirmed') {
+		if (eventData.status === 'confirmed' &&
+			hasAcceptedEvent(eventData)) {
 			let eventKey = eventData.start.dateTime + '_' + eventData.id.split('_')[0];
 			if (!eventsProcessed.includes(eventKey)) {
 				eventsProcessed.push(eventKey);
