@@ -1,6 +1,8 @@
 import { google } from 'googleapis';
 import fs from 'fs';
 import ical from 'ical-generator';
+import {ICalCalendarMethod} from 'ical-generator';
+import { convert } from 'html-to-text';
 
 // Replace with the path to your service account JSON file
 const SERVICE_ACCOUNT_FILE = './calendar-service-account.json';
@@ -18,8 +20,6 @@ const auth = new google.auth.GoogleAuth({
 	keyFile : SERVICE_ACCOUNT_FILE,
 	scopes  : SCOPES
 });
-
-// export const allEvents = [];
 
 // Function to retrieve events and return a promise
 async function listEvents() {
@@ -58,7 +58,6 @@ async function listEvents() {
 
 			// Save the events to a file
 			saveEventsToFile(mappedEvents);
-			// allEvents.push(...mappedEvents);
 		}
 		else {
 			console.log('No events found.');
@@ -105,13 +104,23 @@ function getRecurrence(eventData, events) {
 
 function addICS(fcEvent, eventData, events) {
 	const calendar = ical({name: eventData.summary});
-	// A method is required for outlook to display event as an invitation
-	// calendar.method(ICalCalendarMethod.REQUEST);
+	// ICalCalendarMethod is required by outlook
+	// to display events as invitations
+	calendar.method(ICalCalendarMethod.REQUEST);
+
+	const options = {
+		wordwrap: 130,
+		selectors: [{
+			selector: 'a', options: {
+				hideLinkHrefIfSameAsText: true,
+				// ignoreHref: true,
+			}}]};
+
 	let icsEvent = {
 		start: eventData.start.dateTime,
 		end: eventData.end.dateTime,
 		summary: eventData.summary,
-		description: eventData.description
+		description: convert(eventData.description, options)
 	}
 
 	const repeating = getRecurrence(eventData, events);
