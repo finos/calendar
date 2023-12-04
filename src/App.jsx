@@ -87,9 +87,18 @@ function App() {
 				<button
 					onClick={() => downloadICSFile()}
 					className="fc-button">
-					Download ICS
+					Event ICS
 				</button>
-
+				<form
+					method="get"
+					target="_blank"
+					action={eventDetails.extendedProps.rootIcsLink}>
+					<button
+						type="submit"
+						className="fc-button">
+						Series ICS
+					</button>
+				</form>
 				<h2>{eventDetails.title}</h2>
 				<div>{eventTime}</div>
 				<br />

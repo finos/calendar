@@ -7,6 +7,8 @@ import { convert } from 'html-to-text';
 // The FINOS Community Calendar ID
 const calendarId = 'finos.org_fac8mo1rfc6ehscg0d80fi8jig@group.calendar.google.com';
 
+const outputFile = './dist/events.json';
+
 // Replace with the path to your service account JSON file
 const SERVICE_ACCOUNT_FILE = './calendar-service-account.json';
 
@@ -33,16 +35,18 @@ const calendar = google.calendar({ version: 'v3', auth });
 const cutoffDate = '2024-01-01T00:00:00Z';
 const limitFutureDate = '2026-01-01T00:00:00Z';
 
-function saveEventsToFile(events) {
-	const eventsFilePath = './dist/events.json';
+// We collect the unique root recurring events
+// to generate the correct ICS (iCal) format
+let rootRecurringEventsICS = new Map();
 
-	// Convert events array to JSON string
-	const eventsJson = JSON.stringify(events, null, 2);
+function saveToFile(filepath, str) {
+	fs.writeFileSync(filepath, str);
+	console.log('Items saved to file:', filepath);
+}
 
-	// Write the JSON string to the file
-	fs.writeFileSync(eventsFilePath, eventsJson);
-
-	console.log('Events saved to file:', eventsFilePath);
+function saveJSONToFile(filepath, items) {
+	const itemsJson = JSON.stringify(items, null, 2);
+	saveToFile(filepath, itemsJson);
 }
 
 // Check if an event has valid recurrence data
@@ -53,6 +57,12 @@ function hasRecurrence(eventData) {
 
 // Resolve recurrence data from the
 // root event (recurringEventId)
+function addRecurrence(eventData, events, icsEvent) {
+	const repeating = getRecurrence(eventData, events);
+	if (repeating) {
+		icsEvent.repeating = repeating;
+	}
+}
 function getRecurrence(eventData, events) {
 	let repeating = null;
 	if (hasRecurrence(eventData)) {
@@ -64,6 +74,19 @@ function getRecurrence(eventData, events) {
 		}
 	}
 	return repeating;
+}
+
+function saveRootRecurringEvent(eventData, icsEvent) {
+	const rootId = eventData.id.split('_')[0];
+	const rootEventICS = {
+		eventData: eventData,
+		icsEvent: icsEvent };
+
+	if (rootRecurringEventsICS.has(rootId)) {
+		rootRecurringEventsICS.get(rootId).push(rootEventICS);
+	} else {
+		rootRecurringEventsICS.set(rootId, [rootEventICS]);
+	}
 }
 
 // Returns a string with the ICS format of the event
@@ -89,13 +112,14 @@ function addICS(fcEvent, eventData, events) {
 		summary: eventData.summary,
 		description: convert(eventData.description, options)
 	}
-	const repeating = getRecurrence(eventData, events);
-	if (repeating) {
-		icsEvent.repeating = repeating;
-	}
-
+	addRecurrence(eventData, events, icsEvent);
 	calendar.createEvent(icsEvent);
-	fcEvent.ics = calendar.toString()
+	fcEvent.ics = calendar.toString();
+
+	if (icsEvent.repeating) {
+		saveRootRecurringEvent(eventData, fcEvent.ics);
+		fcEvent.rootIcsLink = eventData.id.split('_')[0] + '.ics';
+	}
 	return fcEvent;
 }
 
@@ -165,8 +189,8 @@ async function parseGoogleEvents() {
 	const mappedEvents = mapEvents(eventItems, recurringEventsMap);
 	console.log('Events returned:', mappedEvents.length);
 
-	// Save the events to a file
-	saveEventsToFile(mappedEvents);
+	// Save events to the output file
+	saveJSONToFile(outputFile, mappedEvents);
 }
 
 function hasAcceptedEvent(eventData) {
@@ -185,7 +209,6 @@ function hasAcceptedEvent(eventData) {
 function mapEvents(events, recurringEventsMap) {
 	let eventsProcessed = [];
 	let eventsNotProcessed = [];
-	console.log('Example event:', events[1900]);
 	const ret = events.map((eventData) => {
 		if (eventData.status === 'confirmed' &&
 			hasAcceptedEvent(eventData)) {
@@ -221,6 +244,15 @@ async function main() {
 	try {
 		await parseGoogleEvents();
 		console.log('All events retrieved from Google Calendar API!');
+		console.log('Saving ICS files:', rootRecurringEventsICS.size);
+		for (const [eventId, eventsICS] of rootRecurringEventsICS) {
+			const sortedEventsICS = eventsICS.sort((a, b) => {
+				return a.eventData.start.dateTime > b.eventData.start.dateTime;
+			});
+			saveToFile(
+				'./dist/' + eventId + '.ics',
+				sortedEventsICS[0].icsEvent);
+		}
 	} catch (error) {
 		console.error('Error occurred:', error);
 	}
