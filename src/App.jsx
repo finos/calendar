@@ -67,16 +67,22 @@ function App() {
 	const renderEventDetails = () => {
 		const description = eventDetails.extendedProps.description.replace(htmlRegex, '');
 
-		let eventTime = '';
 		const fromDate = printDate(eventDetails.start);
 		const toDate = printDate(eventDetails.end);
 		const fromTime = printTime(eventDetails.start);
 		const toTime = printTime(eventDetails.end);
+		let eventTime = '';
 		if (fromDate == toDate) {
 			eventTime = fromDate + ' ' + fromTime + ' - ' + toTime;
 		} else {
 			eventTime = "<strong>From:</strong> " + fromDate + ' - ' + toDate + '<br/>' + "<strong>To:</strong> " + fromTime + ' ' + toTime;
 		}
+
+		let seriesICS = '';
+		if (eventDetails.extendedProps.rootIcsLink != null) {
+			seriesICS = <form method="get" target="_blank" action={eventDetails.extendedProps.rootIcsLink}><button type="submit" className="fc-button">Series ICS</button></form>
+		}
+
 		return (
 			<div className="finos-calendar-event-details">
 				<button
@@ -89,16 +95,7 @@ function App() {
 					className="fc-button">
 					Event ICS
 				</button>
-				<form
-					method="get"
-					target="_blank"
-					action={eventDetails.extendedProps.rootIcsLink}>
-					<button
-						type="submit"
-						className="fc-button">
-						Series ICS
-					</button>
-				</form>
+				<div>{seriesICS}</div>
 				<h2>{eventDetails.title}</h2>
 				<div>{eventTime}</div>
 				<br />
