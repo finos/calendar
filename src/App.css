@@ -52,3 +52,30 @@ button.fc-button.finos-calendar-event-details-close {
   left: 50vw;
   z-index: 901;
 }
+
+@media only screen and (max-width: 1000px) {
+
+  .finos-calendar {
+    min-width: 600px;
+  }
+
+  .fc-daygrid-day-events {
+    font-size: .5em;
+  }
+
+  .fc-daygrid-day-top {
+    max-height: 1.3em;
+    font-size: .75em;
+    margin: 0em 0em .5em 0em
+  }
+
+  .fc-popover {
+    max-width: 400px;
+    overflow: scroll;
+  }
+
+  .fc-event {
+    max-height: 1em;
+    margin: 1em 0;
+  }
+}
