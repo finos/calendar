@@ -21,7 +21,7 @@ cd calendar
 
 2. Download `calendar-service-account.json` into the project's root folder.
 
-TODO: add link to docs on how to download calendar-service-account.json
+In order to use the Google Calendar API you will need to follow [these 5 steps](https://developers.google.com/workspace/guides/get-started) to generate the necessary credentials. Once you have the credentials store them in the root folder of the project in a file named `calendar-service-account.json`.
 
 ### Encrypting Google Service Account key
 
