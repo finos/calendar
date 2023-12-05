@@ -3,18 +3,17 @@
   "version": "0.1.0",
   "description": "FINOS Community Calendar",
   "license": "Apache-2.0",
+  "type": "module",
   "engines": {
     "node": "^18.14.0",
     "npm": "^9.3.1"
   },
   "scripts": {
-    "start": "npm run dev",
-    "dev": "npm run get-cal && vite",
+    "start": "vite",
     "build": "vite build",
-    "buildAndRun": "npm run get-cal && npm run build",
-    "get-cal": "curl -o public/basic.ics https://calendar.google.com/calendar/ical/finos.org_fac8mo1rfc6ehscg0d80fi8jig%40group.calendar.google.com/public/basic.ics",
+    "preview": "vite preview",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "getEvents": "node ./src/googleapi2events.js"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.8",
@@ -23,6 +22,8 @@
     "@fullcalendar/interaction": "^6.1.8",
     "@fullcalendar/react": "^6.1.8",
     "@fullcalendar/timegrid": "^6.1.8",
+    "googleapis": "^129.0.0",
+    "@fullcalendar/rrule": "^6.1.10",
     "html-react-parser": "^4.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -35,6 +36,8 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "ical-generator": "^6.0.0",
+    "html-to-text": "^9.0.5"
   }
 }
