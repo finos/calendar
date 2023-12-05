@@ -24,7 +24,7 @@
     "@fullcalendar/timegrid": "^6.1.10",
     "googleapis": "^129.0.0",
     "@fullcalendar/rrule": "^6.1.10",
-    "html-react-parser": "^4.2.2",
+    "html-react-parser": "^5.0.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -36,7 +36,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
-    "vite": "^4.4.5",
+    "vite": "^5.0.5",
     "ical-generator": "^6.0.0",
     "html-to-text": "^9.0.5"
   }
