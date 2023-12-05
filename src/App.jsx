@@ -110,7 +110,7 @@ function App() {
 				ref={calendarRef}
 				plugins={[ dayGridPlugin, iCalendarPlugin, interactionPlugin, timeGridPlugin, rrulePlugin ]}
 				initialView="dayGridMonth"
-				events="dist/events.json"
+				events="events.json"
 				headerToolbar={{
 					left   : 'prev,next today',
 					center : 'title',
