@@ -3,9 +3,8 @@ name: Build
 on:
   workflow_dispatch:
   push:
-    # TODO - uncomment when merging to main branch (!!)
-    # branches:
-    #   - main
+    branches:
+      - main
   schedule:
     - cron: "0 */3 * * *"
 
@@ -41,10 +40,8 @@ jobs:
       - name: Add CNAME in dist folder
         run: cp CNAME dist
 
-      # Disable to avoid risking to influence the live environement (even though it should not)
-      # TODO - re-enable when merging to main branch (!!)
-      # - name: Deploy to GitHub Pages
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     github_token: ${{ secrets.ACCESS_TOKEN }}
-      #     publish_dir: dist
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.ACCESS_TOKEN }}
+          publish_dir: dist

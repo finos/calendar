@@ -80,7 +80,7 @@ function App() {
 
 		let seriesICS = '';
 		if (eventDetails.extendedProps.rootIcsLink != null) {
-			seriesICS = <form method="get" target="_blank" action={eventDetails.extendedProps.rootIcsLink}><button type="submit" className="fc-button">Series ICS</button></form>
+			seriesICS = <a href={eventDetails.extendedProps.rootIcsLink}>Series ICS</a>
 		}
 
 		return (
