@@ -1,0 +1,39 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:CDM Structured Products Working Group
+X-WR-CALNAME:CDM Structured Products Working Group
+BEGIN:VEVENT
+UID:038bbb1b-ff44-44c9-886a-8d0aa9e5ce83
+SEQUENCE:0
+DTSTAMP:20231205T101337Z
+DTSTART:20230509T140000Z
+DTEND:20230509T150000Z
+RRULE:FREQ=MONTHLY;WKST=SU;UNTIL=20230711T035959Z;INTERVAL=1;BYDAY=2TU
+SUMMARY:CDM Structured Products Working Group
+DESCRIPTION:Github: https://github.com/finos/common-domain-model\n\nJoin 
+ Zoom Meeting\nhttps://zoom.us/j/92136087343?pwd=VER4aW83TC9HNDVxbXU3UUkxU1
+ BoUT09\n\nMeeting ID: 921 3608 7343\nPasscode: 861434\nOne tap mobile\n+19
+ 292056099\,\,92136087343# US (New York)\n+16469313860\,\,92136087343# US\n
+ \nDial by your location\n        +1 929 205 6099 US (New York)\n 
+        +1 646 931 3860 US\n        +1 305 224 1968 US\n  
+       +1 309 205 3325 US\n        +1 312 626 6799 US (Chicag
+ o)\n        +1 301 715 8592 US (Washington DC)\n        +1
+  669 900 6833 US (San Jose)\n        +1 689 278 1000 US\n    
+     +1 719 359 4580 US\n        +1 253 205 0468 US\n     
+    +1 253 215 8782 US (Tacoma)\n        +1 346 248 7799 US (Hou
+ ston)\n        +1 360 209 5623 US\n        +1 386 347 5053
+  US\n        +1 507 473 4847 US\n        +1 564 217 2000 U
+ S\n        +1 669 444 9171 US\n        888 788 0099 US Tol
+ l-free\n        877 853 5247 US Toll-free\n        +44 203
+  481 5237 United Kingdom\n        +44 203 481 5240 United Kingdom\
+ n        +44 203 901 7895 United Kingdom\n        +44 208 
+ 080 6591 United Kingdom\n        +44 208 080 6592 United Kingdom\n
+         +44 330 088 5830 United Kingdom\n        +44 131 4
+ 60 1196 United Kingdom\n        0 800 358 2817 United Kingdom Toll
+ -free\n        0 800 031 5717 United Kingdom Toll-free\n     
+    0 800 260 5801 United Kingdom Toll-free\nMeeting ID: 921 3608 7343\n
+ Find your local number: https://zoom.us/u/ad5NMLeH9R
+END:VEVENT
+END:VCALENDAR

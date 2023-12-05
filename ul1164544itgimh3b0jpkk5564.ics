@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:KDB Project call
+X-WR-CALNAME:KDB Project call
+BEGIN:VEVENT
+UID:7ed734d0-833c-4dba-9937-7172f5564fd5
+SEQUENCE:0
+DTSTAMP:20231205T101336Z
+DTSTART:20190401T150000Z
+DTEND:20190401T160000Z
+RRULE:FREQ=MONTHLY;UNTIL=20190506T035959Z;BYDAY=1MO
+SUMMARY:KDB Project call
+DESCRIPTION:WebEx URL: https://finos.webex.com/finos/j.php?MTID=md2b1d9e4d
+ b4a73133a4fa58d8452baec\nMeeting number: 667 363 915\nHost key: 995365\n\n
+ \nDial-in:\nUSA Toll: +1-240-454-0879\nUK Toll: +44-20319-88141\nMeeting n
+ umber: 667 363 915\n\n\nHost: Rob Underwood\nScribe:\nStart-End: 11-12 am 
+ ET\nRecurrence: The 1st Monday of every month\nConfluence page: https://fi
+ nosfoundation.atlassian.net/wiki/spaces/DT/pages/329383945/kdb+Working+Gro
+ up\nRecording URL: https://finos.webex.com/mw3300/mywebex/default.do?siteu
+ rl=finos&service=1
+END:VEVENT
+END:VCALENDAR

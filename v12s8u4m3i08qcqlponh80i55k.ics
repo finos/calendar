@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:Pure/Alloy Project Pilot Group (Bi-Weekly Meeting)
+X-WR-CALNAME:Pure/Alloy Project Pilot Group (Bi-Weekly Meeting)
+BEGIN:VEVENT
+UID:3654cded-b230-438b-a564-238de2ad1be9
+SEQUENCE:0
+DTSTAMP:20231205T101336Z
+DTSTART:20200311T163000Z
+DTEND:20200311T173000Z
+RRULE:FREQ=WEEKLY;UNTIL=20200325T035959Z;INTERVAL=2;BYDAY=WE
+SUMMARY:Pure/Alloy Project Pilot Group (Bi-Weekly Meeting)
+DESCRIPTION:\n\n * Meeting link: https://finos.webex.com/finos/j.php?MTID=
+ m9faeb59f9167a188a0cde9a2209b9447\n * Call-in: \n   * +1-415-655-0003 US
+  Toll\n   * +44-20319-88141 UK Toll\n * Meeting number: 665 309 471\n * P
+ assword: TAtaZkmC\n\n\nAgenda/ meeting minutes: https://github.com/finos
+ /alloy/tree/master/docs/meeting-minutes\n\n\n\n\n\n
+END:VEVENT
+END:VCALENDAR

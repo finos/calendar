@@ -1,0 +1,25 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:FINOS Office Hours - Your FINOS Questions Answered
+X-WR-CALNAME:FINOS Office Hours - Your FINOS Questions Answered
+BEGIN:VEVENT
+UID:2a2fa765-09de-4515-901c-e60218ddbdcf
+SEQUENCE:0
+DTSTAMP:20231205T101336Z
+DTSTART:20210414T150000Z
+DTEND:20210414T154500Z
+RRULE:FREQ=WEEKLY;WKST=SU;UNTIL=20210721T035959Z;INTERVAL=2
+SUMMARY:FINOS Office Hours - Your FINOS Questions Answered
+DESCRIPTION:FINOS Office Hours are hosted by Director of Community James 
+ McLeod to answer FINOS questions and help people join / start\ncontributin
+ g to FINOS.\n\nThis session is not a 1:1 with James\, but will have multip
+ le people in the room\, including FINOS contributors and maintainers.\nFee
+ l free to forward to others who may be interested in contributing to FINOS
+ .\n\nMeeting information\n\n * Meeting link: https://finos.webex.com/fino
+ s/j.php?MTID=m042efb0ae4405d0e84094879c0784df4\n\nMore ways to join:\n * J
+ oin by phone: \n   * +1-415-655-0003 US Toll\n   * +44-20319-88141 UK Tol
+ l\n   * Access code: 127 270 7126
+END:VEVENT
+END:VCALENDAR

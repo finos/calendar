@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:FDC3 Use Cases Working Group
+X-WR-CALNAME:FDC3 Use Cases Working Group
+BEGIN:VEVENT
+UID:b508de4a-4890-4303-bf8c-bbffc7a86d50
+SEQUENCE:0
+DTSTAMP:20231205T101336Z
+DTSTART:20181004T150000Z
+DTEND:20181004T160000Z
+RRULE:FREQ=WEEKLY;UNTIL=20190124T045959Z;INTERVAL=2;BYDAY=TH
+SUMMARY:FDC3 Use Cases Working Group
+DESCRIPTION:WebEx URL: https://finos.webex.com/finos/j.php?MTID=m6b1c1e9b5
+ 45b1695ba9df7c1aa37260e Audio connection: +1.415.655.0003 (USA Toll)\n+44-
+ 20319-88141 UK Toll Access code: 662 042 476 Meeting number: 662 042 476 H
+ ost key: 192062 WebEx Host: FDC3 Room Scribe: TBD\nweek to week Start-End:
+  11-12 am ET Recurrence: Every 2 weeks on Thursday Confluence page:\nhttps
+ ://finosfoundation.atlassian.net/wiki/spaces/FDC3/pages/169738241/Use+Case
+ +Working+Group Recording URL:\nhttps://finos.webex.com/mw3300/mywebex/defa
+ ult.do?siteurl=finos&service=1
+END:VEVENT
+END:VCALENDAR

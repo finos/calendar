@@ -1,0 +1,25 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:FDC3: App Directory Discussion Group
+X-WR-CALNAME:FDC3: App Directory Discussion Group
+BEGIN:VEVENT
+UID:db77a355-ed6f-4847-853e-899528bbafc7
+SEQUENCE:0
+DTSTAMP:20231205T101336Z
+DTSTART:20220321T130000Z
+DTEND:20220321T140000Z
+RRULE:FREQ=WEEKLY;WKST=SU;UNTIL=20220404T035959Z;INTERVAL=2;BYDAY=MO
+SUMMARY:FDC3: App Directory Discussion Group
+DESCRIPTION:FDC3: App Directory Discussion Group\nHosted by FINOS \n\nMee
+ ting link: https://finos.webex.com/finos/j.php?MTID=m2316d45da678d0203fd86
+ f9342ff63ab \n[https://finos.webex.com/finos/j.php?MTID=m2316d45da678d020
+ 3fd86f9342ff63ab]\nMeeting number: 2551 735 2618\nPassword: VscvKptp756\nH
+ ost key: 430823\nJoin by video system\nDial 25517352618@finos.webex.com\nY
+ ou can also dial 173.243.2.68 and enter your meeting number.\nJoin by phon
+ e\n+1-415-655-0003 US Toll\n+44-20319-88141 UK Toll\nAccess code: 2551 7
+ 35 2618\nHost PIN: 4619Global call-in numbers\n\n[https://finos.webex.com/
+ webappng/sites/finos/meeting/info/5eae40e0317743ada4a8b09b33208354#]
+END:VEVENT
+END:VCALENDAR

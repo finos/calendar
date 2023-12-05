@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:FINOS InnerSource Special Interest Group
+X-WR-CALNAME:FINOS InnerSource Special Interest Group
+BEGIN:VEVENT
+UID:66ea81ec-3e00-4f9b-bccf-992dd1fe830d
+SEQUENCE:0
+DTSTAMP:20231205T101336Z
+DTSTART:20210510T150000Z
+DTEND:20210510T160000Z
+RRULE:FREQ=WEEKLY;WKST=SU;UNTIL=20210606T225959Z;INTERVAL=2;BYDAY=MO
+SUMMARY:FINOS InnerSource Special Interest Group
+DESCRIPTION:FINOS InnerSource Special Interest Group\n\nMeeting Link\n\n *
+  https://finos.webex.com/finos/j.php?MTID=m33975a6a163e1319c07e33a06bd3d1d
+ 5\n\n\nMeeting number\n\n * 127 765 4882\n\n\nJoin by phone\n\n * +1-415-6
+ 55-0003 US Toll\n * +44-20319-88141 UK Toll\n * Access code: 127 765 4882
+END:VEVENT
+END:VCALENDAR

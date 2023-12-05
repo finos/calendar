@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:Waltz Working Group : Charming Waltz with Juju
+X-WR-CALNAME:Waltz Working Group : Charming Waltz with Juju
+BEGIN:VEVENT
+UID:d9b00075-474f-4f78-922f-024ddd07dd11
+SEQUENCE:0
+DTSTAMP:20231205T101337Z
+DTSTART:20220126T140000Z
+DTEND:20220126T144000Z
+RRULE:FREQ=WEEKLY;WKST=SU;UNTIL=20220201T235959Z;BYDAY=WE
+SUMMARY:Waltz Working Group : Charming Waltz with Juju
+DESCRIPTION:Waltz Working Group : Charming Waltz with Juju\n\nJoin by Webe
+ x\nhttps://finos.webex.com/finos/j.php?MTID=mc26a32a8ea307d4cac8c2b425cd95
+ b57\nMeeting number: 2556 647 8555\n\nJoin by phone\n+1-415-655-0003 US To
+ ll\n+44-20319-88141 UK Toll\n\nAccess code: 255 664 78555\n\n\nJoin by vid
+ eo system\nDial 25566478555@finos.webex.com\nYou can also dial 173.243.2.6
+ 8 and enter your meeting number.
+END:VEVENT
+END:VCALENDAR

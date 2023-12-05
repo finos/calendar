@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:Plexus Desktop Interop API Project
+X-WR-CALNAME:Plexus Desktop Interop API Project
+BEGIN:VEVENT
+UID:0e0250a8-d888-4334-ae53-68ec3f667171
+SEQUENCE:0
+DTSTAMP:20231205T101336Z
+DTSTART:20191220T160000Z
+DTEND:20191220T170000Z
+RRULE:FREQ=MONTHLY;UNTIL=20200221T045959Z;BYDAY=3FR
+SUMMARY:Plexus Desktop Interop API Project
+DESCRIPTION:\nWebEx URL: https://finos.webex.com/finos/j.php?MTID=m5998123
+ 7168a9499ebd736d45a102da3\n\nMeeting number:  667 230 319\nHost key:  53
+ 6346\n\nJoin by phone:\n+1-240-454-0879 USA Toll\n+44-20319-88141 UK Toll\
+ nAccess code: 667 230 319\n\nWebEx Host:  Rob Underwood\n\n\nStart-End: 1
+ 1-12 am ET\nRecurrence: 3rd Friday of every month\n\nConfluence page: \nh
+ ttps://finosfoundation.atlassian.net/wiki/spaces/PLX/pages/906133578/Deskt
+ op+Interop+API+working+group+working+title
+END:VEVENT
+END:VCALENDAR

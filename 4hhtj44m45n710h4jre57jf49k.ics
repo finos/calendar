@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:Voice PMC Mtg
+X-WR-CALNAME:Voice PMC Mtg
+BEGIN:VEVENT
+UID:f5dfbcec-b97a-45e1-8b5e-579440a1d147
+SEQUENCE:0
+DTSTAMP:20231205T101336Z
+DTSTART:20190305T160000Z
+DTEND:20190305T170000Z
+RRULE:FREQ=MONTHLY;UNTIL=20190507T035959Z;BYDAY=1TU
+SUMMARY:Voice PMC Mtg
+DESCRIPTION:\nConfluence page [https://finosfoundation.atlassian.net/wiki/
+ spaces/VOICE/pages/40599553/PMC]\n\n\n\nWebEx \nMeeting link:\n\nhttps://
+ finos.webex.com/finos/j.php?MTID=m74e4f7d71e9257bf6f9802af683216d2\n\nMeet
+ ing number:\n666 930 836\nHost key:\n114090\n\nJoin by phone\n+1-240-454-0
+ 879 USA Toll\n+44-20319-88141 UK Toll\nAccess code: 666 930 836
+END:VEVENT
+END:VCALENDAR

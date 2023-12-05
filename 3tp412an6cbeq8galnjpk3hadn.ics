@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:Pure/Alloy Project Pilot Group (Bi-Weekly Meeting)
+X-WR-CALNAME:Pure/Alloy Project Pilot Group (Bi-Weekly Meeting)
+BEGIN:VEVENT
+UID:e9e44ac5-5ea4-456e-b555-ded422995e55
+SEQUENCE:0
+DTSTAMP:20231205T101336Z
+DTSTART:20200129T173000Z
+DTEND:20200129T183000Z
+RRULE:FREQ=WEEKLY;WKST=MO;UNTIL=20200212T045959Z;INTERVAL=2;BYDAY=WE
+SUMMARY:Pure/Alloy Project Pilot Group (Bi-Weekly Meeting)
+DESCRIPTION:NOTE: WebEx OR in person at the FINOS offices in London or NYC
+ \; If you plan to attend in person please RSVP to aitana@finos.org so\nwe 
+ know to expect you.\n\n\nDescription:\n\nhttps://finos.webex.com/meet/prog
+ rams\n\n+1.415.655.0003 USA Toll\n\n+44-20319-88141 UK Toll\n\nAccess co
+ de:  669 161 798\n\nHost PIN: 4619\n\n\n\n\n\n\n\n\n
+END:VEVENT
+END:VCALENDAR

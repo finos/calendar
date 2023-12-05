@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:Cloud Service Certification Project Bi-Weekly Meeting
+X-WR-CALNAME:Cloud Service Certification Project Bi-Weekly Meeting
+BEGIN:VEVENT
+UID:273120a1-4474-4a7c-ad97-1632f32e8632
+SEQUENCE:0
+DTSTAMP:20231205T101336Z
+DTSTART:20190912T140000Z
+DTEND:20190912T150000Z
+RRULE:FREQ=WEEKLY;WKST=SU;UNTIL=20200116T045959Z;INTERVAL=2;BYDAY=TH
+SUMMARY:Cloud Service Certification Project Bi-Weekly Meeting
+DESCRIPTION:Webex: \n\n * https://finos.webex.com/finos/j.php?MTID=me0b8e
+ 6061812f875505b0caaceac3321\n\n\n\nDial-in\n\n * +1-415-655-0003 US Toll\n
+  * +44-20319-88141 UK Toll\n * Access code: 662 732 581\n\n\n\nGithub Repo
+ : https://github.com/finos-fdx/cloud-service-certification/\n\nProject Wik
+ i Page: https://finosfoundation.atlassian.net/wiki/spaces/FDX/pages/904626
+ 436/Cloud+Service+Certification+Project \n[https://finosfoundation.atlass
+ ian.net/wiki/spaces/FDX/pages/904626436/Cloud+Service+Certification+Projec
+ t]
+END:VEVENT
+END:VCALENDAR

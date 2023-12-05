@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:Plexus PMC meeting
+X-WR-CALNAME:Plexus PMC meeting
+BEGIN:VEVENT
+UID:e302ab02-b3aa-4286-ae41-70ba55403462
+SEQUENCE:0
+DTSTAMP:20231205T101336Z
+DTSTART:20190222T160000Z
+DTEND:20190222T170000Z
+RRULE:FREQ=MONTHLY;UNTIL=20191025T035959Z;BYDAY=4FR
+SUMMARY:Plexus PMC meeting
+DESCRIPTION:Confluence page [https://finosfoundation.atlassian.net/wiki/sp
+ aces/PLX/pages/119570475/PMC]\n\nWebEx link:\nhttps://finos.webex.com/fino
+ s/j.php?MTID=me3005d8463b1e5e13e9c47c9cc4ef404\nMeeting number:\n666 676 9
+ 19\nHost key:\n766363\n\nJoin by phone\n+1.415.655.0003 USA Toll\n+44-2031
+ 9-88141 UK Toll\n+41-44575-0282 Switzerland Toll\nAccess code: 666 676 91
+ 9
+END:VEVENT
+END:VCALENDAR

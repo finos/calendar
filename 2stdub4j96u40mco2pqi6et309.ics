@@ -1,0 +1,36 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:FINOS Virtual Q4 "All Community Call" - Register Now!
+X-WR-CALNAME:FINOS Virtual Q4 "All Community Call" - Register Now!
+BEGIN:VEVENT
+UID:7faab0e9-4b97-47c8-b3d1-135d7b09e230
+SEQUENCE:0
+DTSTAMP:20231205T101337Z
+DTSTART:20231129T160000Z
+DTEND:20231129T170000Z
+RRULE:FREQ=WEEKLY;WKST=SU;COUNT=1;BYDAY=WE
+SUMMARY:FINOS Virtual Q4 "All Community Call" - Register Now!
+DESCRIPTION:Register now for the fully virtual FINOS 2023 Q4 All Communit
+ y Call on Wednesday 29th November at 11am ET / 4pm GMT.\n\nRegister he
+ re: \nhttps://zoom.us/webinar/register/4016993940708/WN_ACsWmYRVQMiuHhyj3
+ kpCEg\n\nJoin Gabriele Columbro\, FINOS Executive Director\, and the FINOS
+  team for FINOS Q4 Governing Board updates and a view of what's\nhappening
+  in FINOS throughout 2023 into 2024. \n\n\nAgenda:\n\n\n * State of the F
+ oundation - Gab Columbro\n   \n   * FINOS 2023 Highlights\n     \n   \n   
+ * State of Open Source in Financial Services Survey\n   \n   * FDC3\, OSS 
+ Training and Certification \n   \n   * New TOC Members\n\n * State of the
+  Community - James McLeod\n   \n   * FINOS Community Growth\n     \n   \n 
+   * FINOS Community Award Winners\n * Save the Dates & Calls to Action - G
+ rizz Griswold\n   \n   * Open Source in Finance Forum Reflection \n     \
+ n   \n   * Save the dates for upcoming events\n * SIG and Community Update
+ s - James McLeod\n   \n   * Zenith Emerging Tech SIG\n   \n   * Regulatio
+ n Innovation SIG\n   \n   * Common Domain Model\n   \n   * Technical Overs
+ ight Committee \n   \n   * FINOS Common Cloud Controls\n   \n   * FINOS C
+ ommunity Calendar \n\n * FINOS All Community Call Q&A and Close\n   \n   
+ \n\nWe look forward to seeing you on Wednesday 29th November at 11am ET / 
+ 4pm GMT.\n\nRegister here: \nhttps://zoom.us/webinar/register/40169939407
+ 08/WN_ACsWmYRVQMiuHhyj3kpCEg
+END:VEVENT
+END:VCALENDAR

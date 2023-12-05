@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:DEI SIG meeting (monthly)
+X-WR-CALNAME:DEI SIG meeting (monthly)
+BEGIN:VEVENT
+UID:e8db5507-ad86-4a47-80f1-7aff7a84da82
+SEQUENCE:0
+DTSTAMP:20231205T101337Z
+DTSTART:20221005T160000Z
+DTEND:20221005T170000Z
+RRULE:FREQ=MONTHLY;UNTIL=20221102T035959Z;BYDAY=1WE
+SUMMARY:DEI SIG meeting (monthly)
+DESCRIPTION:SEE AGENDA here:\n\n * https://github.com/finos/DEI-SIG/issues
+  [https://github.com/finos/DEI-SIG/issues/]\n\n\nFor more information or t
+ o contact the group email:\n\n * diversity-inclusion-committee@finos.org\n
+ \nResources:\n\n * DEI SIG Github repo [https://github.com/finos/DEI-SIG/]
+ \n\n\nJoin Zoom Meeting\nhttps://zoom.us/j/98492160513\nMeeting ID: 984 92
+ 16 0513\nPasscode: 691166\n\nMobile\n        +1 929 205 6099 US (
+ New York)\n\nMeeting ID: 984 9216 0513\nPasscode: 691166\nFind your local 
+ number: https://zoom.us/u/acrJp1SJK\n
+END:VEVENT
+END:VCALENDAR

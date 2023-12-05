@@ -1,0 +1,29 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:FINOS DevOps Mutualization Special Interest Group
+X-WR-CALNAME:FINOS DevOps Mutualization Special Interest Group
+BEGIN:VEVENT
+UID:a46fc0ca-3d67-41ac-a5a2-5d00f2346b64
+SEQUENCE:0
+DTSTAMP:20231205T101337Z
+DTSTART:20210121T170000Z
+DTEND:20210121T180000Z
+RRULE:FREQ=MONTHLY;UNTIL=20210218T045959Z;BYDAY=3TH
+SUMMARY:FINOS DevOps Mutualization Special Interest Group
+DESCRIPTION:\n\n\nThe DevOps Mutualization Special Interest Group (SIG) ai
+ ms to solve common engineering problems by providing a continuous\ncomplia
+ nce and assurance approach to DevOps that mutually benefits banks\, audito
+ rs and regulators whilst accelerating DevOps\nadoption in engineering and 
+ fintech IT departments. Learn more about this Special Interest Group at\nh
+ ttps://github.com/finos/devops-mutualization\n\n\nhttps://github.com/finos
+ /devops-mutualization#what-is-the-initial-objective-of-devops-mutualizatio
+ n\n\n\n\nDevOps Mutualization SIG Agenda: https://github.com/finos/devops
+ -mutualization/issues/\nWebEx: https://finos.webex.com/finos/j.php?MTID=m
+ d62056638ba05fbea86b9582df94f807 \n[https://finos.webex.com/finos/j.php?M
+ TID=md62056638ba05fbea86b9582df94f807]\nMeeting password: pQq9EnHHw33\n\nD
+ ial In: +1-415-655-0003 US Toll | +44-20319-88141 UK Toll\nAccess code: 
+  127 662 6070
+END:VEVENT
+END:VCALENDAR

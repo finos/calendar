@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:Currency Ref. Data Work Stream Meeting
+X-WR-CALNAME:Currency Ref. Data Work Stream Meeting
+BEGIN:VEVENT
+UID:491f45d2-3640-46c1-a7ce-5c6c6b2e55d4
+SEQUENCE:0
+DTSTAMP:20231205T101336Z
+DTSTART:20210330T140000Z
+DTEND:20210330T143000Z
+RRULE:FREQ=WEEKLY;WKST=MO;UNTIL=20210525T035959Z;INTERVAL=2;BYDAY=TU
+SUMMARY:Currency Ref. Data Work Stream Meeting
+DESCRIPTION:\nMeeting Information\n\n * Meeting link: https://finos.webex.
+ com/finos/j.php?MTID=mf27815a7807f13f1d0974a973196cb4c\n * Meeting number:
+  127 819 0322\n * Password: VXcd2eQgh82\n\n\nMore ways to join\n\n * Join 
+ by video system\n   * Dial 1278190322@finos.webex.com\n   * You can also d
+ ial 173.243.2.68 and enter your meeting number.\n * Join by phone\n   * +1
+ -415-655-0003 US Toll\n   * +44-20319-88141 UK Toll\n   * Access code: 127
+  819 0322\n\n\nAgenda and Past meeting minutes:\n\n * https://github.com/f
+ inos/secref-data/issues?q=label%3A%22Currency+Reference+Data%22+
+END:VEVENT
+END:VCALENDAR

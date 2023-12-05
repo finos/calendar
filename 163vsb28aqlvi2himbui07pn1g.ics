@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:REGISTER NOW: FINOS Open Source in Finance Forum (OSFF) 2023
+X-WR-CALNAME:REGISTER NOW: FINOS Open Source in Finance Forum (OSFF) 2023
+BEGIN:VEVENT
+UID:dad85d20-6869-41e9-bf77-bf6e2835a315
+SEQUENCE:0
+DTSTAMP:20231205T101337Z
+DTSTART:20231101T120000Z
+DTEND:20231101T230000Z
+RRULE:FREQ=WEEKLY;WKST=SU;COUNT=1;BYDAY=WE
+SUMMARY:REGISTER NOW: FINOS Open Source in Finance Forum (OSFF) 2023
+DESCRIPTION:Register [https://events.linuxfoundation.org/open-source-finan
+ ce-forum-new-york/register/] and Join us on November 1st in New York\nCity
+  for The Open Source in Finance Forum (OSFF)!\n\nWhen: Wednesday\, Novembe
+ r 1st\n\nWhere: New York Marriott Marquis\, 1535 Broadway\, New York\, N
+ Y 10036\, USA\n\nTime: 9 am \n\nAttendee Reception @ 5.45pm [https://sche
+ d.co/1Q2xC]\n\n\n\nREGISTER HERE! [https://events.linuxfoundation.org/open
+ -source-finance-forum-new-york/register/] \n\n(FINOS Members  [https://w
+ ww.finos.org/members]attend for free - email us now for your member code:
+  osff@finos.org)\n\nVIEW THE SCHEDULE [https://events.linuxfoundation.org
+ /open-source-finance-forum-new-york/program/schedule/]\n\nOSFF WEEK OF EVE
+ NTS [https://www.finos.org/blog/2023-osff-week]\n\n__________\n\nOpen Sour
+ ce in Finance Forum returns to New York City on November 1st! The only con
+ ference dedicated to driving collaboration and\ninnovation in financial se
+ rvices through open source software and standards.\n\nWe bring together ex
+ perts across financial services\, technology\, and open source to engage o
+ ur community in stimulating and\nthought-provoking conversations about how
+  to best (and safely) leverage open source software to solve industry chal
+ lenges.\n\nREGISTER HERE! [https://events.linuxfoundation.org/open-source-
+ finance-forum-new-york/register/]\n\n
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:FDC3 Intents Meeting
+X-WR-CALNAME:FDC3 Intents Meeting
+BEGIN:VEVENT
+UID:72425231-9e7f-4cea-9cc9-e5b7c42794d4
+SEQUENCE:0
+DTSTAMP:20231205T101336Z
+DTSTART:20180919T130000Z
+DTEND:20180919T140000Z
+RRULE:FREQ=WEEKLY;UNTIL=20181114T045959Z;INTERVAL=2;BYDAY=WE
+SUMMARY:FDC3 Intents Meeting
+DESCRIPTION:WebEx URL: https://finos.webex.com/finos/j.php?MTID=m793ab27c6
+ 341c37218915e553ae4bda7 Meeting number: 665 410 738 Host key: 276792\nHost
+ : DevOps FINOS Room / Espen Overbye Scribe: Start-End: 10-11 am ET Recurre
+ nce: Every 2 weeks on Wednesday Confluence page:\nhttps://finosfoundation.
+ atlassian.net/wiki/spaces/FDC3/pages/83984435/Intents+Working+Group Record
+ ing URL:\nhttps://finos.webex.com/mw3300/mywebex/default.do?siteurl=finos&
+ service=1
+END:VEVENT
+END:VCALENDAR

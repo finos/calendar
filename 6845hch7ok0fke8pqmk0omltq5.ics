@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:FDC3 Context Data Working Group Meeting
+X-WR-CALNAME:FDC3 Context Data Working Group Meeting
+BEGIN:VEVENT
+UID:81b5fc33-e684-4ad8-9e0a-24564a1a5274
+SEQUENCE:0
+DTSTAMP:20231205T101336Z
+DTSTART:20181022T140000Z
+DTEND:20181022T150000Z
+RRULE:FREQ=WEEKLY;UNTIL=20181202T225959Z;INTERVAL=3;BYDAY=MO
+SUMMARY:FDC3 Context Data Working Group Meeting
+DESCRIPTION:WebEx URL: https://finos.webex.com/finos/j.php?MTID=m1a2579c0b
+ 9019d9798b4a4a8b826d74e Meeting number: 404 005 421 Host key: 183290\nHost
+ : DevOps FINOS Room / Tim Kolecke Scribe: Start-End: 10-11 am ET Recurrenc
+ e: Every 3 weeks on Monday Confluence page:\nhttps://finosfoundation.atlas
+ sian.net/wiki/spaces/FDC3/pages/85393412/Context+Data+Working+Group Record
+ ing URL:\nhttps://finos.webex.com/mw3300/mywebex/default.do?siteurl=finos&
+ service=1
+END:VEVENT
+END:VCALENDAR

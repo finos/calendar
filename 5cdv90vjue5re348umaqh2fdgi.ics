@@ -1,0 +1,33 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:Common Cloud Controls - Define Cloud Services Taxonomy - Working Grou
+ p
+X-WR-CALNAME:Common Cloud Controls - Define Cloud Services Taxonomy - Work
+ ing Group
+BEGIN:VEVENT
+UID:ccb1ba8f-1bd5-4f5a-b622-bffecef48cd0
+SEQUENCE:0
+DTSTAMP:20231205T101337Z
+DTSTART:20230824T160000Z
+DTEND:20230824T170000Z
+RRULE:FREQ=MONTHLY;UNTIL=20230928T035959Z;BYDAY=4TH
+SUMMARY:Common Cloud Controls - Define Cloud Services Taxonomy - Working G
+ roup
+DESCRIPTION:Join Zoom Meeting\nhttps://zoom.us/j/98254617376?pwd=aGV6VzZQO
+ Tg3MHptY0tkZHRVSUsxUT09\n\nMeeting ID: 982 5461 7376\nPasscode: 305874\n\n
+ ---\n\nDial by your location\n• +1 719 359 4580 US\n• +1 253 205 0468 
+ US\n• +1 253 215 8782 US (Tacoma)\n• +1 301 715 8592 US (Washington DC
+ )\n• +1 305 224 1968 US\n• +1 309 205 3325 US\n• +1 312 626 6799 US 
+ (Chicago)\n• +1 346 248 7799 US (Houston)\n• +1 360 209 5623 US\n• +
+ 1 386 347 5053 US\n• +1 507 473 4847 US\n• +1 564 217 2000 US\n• +1 
+ 646 558 8656 US (New York)\n• +1 646 931 3860 US\n• +1 669 444 9171 US
+ \n• +1 669 900 6833 US (San Jose)\n• +1 689 278 1000 US\n• 855 880 1
+ 246 US Toll-free\n• 877 369 0926 US Toll-free\n• +1 438 809 7799 Canad
+ a\n• +1 587 328 1099 Canada\n• +1 647 374 4685 Canada\n• +1 647 558 
+ 0588 Canada\n• +1 778 907 2071 Canada\n• +1 780 666 0144 Canada\n• +
+ 1 204 272 7920 Canada\n• 855 703 8985 Canada Toll-free\n\nMeeting ID: 98
+ 2 5461 7376\n\nFind your local number: https://zoom.us/u/acPjHdY2IO
+END:VEVENT
+END:VCALENDAR

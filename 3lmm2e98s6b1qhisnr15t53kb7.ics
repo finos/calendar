@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:KDB Project call
+X-WR-CALNAME:KDB Project call
+BEGIN:VEVENT
+UID:195184f7-7c4e-41b1-8b4d-43cc7702a6ca
+SEQUENCE:0
+DTSTAMP:20231205T101336Z
+DTSTART:20200504T140000Z
+DTEND:20200504T150000Z
+RRULE:FREQ=MONTHLY;UNTIL=20200907T035959Z;BYDAY=1MO
+SUMMARY:KDB Project call
+DESCRIPTION: * Meeting link: https://finos.webex.com/finos/j.php?MTID=mfc9
+ 190e818fd85f9e3ece5166f23d920\n * Meeting number: 663 746 304\n * Join by 
+ phone: +1-415-655-0003 US Toll | +44-20319-88141 UK Toll | Access code: 6
+ 63 746 304\n\n\n * Host: Rob Underwood\n * Start-End: 10-11 am ET\n * Recu
+ rrence: The 1st Monday of every month\n * Confluence page: https://finosf
+ oundation.atlassian.net/wiki/spaces/DT/pages/329383945/kdb+Project
+END:VEVENT
+END:VCALENDAR

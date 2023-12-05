@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:D&I Committee meeting (monthly)
+X-WR-CALNAME:D&I Committee meeting (monthly)
+BEGIN:VEVENT
+UID:0060c590-1bbc-4153-b768-54d30ec49794
+SEQUENCE:0
+DTSTAMP:20231205T101336Z
+DTSTART:20210406T170000Z
+DTEND:20210406T180000Z
+RRULE:FREQ=MONTHLY;UNTIL=20210601T065959Z;BYDAY=1TU
+SUMMARY:D&I Committee meeting (monthly)
+DESCRIPTION:SEE AGENDA here:\n\n * https://github.com/finos/DEI-SIG/issues
+  [https://github.com/finos/DEI-SIG/issues/]\n\n\nFor more information or t
+ o contact the group email:\n\n * diversity-inclusion-committee@finos.org\n
+ \nResources:\n\n * DEI SIG Github repo [https://github.com/finos/DEI-SIG/]
+ \n\n\nJoin Zoom Meeting\nhttps://zoom.us/j/98492160513\nMeeting ID: 984 92
+ 16 0513\nPasscode: 691166\n\nMobile\n        +1 929 205 6099 US (
+ New York)\n\nMeeting ID: 984 9216 0513\nPasscode: 691166\nFind your local 
+ number: https://zoom.us/u/acrJp1SJK\n
+END:VEVENT
+END:VCALENDAR
