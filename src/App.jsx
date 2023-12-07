@@ -75,7 +75,7 @@ function App() {
 		if (fromDate == toDate) {
 			eventTime = fromDate + ' ' + fromTime + ' - ' + toTime;
 		} else {
-			eventTime = "<strong>From:</strong> " + fromDate + ' - ' + toDate + '<br/>' + "<strong>To:</strong> " + fromTime + ' ' + toTime;
+			eventTime = <strong>From:</strong> + fromDate + ' - ' + toDate + <br/> + <strong>To:</strong> + fromTime + ' ' + toTime;
 		}
 
 		let seriesICS = '';
