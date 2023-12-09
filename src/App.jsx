@@ -103,7 +103,9 @@ function App() {
 			return outputText;
 		}
 		let formattedDescription = description
-		if(extractUrls(description).length > extractAnchors(description).length) formattedDescription = replaceUrlsWithAnchorTags(description)
+		if(description){
+			if(extractUrls(description).length > extractAnchors(description).length) formattedDescription = replaceUrlsWithAnchorTags(description)
+		}
 
 		return (
 			<div className="finos-calendar-event-details">
