@@ -83,6 +83,30 @@ function App() {
 			seriesICS = <a href={eventDetails.extendedProps.rootIcsLink}>Series ICS</a>
 		}
 
+		const extractUrls = (text) => {
+			const urlPattern = /(?<!href\s*=\s*["'])\bhttps?:\/\/\S+\b/g;
+			return text.match(urlPattern) || [];
+		};
+
+		const extractAnchors = (text) => {
+			const urlPattern = /<a\s+(?:[^>]*?\s+)?href="([^"]*)"[^>]*>.*?<\/a>/g
+			return text.match(urlPattern) || [];
+		};
+
+		function replaceUrlsWithAnchorTags(inputText) {
+			const urls = extractUrls(inputText)
+			const outputText = urls.reduce((text, url) => {
+				const anchorTag = `<a href="${url}">${url}</a>`;
+				const isAlreadyAnchorTagged = new RegExp(`<a\\s+[^>]*href\\s*=\\s*['"]?${url}['"]?[^>]*>.*?<\\/a>`).test(text);
+				return isAlreadyAnchorTagged ? text : text.replace(url, anchorTag);
+			}, inputText);
+			return outputText;
+		}
+		let formattedDescription = description
+		if(description){
+			if(extractUrls(description).length > extractAnchors(description).length) formattedDescription = replaceUrlsWithAnchorTags(description)
+		}
+
 		return (
 			<div className="finos-calendar-event-details">
 				<button
@@ -99,7 +123,7 @@ function App() {
 				<h2>{eventDetails.title}</h2>
 				<div>{eventTime}</div>
 				<br />
-				{parse(description)}
+				{parse(formattedDescription)}
 			</div>
 		);
 	};
