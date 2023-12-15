@@ -1,11 +1,21 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body{
+  padding: 0;
+  margin: 0;
+}
+
+#root{
+  width: 100%;
+  min-height: 100vh;
 }
 
 .main {
   display: relative;
+}
+
+.finos-calendar{
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
 .finos-calendar-event-details {
@@ -77,5 +87,12 @@ button.fc-button.finos-calendar-event-details-close {
   .fc-event {
     max-height: 1em;
     margin: 1em 0;
+  }
+}
+
+@media only screen and (prefers-color-scheme : dark){
+  #root, .main, .finos-calendar, .finos-calendar-event-details{
+    background-color: #222;
+    color: #eee;
   }
 }
