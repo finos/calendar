@@ -29,6 +29,13 @@ button.fc-button.finos-calendar-event-details-close {
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
+  display:grid;
+  place-content: center;
+  padding: 6px;
+}
+
+button.fc-button.finos-calendar-event-details-close img{
+  width: 25px;
 }
 
 .finos-calendar-event-details ul {

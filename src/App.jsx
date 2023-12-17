@@ -10,6 +10,7 @@ import rrulePlugin from '@fullcalendar/rrule';
 import useEscKey from './hooks/useEscKey';
 
 import './App.css';
+import windowCloseIcon from './assets/icons/window-close.svg';
 
 const htmlRegex = /<\/*html-blob>/;
 
@@ -112,7 +113,7 @@ function App() {
 				<button
 					onClick={() => setShowEventDetails(false)}
 					className="fc-button finos-calendar-event-details-close">
-					X
+					<img src={windowCloseIcon} alt="close" />
 				</button>
 				<button
 					onClick={() => downloadICSFile()}
