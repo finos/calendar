@@ -66,8 +66,7 @@ function App() {
 	}
 
 	const renderEventDetails = () => {
-		const description = eventDetails.extendedProps.description.replace(htmlRegex, '');
-
+		let description = eventDetails.extendedProps.description ? eventDetails.extendedProps.description.replace(htmlRegex, '') :  "<i>No description</i>"
 		const fromDate = printDate(eventDetails.start);
 		const toDate = printDate(eventDetails.end);
 		const fromTime = printTime(eventDetails.start);
