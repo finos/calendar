@@ -9,8 +9,9 @@ import rrulePlugin from '@fullcalendar/rrule';
 
 import useEscKey from './hooks/useEscKey';
 
+import Icon from '@mdi/react';
+import { mdiCalendarRange, mdiMapMarkerOutline, mdiClose } from '@mdi/js';
 import './App.css';
-import windowCloseIcon from './assets/icons/window-close.svg';
 
 const htmlRegex = /<\/*html-blob>/;
 
@@ -23,10 +24,28 @@ function App() {
 
 	useEscKey(() => setShowEventDetails(false));
 
+	const [popupPosition, setPopupPosition] = useState({})
+
+	const createPopupPosition = (event)=>{
+		const popup = {width: 330, height: 400}
+		let position = {top: event.pageY + 20, left: event.pageX + 50}
+		if(event.pageX + popup.width + 140 > window.outerWidth || event.pageY + popup.height + 20 > document.body.scrollHeight){
+			if(event.pageX + popup.width + 140 > window.outerWidth){
+				position.left = event.pageX - popup.width - 50
+				if(position.left < 0) position.left = position.left * -1
+			}
+			if(event.pageY + popup.height + 20 > document.body.scrollHeight){
+				position.top = (event.pageY - popup.height) - 70
+				if(position.top < 0) position.top = position.top * -1
+			}
+		}
+		setPopupPosition({left: position.left + 'px', top: position.top + 'px'})
+	}
+
 	const handleEventClick = useCallback((clickInfo) => {
+		window.outerWidth > 600 && createPopupPosition(clickInfo.jsEvent)
 		setEventDetails(clickInfo.event);
 		setShowEventDetails(true);
-		// console.log('event', clickInfo.event);
 	});
 
 	function downloadICSFile() {
@@ -67,6 +86,7 @@ function App() {
 
 	const renderEventDetails = () => {
 		let description = eventDetails.extendedProps.description ? eventDetails.extendedProps.description.replace(htmlRegex, '') :  "<i>No description</i>"
+		const eventLocation = eventDetails.extendedProps.location;
 		const fromDate = printDate(eventDetails.start);
 		const toDate = printDate(eventDetails.end);
 		const fromTime = printTime(eventDetails.start);
@@ -108,11 +128,11 @@ function App() {
 		}
 
 		return (
-			<div className="finos-calendar-event-details">
+			<div className="finos-calendar-event-details" style={popupPosition}>
 				<button
 					onClick={() => setShowEventDetails(false)}
 					className="fc-button finos-calendar-event-details-close">
-					<img src={windowCloseIcon} alt="close" />
+						<Icon path={mdiClose} size={1} />
 				</button>
 				<button
 					onClick={() => downloadICSFile()}
@@ -120,8 +140,16 @@ function App() {
 					Event ICS
 				</button>
 				<div>{seriesICS}</div>
-				<h2>{eventDetails.title}</h2>
-				<div>{eventTime}</div>
+				<h2 className="event-title">{eventDetails.title}</h2>
+				<div className="event-time">
+					<div className="icon"><Icon path={mdiCalendarRange} size={0.75} /></div>
+					<div>{eventTime}</div>
+				</div>
+				{eventLocation &&
+				<div className="event-location">
+					<div className="icon"><Icon path={mdiMapMarkerOutline} size={0.75} /></div>
+					<div>{eventLocation}</div>
+				</div>}
 				<br />
 				{parse(formattedDescription)}
 			</div>
@@ -133,7 +161,9 @@ function App() {
 			<FullCalendar
 				ref={calendarRef}
 				plugins={[ dayGridPlugin, iCalendarPlugin, interactionPlugin, timeGridPlugin, rrulePlugin ]}
-				initialView="dayGridMonth"
+				initialView={window.outerWidth > 600 ? "dayGridMonth" : "timeGridWeek"}
+				handleWindowResize={true}
+				aspectRatio={window.innerWidth > window.innerHeight ? 1.35 : window.innerWidth / window.innerHeight}
 				events="events.json"
 				headerToolbar={{
 					left   : 'prev,next today',
