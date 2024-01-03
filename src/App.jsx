@@ -1,4 +1,4 @@
-import { createRef, useCallback, useMemo, useState } from 'react';
+import { createRef, useCallback, useEffect, useMemo, useState } from 'react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import FullCalendar from '@fullcalendar/react';
 import iCalendarPlugin from '@fullcalendar/icalendar';
@@ -21,10 +21,19 @@ function App() {
 	const [ loading, setLoading ] = useState(true);
 	const [ showEventDetails, setShowEventDetails ] = useState(false);
 	const [ eventDetails, setEventDetails ] = useState(false);
+	const [ aspectRatio, setAspectRatio ] = useState(window.outerWidth > window.innerHeight ? 1.35 : window.innerWidth / window.innerHeight)
+	const [ initialView, setInitialView ] = useState(window.outerWidth > 600 ? "dayGridMonth" : "timeGridWeek")
 
 	useEscKey(() => setShowEventDetails(false));
 
 	const [popupPosition, setPopupPosition] = useState({})
+
+	const windowResize = ()=>{
+		setAspectRatio(window.outerWidth > window.innerHeight ? 1.35 : window.innerWidth / window.innerHeight)
+		setInitialView(window.outerWidth > 600 ? "dayGridMonth" : "timeGridWeek")
+		setShowEventDetails(false)
+		window.outerWidth < 600 && setPopupPosition({left: 0, top: 0})
+	}
 
 	const createPopupPosition = (event)=>{
 		const popup = {width: 330, height: 400}
@@ -161,9 +170,10 @@ function App() {
 			<FullCalendar
 				ref={calendarRef}
 				plugins={[ dayGridPlugin, iCalendarPlugin, interactionPlugin, timeGridPlugin, rrulePlugin ]}
-				initialView={window.outerWidth > 600 ? "dayGridMonth" : "timeGridWeek"}
+				initialView={initialView}
+				aspectRatio={aspectRatio}
 				handleWindowResize={true}
-				aspectRatio={window.innerWidth > window.innerHeight ? 1.35 : window.innerWidth / window.innerHeight}
+				windowResize={windowResize}
 				events="events.json"
 				headerToolbar={{
 					left   : 'prev,next today',
@@ -178,7 +188,7 @@ function App() {
 				eventClick={handleEventClick}
 				loading={(isLoading) => setLoading(isLoading)}
 			/>
-		),[]);
+		),[aspectRatio, initialView]);
 
 	return (
 		<div className="App main">
