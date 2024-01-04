@@ -95,6 +95,10 @@ button.fc-button.finos-calendar-event-details-close {
     background-color: #222;
     color: #eee;
   }
+  .fc-theme-standard .fc-popover{
+    background-color: #222;
+    color: #eee;
+  }
   .finos-calendar-event-details a{
     color: #343;
   }
