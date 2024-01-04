@@ -8,7 +8,7 @@ The calendar is visualized in HTML using React and [FullCalendar](https://fullca
 
 ## Prerequisites
 
-- Node.js and npm installed on your machine.
+- Node.js, npm and GPG(/GNUPG) installed on your machine.
 
 ## Getting Started
 
@@ -21,7 +21,7 @@ cd calendar
 
 2. Download `calendar-service-account.json` into the project's root folder.
 
-In order to use the Google Calendar API you will need to follow [these 5 steps](https://developers.google.com/workspace/guides/get-started) to generate the necessary credentials. Once you have the credentials store them in the root folder of the project in a file named `calendar-service-account.json`.
+In order to use the Google Calendar API you will need to follow [these 5 steps](https://developers.google.com/workspace/guides/get-started) to generate the necessary credentials for a Service Account. Once you have the credentials store them in the root folder of the project in a file named `calendar-service-account.json`.
 
 ### Encrypting Google Service Account key
 
@@ -37,9 +37,13 @@ npm install
 
 ### Import events from Google API
 
+Create a new directory named `dist` in the root directory and run :
+
 ```bash
 npm run getEvents
 ```
+
+Copy `events.json` from `dist` to root directory.
 
 ### Run development server
 
