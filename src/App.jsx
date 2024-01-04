@@ -1,4 +1,4 @@
-import { createRef, useCallback, useMemo, useState } from 'react';
+import { createRef, useCallback, useEffect, useMemo, useState } from 'react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import FullCalendar from '@fullcalendar/react';
 import iCalendarPlugin from '@fullcalendar/icalendar';
@@ -9,6 +9,8 @@ import rrulePlugin from '@fullcalendar/rrule';
 
 import useEscKey from './hooks/useEscKey';
 
+import Icon from '@mdi/react';
+import { mdiCalendarRange, mdiMapMarkerOutline, mdiClose } from '@mdi/js';
 import './App.css';
 
 const htmlRegex = /<\/*html-blob>/;
@@ -19,13 +21,40 @@ function App() {
 	const [ loading, setLoading ] = useState(true);
 	const [ showEventDetails, setShowEventDetails ] = useState(false);
 	const [ eventDetails, setEventDetails ] = useState(false);
+	const [ aspectRatio, setAspectRatio ] = useState(window.outerWidth > window.innerHeight ? 1.35 : window.innerWidth / window.innerHeight)
+	const [ initialView, setInitialView ] = useState(window.outerWidth > 600 ? "dayGridMonth" : "timeGridWeek")
 
 	useEscKey(() => setShowEventDetails(false));
 
+	const [popupPosition, setPopupPosition] = useState({})
+
+	const windowResize = ()=>{
+		setAspectRatio(window.outerWidth > window.innerHeight ? 1.35 : window.innerWidth / window.innerHeight)
+		setInitialView(window.outerWidth > 600 ? "dayGridMonth" : "timeGridWeek")
+		setShowEventDetails(false)
+		window.outerWidth < 600 && setPopupPosition({left: 0, top: 0})
+	}
+
+	const createPopupPosition = (event)=>{
+		const popup = {width: 330, height: 400}
+		let position = {top: event.pageY + 20, left: event.pageX + 50}
+		if(event.pageX + popup.width + 140 > window.outerWidth || event.pageY + popup.height + 20 > document.body.scrollHeight){
+			if(event.pageX + popup.width + 140 > window.outerWidth){
+				position.left = event.pageX - popup.width - 50
+				if(position.left < 0) position.left = position.left * -1
+			}
+			if(event.pageY + popup.height + 20 > document.body.scrollHeight){
+				position.top = (event.pageY - popup.height) - 70
+				if(position.top < 0) position.top = position.top * -1
+			}
+		}
+		setPopupPosition({left: position.left + 'px', top: position.top + 'px'})
+	}
+
 	const handleEventClick = useCallback((clickInfo) => {
+		window.outerWidth > 600 && createPopupPosition(clickInfo.jsEvent)
 		setEventDetails(clickInfo.event);
 		setShowEventDetails(true);
-		// console.log('event', clickInfo.event);
 	});
 
 	function downloadICSFile() {
@@ -66,6 +95,7 @@ function App() {
 
 	const renderEventDetails = () => {
 		let description = eventDetails.extendedProps.description ? eventDetails.extendedProps.description.replace(htmlRegex, '') :  "<i>No description</i>"
+		const eventLocation = eventDetails.extendedProps.location;
 		const fromDate = printDate(eventDetails.start);
 		const toDate = printDate(eventDetails.end);
 		const fromTime = printTime(eventDetails.start);
@@ -107,11 +137,11 @@ function App() {
 		}
 
 		return (
-			<div className="finos-calendar-event-details">
+			<div className="finos-calendar-event-details" style={popupPosition}>
 				<button
 					onClick={() => setShowEventDetails(false)}
 					className="fc-button finos-calendar-event-details-close">
-					X
+						<Icon path={mdiClose} size={1} />
 				</button>
 				<button
 					onClick={() => downloadICSFile()}
@@ -119,8 +149,16 @@ function App() {
 					Event ICS
 				</button>
 				<div>{seriesICS}</div>
-				<h2>{eventDetails.title}</h2>
-				<div>{eventTime}</div>
+				<h2 className="event-title">{eventDetails.title}</h2>
+				<div className="event-time">
+					<div className="icon"><Icon path={mdiCalendarRange} size={0.75} /></div>
+					<div>{eventTime}</div>
+				</div>
+				{eventLocation &&
+				<div className="event-location">
+					<div className="icon"><Icon path={mdiMapMarkerOutline} size={0.75} /></div>
+					<div>{eventLocation}</div>
+				</div>}
 				<br />
 				{parse(formattedDescription)}
 			</div>
@@ -132,7 +170,10 @@ function App() {
 			<FullCalendar
 				ref={calendarRef}
 				plugins={[ dayGridPlugin, iCalendarPlugin, interactionPlugin, timeGridPlugin, rrulePlugin ]}
-				initialView="dayGridMonth"
+				initialView={initialView}
+				aspectRatio={aspectRatio}
+				handleWindowResize={true}
+				windowResize={windowResize}
 				events="events.json"
 				headerToolbar={{
 					left   : 'prev,next today',
@@ -147,7 +188,7 @@ function App() {
 				eventClick={handleEventClick}
 				loading={(isLoading) => setLoading(isLoading)}
 			/>
-		),[]);
+		),[aspectRatio, initialView]);
 
 	return (
 		<div className="App main">

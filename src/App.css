@@ -4,12 +4,13 @@ body{
 }
 
 #root{
+  min-width: fit-content;
   width: 100%;
   min-height: 100vh;
 }
 
 .main {
-  display: relative;
+  position: relative;
 }
 
 .finos-calendar{
@@ -20,16 +21,15 @@ body{
 
 .finos-calendar-event-details {
   position: absolute;
-  width: 25%;
-  height: 70vh;
-  top: 12vh;
-  right: 2rem;
+  width: 330px;
+  height: 400px;
   background: #fff;
   border: #333;
-  overflow: auto;
-  z-index: 900;
+  overflow-y: auto;
+  z-index: 9999;
   padding: 2rem;
   box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.75);
+  word-break: break-word;
 }
 
 button.fc-button.finos-calendar-event-details-close {
@@ -39,6 +39,33 @@ button.fc-button.finos-calendar-event-details-close {
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
+  display:grid;
+  place-content: center;
+  padding: 6px;
+}
+
+button.fc-button.finos-calendar-event-details-close img{
+  width: 25px;
+}
+
+.event-title{
+  margin-bottom: 8px;
+}
+
+.event-time{
+  font-size: 14px;
+  margin-bottom: 6px;
+  display:flex;
+  gap: 5px;
+}
+
+.event-location{
+  display:flex;
+  gap: 5px;
+}
+
+.icon{
+  padding-top: 3px;
 }
 
 .finos-calendar-event-details ul {
@@ -87,6 +114,15 @@ button.fc-button.finos-calendar-event-details-close {
   .fc-event {
     max-height: 1em;
     margin: 1em 0;
+  }
+}
+
+@media only screen and (max-width: 600px){
+  .finos-calendar-event-details{
+    width: 90%;
+    height: 100%;
+    top: 0;
+    left: 0;
   }
 }
 
