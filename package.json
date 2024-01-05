@@ -24,7 +24,7 @@
     "@fullcalendar/timegrid": "^6.1.10",
     "@mdi/js": "^7.3.67",
     "@mdi/react": "^1.6.1",
-    "googleapis": "^129.0.0",
+    "googleapis": "^130.0.0",
     "@fullcalendar/rrule": "^6.1.10",
     "html-react-parser": "^5.0.7",
     "react": "^18.2.0",
