@@ -7,16 +7,23 @@ import parse from 'html-react-parser';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import rrulePlugin from '@fullcalendar/rrule';
 
+import SearchHeader from './components/SearchHeader';
+import './App.css';
+
 import useEscKey from './hooks/useEscKey';
 
 import Icon from '@mdi/react';
 import { mdiCalendarRange, mdiMapMarkerOutline, mdiClose } from '@mdi/js';
-import './App.css';
+
+import eventData from './events.json'
 
 const htmlRegex = /<\/*html-blob>/;
 
 function App() {
 	const calendarRef = createRef();
+
+	const eventsArray = Array.from(eventData)
+	const [events, setEvents] = useState(eventsArray)
 
 	const [ loading, setLoading ] = useState(true);
 	const [ showEventDetails, setShowEventDetails ] = useState(false);
@@ -49,6 +56,16 @@ function App() {
 			}
 		}
 		setPopupPosition({left: position.left + 'px', top: position.top + 'px'})
+	}
+
+	const filterEvents = (searchTerm)=>{
+		if(!searchTerm) return setEvents(eventsArray) //handles searchbox clear
+		let matchingEvents = eventsArray.filter((event) => {
+			const titleIncludes = event.title?.toLowerCase().includes(searchTerm.toLowerCase())
+			const descriptionIncludes = event.description?.toLowerCase().includes(searchTerm.toLowerCase())
+			return titleIncludes || descriptionIncludes
+		})
+		setEvents(matchingEvents)
 	}
 
 	const handleEventClick = useCallback((clickInfo) => {
@@ -174,7 +191,7 @@ function App() {
 				aspectRatio={aspectRatio}
 				handleWindowResize={true}
 				windowResize={windowResize}
-				events="events.json"
+				events={events}
 				headerToolbar={{
 					left   : 'prev,next today',
 					center : 'title',
@@ -188,10 +205,11 @@ function App() {
 				eventClick={handleEventClick}
 				loading={(isLoading) => setLoading(isLoading)}
 			/>
-		),[aspectRatio, initialView]);
+		),[aspectRatio, initialView, events]);
 
 	return (
 		<div className="App main">
+			<SearchHeader filterEvents={filterEvents} />
 			<div className="finos-calendar">{renderFullCalendar}</div>
 			{showEventDetails && renderEventDetails()}
 			{loading && <div className="finos-calendar-overlay" />}
