@@ -43,8 +43,6 @@ Create a new directory named `dist` in the root directory and run :
 npm run getEvents
 ```
 
-Copy `events.json` from `dist` to `src` directory.
-
 ### Run development server
 
 ```bash

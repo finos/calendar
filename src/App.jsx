@@ -15,7 +15,7 @@ import useEscKey from './hooks/useEscKey';
 import Icon from '@mdi/react';
 import { mdiCalendarRange, mdiMapMarkerOutline, mdiClose } from '@mdi/js';
 
-import eventData from './events.json'
+import eventData from '../dist/events.json'
 
 const htmlRegex = /<\/*html-blob>/;
 
