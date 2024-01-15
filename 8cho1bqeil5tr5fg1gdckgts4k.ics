@@ -1,0 +1,29 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:CDM Derivatives Products and Business Events Working Group
+X-WR-CALNAME:CDM Derivatives Products and Business Events Working Group
+BEGIN:VEVENT
+UID:2a9f94fb-d9d2-4beb-8e9c-935955a86023
+SEQUENCE:0
+DTSTAMP:20240115T090534Z
+DTSTART:20240117T153000Z
+DTEND:20240117T163000Z
+RRULE:FREQ=WEEKLY;WKST=SU;INTERVAL=2;BYDAY=WE
+SUMMARY:CDM Derivatives Products and Business Events Working Group
+DESCRIPTION:Github: https://github.com/finos/common-domain-model\n\nJoin 
+ Zoom Meeting\nhttps://zoom.us/j/94131415778?pwd=L1A2aUhoTEhoODdUZ0lrUkNLOX
+ BiQT09\n\nMeeting ID: 941 3141 5778\nPasscode: 189607\n\n---\n\nOne tap mo
+ bile\n+16469313860\,\,94131415778# US\n+19292056099\,\,94131415778# US (Ne
+ w York)\n\n---\n\nDial by your location\n• +1 646 931 3860 US\n• +1 92
+ 9 205 6099 US (New York)\n• +1 309 205 3325 US\n• +1 312 626 6799 US (
+ Chicago)\n• +1 301 715 8592 US (Washington DC)\n• +1 305 224 1968 US\n
+ • +1 669 444 9171 US\n• +1 669 900 6833 US (San Jose)\n• +1 689 278 
+ 1000 US\n• +1 719 359 4580 US\n• +1 253 205 0468 US\n• +1 253 215 87
+ 82 US (Tacoma)\n• +1 346 248 7799 US (Houston)\n• +1 360 209 5623 US\n
+ • +1 386 347 5053 US\n• +1 507 473 4847 US\n• +1 564 217 2000 US\n
+ • 877 853 5247 US Toll-free\n• 888 788 0099 US Toll-free\n\nMeeting ID
+ : 941 3141 5778\n\nFind your local number: https://zoom.us/u/adEnPA6h80
+END:VEVENT
+END:VCALENDAR
