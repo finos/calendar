@@ -3,6 +3,8 @@ import fs from 'fs';
 import ical from 'ical-generator';
 import {ICalCalendarMethod} from 'ical-generator';
 import { convert } from 'html-to-text';
+import pkg from 'rrule';
+const { rrulestr } = pkg;
 
 // The FINOS Community Calendar ID
 const calendarId = 'finos.org_fac8mo1rfc6ehscg0d80fi8jig@group.calendar.google.com';
@@ -41,7 +43,6 @@ let rootRecurringEventsICS = new Map();
 
 function saveToFile(filepath, str) {
 	fs.writeFileSync(filepath, str);
-	console.log('Items saved to file:', filepath);
 }
 
 function saveJSONToFile(filepath, items) {
@@ -117,6 +118,8 @@ function addICS(fcEvent, eventData, events) {
 	fcEvent.ics = calendar.toString();
 
 	if (icsEvent.repeating) {
+		// Remove the UNTIL field from the rrule
+		fcEvent.ics = fcEvent.ics.replace(/UNTIL=.*;/, '');
 		saveRootRecurringEvent(eventData, fcEvent.ics);
 		fcEvent.rootIcsLink = eventData.id.split('_')[0] + '.ics';
 	}
