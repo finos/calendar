@@ -5,12 +5,12 @@ METHOD:REQUEST
 NAME:Pure/Alloy Project Pilot Group (Bi-Weekly Meeting)
 X-WR-CALNAME:Pure/Alloy Project Pilot Group (Bi-Weekly Meeting)
 BEGIN:VEVENT
-UID:15ce6a42-d302-4d72-9c3b-f002014fe4e0
+UID:6205c6f8-b815-4b1e-9886-5af3f79a84c7
 SEQUENCE:0
-DTSTAMP:20240118T180542Z
+DTSTAMP:20240118T193146Z
 DTSTART:20200129T173000Z
 DTEND:20200129T183000Z
-RRULE:FREQ=WEEKLY;WKST=MO;UNTIL=20200212T045959Z;INTERVAL=2;BYDAY=WE
+RRULE:FREQ=WEEKLY;WKST=MO;BYDAY=WE
 SUMMARY:Pure/Alloy Project Pilot Group (Bi-Weekly Meeting)
 DESCRIPTION:NOTE: WebEx OR in person at the FINOS offices in London or NYC
  \; If you plan to attend in person please RSVP to aitana@finos.org so\nwe 

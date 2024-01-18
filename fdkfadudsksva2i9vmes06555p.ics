@@ -5,12 +5,12 @@ METHOD:REQUEST
 NAME:Automated Change Deployment - DevOps Automation
 X-WR-CALNAME:Automated Change Deployment - DevOps Automation
 BEGIN:VEVENT
-UID:ff96b16c-100c-41cd-9cf0-f2371d933d75
+UID:96ec7da5-baef-4ec7-a3a2-d195368580a6
 SEQUENCE:0
-DTSTAMP:20240118T180543Z
+DTSTAMP:20240118T193147Z
 DTSTART:20230418T150000Z
 DTEND:20230418T160000Z
-RRULE:FREQ=WEEKLY;WKST=SU;UNTIL=20230516T035959Z;INTERVAL=2;BYDAY=TU
+RRULE:FREQ=WEEKLY;WKST=SU;BYDAY=TU
 SUMMARY:Automated Change Deployment - DevOps Automation
 DESCRIPTION:DevOps Automation GitHub: https://github.com/finos/devops-aut
  omation\n\nJoin Zoom Meeting\nhttps://zoom.us/j/95521041942?pwd=dHgwREU2Tz

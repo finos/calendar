@@ -5,12 +5,12 @@ METHOD:REQUEST
 NAME:Call Metadata Standardization Working Group WG
 X-WR-CALNAME:Call Metadata Standardization Working Group WG
 BEGIN:VEVENT
-UID:bfd99c2d-fce6-450f-86c6-00ae577da78f
+UID:772b4e83-b5c2-4d3e-8b62-13c4192a61d3
 SEQUENCE:0
-DTSTAMP:20240118T180542Z
+DTSTAMP:20240118T193146Z
 DTSTART:20181119T150000Z
 DTEND:20181119T160000Z
-RRULE:FREQ=MONTHLY;UNTIL=20190218T045959Z;BYDAY=3MO
+RRULE:FREQ=MONTHLY;BYDAY=3MO
 SUMMARY:Call Metadata Standardization Working Group WG
 DESCRIPTION:Confluence page\n[https://finosfoundation.atlassian.net/wiki/s
  paces/VOICE/pages/154632282/Call+Metadata+Standardization+Working+Group]\n

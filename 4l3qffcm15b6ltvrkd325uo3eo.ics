@@ -5,12 +5,12 @@ METHOD:REQUEST
 NAME:Compliant Financial Infrastructure Project Meeting
 X-WR-CALNAME:Compliant Financial Infrastructure Project Meeting
 BEGIN:VEVENT
-UID:a8b7dc1e-c476-41eb-9a9d-747e335c5b2a
+UID:22490cf4-fbf9-4394-9797-de44b7bbf3d3
 SEQUENCE:0
-DTSTAMP:20240118T180543Z
+DTSTAMP:20240118T193147Z
 DTSTART:20221214T150000Z
 DTEND:20221214T160000Z
-RRULE:FREQ=MONTHLY;UNTIL=20230111T045959Z;BYDAY=2WE
+RRULE:FREQ=MONTHLY;BYDAY=2WE
 SUMMARY:Compliant Financial Infrastructure Project Meeting
 DESCRIPTION:Meeting Information\n\n * Meeting link: https://finos.webex.c
  om/finos/j.php?MTID=m4b1d85127d1f3ca179545d6bd3291975\n   [https://finos.w

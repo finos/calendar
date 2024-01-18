@@ -5,12 +5,12 @@ METHOD:REQUEST
 NAME:FINOS Regulation Innovation SIG (biweekly meeting)
 X-WR-CALNAME:FINOS Regulation Innovation SIG (biweekly meeting)
 BEGIN:VEVENT
-UID:74fd6d95-7a80-4164-828b-d4c875dec2f2
+UID:f40a31bc-3f03-41be-b140-80a35aecb59a
 SEQUENCE:0
-DTSTAMP:20240118T180543Z
+DTSTAMP:20240118T193147Z
 DTSTART:20210105T170000Z
 DTEND:20210105T180000Z
-RRULE:FREQ=WEEKLY;WKST=MO;UNTIL=20210119T045959Z;INTERVAL=2;BYDAY=TU
+RRULE:FREQ=WEEKLY;WKST=MO;BYDAY=TU
 SUMMARY:FINOS Regulation Innovation SIG (biweekly meeting)
 DESCRIPTION:The FINOS Regulation Innovation Special Interest Group (SIG) i
  s a community of people interested in creating open source solutions\nfor 

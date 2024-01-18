@@ -5,12 +5,12 @@ METHOD:REQUEST
 NAME:Product Control Common Template project
 X-WR-CALNAME:Product Control Common Template project
 BEGIN:VEVENT
-UID:c0aa6302-e17e-4c49-9d3a-c82f5c296b44
+UID:2e2e0b88-cd8f-4d04-af2f-f57b8ae22e96
 SEQUENCE:0
-DTSTAMP:20240118T180543Z
+DTSTAMP:20240118T193147Z
 DTSTART:20210913T140000Z
 DTEND:20210913T150000Z
-RRULE:FREQ=WEEKLY;WKST=MO;UNTIL=20211025T035959Z;INTERVAL=2;BYDAY=MO
+RRULE:FREQ=WEEKLY;WKST=MO;BYDAY=MO
 SUMMARY:Product Control Common Template project
 DESCRIPTION:Background \n\nSee https://github.com/finos/community/issues/
  97  [https://github.com/finos/community/issues/97]\n\nGoals\n\nThe Produc

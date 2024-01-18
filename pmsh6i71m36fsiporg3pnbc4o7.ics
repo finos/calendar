@@ -6,12 +6,12 @@ NAME:Alloy Pilot Participants Meeting (was previously "Bi-Weekly Meeting")
 X-WR-CALNAME:Alloy Pilot Participants Meeting (was previously "Bi-Weekly M
  eeting")
 BEGIN:VEVENT
-UID:f5b4c6b4-c8bc-4544-a506-c548e13c4fd4
+UID:6e953b05-928a-4049-9e81-a23422125b46
 SEQUENCE:0
-DTSTAMP:20240118T180543Z
+DTSTAMP:20240118T193147Z
 DTSTART:20200805T163000Z
 DTEND:20200805T173000Z
-RRULE:FREQ=MONTHLY;UNTIL=20200902T035959Z;BYDAY=1WE
+RRULE:FREQ=MONTHLY;BYDAY=1WE
 SUMMARY:Alloy Pilot Participants Meeting (was previously "Bi-Weekly Meetin
  g")
 DESCRIPTION:\n\n * Meeting link: https://finos.webex.com/finos/j.php?MTID=

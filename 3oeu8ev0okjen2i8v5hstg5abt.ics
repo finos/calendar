@@ -5,12 +5,12 @@ METHOD:REQUEST
 NAME:Open Source Readiness SIG - Checkpoint Session
 X-WR-CALNAME:Open Source Readiness SIG - Checkpoint Session
 BEGIN:VEVENT
-UID:565f7b77-56b5-4796-b554-906a7fd29391
+UID:c2b597c4-75eb-446d-9a56-e4a7dd002dfb
 SEQUENCE:0
-DTSTAMP:20240118T180544Z
+DTSTAMP:20240118T193148Z
 DTSTART:20230215T140000Z
 DTEND:20230215T150000Z
-RRULE:FREQ=MONTHLY;UNTIL=20230315T035959Z;BYDAY=3WE
+RRULE:FREQ=MONTHLY;BYDAY=3WE
 SUMMARY:Open Source Readiness SIG - Checkpoint Session
 DESCRIPTION:FINOS Open Source Readiness Special Interest Group\n\nGithub:
   https://github.com/finos/open-source-readiness/issues\n\nJoin Zoom Meeti

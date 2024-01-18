@@ -5,12 +5,12 @@ METHOD:REQUEST
 NAME:CFI : Reproducible Infrastructure Working Group
 X-WR-CALNAME:CFI : Reproducible Infrastructure Working Group
 BEGIN:VEVENT
-UID:a11758ad-fb3c-4ee3-9ce7-2d0199abb4b1
+UID:5ddc522d-7e70-42a1-8f9f-4ef79ed35607
 SEQUENCE:0
-DTSTAMP:20240118T180544Z
+DTSTAMP:20240118T193148Z
 DTSTART:20230125T150000Z
 DTEND:20230125T160000Z
-RRULE:FREQ=MONTHLY;UNTIL=20230222T045959Z;BYDAY=4WE
+RRULE:FREQ=MONTHLY;BYDAY=4WE
 SUMMARY:CFI : Reproducible Infrastructure Working Group
 DESCRIPTION:https://github.com/finos/compliant-financial-infrastructure\n\
  nJoin Zoom Meeting\nhttps://zoom.us/j/97339752885?pwd=ZXQzZGdyMFRDNTgzVWJ0

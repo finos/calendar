@@ -5,12 +5,12 @@ METHOD:REQUEST
 NAME:Diversity Equity & Inclusion Special Interest Group
 X-WR-CALNAME:Diversity Equity & Inclusion Special Interest Group
 BEGIN:VEVENT
-UID:c468324c-38ef-4173-98e8-6a896f9e2d78
+UID:4a7eadba-8598-4ef5-9265-9727760a550d
 SEQUENCE:0
-DTSTAMP:20240118T180543Z
+DTSTAMP:20240118T193147Z
 DTSTART:20220301T180000Z
 DTEND:20220301T190000Z
-RRULE:FREQ=MONTHLY;UNTIL=20220405T035959Z;BYDAY=1TU
+RRULE:FREQ=MONTHLY;BYDAY=1TU
 SUMMARY:Diversity Equity & Inclusion Special Interest Group
 DESCRIPTION:Meeting link:\nhttps://finos.webex.com/finos/j.php?MTID=m8c68b
  f14e3fce3cc567ffabaf30288d0\n\n\nMeeting number:\n2552 137 1430\n\nHost ke

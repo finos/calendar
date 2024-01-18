@@ -5,12 +5,12 @@ METHOD:REQUEST
 NAME:Waltz Working Group : Charming Waltz with Juju
 X-WR-CALNAME:Waltz Working Group : Charming Waltz with Juju
 BEGIN:VEVENT
-UID:5ff409c6-54cb-48e5-8de7-89e7b138bde4
+UID:b560c29d-eb47-4cea-894e-438d7fcf7de2
 SEQUENCE:0
-DTSTAMP:20240118T180544Z
+DTSTAMP:20240118T193148Z
 DTSTART:20220126T140000Z
 DTEND:20220126T144000Z
-RRULE:FREQ=WEEKLY;WKST=SU;UNTIL=20220201T235959Z;BYDAY=WE
+RRULE:FREQ=WEEKLY;WKST=SU;BYDAY=WE
 SUMMARY:Waltz Working Group : Charming Waltz with Juju
 DESCRIPTION:Waltz Working Group : Charming Waltz with Juju\n\nJoin by Webe
  x\nhttps://finos.webex.com/finos/j.php?MTID=mc26a32a8ea307d4cac8c2b425cd95

@@ -5,12 +5,12 @@ METHOD:REQUEST
 NAME:D&I Committee meeting (monthly)
 X-WR-CALNAME:D&I Committee meeting (monthly)
 BEGIN:VEVENT
-UID:cf4a1a2a-81a6-4753-a17b-ff946137a52a
+UID:ce9767ef-e2cd-4d15-acab-a55f901a5d69
 SEQUENCE:0
-DTSTAMP:20240118T180543Z
+DTSTAMP:20240118T193147Z
 DTSTART:20210406T170000Z
 DTEND:20210406T180000Z
-RRULE:FREQ=MONTHLY;UNTIL=20210601T065959Z;BYDAY=1TU
+RRULE:FREQ=MONTHLY;BYDAY=1TU
 SUMMARY:D&I Committee meeting (monthly)
 DESCRIPTION:SEE AGENDA here:\n\n * https://github.com/finos/DEI-SIG/issues
   [https://github.com/finos/DEI-SIG/issues/]\n\n\nFor more information or t

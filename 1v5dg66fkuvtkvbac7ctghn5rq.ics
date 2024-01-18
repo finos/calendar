@@ -5,12 +5,12 @@ METHOD:REQUEST
 NAME:FDC3 Channels, Feeds & Transactions Discussion group
 X-WR-CALNAME:FDC3 Channels, Feeds & Transactions Discussion group
 BEGIN:VEVENT
-UID:89e26d0c-a078-4928-b0a6-112e0616f3a0
+UID:20dcbdde-3e8a-4a46-bb5d-39d7b6d7ec82
 SEQUENCE:0
-DTSTAMP:20240118T180543Z
+DTSTAMP:20240118T193147Z
 DTSTART:20210930T130000Z
 DTEND:20210930T140000Z
-RRULE:FREQ=WEEKLY;WKST=SU;UNTIL=20211014T035959Z;INTERVAL=2;BYDAY=TH
+RRULE:FREQ=WEEKLY;WKST=SU;BYDAY=TH
 SUMMARY:FDC3 Channels\, Feeds & Transactions Discussion group
 DESCRIPTION:Background\nThere are currently 11 open issues in the FDC3 rep
  ository\, under consideration for the 2.0 release\, that relate to the exi

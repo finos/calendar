@@ -5,12 +5,12 @@ METHOD:REQUEST
 NAME:Zenith - FINOS Emerging Technologies SIG - Kick Off
 X-WR-CALNAME:Zenith - FINOS Emerging Technologies SIG - Kick Off
 BEGIN:VEVENT
-UID:25aedddb-797d-40c5-a263-0851790c1cec
+UID:47ccd5a2-5b7a-4fbb-84fe-d1a3954ff64a
 SEQUENCE:0
-DTSTAMP:20240118T180543Z
+DTSTAMP:20240118T193147Z
 DTSTART:20230810T140000Z
 DTEND:20230810T150000Z
-RRULE:FREQ=MONTHLY;UNTIL=20230914T035959Z;BYDAY=2TH
+RRULE:FREQ=MONTHLY;BYDAY=2TH
 SUMMARY:Zenith - FINOS Emerging Technologies SIG - Kick Off
 DESCRIPTION:Topic: Zenith: Emerging Technologies SIG\nTime: This is a recu
  rring meeting Meet anytime\n\nJoin Zoom Meeting\nhttps://zoom.us/j/9853883

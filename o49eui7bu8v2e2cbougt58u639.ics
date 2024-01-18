@@ -7,12 +7,12 @@ NAME:Alloy Monthly General Meeting (9am ET/2pm UK Third Thursday of the Mo
 X-WR-CALNAME:Alloy Monthly General Meeting (9am ET/2pm UK Third Thursday o
  f the Month)
 BEGIN:VEVENT
-UID:8b074035-7d97-4adf-b184-e476d88801b4
+UID:5fb3928f-826a-4271-a8c8-36dab366e2a1
 SEQUENCE:0
-DTSTAMP:20240118T180543Z
+DTSTAMP:20240118T193147Z
 DTSTART:20200820T130000Z
 DTEND:20200820T140000Z
-RRULE:FREQ=MONTHLY;UNTIL=20201015T035959Z;BYDAY=3TH
+RRULE:FREQ=MONTHLY;BYDAY=3TH
 SUMMARY:Alloy Monthly General Meeting (9am ET/2pm UK Third Thursday of the
   Month)
 DESCRIPTION:**Our next meeting is October 15\, 2020 at 9am ET / 2pm UK**\n
