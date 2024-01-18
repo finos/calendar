@@ -41,7 +41,6 @@ let rootRecurringEventsICS = new Map();
 
 function saveToFile(filepath, str) {
 	fs.writeFileSync(filepath, str);
-	console.log('Items saved to file:', filepath);
 }
 
 function saveJSONToFile(filepath, items) {
@@ -117,6 +116,8 @@ function addICS(fcEvent, eventData, events) {
 	fcEvent.ics = calendar.toString();
 
 	if (icsEvent.repeating) {
+		// Remove the UNTIL field from the rrule
+		fcEvent.ics = fcEvent.ics.replace(/UNTIL=.*;/, '');
 		saveRootRecurringEvent(eventData, fcEvent.ics);
 		fcEvent.rootIcsLink = eventData.id.split('_')[0] + '.ics';
 	}
