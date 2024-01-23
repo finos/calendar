@@ -1,11 +1,11 @@
 import { google } from 'googleapis';
 import { convert } from 'html-to-text';
-import ical, {ICalCalendarMethod} from 'ical-generator';
+import ical, { ICalCalendarMethod } from 'ical-generator';
 import fs from 'fs';
 
-
 // The FINOS Community Calendar ID
-const calendarId = 'finos.org_fac8mo1rfc6ehscg0d80fi8jig@group.calendar.google.com';
+const calendarId =
+  'finos.org_fac8mo1rfc6ehscg0d80fi8jig@group.calendar.google.com';
 
 const outputFile = './dist/events.json';
 
@@ -17,13 +17,13 @@ const SCOPES = [
   'https://www.googleapis.com/auth/calendar',
   'https://www.googleapis.com/auth/calendar.events',
   'https://www.googleapis.com/auth/calendar.events.readonly',
-  'https://www.googleapis.com/auth/calendar.readonly'
+  'https://www.googleapis.com/auth/calendar.readonly',
 ];
 
 // Create a JWT client using the service account key
 const auth = new google.auth.GoogleAuth({
-  keyFile : SERVICE_ACCOUNT_FILE,
-  scopes  : SCOPES
+  keyFile: SERVICE_ACCOUNT_FILE,
+  scopes: SCOPES,
 });
 
 // Create a Calendar API client
@@ -50,8 +50,7 @@ function saveJSONToFile(filepath, items) {
 
 // Check if an event has valid recurrence data
 function hasRecurrence(eventData) {
-  return eventData.recurrence &&
-		!eventData.recurrence[0].startsWith('EXDATE');
+  return eventData.recurrence && !eventData.recurrence[0].startsWith('EXDATE');
 }
 
 // Resolve recurrence data from the
@@ -79,7 +78,8 @@ function saveRootRecurringEvent(eventData, icsEvent) {
   const rootId = eventData.id.split('_')[0];
   const rootEventICS = {
     eventData,
-    icsEvent };
+    icsEvent,
+  };
 
   if (rootRecurringEventsICS.has(rootId)) {
     rootRecurringEventsICS.get(rootId).push(rootEventICS);
@@ -91,7 +91,7 @@ function saveRootRecurringEvent(eventData, icsEvent) {
 // Returns a string with the ICS format of the event
 // Includes HTML to text conversion, and recurrence data
 function addICS(fcEvent, eventData, events) {
-  const calendar = ical({name: eventData.summary});
+  const calendar = ical({ name: eventData.summary });
   // ICalCalendarMethod is required by outlook
   // to display events as invitations
   calendar.method(ICalCalendarMethod.REQUEST);
@@ -100,16 +100,21 @@ function addICS(fcEvent, eventData, events) {
   // to 130 characters
   const options = {
     wordwrap: 130,
-    selectors: [{
-      selector: 'a', options: {
-        hideLinkHrefIfSameAsText: true
-      }}]};
+    selectors: [
+      {
+        selector: 'a',
+        options: {
+          hideLinkHrefIfSameAsText: true,
+        },
+      },
+    ],
+  };
 
   let icsEvent = {
     start: eventData.start.dateTime,
     end: eventData.end.dateTime,
     summary: eventData.summary,
-    description: convert(eventData.description, options)
+    description: convert(eventData.description, options),
   };
   addRecurrence(eventData, events, icsEvent);
   calendar.createEvent(icsEvent);
@@ -135,16 +140,18 @@ function getApiOptions(options) {
 // If results hit the limit of 2500 entries, an error is thrown
 // Accepts additional options to pass to the API
 async function getGoogleEvents(queryName, dynamicOptions) {
-  const itemsAsync = await calendar.events.list(
-    getApiOptions(dynamicOptions));
+  const itemsAsync = await calendar.events.list(getApiOptions(dynamicOptions));
   const items = itemsAsync.data.items;
 
   if (items.length == 0) {
     throw new Error(queryName + 'No events returned!');
   } else if (items.length == 2500) {
-    throw new Error(queryName + ' Events retrieved reached API limit!', items.length);
+    throw new Error(
+      queryName + ' Events retrieved reached API limit!',
+      items.length
+    );
   } else {
-    console.log(queryName +' Events retrieved:', items.length);
+    console.log(queryName + ' Events retrieved:', items.length);
   }
   return items;
 }
@@ -161,21 +168,26 @@ async function parseGoogleEvents() {
     'Past Cutoff',
     new Map([
       ['singleEvents', true],
-      ['timeMax', cutoffDate]]));
+      ['timeMax', cutoffDate],
+    ])
+  );
   // Fetch events after the cutoff date
   const eventsFuture = await getGoogleEvents(
     'Future Cutoff',
     new Map([
       ['singleEvents', true],
       ['timeMin', cutoffDate],
-      ['timeMax', limitFutureDate]]));
+      ['timeMax', limitFutureDate],
+    ])
+  );
 
   // Fetch all events, including recurring ones
   // These events are used for resolving the recurrence of events
   // They are not used for rendering the events in the calendar
   const recurringEvents = await getGoogleEvents(
     'Recurring',
-    new Map([['singleEvents', false]]));
+    new Map([['singleEvents', false]])
+  );
   const recurringEventsMap = new Map();
   for (const eventData of recurringEvents) {
     recurringEventsMap.set(eventData.id, eventData);
@@ -210,33 +222,31 @@ function hasAcceptedEvent(eventData) {
 function mapEvents(events, recurringEventsMap) {
   let eventsProcessed = [];
   let eventsNotProcessed = [];
-  const ret = events.map((eventData) => {
-    if (eventData.status === 'confirmed' &&
-			hasAcceptedEvent(eventData)) {
-      let eventKey = eventData.start.dateTime + '_' + eventData.id.split('_')[0];
-      if (!eventsProcessed.includes(eventKey)) {
-        eventsProcessed.push(eventKey);
-        let fcEvent = {
-          title       : eventData.summary,
-          description : eventData.description,
-          start       : eventData.start.dateTime,
-          end         : eventData.end.dateTime,
-          uid         : eventData.id,
-          location	: eventData.location,
-          repeating   : getRecurrence(
-            eventData, recurringEventsMap)
-        };
-        fcEvent = addICS(
-          fcEvent,
-          eventData,
-          recurringEventsMap);
-        return fcEvent;
+  const ret = events
+    .map((eventData) => {
+      if (eventData.status === 'confirmed' && hasAcceptedEvent(eventData)) {
+        let eventKey =
+          eventData.start.dateTime + '_' + eventData.id.split('_')[0];
+        if (!eventsProcessed.includes(eventKey)) {
+          eventsProcessed.push(eventKey);
+          let fcEvent = {
+            title: eventData.summary,
+            description: eventData.description,
+            start: eventData.start.dateTime,
+            end: eventData.end.dateTime,
+            uid: eventData.id,
+            location: eventData.location,
+            repeating: getRecurrence(eventData, recurringEventsMap),
+          };
+          fcEvent = addICS(fcEvent, eventData, recurringEventsMap);
+          return fcEvent;
+        }
+      } else {
+        eventsNotProcessed.push(eventData);
+        return null;
       }
-    } else {
-      eventsNotProcessed.push(eventData);
-      return null;
-    }
-  }).filter(Boolean); // Remove null values
+    })
+    .filter(Boolean); // Remove null values
   console.log('Events not processed:', eventsNotProcessed.length);
   return ret;
 }
@@ -250,9 +260,7 @@ async function main() {
       const sortedEventsICS = eventsICS.sort((a, b) => {
         return a.eventData.start.dateTime > b.eventData.start.dateTime;
       });
-      saveToFile(
-        './dist/' + eventId + '.ics',
-        sortedEventsICS[0].icsEvent);
+      saveToFile('./dist/' + eventId + '.ics', sortedEventsICS[0].icsEvent);
     }
   } catch (error) {
     console.error('Error occurred:', error);
