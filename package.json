@@ -9,12 +9,13 @@
     "npm": "^10.3.0"
   },
   "scripts": {
-    "start": "npm run getEvents && vite",
+    "start": "npm run get-events && vite",
     "build": "npm run lint && vite build",
     "preview": "vite preview",
     "lint": "eslint ./src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "lint-fix": "eslint ./src --ext js,jsx --report-unused-disable-directives --max-warnings 0 --fix",
-    "getEvents": "node ./scripts/googleapi2events.js"
+    "lint-fix": "npm run lint -- --fix",
+    "get-events": "node ./scripts/googleapi2events.js",
+    "getEvents": "npm run get-events"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.10",
@@ -22,7 +23,6 @@
     "@fullcalendar/icalendar": "^6.1.10",
     "@fullcalendar/interaction": "^6.1.10",
     "@fullcalendar/react": "^6.1.10",
-    "@fullcalendar/rrule": "^6.1.10",
     "@fullcalendar/timegrid": "^6.1.10",
     "@mdi/js": "^7.3.67",
     "@mdi/react": "^1.6.1",
