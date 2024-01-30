@@ -9,18 +9,18 @@ import { mdiCalendarRange, mdiClose, mdiMapMarkerOutline } from '@mdi/js';
 import Icon from '@mdi/react';
 import parse from 'html-react-parser';
 import { createRef, useCallback, useMemo, useState } from 'react';
-import useEscKey from './hooks/useEscKey';
 import SearchHeader from './components/SearchHeader';
+import useEscKey from './hooks/useEscKey';
 import './App.css';
-import eventData from '../dist/events.json'
+import eventData from '../events.json';
 
 const htmlRegex = /<\/*html-blob>/;
 
 function App() {
   const calendarRef = createRef();
 
-	const eventsArray = Array.from(eventData)
-	const [events, setEvents] = useState(eventsArray)
+  const eventsArray = Array.from(eventData);
+  const [events, setEvents] = useState(eventsArray);
 
   const [loading, setLoading] = useState(true);
   const [showEventDetails, setShowEventDetails] = useState(false);
@@ -69,7 +69,7 @@ function App() {
   };
 
 	const filterEvents = (searchTerm)=>{
-		if(!searchTerm) return setEvents(eventsArray) //handles searchbox clear
+		if(!searchTerm) return setEvents(eventsArray); //handles searchbox clear
 		let matchingEvents = eventsArray.filter((event) => {
 			const titleIncludes = event.title?.toLowerCase().includes(searchTerm.toLowerCase())
 			const descriptionIncludes = event.description?.toLowerCase().includes(searchTerm.toLowerCase())
