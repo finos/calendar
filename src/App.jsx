@@ -10,11 +10,9 @@ import Icon from '@mdi/react';
 import parse from 'html-react-parser';
 import { createRef, useCallback, useMemo, useState } from 'react';
 import useEscKey from './hooks/useEscKey';
-
-import Icon from '@mdi/react';
-import { mdiCalendarRange, mdiMapMarkerOutline, mdiClose } from '@mdi/js';
 import SearchHeader from './components/SearchHeader';
 import './App.css';
+import eventData from '../dist/events.json'
 
 const htmlRegex = /<\/*html-blob>/;
 
