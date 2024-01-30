@@ -1,6 +1,7 @@
 name: Build
 
 on:
+  pull_request:
   workflow_dispatch:
   push:
     branches:
@@ -39,9 +40,10 @@ jobs:
 
       - name: Add CNAME in dist folder
         run: cp CNAME dist
-
+    
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.ACCESS_TOKEN }}
           publish_dir: dist
+        if: github.event_name != 'pull_request'
