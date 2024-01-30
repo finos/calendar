@@ -12,7 +12,7 @@ import { createRef, useCallback, useMemo, useState } from 'react';
 import SearchHeader from './components/SearchHeader';
 import useEscKey from './hooks/useEscKey';
 import './App.css';
-import eventData from '../events.json';
+import eventData from 'events.json';
 
 const htmlRegex = /<\/*html-blob>/;
 
@@ -72,11 +72,11 @@ function App() {
 		if(!searchTerm) return setEvents(eventsArray); //handles searchbox clear
 		let matchingEvents = eventsArray.filter((event) => {
 			const titleIncludes = event.title?.toLowerCase().includes(searchTerm.toLowerCase())
-			const descriptionIncludes = event.description?.toLowerCase().includes(searchTerm.toLowerCase())
-			return titleIncludes || descriptionIncludes
+			const descriptionIncludes = event.description?.toLowerCase().includes(searchTerm.toLowerCase());
+			return titleIncludes || descriptionIncludes;
 		})
-		setEvents(matchingEvents)
-	}
+		setEvents(matchingEvents);
+	};
 
   const handleEventClick = useCallback((clickInfo) => {
     window.outerWidth > 600 && createPopupPosition(clickInfo.jsEvent);
