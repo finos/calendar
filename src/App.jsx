@@ -11,8 +11,8 @@ import parse from 'html-react-parser';
 import { createRef, useCallback, useMemo, useState } from 'react';
 import SearchHeader from './components/SearchHeader';
 import useEscKey from './hooks/useEscKey';
+import eventData from '../events.json';
 import './App.css';
-import eventData from 'events.json';
 
 const htmlRegex = /<\/*html-blob>/;
 
@@ -68,15 +68,15 @@ function App() {
     setPopupPosition({ left: position.left + 'px', top: position.top + 'px' });
   };
 
-	const filterEvents = (searchTerm)=>{
-		if(!searchTerm) return setEvents(eventsArray); //handles searchbox clear
-		let matchingEvents = eventsArray.filter((event) => {
-			const titleIncludes = event.title?.toLowerCase().includes(searchTerm.toLowerCase())
-			const descriptionIncludes = event.description?.toLowerCase().includes(searchTerm.toLowerCase());
-			return titleIncludes || descriptionIncludes;
-		})
-		setEvents(matchingEvents);
-	};
+  const filterEvents = (searchTerm)=>{
+    if(!searchTerm) return setEvents(eventsArray); //handles searchbox clear
+    let matchingEvents = eventsArray.filter((event) => {
+      const titleIncludes = event.title?.toLowerCase().includes(searchTerm.toLowerCase());
+      const descriptionIncludes = event.description?.toLowerCase().includes(searchTerm.toLowerCase());
+      return titleIncludes || descriptionIncludes;
+    });
+    setEvents(matchingEvents);
+  };
 
   const handleEventClick = useCallback((clickInfo) => {
     window.outerWidth > 600 && createPopupPosition(clickInfo.jsEvent);
@@ -247,7 +247,7 @@ function App() {
 
   return (
     <div className="App main">
-			<SearchHeader filterEvents={filterEvents} />
+      <SearchHeader filterEvents={filterEvents} />
       <div className="finos-calendar">{renderFullCalendar}</div>
       {showEventDetails && renderEventDetails()}
       {loading && <div className="finos-calendar-overlay" />}
