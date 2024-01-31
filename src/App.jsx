@@ -10,8 +10,8 @@ import Icon from '@mdi/react';
 import parse from 'html-react-parser';
 import { createRef, useCallback, useMemo, useState } from 'react';
 import SearchHeader from './components/SearchHeader';
+import eventData from './events.json';
 import useEscKey from './hooks/useEscKey';
-import eventData from '../events.json';
 import './App.css';
 
 const htmlRegex = /<\/*html-blob>/;
