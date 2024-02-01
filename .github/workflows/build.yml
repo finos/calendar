@@ -25,10 +25,8 @@ jobs:
         with:
           node-version: "${{ matrix.node-version }}"
 
-      - name: Build
-        run: |
-          npm install
-          npm run build
+      - name: Install
+        run: npm ci
 
       - name: Setup environment
         run: gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output calendar-service-account.json calendar-service-account.json.gpg
@@ -38,9 +36,12 @@ jobs:
       - name: Get events from Google API
         run: npm run getEvents
 
+      - name: Build
+        run: npm run build
+
       - name: Add CNAME in dist folder
         run: cp CNAME dist
-    
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
