@@ -175,7 +175,7 @@ function App() {
         <button onClick={() => downloadICSFile()} className="fc-button">
           Event ICS
         </button>
-        <div>{seriesICS}</div>
+        {/* <div>{seriesICS}</div> */}
         <h2 className="event-title">{eventDetails.title}</h2>
         <div className="event-time">
           <div className="icon">
