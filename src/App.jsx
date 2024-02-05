@@ -130,12 +130,12 @@ function App() {
         toTime;
     }
 
-    let seriesICS = '';
-    if (eventDetails.extendedProps.rootIcsLink != null) {
-      seriesICS = (
-        <a href={eventDetails.extendedProps.rootIcsLink}>Series ICS</a>
-      );
-    }
+    // let seriesICS = '';
+    // if (eventDetails.extendedProps.rootIcsLink != null) {
+    //  seriesICS = (
+    //    <a href={eventDetails.extendedProps.rootIcsLink}>Series ICS</a>
+    //  );
+    // }
 
     const extractUrls = (text) => {
       const urlPattern = /(?<!href\s*=\s*["'])\bhttps?:\/\/\S+\b/g;
@@ -175,7 +175,7 @@ function App() {
         <button onClick={() => downloadICSFile()} className="fc-button">
           Event ICS
         </button>
-        <div>{seriesICS}</div>
+        {/* <div>{seriesICS}</div> */}
         <h2 className="event-title">{eventDetails.title}</h2>
         <div className="event-time">
           <div className="icon">
