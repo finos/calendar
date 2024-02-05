@@ -130,12 +130,12 @@ function App() {
         toTime;
     }
 
-    let seriesICS = '';
-    if (eventDetails.extendedProps.rootIcsLink != null) {
-      seriesICS = (
-        <a href={eventDetails.extendedProps.rootIcsLink}>Series ICS</a>
-      );
-    }
+    // let seriesICS = '';
+    // if (eventDetails.extendedProps.rootIcsLink != null) {
+    //  seriesICS = (
+    //    <a href={eventDetails.extendedProps.rootIcsLink}>Series ICS</a>
+    //  );
+    // }
 
     const extractUrls = (text) => {
       const urlPattern = /(?<!href\s*=\s*["'])\bhttps?:\/\/\S+\b/g;
