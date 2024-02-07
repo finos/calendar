@@ -26,7 +26,7 @@ jobs:
           node-version: "${{ matrix.node-version }}"
 
       - name: Install
-        run: npm ci
+        run: npm install
 
       - name: Setup environment
         run: gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output calendar-service-account.json calendar-service-account.json.gpg
