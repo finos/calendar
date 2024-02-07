@@ -26,12 +26,12 @@ jobs:
           node-version: "${{ matrix.node-version }}"
 
       - name: Install
-        run: npm install
+        run: npm ci
 
       - name: Setup environment
-        run: gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output calendar-service-account.json calendar-service-account.json.gpg
         env:
           PASSPHRASE: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_PASSPHRASE }}
+        run: gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output calendar-service-account.json calendar-service-account.json.gpg
 
       - name: Get events from Google API
         run: npm run getEvents
