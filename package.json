@@ -24,6 +24,7 @@
     "@fullcalendar/icalendar": "^6.1.10",
     "@fullcalendar/interaction": "^6.1.10",
     "@fullcalendar/react": "^6.1.10",
+    "@fullcalendar/rrule": "^6.1.10",
     "@fullcalendar/timegrid": "^6.1.10",
     "@mdi/js": "^7.3.67",
     "@mdi/react": "^1.6.1",

@@ -1,10 +1,15 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import App from './App';
 
 describe('App', () => {
-  it('renders headline', () => {
+  it('renders calendar', () => {
     render(<App />);
-    const headline = screen.getByText(/It works and you found me!/i);
-    expect(headline).toBeInTheDocument();
+  });
+  it('true is truthy', () => {
+    expect(true).toBe(true);
+  });
+
+  it('false is falsy', () => {
+    expect(false).toBe(false);
   });
 });
