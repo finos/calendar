@@ -7,9 +7,9 @@ NAME:Alloy Monthly General Meeting (9am ET/2pm UK Third Thursday of the Mo
 X-WR-CALNAME:Alloy Monthly General Meeting (9am ET/2pm UK Third Thursday o
  f the Month)
 BEGIN:VEVENT
-UID:d28f28bd-9aaa-4f2b-b30c-fceb6f6dce95
+UID:4adbf693-cffd-4cf8-9018-bae4fcc36fdb
 SEQUENCE:0
-DTSTAMP:20240215T210504Z
+DTSTAMP:20240216T001742Z
 DTSTART:20200820T130000Z
 DTEND:20200820T140000Z
 RRULE:FREQ=MONTHLY;BYDAY=3TH
