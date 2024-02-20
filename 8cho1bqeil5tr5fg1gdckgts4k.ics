@@ -5,12 +5,12 @@ METHOD:REQUEST
 NAME:CDM Derivatives Products and Business Events Working Group
 X-WR-CALNAME:CDM Derivatives Products and Business Events Working Group
 BEGIN:VEVENT
-UID:d8f28428-ccf1-4464-bba0-ba4306f4f20d
+UID:de81e355-6d36-4d1f-b489-ca7f41b3538c
 SEQUENCE:0
-DTSTAMP:20240220T120658Z
+DTSTAMP:20240220T150511Z
 DTSTART:20240131T163000Z
 DTEND:20240131T173000Z
-RRULE:FREQ=WEEKLY;WKST=SU;INTERVAL=2;BYDAY=WE
+RRULE:FREQ=WEEKLY;WKST=SU;BYDAY=WE
 SUMMARY:CDM Derivatives Products and Business Events Working Group
 DESCRIPTION:Github: https://github.com/finos/common-domain-model\n\nJoin 
  Zoom Meeting\nhttps://zoom.us/j/94131415778?pwd=L1A2aUhoTEhoODdUZ0lrUkNLOX
