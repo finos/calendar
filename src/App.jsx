@@ -19,6 +19,7 @@ function App() {
   const eventDetailRef = createRef();
 
   const [loading, setLoading] = useState(true);
+  const [clickedEvent, setClickedEvent] = useState([]);
   const [showEventDetails, setShowEventDetails] = useState(false);
   const [eventDetails, setEventDetails] = useState(false);
   const [aspectRatio, setAspectRatio] = useState(
@@ -64,19 +65,18 @@ function App() {
     setPopupPosition({ left: position.left + 'px', top: position.top + 'px' });
   };
 
-  const clickedEvent = [];
-
   const handleEventClick = useCallback((clickInfo) => {
     window.outerWidth > 600 && createPopupPosition(clickInfo.jsEvent);
     setEventDetails(clickInfo.event);
     setShowEventDetails(true);
     if(clickedEvent.length){
       clickedEvent[0].classList.remove('active-event');
-      clickedEvent.pop();
+      setClickedEvent([]);
     }
-    clickedEvent.push(clickInfo.jsEvent.target.closest('a.fc-event'));
-    clickedEvent[0].classList.add('active-event');
-  }, []);
+    const event = clickInfo.jsEvent.target.closest('a.fc-event');
+    event.classList.add('active-event');
+    setClickedEvent([event]);
+  }, [clickedEvent]);
 
   useEffect(()=>{
     const closeOnOutsideClick = (e)=>{
