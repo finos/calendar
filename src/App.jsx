@@ -86,7 +86,7 @@ function App() {
 
     document.body.addEventListener('click', closeOnOutsideClick);
     return ()=> document.removeEventListener('click', closeOnOutsideClick);
-  }, [ eventDetailRef ]);
+  }, [ eventDetailRef, showEventDetails ]);
 
   function downloadICSFile() {
     // console.log("print ics");
