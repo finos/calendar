@@ -7,9 +7,9 @@ NAME:Common Cloud Controls - Engage with MITRE Threat Catalogue - Working
 X-WR-CALNAME:Common Cloud Controls - Engage with MITRE Threat Catalogue - 
  Working Group
 BEGIN:VEVENT
-UID:cce7dba6-3ab0-4168-861d-2da2f4baccbb
+UID:a908efbd-f886-48ce-8bc8-b6d1db6be0be
 SEQUENCE:0
-DTSTAMP:20240313T210508Z
+DTSTAMP:20240314T001740Z
 DTSTART:20230817T140000Z
 DTEND:20230817T150000Z
 RRULE:FREQ=MONTHLY;BYDAY=3TH
