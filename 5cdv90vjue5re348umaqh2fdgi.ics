@@ -7,9 +7,9 @@ NAME:Common Cloud Controls - Define Cloud Services Taxonomy - Working Grou
 X-WR-CALNAME:Common Cloud Controls - Define Cloud Services Taxonomy - Work
  ing Group
 BEGIN:VEVENT
-UID:a921cc5e-c20d-482c-a627-f61af1c688f0
+UID:81eedd5e-ef62-4e5c-abbf-ae57bf23b02b
 SEQUENCE:0
-DTSTAMP:20240320T120715Z
+DTSTAMP:20240320T150511Z
 DTSTART:20230824T160000Z
 DTEND:20230824T170000Z
 RRULE:FREQ=MONTHLY;BYDAY=4TH
