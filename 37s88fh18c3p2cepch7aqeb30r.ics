@@ -1,0 +1,29 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:CDM Asset Refactor Task Force
+X-WR-CALNAME:CDM Asset Refactor Task Force
+BEGIN:VEVENT
+UID:a1ba0e2b-8ab5-42da-a736-6f0fe3efd478
+SEQUENCE:0
+DTSTAMP:20240322T030542Z
+DTSTART:20240328T150000Z
+DTEND:20240328T160000Z
+RRULE:FREQ=WEEKLY;WKST=SU;BYDAY=TH
+SUMMARY:CDM Asset Refactor Task Force
+DESCRIPTION:Github: https://github.com/finos/common-domain-model\n\nJoin 
+ Zoom Meeting\nhttps://zoom.us/j/91947398280?pwd=YS85Mmo4ejhvV2VKMlpaU1FmeD
+ Yydz09\n\nMeeting ID: 919 4739 8280\nPasscode: 867245\n\n---\n\nOne tap mo
+ bile\n+16469313860\,\,91947398280# US\n+19292056099\,\,91947398280# US (Ne
+ w York)\n\n---\n\nDial by your location\n• +1 646 931 3860 US\n• +1 92
+ 9 205 6099 US (New York)\n• +1 301 715 8592 US (Washington DC)\n• +1 3
+ 05 224 1968 US\n• +1 309 205 3325 US\n• +1 312 626 6799 US (Chicago)\n
+ • +1 719 359 4580 US\n• +1 253 205 0468 US\n• +1 253 215 8782 US (Ta
+ coma)\n• +1 346 248 7799 US (Houston)\n• +1 360 209 5623 US\n• +1 38
+ 6 347 5053 US\n• +1 507 473 4847 US\n• +1 564 217 2000 US\n• +1 669 
+ 444 9171 US\n• +1 669 900 6833 US (San Jose)\n• +1 689 278 1000 US\n
+ • 877 853 5247 US Toll-free\n• 888 788 0099 US Toll-free\n\nMeeting ID
+ : 919 4739 8280\n\nFind your local number: https://zoom.us/u/acXLfT91mR
+END:VEVENT
+END:VCALENDAR
