@@ -11,7 +11,7 @@ import parse from 'html-react-parser';
 import { createRef, useCallback, useEffect, useMemo, useState } from 'react';
 import SearchHeader from './components/SearchHeader';
 import useEscKey from './hooks/useEscKey';
-import eventData from '../dist/events.json';
+// import eventData from '../dist/events.json';
 import './App.css';
 
 const htmlRegex = /<\/*html-blob>/;
