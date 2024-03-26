@@ -9,7 +9,9 @@ import { mdiCalendarRange, mdiClose, mdiMapMarkerOutline } from '@mdi/js';
 import Icon from '@mdi/react';
 import parse from 'html-react-parser';
 import { createRef, useCallback, useEffect, useMemo, useState } from 'react';
+import SearchHeader from './components/SearchHeader';
 import useEscKey from './hooks/useEscKey';
+import eventData from '../dist/events.json';
 import './App.css';
 
 const htmlRegex = /<\/*html-blob>/;
@@ -17,6 +19,9 @@ const htmlRegex = /<\/*html-blob>/;
 function App() {
   const calendarRef = createRef();
   const eventDetailRef = createRef();
+
+  const eventsArray = Array.from(eventData);
+  const [events, setEvents] = useState(eventsArray);
 
   const [loading, setLoading] = useState(true);
   const [clickedEvent, setClickedEvent] = useState([]);
@@ -63,6 +68,16 @@ function App() {
       }
     }
     setPopupPosition({ left: position.left + 'px', top: position.top + 'px' });
+  };
+
+  const filterEvents = (searchTerm)=>{
+    if(!searchTerm) return setEvents(eventsArray); //handles searchbox clear
+    let matchingEvents = eventsArray.filter((event) => {
+      const titleIncludes = event.title?.toLowerCase().includes(searchTerm.toLowerCase());
+      const descriptionIncludes = event.description?.toLowerCase().includes(searchTerm.toLowerCase());
+      return titleIncludes || descriptionIncludes;
+    });
+    setEvents(matchingEvents);
   };
 
   const handleEventClick = useCallback((clickInfo) => {
@@ -234,7 +249,7 @@ function App() {
         aspectRatio={aspectRatio}
         handleWindowResize={true}
         windowResize={windowResize}
-        events="events.json"
+        events={events}
         headerToolbar={{
           left: 'prev,next today',
           center: 'title',
@@ -249,11 +264,12 @@ function App() {
         loading={(isLoading) => setLoading(isLoading)}
       />
     ),
-    [aspectRatio, initialView, calendarRef, handleEventClick]
+    [aspectRatio, initialView, calendarRef, handleEventClick, events]
   );
 
   return (
     <div className="App main">
+      <SearchHeader filterEvents={filterEvents} />
       <div className="finos-calendar">{renderFullCalendar}</div>
       {showEventDetails && renderEventDetails()}
       {loading && <div className="finos-calendar-overlay" />}
