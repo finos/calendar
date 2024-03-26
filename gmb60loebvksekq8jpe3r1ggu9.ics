@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:Git Proxy catch up
+X-WR-CALNAME:Git Proxy catch up
+BEGIN:VEVENT
+UID:01bc23f3-efba-42c6-b2e6-635f68ef650e
+SEQUENCE:0
+DTSTAMP:20240326T185400Z
+DTSTART:20240408T150000Z
+DTEND:20240408T154500Z
+RRULE:FREQ=WEEKLY;WKST=MO;INTERVAL=2;BYDAY=MO
+SUMMARY:Git Proxy catch up
+DESCRIPTION:Join Zoom Meetinghttps://zoom.us/j/97235277537?pwd=aDJsaE8zcDJ
+ pYW1vZHJmSTJ0RXNZUT09 \n\nMeeting ID: 972 3527 7537 \nPasscode: 668279\n
+ \n‪(US) +1 888-788-0099‬\nPasscode: 668279\n\nAgenda:\n * Issues and P
+ Rs status\n   * share love and engage with contributors\n   * coordinate e
+ fforts\, ie label issues with "help wanted"\n   * define documentation tas
+ ks ("help wanted")\n * Discuss and consolidate Roadmap\n * AOB\n\n\nCode a
+ nd issues on https://github.com/finos/git-proxy
+END:VEVENT
+END:VCALENDAR
