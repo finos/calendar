@@ -70,8 +70,6 @@ function App() {
   }, []);
 
   function downloadICSFile() {
-    // console.log("print ics");
-    // console.log(eventDetails.extendedProps.ics);
     const file = new Blob([eventDetails.extendedProps.ics], {
       type: 'text/calendar',
     });
