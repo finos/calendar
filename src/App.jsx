@@ -8,7 +8,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { mdiCalendarRange, mdiClose, mdiMapMarkerOutline } from '@mdi/js';
 import Icon from '@mdi/react';
 import parse from 'html-react-parser';
-import { createRef, useCallback, useMemo, useState } from 'react';
+import { createRef, useCallback, useEffect, useMemo, useState } from 'react';
 import useEscKey from './hooks/useEscKey';
 import './App.css';
 
@@ -16,8 +16,10 @@ const htmlRegex = /<\/*html-blob>/;
 
 function App() {
   const calendarRef = createRef();
+  const eventDetailRef = createRef();
 
   const [loading, setLoading] = useState(true);
+  const [clickedEvent, setClickedEvent] = useState([]);
   const [showEventDetails, setShowEventDetails] = useState(false);
   const [eventDetails, setEventDetails] = useState(false);
   const [aspectRatio, setAspectRatio] = useState(
@@ -45,7 +47,7 @@ function App() {
   };
 
   const createPopupPosition = (event) => {
-    const popup = { width: 330, height: 400 };
+    const popup = { width: 330, height: 450 };
     let position = { top: event.pageY + 20, left: event.pageX + 50 };
     if (
       event.pageX + popup.width + 140 > window.outerWidth ||
@@ -63,15 +65,35 @@ function App() {
     setPopupPosition({ left: position.left + 'px', top: position.top + 'px' });
   };
 
-  const handleEventClick = useCallback((clickInfo) => {
-    window.outerWidth > 600 && createPopupPosition(clickInfo.jsEvent);
-    setEventDetails(clickInfo.event);
-    setShowEventDetails(true);
-  }, []);
+  const handleEventClick = useCallback(
+    (clickInfo) => {
+      window.outerWidth > 600 && createPopupPosition(clickInfo.jsEvent);
+      setEventDetails(clickInfo.event);
+      setShowEventDetails(true);
+      if (clickedEvent.length) {
+        clickedEvent[0].classList.remove('active-event');
+        setClickedEvent([]);
+      }
+      const event = clickInfo.jsEvent.target.closest('a.fc-event');
+      event.classList.add('active-event');
+      setClickedEvent([event]);
+    },
+    [clickedEvent]
+  );
+
+  useEffect(() => {
+    const closeOnOutsideClick = (e) => {
+      if (e.target.closest('.fc-event') || eventDetailRef.current == null)
+        return;
+      if (showEventDetails && !eventDetailRef.current.contains(e.target))
+        setShowEventDetails(false);
+    };
+
+    document.body.addEventListener('click', closeOnOutsideClick);
+    return () => document.removeEventListener('click', closeOnOutsideClick);
+  }, [eventDetailRef, showEventDetails]);
 
   function downloadICSFile() {
-    // console.log("print ics");
-    // console.log(eventDetails.extendedProps.ics);
     const file = new Blob([eventDetails.extendedProps.ics], {
       type: 'text/calendar',
     });
@@ -130,12 +152,12 @@ function App() {
         toTime;
     }
 
-    let seriesICS = '';
-    if (eventDetails.extendedProps.rootIcsLink != null) {
-      seriesICS = (
-        <a href={eventDetails.extendedProps.rootIcsLink}>Series ICS</a>
-      );
-    }
+    // let seriesICS = '';
+    // if (eventDetails.extendedProps.rootIcsLink != null) {
+    //  seriesICS = (
+    //    <a href={eventDetails.extendedProps.rootIcsLink}>Series ICS</a>
+    //  );
+    // }
 
     const extractUrls = (text) => {
       const urlPattern = /(?<!href\s*=\s*["'])\bhttps?:\/\/\S+\b/g;
@@ -165,17 +187,25 @@ function App() {
     }
 
     return (
-      <div className="finos-calendar-event-details" style={popupPosition}>
-        <button
-          onClick={() => setShowEventDetails(false)}
-          className="fc-button finos-calendar-event-details-close"
-        >
-          <Icon path={mdiClose} size={1} />
-        </button>
-        <button onClick={() => downloadICSFile()} className="fc-button">
-          Event ICS
-        </button>
-        <div>{seriesICS}</div>
+      <div
+        ref={eventDetailRef}
+        key={description}
+        className="finos-calendar-event-details"
+        style={popupPosition}
+      >
+        <div className="event-details-buttons">
+          <button onClick={() => downloadICSFile()} className="fc-button">
+            Event ICS
+          </button>
+          <button
+            onClick={() => setShowEventDetails(false)}
+            className="fc-button finos-calendar-event-details-close"
+          >
+            <Icon path={mdiClose} size={1} />
+          </button>
+        </div>
+
+        {/* <div>{seriesICS}</div> */}
         <h2 className="event-title">{eventDetails.title}</h2>
         <div className="event-time">
           <div className="icon">
@@ -232,7 +262,9 @@ function App() {
 
   return (
     <div className="App main">
-      <div className="finos-calendar">{renderFullCalendar}</div>
+      <div data-testid="finos-calendar" className="finos-calendar">
+        {renderFullCalendar}
+      </div>
       {showEventDetails && renderEventDetails()}
       {loading && <div className="finos-calendar-overlay" />}
       {loading && <div className="finos-calendar-loading">Loading...</div>}
