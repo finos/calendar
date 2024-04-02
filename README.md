@@ -1,4 +1,4 @@
-# FINOS Calendar
+\*\*\*\*# FINOS Calendar
 
 This code builds the page hosted on https://calendar.finos.org , which is also embedded on https://www.finos.org/calendar , in order to provide a fully hosted solution that shows all events in the [FINOS Community (Google) Calendar](https://calendar.google.com/calendar/embed?src=symphony.foundation_6g70j7s80813djmj9q7gmgdjuc%40group.calendar.google.com&ctz=Europe%2FMadrid) that can be correctly visualised also behind a corporate firewall.
 
@@ -56,3 +56,11 @@ Open browser to `http://localhost:5173/`.
 ### Live environment
 
 https://calendar.finos.org is served by Github Pages and deployed by the [build.yml](.github/workflows/build.yml) Github Action.
+
+### Tests
+
+Tests are implemented using [testing-library/react](https://testing-library.com/docs/react-testing-library/intro) and [vitest](https://vitest.dev/).
+
+```bash
+npm run test
+```
