@@ -1,13 +1,12 @@
 name: Build
 
 on:
-  pull_request:
   workflow_dispatch:
   push:
     branches:
       - main
   schedule:
-    - cron: "0 */3 * * *"
+    - cron: '0 */3 * * *'
 
 jobs:
   build:
@@ -23,7 +22,7 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
-          node-version: "${{ matrix.node-version }}"
+          node-version: '${{ matrix.node-version }}'
 
       - name: Build
         run: |
@@ -36,11 +35,11 @@ jobs:
           PASSPHRASE: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_PASSPHRASE }}
 
       - name: Get events from Google API
-        run: npm run getEvents
+        run: npm run get-events
 
       - name: Add CNAME in dist folder
         run: cp CNAME dist
-    
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

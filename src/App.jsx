@@ -65,32 +65,35 @@ function App() {
     setPopupPosition({ left: position.left + 'px', top: position.top + 'px' });
   };
 
-  const handleEventClick = useCallback((clickInfo) => {
-    window.outerWidth > 600 && createPopupPosition(clickInfo.jsEvent);
-    setEventDetails(clickInfo.event);
-    setShowEventDetails(true);
-    if(clickedEvent.length){
-      clickedEvent[0].classList.remove('active-event');
-      setClickedEvent([]);
-    }
-    const event = clickInfo.jsEvent.target.closest('a.fc-event');
-    event.classList.add('active-event');
-    setClickedEvent([event]);
-  }, [clickedEvent]);
+  const handleEventClick = useCallback(
+    (clickInfo) => {
+      window.outerWidth > 600 && createPopupPosition(clickInfo.jsEvent);
+      setEventDetails(clickInfo.event);
+      setShowEventDetails(true);
+      if (clickedEvent.length) {
+        clickedEvent[0].classList.remove('active-event');
+        setClickedEvent([]);
+      }
+      const event = clickInfo.jsEvent.target.closest('a.fc-event');
+      event.classList.add('active-event');
+      setClickedEvent([event]);
+    },
+    [clickedEvent]
+  );
 
-  useEffect(()=>{
-    const closeOnOutsideClick = (e)=>{
-      if(e.target.closest('.fc-event') || eventDetailRef.current == null) return;
-      if(showEventDetails && !eventDetailRef.current.contains(e.target)) setShowEventDetails(false);
+  useEffect(() => {
+    const closeOnOutsideClick = (e) => {
+      if (e.target.closest('.fc-event') || eventDetailRef.current == null)
+        return;
+      if (showEventDetails && !eventDetailRef.current.contains(e.target))
+        setShowEventDetails(false);
     };
 
     document.body.addEventListener('click', closeOnOutsideClick);
-    return ()=> document.removeEventListener('click', closeOnOutsideClick);
-  }, [ eventDetailRef, showEventDetails ]);
+    return () => document.removeEventListener('click', closeOnOutsideClick);
+  }, [eventDetailRef, showEventDetails]);
 
   function downloadICSFile() {
-    // console.log("print ics");
-    // console.log(eventDetails.extendedProps.ics);
     const file = new Blob([eventDetails.extendedProps.ics], {
       type: 'text/calendar',
     });
@@ -184,15 +187,20 @@ function App() {
     }
 
     return (
-      <div ref={eventDetailRef} key={description} className="finos-calendar-event-details" style={popupPosition}>
-
+      <div
+        ref={eventDetailRef}
+        key={description}
+        className="finos-calendar-event-details"
+        style={popupPosition}
+      >
         <div className="event-details-buttons">
           <button onClick={() => downloadICSFile()} className="fc-button">
             Event ICS
           </button>
           <button
             onClick={() => setShowEventDetails(false)}
-            className="fc-button finos-calendar-event-details-close">
+            className="fc-button finos-calendar-event-details-close"
+          >
             <Icon path={mdiClose} size={1} />
           </button>
         </div>
@@ -254,7 +262,9 @@ function App() {
 
   return (
     <div className="App main">
-      <div className="finos-calendar">{renderFullCalendar}</div>
+      <div data-testid="finos-calendar" className="finos-calendar">
+        {renderFullCalendar}
+      </div>
       {showEventDetails && renderEventDetails()}
       {loading && <div className="finos-calendar-overlay" />}
       {loading && <div className="finos-calendar-loading">Loading...</div>}

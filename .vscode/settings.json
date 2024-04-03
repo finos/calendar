@@ -1,15 +1,16 @@
 {
   "diffEditor.codeLens": true,
-  "files.trimTrailingWhitespace": true,
-  "html.format.indentInnerHtml": true,
-  "html.format.wrapAttributes": "force-aligned",
-  "eslint.format.enable": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "eslint.validate": ["javascript"],
   "editor.formatOnSave": true,
+  "eslint.format.enable": true,
+  "eslint.validate": ["javascript"],
+  "files.trimTrailingWhitespace": true,
+  "html.format.indentInnerHtml": true,
+  "html.format.wrapAttributes": "force-aligned",
   "search.exclude": {
     "**/node_modules": true
-  }
+  },
+  "search.useIgnoreFiles": false
 }
