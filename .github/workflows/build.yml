@@ -34,6 +34,9 @@ jobs:
         env:
           PASSPHRASE: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_PASSPHRASE }}
 
+      - name: Download basic.ics file
+        run: curl -o dist/basic.ics https://calendar.google.com/calendar/ical/finos.org_fac8mo1rfc6ehscg0d80fi8jig%40group.calendar.google.com/public/basic.ics
+
       - name: Get events from Google API
         run: npm run get-events
 
