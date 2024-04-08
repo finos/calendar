@@ -136,9 +136,11 @@ function App() {
     const toDate = printDate(eventDetails.end);
     const fromTime = printTime(eventDetails.start);
     const toTime = printTime(eventDetails.end);
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    
     let eventTime = '';
     if (fromDate == toDate) {
-      eventTime = fromDate + ' ' + fromTime + ' - ' + toTime;
+      eventTime = fromDate + ' ' + fromTime + ' ' + timeZone + ' - ' + toTime + ' ' + timeZone;
     } else {
       eventTime =
         <strong>From:</strong> +
@@ -147,9 +149,9 @@ function App() {
         toDate +
         <br /> +
         <strong>To:</strong> +
-        fromTime +
+        fromTime + ' ' + timeZone +
         ' ' +
-        toTime;
+        toTime + ' ' + timeZone;
     }
 
     // let seriesICS = '';
