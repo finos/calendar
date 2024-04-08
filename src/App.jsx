@@ -5,11 +5,13 @@ import FullCalendar from '@fullcalendar/react';
 import rrulePlugin from '@fullcalendar/rrule';
 import timeGridPlugin from '@fullcalendar/timegrid';
 
-import { mdiCalendarRange, mdiClose, mdiMapMarkerOutline } from '@mdi/js';
+import { mdiCalendarRange, mdiClose, mdiMapMarkerOutline, mdiClock } from '@mdi/js';
 import Icon from '@mdi/react';
 import parse from 'html-react-parser';
 import { createRef, useCallback, useEffect, useMemo, useState } from 'react';
+import SearchHeader from './components/searchheader';
 import useEscKey from './hooks/useEscKey';
+import eventData from '../dist/events.json';
 import './App.css';
 
 const htmlRegex = /<\/*html-blob>/;
@@ -17,6 +19,9 @@ const htmlRegex = /<\/*html-blob>/;
 function App() {
   const calendarRef = createRef();
   const eventDetailRef = createRef();
+
+  const eventsArray = Array.from(eventData);
+  const [events, setEvents] = useState(eventsArray);
 
   const [loading, setLoading] = useState(true);
   const [clickedEvent, setClickedEvent] = useState([]);
@@ -65,35 +70,42 @@ function App() {
     setPopupPosition({ left: position.left + 'px', top: position.top + 'px' });
   };
 
-  const handleEventClick = useCallback(
-    (clickInfo) => {
-      window.outerWidth > 600 && createPopupPosition(clickInfo.jsEvent);
-      setEventDetails(clickInfo.event);
-      setShowEventDetails(true);
-      if (clickedEvent.length) {
-        clickedEvent[0].classList.remove('active-event');
-        setClickedEvent([]);
-      }
-      const event = clickInfo.jsEvent.target.closest('a.fc-event');
-      event.classList.add('active-event');
-      setClickedEvent([event]);
-    },
-    [clickedEvent]
-  );
+  const filterEvents = (searchTerm)=>{
+    if(!searchTerm) return setEvents(eventsArray); //handles searchbox clear
+    let matchingEvents = eventsArray.filter((event) => {
+      const titleIncludes = event.title?.toLowerCase().includes(searchTerm.toLowerCase());
+      const descriptionIncludes = event.description?.toLowerCase().includes(searchTerm.toLowerCase());
+      return titleIncludes || descriptionIncludes;
+    });
+    setEvents(matchingEvents);
+  };
 
-  useEffect(() => {
-    const closeOnOutsideClick = (e) => {
-      if (e.target.closest('.fc-event') || eventDetailRef.current == null)
-        return;
-      if (showEventDetails && !eventDetailRef.current.contains(e.target))
-        setShowEventDetails(false);
+  const handleEventClick = useCallback((clickInfo) => {
+    window.outerWidth > 600 && createPopupPosition(clickInfo.jsEvent);
+    setEventDetails(clickInfo.event);
+    setShowEventDetails(true);
+    if(clickedEvent.length){
+      clickedEvent[0].classList.remove('active-event');
+      setClickedEvent([]);
+    }
+    const event = clickInfo.jsEvent.target.closest('a.fc-event');
+    event.classList.add('active-event');
+    setClickedEvent([event]);
+  }, [clickedEvent]);
+
+  useEffect(()=>{
+    const closeOnOutsideClick = (e)=>{
+      if(e.target.closest('.fc-event') || eventDetailRef.current == null) return;
+      if(showEventDetails && !eventDetailRef.current.contains(e.target)) setShowEventDetails(false);
     };
 
     document.body.addEventListener('click', closeOnOutsideClick);
-    return () => document.removeEventListener('click', closeOnOutsideClick);
-  }, [eventDetailRef, showEventDetails]);
+    return ()=> document.removeEventListener('click', closeOnOutsideClick);
+  }, [ eventDetailRef, showEventDetails ]);
 
   function downloadICSFile() {
+    // console.log("print ics");
+    // console.log(eventDetails.extendedProps.ics);
     const file = new Blob([eventDetails.extendedProps.ics], {
       type: 'text/calendar',
     });
@@ -136,11 +148,12 @@ function App() {
     const toDate = printDate(eventDetails.end);
     const fromTime = printTime(eventDetails.start);
     const toTime = printTime(eventDetails.end);
+    // get users local timezone
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    
+
     let eventTime = '';
     if (fromDate == toDate) {
-      eventTime = fromDate + ' ' + fromTime + ' ' + timeZone + ' - ' + toTime + ' ' + timeZone;
+      eventTime = fromDate + ' ' + fromTime + ' - ' + toTime + ' ' + 'Time Zone: ' + timeZone;
     } else {
       eventTime =
         <strong>From:</strong> +
@@ -149,9 +162,9 @@ function App() {
         toDate +
         <br /> +
         <strong>To:</strong> +
-        fromTime + ' ' + timeZone +
+        fromTime +
         ' ' +
-        toTime + ' ' + timeZone;
+        toTime + ' ' + 'Time Zone: ' + timeZone;
     }
 
     // let seriesICS = '';
@@ -189,20 +202,15 @@ function App() {
     }
 
     return (
-      <div
-        ref={eventDetailRef}
-        key={description}
-        className="finos-calendar-event-details"
-        style={popupPosition}
-      >
+      <div ref={eventDetailRef} key={description} className="finos-calendar-event-details" style={popupPosition}>
+
         <div className="event-details-buttons">
           <button onClick={() => downloadICSFile()} className="fc-button">
             Event ICS
           </button>
           <button
             onClick={() => setShowEventDetails(false)}
-            className="fc-button finos-calendar-event-details-close"
-          >
+            className="fc-button finos-calendar-event-details-close">
             <Icon path={mdiClose} size={1} />
           </button>
         </div>
@@ -215,6 +223,14 @@ function App() {
           </div>
           <div>{eventTime}</div>
         </div>
+
+        <div className="event-timeZone">
+          <div className="icon">
+            <Icon path={mdiClock} size={0.75} />
+          </div>
+          <div>Time Zone: {timeZone}</div>
+        </div>
+
         {eventLocation && (
           <div className="event-location">
             <div className="icon">
@@ -244,7 +260,7 @@ function App() {
         aspectRatio={aspectRatio}
         handleWindowResize={true}
         windowResize={windowResize}
-        events="events.json"
+        events={events}
         headerToolbar={{
           left: 'prev,next today',
           center: 'title',
@@ -259,14 +275,13 @@ function App() {
         loading={(isLoading) => setLoading(isLoading)}
       />
     ),
-    [aspectRatio, initialView, calendarRef, handleEventClick]
+    [aspectRatio, initialView, calendarRef, handleEventClick, events]
   );
 
   return (
     <div className="App main">
-      <div data-testid="finos-calendar" className="finos-calendar">
-        {renderFullCalendar}
-      </div>
+      <SearchHeader filterEvents={filterEvents} />
+      <div className="finos-calendar">{renderFullCalendar}</div>
       {showEventDetails && renderEventDetails()}
       {loading && <div className="finos-calendar-overlay" />}
       {loading && <div className="finos-calendar-loading">Loading...</div>}
