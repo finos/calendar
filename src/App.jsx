@@ -5,7 +5,7 @@ import FullCalendar from '@fullcalendar/react';
 import rrulePlugin from '@fullcalendar/rrule';
 import timeGridPlugin from '@fullcalendar/timegrid';
 
-import { mdiCalendarRange, mdiClose, mdiMapMarkerOutline, mdiClock } from '@mdi/js';
+import { mdiCalendarRange, mdiClock, mdiClose, mdiMapMarkerOutline } from '@mdi/js';
 import Icon from '@mdi/react';
 import parse from 'html-react-parser';
 import { createRef, useCallback, useEffect, useMemo, useState } from 'react';
