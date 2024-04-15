@@ -5,7 +5,7 @@ import FullCalendar from '@fullcalendar/react';
 import rrulePlugin from '@fullcalendar/rrule';
 import timeGridPlugin from '@fullcalendar/timegrid';
 
-import { mdiCalendarRange, mdiClose, mdiMapMarkerOutline } from '@mdi/js';
+import { mdiCalendarRange, mdiClock, mdiClose, mdiMapMarkerOutline } from '@mdi/js';
 import Icon from '@mdi/react';
 import parse from 'html-react-parser';
 import { createRef, useCallback, useEffect, useMemo, useState } from 'react';
@@ -136,6 +136,7 @@ function App() {
     const toDate = printDate(eventDetails.end);
     const fromTime = printTime(eventDetails.start);
     const toTime = printTime(eventDetails.end);
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     let eventTime = '';
     if (fromDate == toDate) {
       eventTime = fromDate + ' ' + fromTime + ' - ' + toTime;
@@ -212,6 +213,12 @@ function App() {
             <Icon path={mdiCalendarRange} size={0.75} />
           </div>
           <div>{eventTime}</div>
+        </div>
+        <div className="event-timeZone">
+          <div className="icon">
+            <Icon path={mdiClock} size={0.75} />
+          </div>
+          <div>Time Zone: {timeZone}</div>
         </div>
         {eventLocation && (
           <div className="event-location">
