@@ -28,7 +28,7 @@ function App() {
       : window.innerWidth / window.innerHeight
   );
   const [initialView, setInitialView] = useState(
-    window.outerWidth > 600 ? 'dayGridMonth' : 'timeGridWeek'
+    window.outerWidth > 500 ? 'dayGridMonth' : 'timeGridWeek'
   );
 
   useEscKey(() => setShowEventDetails(false));
