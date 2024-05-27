@@ -6,9 +6,9 @@ NAME:Alloy Pilot Participants Meeting (was previously "Bi-Weekly Meeting")
 X-WR-CALNAME:Alloy Pilot Participants Meeting (was previously "Bi-Weekly M
  eeting")
 BEGIN:VEVENT
-UID:3449ef9b-4f53-434b-ae48-e4f6894ddc34
+UID:49df565a-abed-42dc-8de2-c9e3ef3c4763
 SEQUENCE:0
-DTSTAMP:20240527T180607Z
+DTSTAMP:20240527T210527Z
 DTSTART:20200805T163000Z
 DTEND:20200805T173000Z
 RRULE:FREQ=MONTHLY;BYDAY=1WE
