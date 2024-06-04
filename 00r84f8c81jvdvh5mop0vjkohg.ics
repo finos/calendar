@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:CCC - Working Group: Communications / All Hands
+X-WR-CALNAME:CCC - Working Group: Communications / All Hands
+BEGIN:VEVENT
+UID:e8330c83-8bdb-4320-b01f-44cd46e2054f
+SEQUENCE:0
+DTSTAMP:20240604T164500Z
+DTSTART:20240620T160000Z
+DTEND:20240620T170000Z
+RRULE:FREQ=MONTHLY;BYDAY=3TH
+SUMMARY:CCC - Working Group: Communications / All Hands
+DESCRIPTION:CCC - Working Group: Communications / All Hands\n\nGitHub: ht
+ tps://github.com/finos/common-cloud-controls\n\nJoin Zoom Meeting\nhttps:/
+ /zoom.us/j/94416168360\n\nMeeting ID: 944 1616 8360\nPasscode: 042805\n\
+ n---\n\nFind your local number: https://zoom.us/u/apjhwwA3K
+END:VEVENT
+END:VCALENDAR

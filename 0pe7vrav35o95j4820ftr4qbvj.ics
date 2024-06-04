@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:CCC - Working Group: Taxonomy
+X-WR-CALNAME:CCC - Working Group: Taxonomy
+BEGIN:VEVENT
+UID:614cb3d5-f009-4c1e-8885-89172165e422
+SEQUENCE:0
+DTSTAMP:20240604T164500Z
+DTSTART:20240627T153000Z
+DTEND:20240627T160000Z
+RRULE:FREQ=MONTHLY;BYDAY=4TH
+SUMMARY:CCC - Working Group: Taxonomy
+DESCRIPTION:CCC - Working Group: Taxonomy\n\nGitHub: https://github.com/f
+ inos/common-cloud-controls\n\nJoin Zoom Meeting\nhttps://zoom.us/j/9410960
+ 3410\n\nMeeting ID: 941 0960 3410\nPasscode: 353234\n\n---\n\nFind your lo
+ cal number: https://zoom.us/u/ab9zAHYy5T
+END:VEVENT
+END:VCALENDAR
