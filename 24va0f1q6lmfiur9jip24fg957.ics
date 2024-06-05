@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:CCC - Working Group: Community Structure
+X-WR-CALNAME:CCC - Working Group: Community Structure
+BEGIN:VEVENT
+UID:328c1351-edd3-4569-aec5-e5d2f9764ce8
+SEQUENCE:0
+DTSTAMP:20240605T134253Z
+DTSTART:20240627T160000Z
+DTEND:20240627T163000Z
+RRULE:FREQ=MONTHLY;BYDAY=4TH
+SUMMARY:CCC - Working Group: Community Structure
+DESCRIPTION:CCC - Working Group: Community Structure\n\nGitHub: https://g
+ ithub.com/finos/common-cloud-controls\n\nJoin Zoom Meeting\nhttps://zoom.u
+ s/j/99708793584\n\nMeeting ID: 997 0879 3584\nPasscode: 718089\n\n---\n\
+ nFind your local number: https://zoom.us/u/abu2VMzm1v
+END:VEVENT
+END:VCALENDAR
