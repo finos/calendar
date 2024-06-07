@@ -5,16 +5,29 @@ METHOD:REQUEST
 NAME:CCC - Working Group: Community Structure
 X-WR-CALNAME:CCC - Working Group: Community Structure
 BEGIN:VEVENT
-UID:a70092b0-4300-4822-8ea2-95cdcb9e918d
+UID:3c4c3158-3f4a-4d99-8ca4-39310d7c7871
 SEQUENCE:0
-DTSTAMP:20240607T090523Z
-DTSTART:20240613T160000Z
-DTEND:20240613T163000Z
+DTSTAMP:20240607T120922Z
+DTSTART:20240711T160000Z
+DTEND:20240711T163000Z
 RRULE:FREQ=MONTHLY;BYDAY=2TH
 SUMMARY:CCC - Working Group: Community Structure
-DESCRIPTION:CCC - Working Group: Community Structure\n\nGitHub: https://g
- ithub.com/finos/common-cloud-controls\n\nJoin Zoom Meeting\nhttps://zoom.u
- s/j/99708793584\n\nMeeting ID: 997 0879 3584\nPasscode: 718089\n\n---\n\nF
- ind your local number: https://zoom.us/u/abu2VMzm1v
+DESCRIPTION:CCC - Working Group: Community Structure\n\n\n\nThe mission of
+  the Community Structure WG\n[https://github.com/finos/common-cloud-contr
+ ols/blob/main/docs/governance/community-groups.md#working-groups] is to e
+ stablish\nrobust\, scalable\, and efficient frameworks for the governance 
+ and operation of all community WG\n[https://github.com/finos/common-cloud
+ -controls/blob/main/docs/governance/community-groups.md#working-groups]s w
+ ithin the CCC.\n\nBy designing clear guidelines and structures\, this grou
+ p ensures consistency and facilitates effective collaboration across the\n
+ entire community. It acts as a central body to guide the formation and ope
+ ration of other WG\n[https://github.com/finos/common-cloud-controls/blob/
+ main/docs/governance/community-groups.md#working-groups]s\, helping them a
+ lign\nwith the overarching goals of the CCC.\n\nhttps://github.com/finos/c
+ ommon-cloud-controls/blob/main/docs/governance/working-groups/community-st
+ ructure/charter.md\n\nGitHub: https://github.com/finos/common-cloud-contr
+ ols\n\nJoin Zoom Meeting\nhttps://zoom.us/j/99708793584\n\nMeeting ID: 997
+  0879 3584\nPasscode: 718089\n\n---\n\nFind your local number: https://zoo
+ m.us/u/abu2VMzm1v
 END:VEVENT
 END:VCALENDAR
