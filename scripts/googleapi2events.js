@@ -140,20 +140,29 @@ function getApiOptions(options) {
 // If results hit the limit of 2500 entries, an error is thrown
 // Accepts additional options to pass to the API
 async function getGoogleEvents(queryName, dynamicOptions) {
-  const itemsAsync = await calendar.events.list(getApiOptions(dynamicOptions));
-  const items = itemsAsync.data.items;
+	let allItems = [];
+	let nextPageToken = null;
 
-  if (items.length == 0) {
-    throw new Error(queryName + 'No events returned!');
-  } else if (items.length == 2500) {
-    throw new Error(
-      queryName + ' Events retrieved reached API limit!',
-      items.length
-    );
-  } else {
-    console.log(queryName + ' Events retrieved:', items.length);
-  }
-  return items;
+  // Loop to fetch events until there are no more pages
+	do {
+    // If nextPageToken is not null, set it in dynamicOptions to fetch the next page
+		if (nextPageToken) {
+			dynamicOptions.set('pageToken', nextPageToken);
+		}
+
+		const itemsAsync = await calendar.events.list(getApiOptions(dynamicOptions));
+		const items = itemsAsync.data.items;
+		allItems = allItems.concat(items);
+    // set page token for the next iteration
+		nextPageToken = itemsAsync.data.nextPageToken;
+	} while (nextPageToken);
+
+	if (allItems.length == 0) {
+		throw new Error(queryName + ' No events returned!');
+	} else {
+		console.log(queryName + ' Events retrieved:', allItems.length);
+	}
+	return allItems;
 }
 
 // Fetches events from Google API and transforms them
