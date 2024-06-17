@@ -143,7 +143,9 @@ async function getGoogleEvents(queryName, dynamicOptions) {
 	let allItems = [];
 	let nextPageToken = null;
 
+  // Loop to fetch events until there are no more pages
 	do {
+    // If nextPageToken is not null, set it in dynamicOptions to fetch the next page
 		if (nextPageToken) {
 			dynamicOptions.set('pageToken', nextPageToken);
 		}
@@ -151,6 +153,7 @@ async function getGoogleEvents(queryName, dynamicOptions) {
 		const itemsAsync = await calendar.events.list(getApiOptions(dynamicOptions));
 		const items = itemsAsync.data.items;
 		allItems = allItems.concat(items);
+    // set page token for the next iteration
 		nextPageToken = itemsAsync.data.nextPageToken;
 	} while (nextPageToken);
 
