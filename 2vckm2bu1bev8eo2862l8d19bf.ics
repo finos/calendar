@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:FDC3 App Directory Working Group
+X-WR-CALNAME:FDC3 App Directory Working Group
+BEGIN:VEVENT
+UID:4fad2ee3-80e1-49fa-9d71-85e7a261075b
+SEQUENCE:0
+DTSTAMP:20240617T194730Z
+DTSTART:20180912T150000Z
+DTEND:20180912T160000Z
+RRULE:FREQ=WEEKLY;BYDAY=WE
+SUMMARY:FDC3 App Directory Working Group
+DESCRIPTION:WebEx URL: https://finos.webex.com/finos/j.php?MTID=md0b47edef
+ c1af5a6fafc750286f684f6 Meeting number: 663 641 903 Host key: 319354\nHost
+ : FDC3 PMC Scribe: Start-End: 11-12 am ET Recurrence: Every 2 weeks on Wed
+ nesday Confluence page:\nhttps://finosfoundation.atlassian.net/wiki/spaces
+ /FDC3/pages/83918899/App+Directory+Working+Group Recording URL:\nhttps://f
+ inos.webex.com/mw3300/mywebex/default.do?siteurl=finos&service=1
+END:VEVENT
+END:VCALENDAR

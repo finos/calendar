@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:Data Technologies PMC Call
+X-WR-CALNAME:Data Technologies PMC Call
+BEGIN:VEVENT
+UID:de9eea2a-e8e9-430f-803d-552bffca5866
+SEQUENCE:0
+DTSTAMP:20240617T194730Z
+DTSTART:20190926T150000Z
+DTEND:20190926T154500Z
+RRULE:FREQ=MONTHLY;BYDAY=4TH
+SUMMARY:Data Technologies PMC Call
+DESCRIPTION:WebEx URL: https://finos.webex.com/finos/j.php?MTID=m7e34d5b36
+ 206d3b34cefd76524008d4e\nMeeting number: 663 147 349\n\nHost key: 459197\n
+ Host: Rob Underwood\nScribe:\nStart-End: 11am to 11:45am ET \nRecurrence:
+  The 4th Thursday of every month\nConfluence page: https://finosfoundation
+ .atlassian.net/wiki/spaces/DT/pages/329383939/PMC\nRecording URL: https://
+ finos.webex.com/mw3300/mywebex/default.do?siteurl=finos&service=1
+END:VEVENT
+END:VCALENDAR

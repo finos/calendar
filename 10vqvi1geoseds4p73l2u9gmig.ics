@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:KDB Project call
+X-WR-CALNAME:KDB Project call
+BEGIN:VEVENT
+UID:b5a7cb11-5f8c-4be2-b90a-8710d710d618
+SEQUENCE:0
+DTSTAMP:20240617T194730Z
+DTSTART:20220509T133000Z
+DTEND:20220509T143000Z
+RRULE:FREQ=MONTHLY;BYDAY=2MO
+SUMMARY:KDB Project call
+DESCRIPTION: * Meeting link: https://finos.webex.com/finos/j.php?MTID=me61
+ 719ca3c3295a7cc76762d78392bc3\n * Meeting number: 2704 417 0390\n * Join 
+ by phone: +1-415-655-0003 US Toll | +44-20319-88141 UK Toll | Access code
+ : 2704 417 0390\n * Agenda: https://github.com/finos/kdb/labels/meeting\n\
+ n\nStart-End: 9:30-10:30 am ET\nRecurrence: The 2nd Monday of every month\
+ nConfluence page: https://finosfoundation.atlassian.net/wiki/spaces/DT/pa
+ ges/329383945/kdb+Project
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:FINOS Office Hours - Community Drop-in
+X-WR-CALNAME:FINOS Office Hours - Community Drop-in
+BEGIN:VEVENT
+UID:df70210d-c6a6-4ddf-8e5d-0cb13a51ae3e
+SEQUENCE:0
+DTSTAMP:20240617T194729Z
+DTSTART:20191025T160000Z
+DTEND:20191025T170000Z
+RRULE:FREQ=WEEKLY;BYDAY=FR
+SUMMARY:FINOS Office Hours - Community Drop-in
+DESCRIPTION:Meeting link: https://finos.webex.com/finos/j.php?MTID=m336056
+ 03b916bb03949acbbb8c44e8c5\n\nDial in\n\n * USA: +1.415.655.0003 \n * UK:
+  +44-20319-88141 \n\n\nMeeting number: 660 377 639\nHost key: 867752\n\n\
+ nHi - I'm James McLeod\, the FINOS Director of Community\, and I'd like to
+  invite you to a regular call I'm scheduling to help people\njoin and star
+ t contributing to FINOS.\n\nThese drop-in sessions will have multiple peop
+ le in the room\, so don't expect a 121\, but they will be open and I will 
+ answer\nquestions from anyone.\n\nIt'll be very friendly and feel free to 
+ forward to others who are interested in contributing to FINOS!\n\nThe meet
+ ing will happen on the FINOS Community WebEx below and I might even invite
+  existing FINOS contributors and leads into the\ncall to help you get star
+ ted FAST!\n\nhttps://finos.webex.com/meet/community\n\nHave a great week a
+ nd feel free to drop in and say hello 🤩\n\nJames.\n\n// Feel free to de
+ cline if this session isn't for you and I'll remove you from the list!
+END:VEVENT
+END:VCALENDAR

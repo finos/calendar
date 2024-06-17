@@ -1,0 +1,36 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:Software Security Supply Chain - DevOps Automation
+X-WR-CALNAME:Software Security Supply Chain - DevOps Automation
+BEGIN:VEVENT
+UID:caf0f037-ee5c-470d-b7a2-980abd2b3e2d
+SEQUENCE:0
+DTSTAMP:20240617T194730Z
+DTSTART:20231219T140000Z
+DTEND:20231219T150000Z
+RRULE:FREQ=MONTHLY;BYDAY=3TU
+SUMMARY:Software Security Supply Chain - DevOps Automation
+DESCRIPTION:Software Security Supply Chain - DevOps Automation\n\nGitHub:
+  https://github.com/finos/devops-automation\n\nJoin Zoom Meeting\nhttps:/
+ /zoom.us/j/94904595244 [https://zoom.us/j/94904595244?pwd=djIxWjlrenBGNWZm
+ SGZ3cWJhamFTZz09]\n\nMeeting ID: 949 0459 5244\nPasscode: 545224\n\nOne ta
+ p mobile\n+16892781000\,\,95521041942# US\n+17193594580\,\,95521041942# US
+ \n\nDial by your location\n        +1 689 278 1000 US\n        +1 
+ 719 359 4580 US\n        +1 253 205 0468 US\n        +1 253 215 87
+ 82 US (Tacoma)\n        +1 301 715 8592 US (Washington DC)\n      
+   +1 305 224 1968 US\n        +1 309 205 3325 US\n        +1 312 
+ 626 6799 US (Chicago)\n        +1 346 248 7799 US (Houston)\n      
+   +1 360 209 5623 US\n        +1 386 347 5053 US\n        +1 507 
+ 473 4847 US\n        +1 564 217 2000 US\n        +1 646 558 8656 U
+ S (New York)\n        +1 646 931 3860 US\n        +1 669 444 9171 
+ US\n        +1 669 900 6833 US (San Jose)\n        855 880 1246 US
+  Toll-free\n        877 369 0926 US Toll-free\n        +1 647 374 
+ 4685 Canada\n        +1 647 558 0588 Canada\n        +1 778 907 20
+ 71 Canada\n        +1 780 666 0144 Canada\n        +1 204 272 7920
+  Canada\n        +1 438 809 7799 Canada\n        +1 587 328 1099 C
+ anada\n        855 703 8985 Canada Toll-free\n\nFind your local number
+ : https://zoom.us/u/acxeOM6Tte
+END:VEVENT
+END:VCALENDAR

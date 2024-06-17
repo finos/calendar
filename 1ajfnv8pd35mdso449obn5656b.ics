@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:Currency Reference Data Meeting
+X-WR-CALNAME:Currency Reference Data Meeting
+BEGIN:VEVENT
+UID:5211a755-72e5-4cac-8c7c-43562a9cf00d
+SEQUENCE:0
+DTSTAMP:20240617T194729Z
+DTSTART:20200707T140000Z
+DTEND:20200707T150000Z
+RRULE:FREQ=WEEKLY;WKST=MO;BYDAY=TU
+SUMMARY:Currency Reference Data Meeting
+DESCRIPTION:\nMeeting Information\n\n * Meeting link: https://finos.webex.
+ com/finos/j.php?MTID=mf27815a7807f13f1d0974a973196cb4c\n * Meeting number:
+  127 819 0322\n * Password: VXcd2eQgh82\n\n\n\nMore ways to join\n\n * Joi
+ n by video system\n   * Dial 1278190322@finos.webex.com\n   * You can also
+  dial 173.243.2.68 and enter your meeting number.\n * Join by phone\n   * 
+ +1-415-655-0003 US Toll\n   * +44-20319-88141 UK Toll\n   * Access code: 1
+ 27 819 0322
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,44 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:Alloy Monthly General Meeting (9am ET/2pm UK Third Thursday of the Mo
+ nth)
+X-WR-CALNAME:Alloy Monthly General Meeting (9am ET/2pm UK Third Thursday o
+ f the Month)
+BEGIN:VEVENT
+UID:e867537f-161e-48a2-b29a-0530e9a7101e
+SEQUENCE:0
+DTSTAMP:20240617T194730Z
+DTSTART:20200820T130000Z
+DTEND:20200820T140000Z
+RRULE:FREQ=MONTHLY;BYDAY=3TH
+SUMMARY:Alloy Monthly General Meeting (9am ET/2pm UK Third Thursday of the
+  Month)
+DESCRIPTION:**Our next meeting is October 15\, 2020 at 9am ET / 2pm UK**\n
+ \nPLEASE NOTE: THE MEETING TIME OF THIS RECURRING MEETING HAS CHANGED TO 9
+ am ET / 2pm UK on the 3rd Thursday of the month. Note that\nsome systems\,
+  especially Exchange/Outlook\, do not handle well invite updates from Goog
+ le calendar. You may still have an old\ninvite for the 10:30am. If you sti
+ ll have that expired invite\, please delete that and accept this one inste
+ ad. \n\n\nTopic: Alloy Monthly General Meeting \nPlease download and imp
+ ort the following iCalendar (.ics) files to your calendar system.Monthly:\
+ nhttps://zoom.us/meeting/tJEsce6gqTMoGtYuAwRemttGvwoUdVhzgGPj/ics?icsToken
+ =98tyKuCtrz0tEtOdshmFRowMBY_oKPzwtlxBjbdkiT7yMSVedhfRIPVNB7ZJGMLX\nJoin Zo
+ om Meetinghttps://zoom.us/j/95167878202?pwd=SW1VUlhmL01KOGwrSHNIRkxmTVVpQT
+ 09\nMeeting ID: 951 6787 8202Passcode: 013958One tap mobile+16465588656\,\
+ ,95167878202# US (New York)+13017158592\,\,95167878202# US\n(Germantown)\n
+ Dial by your location        +1 646 558 8656 US (New York)        
+ +1 301 715 8592 US (Germantown)        +1 312 626 6799 US\n(Chicago) 
+        +1 669 900 6833 US (San Jose)        +1 253 215 8782 US (Tac
+ oma)        +1 346 248 7799 US (Houston)        855\n880 1246 US T
+ oll-free        877 369 0926 US Toll-free        +1 587 328 1099 C
+ anada        +1 647 374 4685 Canada        +1 647\n558 0588 Canada
+         +1 778 907 2071 Canada        +1 204 272 7920 Canada    
+     +1 438 809 7799 Canada        855 703 8985\nCanada Toll-free\n\n
+ UK numbers:\n\n\n+44 330 088 5830\n\n+44 131 460 1196\n\n+44 203 481 5237\
+ n\n+44 203 481 5240\n\n+44 203 901 7895\n\n+44 208 080 6591\n\n+44 208 080
+  6592\n\n\n\nMeeting ID: 951 6787 8202Find your local number: https://zoom
+ .us/u/abZRjfhlHx
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:FINAL: Pan-FINOS PMCs Monthly Roundtable
+X-WR-CALNAME:FINAL: Pan-FINOS PMCs Monthly Roundtable
+BEGIN:VEVENT
+UID:1a780f0e-0fac-44c1-b447-ec49ca40bd7a
+SEQUENCE:0
+DTSTAMP:20240617T194730Z
+DTSTART:20200331T140000Z
+DTEND:20200331T150000Z
+RRULE:FREQ=WEEKLY;WKST=SU;INTERVAL=6
+SUMMARY:FINAL: Pan-FINOS PMCs Monthly Roundtable
+DESCRIPTION:Please note that March 31\, 2020 is our final PMC meeting per 
+ discussion at https://github.com/finos/finos-pmcs/issues/26\n\n * Agenda:
+  https://github.com/finos/finos-pmcs/blob/master/docs/2020-03-31-Pan-PMC-
+ Meeting.md\n   \n   \n * Meeting link: https://finos.webex.com/finos/j.ph
+ p?MTID=m5ecadc932d4ae09b3657ae3d9cffed71\n * Meeting number: 661 947 306\
+ n * Password: aR6Ug5kZ5ZA\n * Host key: 847204\n * Join by phone: +1-41
+ 5-655-0003 US Toll | +44-20319-88141 UK Toll | Access code: 661 947 306
+END:VEVENT
+END:VCALENDAR

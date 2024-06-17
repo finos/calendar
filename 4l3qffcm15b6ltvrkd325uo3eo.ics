@@ -1,0 +1,25 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:Compliant Financial Infrastructure Project Meeting
+X-WR-CALNAME:Compliant Financial Infrastructure Project Meeting
+BEGIN:VEVENT
+UID:bf7cc451-1df5-4b4c-9728-3a1ab1144f99
+SEQUENCE:0
+DTSTAMP:20240617T194731Z
+DTSTART:20221214T150000Z
+DTEND:20221214T160000Z
+RRULE:FREQ=MONTHLY;BYDAY=2WE
+SUMMARY:Compliant Financial Infrastructure Project Meeting
+DESCRIPTION:Meeting Information\n\n * Meeting link: https://finos.webex.c
+ om/finos/j.php?MTID=m4b1d85127d1f3ca179545d6bd3291975\n   [https://finos.w
+ ebex.com/finos/j.php?MTID=m4b1d85127d1f3ca179545d6bd3291975]\n * Meeting n
+ umber: 127 846 2278\n * Password: dA38XsiVzF2\n\n\nMore ways to join\n\n *
+  Join by video system\n   * Dial 1278462278@finos.webex.com\n   * You can
+  also dial 173.243.2.68 and enter your meeting number.\n * Join by phone\n
+    * +1-415-655-0003 US Toll\n   * +44-20319-88141 UK Toll\n   * Access co
+ de: 127 846 2278\n * Global call-in numbers\n\n\nGithub Repo: https://git
+ hub.com/finos/compliant-financial-infrastructure/
+END:VEVENT
+END:VCALENDAR

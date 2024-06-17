@@ -1,0 +1,32 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:CDM Contribution Review Working Group
+X-WR-CALNAME:CDM Contribution Review Working Group
+BEGIN:VEVENT
+UID:c28b1f45-1487-43a5-a1c7-62d3d32c6ab1
+SEQUENCE:0
+DTSTAMP:20240617T194731Z
+DTSTART:20230801T140000Z
+DTEND:20230801T150000Z
+RRULE:FREQ=WEEKLY;WKST=SU;BYDAY=TU
+SUMMARY:CDM Contribution Review Working Group
+DESCRIPTION:Github: https://github.com/finos/common-domain-model\n\nJoin 
+ Zoom Meeting\nhttps://zoom.us/j/96436091087?pwd=TUZMYm1KdGt2YWtxdDVHY3BpQz
+ h0QT09\n\nMeeting ID: 964 3609 1087\nPasscode: 238896\nOne tap mobile\n+19
+ 292056099\,\,96436091087# US (New York)\n+16469313860\,\,96436091087# US\n
+ \nDial by your location\n        +1 929 205 6099 US (New York)\n 
+        +1 646 931 3860 US\n        +1 305 224 1968 US\n  
+       +1 309 205 3325 US\n        +1 312 626 6799 US (Chicag
+ o)\n        +1 301 715 8592 US (Washington DC)\n        +1
+  507 473 4847 US\n        +1 564 217 2000 US\n        +1 6
+ 69 444 9171 US\n        +1 669 900 6833 US (San Jose)\n     
+    +1 689 278 1000 US\n        +1 719 359 4580 US\n      
+   +1 253 205 0468 US\n        +1 253 215 8782 US (Tacoma)\n  
+       +1 346 248 7799 US (Houston)\n        +1 360 209 5623 
+ US\n        +1 386 347 5053 US\n        888 788 0099 US To
+ ll-free\n        877 853 5247 US Toll-free\nMeeting ID: 964 3609 1
+ 087\nFind your local number: https://zoom.us/u/a3KWGNquN
+END:VEVENT
+END:VCALENDAR

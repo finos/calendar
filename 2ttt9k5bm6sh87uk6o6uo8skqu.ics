@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:KDB Working Group call
+X-WR-CALNAME:KDB Working Group call
+BEGIN:VEVENT
+UID:fb40ee89-677e-4288-95e3-9d5711ee7beb
+SEQUENCE:0
+DTSTAMP:20240617T194730Z
+DTSTART:20181003T150000Z
+DTEND:20181003T160000Z
+RRULE:FREQ=MONTHLY;BYDAY=1WE
+SUMMARY:KDB Working Group call
+DESCRIPTION:WebEx URL: https://finos.webex.com/finos/j.php?MTID=md2b1d9e4d
+ b4a73133a4fa58d8452baec Meeting number: 667 363 915 Host key: 995365\nHost
+ : Rob Underwood Scribe: Start-End: 11-12 am ET Recurrence: The 1st Wednesd
+ ay of every month Confluence page:\nhttps://finosfoundation.atlassian.net/
+ wiki/spaces/DT/pages/329383945/kdb+Working+Group Recording URL:\nhttps://f
+ inos.webex.com/mw3300/mywebex/default.do?siteurl=finos&service=1
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:FDC3 - PMC
+X-WR-CALNAME:FDC3 - PMC
+BEGIN:VEVENT
+UID:ef9e61d0-69da-44b4-ae44-3ec66c784da9
+SEQUENCE:0
+DTSTAMP:20240617T194730Z
+DTSTART:20180629T140000Z
+DTEND:20180629T150000Z
+RRULE:FREQ=WEEKLY;BYDAY=FR
+SUMMARY:FDC3 - PMC
+DESCRIPTION:FDC3 PMC Meeting\nMeeting number: 663 444 364\n\nHost key: 167
+ 756\n\nMeeting Link: https://finos.webex.com/finos/j.php?MTID=mb24e0868b72
+ 4abcfa92221ca14207e14\n\nDial in: \n\n+1-240-454-0879 USA Toll\n\n+44-203
+ 19-88141 UK Toll\n\nAccess code: 663 444 364\n\nAgenda: https://finosfound
+ ation.atlassian.net/wiki/spaces/FDC3/pages/40534023/Meeting+Minutes
+END:VEVENT
+END:VCALENDAR

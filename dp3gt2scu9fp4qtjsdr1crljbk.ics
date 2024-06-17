@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:FDC3 Context Data Working Group Meeting
+X-WR-CALNAME:FDC3 Context Data Working Group Meeting
+BEGIN:VEVENT
+UID:cd45405e-bac9-4574-8719-d7b7faae0d3f
+SEQUENCE:0
+DTSTAMP:20240617T194730Z
+DTSTART:20190304T150000Z
+DTEND:20190304T160000Z
+RRULE:FREQ=WEEKLY;BYDAY=MO
+SUMMARY:FDC3 Context Data Working Group Meeting
+DESCRIPTION:WebEx: https://finos.webex.com/finos/j.php?MTID=me464152eb3708
+ 5b1411a28fdd768ce62\nMeeting number: 662 571 727\nHost key: 183290\nHost: 
+ FDC3 Room / Tim Kolecke\n\nJoin by phone\n+1-240-454-0879 USA Toll\n+44-20
+ 319-88141 UK Toll\nAccess code: 662 571 727\n\nScribe:\nStart-End: 10 - 11
+  am ET\nRecurrence: Every 2 weeks on Monday\nConfluence page: https://fino
+ sfoundation.atlassian.net/wiki/spaces/FDC3/pages/85393412/Context+Data+Wor
+ king+Group\nRecording URL: https://finos.webex.com/mw3300/mywebex/default.
+ do?siteurl=finos&service=1
+END:VEVENT
+END:VCALENDAR

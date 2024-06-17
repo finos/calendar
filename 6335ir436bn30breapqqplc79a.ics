@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:FINOS InnerSource SIG License Working Group
+X-WR-CALNAME:FINOS InnerSource SIG License Working Group
+BEGIN:VEVENT
+UID:75a60f36-5db7-4d74-b2b9-92cef4e45c57
+SEQUENCE:0
+DTSTAMP:20240617T194730Z
+DTSTART:20221121T160000Z
+DTEND:20221121T170000Z
+RRULE:FREQ=WEEKLY;WKST=SU;BYDAY=MO
+SUMMARY:FINOS InnerSource SIG License Working Group
+DESCRIPTION:InnerSource SIG License Working Group\n\nhttps://finos.webex.c
+ om/finos/j.php?MTID=maecde604b8ce6039f78dbdd63be43d61\nEastern Time (US & 
+ Canada)</span>\nMeeting number: 2550 534 4397\nPassword: ZRq8BkMpa34\n\nJo
+ in by phone\n+1-415-655-0003 US Toll\n+44-20319-88141 UK Toll\n\nAccess co
+ de: 255 053 44397
+END:VEVENT
+END:VCALENDAR

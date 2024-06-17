@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:FDC3 Intents WG Bi-Weekly Meeting
+X-WR-CALNAME:FDC3 Intents WG Bi-Weekly Meeting
+BEGIN:VEVENT
+UID:1f7f4ff5-ef67-4ac3-9ba7-21f8324ba520
+SEQUENCE:0
+DTSTAMP:20240617T194729Z
+DTSTART:20190123T150000Z
+DTEND:20190123T160000Z
+RRULE:FREQ=WEEKLY;BYDAY=WE
+SUMMARY:FDC3 Intents WG Bi-Weekly Meeting
+DESCRIPTION: \nWebEx URL: https://finos.webex.com/finos/j.php?MTID=mf82d3
+ 8edf9ff6dad0fef20d793d0ca55\nMeeting number: 666 300 325\nHost key: 103389
+ \n\nJoin by phone:\n+1-240-454-0879 USA Toll\n+44-20319-88141 UK Toll\nAcc
+ ess code: 666 300 325\n\n\nHost: FDC3 Room / Espen Overbye\nScribe:\nStart
+ -End: 10-11 am ET\nRecurrence: Every 2 weeks on Wednesday\nConfluence page
+ : https://finosfoundation.atlassian.net/wiki/spaces/FDC3/pages/83984435/In
+ tents+Working+Group\nRecording URL: https://finos.webex.com/mw3300/mywebex
+ /default.do?siteurl=finos&service=1
+END:VEVENT
+END:VCALENDAR

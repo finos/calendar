@@ -1,0 +1,40 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:CDM Collateral Working Group
+X-WR-CALNAME:CDM Collateral Working Group
+BEGIN:VEVENT
+UID:4926e64b-c689-46e3-910a-d38fc8c4bb20
+SEQUENCE:0
+DTSTAMP:20240617T194731Z
+DTSTART:20230926T140000Z
+DTEND:20230926T150000Z
+RRULE:FREQ=MONTHLY;BYDAY=-1TU
+SUMMARY:CDM Collateral Working Group
+DESCRIPTION:Github: https://github.com/finos/common-domain-model\n\nMeeti
+ ng Issue for September 26th: https://github.com/finos/common-domain-model
+ /issues/2362\n\nJoin Zoom Meeting\nhttps://zoom.us/j/96084284579?pwd=QTJ3b
+ TBrMURkWXA1S0owa1djaEVIUT09\n\nMeeting ID: 960 8428 4579\nPasscode: 477790
+ \nOne tap mobile\n+19292056099\,\,96084284579# US (New York)\n+16469313860
+ \,\,96084284579# US\n\nDial by your location\n        +1 929 205 6
+ 099 US (New York)\n        +1 646 931 3860 US\n        +1 
+ 305 224 1968 US\n        +1 309 205 3325 US\n        +1 31
+ 2 626 6799 US (Chicago)\n        +1 301 715 8592 US (Washington DC
+ )\n        +1 360 209 5623 US\n        +1 386 347 5053 US\
+ n        +1 507 473 4847 US\n        +1 564 217 2000 US\n
+         +1 669 444 9171 US\n        +1 669 900 6833 US (Sa
+ n Jose)\n        +1 689 278 1000 US\n        +1 719 359 45
+ 80 US\n        +1 253 205 0468 US\n        +1 253 215 8782
+  US (Tacoma)\n        +1 346 248 7799 US (Houston)\n       
+  888 788 0099 US Toll-free\n        877 853 5247 US Toll-free\n 
+        +44 208 080 6591 United Kingdom\n        +44 208 080
+  6592 United Kingdom\n        +44 330 088 5830 United Kingdom\n 
+        +44 131 460 1196 United Kingdom\n        +44 203 481
+  5237 United Kingdom\n        +44 203 481 5240 United Kingdom\n 
+        +44 203 901 7895 United Kingdom\n        0 800 260 5
+ 801 United Kingdom Toll-free\n        0 800 358 2817 United Kingdo
+ m Toll-free\n        0 800 031 5717 United Kingdom Toll-free\nMeet
+ ing ID: 960 8428 4579\nFind your local number: https://zoom.us/u/aoBkYnW9l
+END:VEVENT
+END:VCALENDAR

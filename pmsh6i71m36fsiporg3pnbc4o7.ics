@@ -1,0 +1,25 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:Alloy Pilot Participants Meeting (was previously "Bi-Weekly Meeting")
+X-WR-CALNAME:Alloy Pilot Participants Meeting (was previously "Bi-Weekly M
+ eeting")
+BEGIN:VEVENT
+UID:4dd422c3-2cb5-4afa-8265-dd645ec3e538
+SEQUENCE:0
+DTSTAMP:20240617T194729Z
+DTSTART:20200805T163000Z
+DTEND:20200805T173000Z
+RRULE:FREQ=MONTHLY;BYDAY=1WE
+SUMMARY:Alloy Pilot Participants Meeting (was previously "Bi-Weekly Meetin
+ g")
+DESCRIPTION:\n\n * Meeting link: https://finos.webex.com/finos/j.php?MTID=
+ m9faeb59f9167a188a0cde9a2209b9447\n * Call-in: \n   * +1-415-655-0003 US
+  Toll\n   * +44-20319-88141 UK Toll\n * Meeting number: 665 309 471\n * P
+ assword: TAtaZkmC\n\n\nAgenda/ meeting minutes: \n * https://github.com/
+ finos/alloy/labels/Meeting (for meeting sessions after June 25th\, 2020)
+  \n * https://github.com/finos/alloy/tree/master/docs/meeting-minutes (f
+ or meeting sessions prior to June 25th\, 2020)
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:Product Control Common Template project
+X-WR-CALNAME:Product Control Common Template project
+BEGIN:VEVENT
+UID:7370fc3a-9f1f-4ad6-b980-030e24954ec0
+SEQUENCE:0
+DTSTAMP:20240617T194729Z
+DTSTART:20210913T140000Z
+DTEND:20210913T150000Z
+RRULE:FREQ=WEEKLY;WKST=MO;BYDAY=MO
+SUMMARY:Product Control Common Template project
+DESCRIPTION:Background \n\nSee https://github.com/finos/community/issues/
+ 97  [https://github.com/finos/community/issues/97]\n\nGoals\n\nThe Produc
+ t Control Common Template initiative is looking to:\n\n\n\n * Construct a 
+ common template data model using Legend Studio (an approved open sourced d
+ ata modelling tool that allow users to\n   create data model in a graphica
+ l user interface).\n * This common template data model will include all th
+ e attributes that each vendor is required to run their valuation process a
+ nd\n   return the consensus data to the banks.\n * Banks can connect their
+  daily pricing data to the industry approved model for submission and vend
+ or can leverage the same model\n   to provide the consensus data. Thereby\
+ , both the banks and vendor will communicate in the same common model lang
+ uage.\n\n\n\nAgenda: https://github.com/finos/finos-fo/issues?q=label%3Am
+ eeting+  [https://github.com/finos/finos-fo/issues?q=label%3Ameeting+]\n\
+ n\nMeeting details:\n\n * Meeting link: https://finos.webex.com/finos/j.ph
+ p?MTID=m6e9255a2368279a9f1857f176cbf2c1a\n * Meeting number: 127 642 4586\
+ n * Password: J2SqF2Kp5X2\n\nJoin by video system: Dial 1276424586@finos.w
+ ebex.com. You can also dial 173.243.2.68 and enter your meeting number.\n\
+ nJoin by phone: +1-415-655-0003 US Toll | +44-20319-88141 UK Toll | Access
+  code: 127 642 4586
+END:VEVENT
+END:VCALENDAR

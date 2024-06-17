@@ -1,0 +1,27 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:Financial Objects Project Meeting
+X-WR-CALNAME:Financial Objects Project Meeting
+BEGIN:VEVENT
+UID:feaed472-b827-4174-b580-54e59aed988b
+SEQUENCE:0
+DTSTAMP:20240617T194729Z
+DTSTART:20200825T153000Z
+DTEND:20200825T163000Z
+RRULE:FREQ=MONTHLY;BYDAY=4TU
+SUMMARY:Financial Objects Project Meeting
+DESCRIPTION:\n\nMeeting Information\n\n * Meeting link: https://finos.webe
+ x.com/finos/j.php?MTID=mb412cf99b3a697e8c87e339236f83fbf\n * Meeting numbe
+ r: 668 814 413\n\n\nMore ways to join\n\n * Join by video system\n   * Dia
+ l 668814413@finos.webex.com\n   * You can also dial 173.243.2.68 and enter
+  your meeting number.\n * Join by phone\n   * +1-415-655-0003 US Toll\n   
+ * +44-20319-88141 UK Toll\n   * Access code: 668 814 413\n\n\nAgenda and m
+ eeting minutes: https://github.com/finos/finos-fo/labels/meeting\n\nMeeti
+ ng minute archive (meetings prior to July\n2020): https://finosfoundation
+ .atlassian.net/wiki/spaces/FO/pages/123404294/Financial+Object+Working+Gro
+ upRecording URL:\nhttps://finos.webex.com/mw3300/mywebex/default.do?siteur
+ l=finos&service=1
+END:VEVENT
+END:VCALENDAR

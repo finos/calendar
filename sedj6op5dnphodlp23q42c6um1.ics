@@ -1,0 +1,25 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:FINOS Open Source Readiness WG
+X-WR-CALNAME:FINOS Open Source Readiness WG
+BEGIN:VEVENT
+UID:77127d09-0298-4df7-b41a-177cb2d2e09f
+SEQUENCE:0
+DTSTAMP:20240617T194730Z
+DTSTART:20200513T140000Z
+DTEND:20200513T150000Z
+RRULE:FREQ=WEEKLY;BYDAY=WE
+SUMMARY:FINOS Open Source Readiness WG
+DESCRIPTION:The working group meets every other Wednesday at 10:00 US/East
+ ern.  \n\nAgendas for upcoming meetings (and minutes of past meetings) a
+ re available at\nhttps://finosfoundation.atlassian.net/wiki/spaces/FDX/pag
+ es/154533976/Meetings+-+Open+Source+Readiness+Working+Group\n[https://fino
+ sfoundation.atlassian.net/wiki/spaces/OSR/pages/154533976/Meetings+Open+So
+ urce+Readiness+Working+Group]\n\n\nWebex Meeting URL\nhttps://finos.webex.
+ com/finos/j.php?MTID=mec6bb47084d671bc772c0652add2605c\n\nWebex Dial-in\n+
+ 1-240-454-0879 USA Toll\n+44-20319-88141 UK Toll\nAccess code: 664 434 054
+ \n\nOne-press dial (US)\n+1-240-454-0879\,\,\,664434054#
+END:VEVENT
+END:VCALENDAR

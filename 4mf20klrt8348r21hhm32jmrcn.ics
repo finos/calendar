@@ -1,0 +1,26 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:Financial Objects SIG meeting
+X-WR-CALNAME:Financial Objects SIG meeting
+BEGIN:VEVENT
+UID:62d7d8d7-9a5a-439e-ae12-0bc695f14ac5
+SEQUENCE:0
+DTSTAMP:20240617T194730Z
+DTSTART:20210713T140000Z
+DTEND:20210713T150000Z
+RRULE:FREQ=WEEKLY;WKST=SU;BYDAY=TU
+SUMMARY:Financial Objects SIG meeting
+DESCRIPTION:Financial Objects SIG meeting\n\nhttps://github.com/finos/fina
+ ncial-objects#finos-financial-objects-special-interest-group\n\n[https://g
+ ithub.com/finos/financial-objects#finos-financial-objects-special-interest
+ -groupAgenda]Agenda\n\nhttps://github.com/finos/financial-objects/issues\n
+ \nMeeting Details\n * Meeting link: https://finos.webex.com/finos/j.php?MT
+ ID=mc56f76ae5a93c44709379b3077207f2c\n * Meeting number: 127 987 3526\n * 
+ Password: xXGEQgJH562\n * Join by video system: Dial 1279873526@finos.webe
+ x.com. You can also dial 173.243.2.68 and enter your meeting number.\n * J
+ oin by phone: +1-415-655-0003 US Toll | +44-20319-88141 UK Toll | Access c
+ ode: 127 987 3526
+END:VEVENT
+END:VCALENDAR

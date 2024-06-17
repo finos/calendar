@@ -1,0 +1,31 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:CDM Steering Working Group
+X-WR-CALNAME:CDM Steering Working Group
+BEGIN:VEVENT
+UID:23e6a132-4351-4ee5-97ba-9bfbcd883faf
+SEQUENCE:0
+DTSTAMP:20240617T194731Z
+DTSTART:20231010T150000Z
+DTEND:20231010T163000Z
+RRULE:FREQ=MONTHLY;WKST=SU;BYDAY=2TU
+SUMMARY:CDM Steering Working Group
+DESCRIPTION:Github: https://github.com/finos/common-domain-model\n\nOctob
+ er 10th Meeting Issue: https://github.com/finos/common-domain-model/issue
+ s/2414\n\nCDM is inviting you to a scheduled Zoom meeting.\n\nJoin Zoom Me
+ eting\nhttps://zoom.us/j/93756205037?pwd=NFd1SUh1ZXdOdVNjQXdLVzZBbnpudz09\
+ n\nMeeting ID: 937 5620 5037\nPasscode: 911071\n\n---\n\nOne tap mobile\n+
+ 19292056099\,\,93756205037# US (New York)\n+16469313860\,\,93756205037# US
+ \n\n---\n\nDial by your location\n• +1 929 205 6099 US (New York)\n• +
+ 1 646 931 3860 US\n• +1 312 626 6799 US (Chicago)\n• +1 301 715 8592 U
+ S (Washington DC)\n• +1 305 224 1968 US\n• +1 309 205 3325 US\n• +1 
+ 253 205 0468 US\n• +1 253 215 8782 US (Tacoma)\n• +1 346 248 7799 US (
+ Houston)\n• +1 360 209 5623 US\n• +1 386 347 5053 US\n• +1 507 473 4
+ 847 US\n• +1 564 217 2000 US\n• +1 669 444 9171 US\n• +1 669 900 683
+ 3 US (San Jose)\n• +1 689 278 1000 US\n• +1 719 359 4580 US\n• 888 7
+ 88 0099 US Toll-free\n• 877 853 5247 US Toll-free\n\nMeeting ID: 937 562
+ 0 5037\n\nFind your local number: https://zoom.us/u/axu5kFLKy
+END:VEVENT
+END:VCALENDAR

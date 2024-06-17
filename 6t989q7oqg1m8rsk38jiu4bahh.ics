@@ -1,0 +1,28 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:ODP Project
+X-WR-CALNAME:ODP Project
+BEGIN:VEVENT
+UID:50e29168-50e6-4b2c-9896-fe0b13ed4836
+SEQUENCE:0
+DTSTAMP:20240617T194730Z
+DTSTART:20200311T160000Z
+DTEND:20200311T170000Z
+RRULE:FREQ=WEEKLY;WKST=MO;BYDAY=WE
+SUMMARY:ODP Project
+DESCRIPTION:Agenda and Meeting Notes https://finosfoundation.atlassian.ne
+ t/wiki/spaces/FDX/pages/253034498/Minutes+of+the+ODP+WG JOIN WEBEX\nMEETIN
+ G https://finos.webex.com/finos/j.php?MTID=me6cd7441ee4946d919175d20a0b267
+ a4 Meeting Number: 661 146 297 Host key: 549362\nStart-End: 12-1 pm ET Rec
+ urrence: Every 2 weeks on Wednesday Host: Rob Underwood Scribe: Maurizio P
+ illitu JOIN BY PHONE +\n1-415-655-0003 USA Toll +1-647-484-1596 CANADA Tol
+ l +44-20319-88141 UK Toll +34-93545-2895 (Spain) JIRA BACKLOG\nhttps://fin
+ osfoundation.atlassian.net/secure/RapidBoard.jspa?rapidView=1&view=plannin
+ g.nodetail&versions=visible&epics=visible\nMORE INFO Confluence page:\nhtt
+ ps://finosfoundation.atlassian.net/wiki/spaces/FDX/pages/243859459/Open+De
+ veloper+Platform+Working+Group Recording URL:\nhttps://finos.webex.com/mw3
+ 300/mywebex/default.do?siteurl=finos&service=1
+END:VEVENT
+END:VCALENDAR

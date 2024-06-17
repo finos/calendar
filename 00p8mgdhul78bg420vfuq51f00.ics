@@ -1,0 +1,28 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:FINOS Regulation Innovation SIG (biweekly meeting)
+X-WR-CALNAME:FINOS Regulation Innovation SIG (biweekly meeting)
+BEGIN:VEVENT
+UID:c3f621b2-7138-4467-a0da-6d4848a0ba7f
+SEQUENCE:0
+DTSTAMP:20240617T194729Z
+DTSTART:20210105T170000Z
+DTEND:20210105T180000Z
+RRULE:FREQ=WEEKLY;WKST=MO;BYDAY=TU
+SUMMARY:FINOS Regulation Innovation SIG (biweekly meeting)
+DESCRIPTION:The FINOS Regulation Innovation Special Interest Group (SIG) i
+ s a community of people interested in creating open source solutions\nfor 
+ regulatory and compliance issues in financial services. For more informati
+ on\, visit https://github.com/finos/open-regtech \n\n\n\n\nAgenda: https:
+ //github.com/finos/open-regtech/issues?q=label%3Ameeting+ \n[https://gith
+ ub.com/finos/open-regtech/issues?q=label%3Ameeting+]\n\nMeeting Informatio
+ n\n\n * Meeting link: https://finos.webex.com/finos/j.php?MTID=mc39f602c94
+ 618d58437eac6707b6b5ab\n * Meeting number: 127 988 1411\n * Password: d9kK
+ JPdX5C9\n\nMore ways to join\n\n * Join by video system\n   * Dial 1279881
+ 411@finos.webex.com\n   * You can also dial 173.243.2.68 and enter your me
+ eting number.\n * Join by phone\n   * +1-415-655-0003 US Toll\n   * +44-20
+ 319-88141 UK Toll\n   * Access code: 127 988 1411
+END:VEVENT
+END:VCALENDAR
