@@ -2,16 +2,16 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//sebbo.net//ical-generator//EN
 METHOD:REQUEST
-NAME:Zenith Brain Trust - FINOS Emerging Technologies SIG
-X-WR-CALNAME:Zenith Brain Trust - FINOS Emerging Technologies SIG
+NAME:Zenith - FINOS Emerging Technologies SIG - Kick Off
+X-WR-CALNAME:Zenith - FINOS Emerging Technologies SIG - Kick Off
 BEGIN:VEVENT
-UID:02009b5e-0be7-4f88-b7ab-e0e9426dc261
+UID:0b32c99d-cb20-41ce-ad70-4f8068164bd7
 SEQUENCE:0
-DTSTAMP:20240912T120852Z
-DTSTART:20231012T140000Z
-DTEND:20231012T150000Z
+DTSTAMP:20240912T150535Z
+DTSTART:20230810T140000Z
+DTEND:20230810T150000Z
 RRULE:FREQ=MONTHLY;BYDAY=2TH
-SUMMARY:Zenith Brain Trust - FINOS Emerging Technologies SIG
+SUMMARY:Zenith - FINOS Emerging Technologies SIG - Kick Off
 DESCRIPTION:Topic: Zenith: Emerging Technologies SIG\nTime: This is a recu
  rring meeting Meet anytime\n\nJoin Zoom Meeting\nhttps://zoom.us/j/9853883
  7792?pwd=ZHg3QVVnaCtOT0tEZSs5c0hrZTg1dz09\n\nMeeting ID: 985 3883 7792\nPa
