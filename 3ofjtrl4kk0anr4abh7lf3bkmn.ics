@@ -2,16 +2,17 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//sebbo.net//ical-generator//EN
 METHOD:REQUEST
-NAME:AI Readiness: Governance Framework Working Session
-X-WR-CALNAME:AI Readiness: Governance Framework Working Session
+NAME:[MEMBER-ONLY] - AI Readiness: Governance Framework Working Session
+X-WR-CALNAME:[MEMBER-ONLY] - AI Readiness: Governance Framework Working Se
+ ssion
 BEGIN:VEVENT
-UID:58b449be-462c-47e1-ba88-61ced6c22587
+UID:730cf9e2-2d7d-4b3f-95c6-6df023e128c2
 SEQUENCE:0
-DTSTAMP:20240917T060711Z
+DTSTAMP:20240917T090606Z
 DTSTART:20240925T140000Z
 DTEND:20240925T150000Z
 RRULE:FREQ=WEEKLY;WKST=SU;INTERVAL=2;BYDAY=WE
-SUMMARY:AI Readiness: Governance Framework Working Session
+SUMMARY:[MEMBER-ONLY] - AI Readiness: Governance Framework Working Session
 DESCRIPTION:AI Readiness: Governance Framework Working Session\n\nJoin Zoo
  m Meeting\nhttps://zoom.us/j/96783320878 [https://zoom.us/j/96783320878?pw
  d=AhCcHslTfeIeV82IeII1rHQUTYtoce.1]\n\nMeeting ID: 967 8332 0878\nPasscode
