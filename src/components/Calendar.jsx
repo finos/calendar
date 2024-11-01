@@ -221,7 +221,7 @@ function Calendar() {
   );
 
   return (
-    <div className="App main">
+    <div className="content">
       <div data-testid="finos-calendar" className="finos-calendar">
         {renderFullCalendar}
       </div>

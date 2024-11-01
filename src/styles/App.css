@@ -9,7 +9,7 @@ body {
   min-height: 100vh;
 }
 
-.main {
+.content {
   margin: 0 auto;
   max-width: var(--content-width);
 }
