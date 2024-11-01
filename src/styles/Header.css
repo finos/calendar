@@ -1,0 +1,9 @@
+header {
+  background-color: var(--finos-accent);
+  color: white;
+}
+
+h1.logo {
+  margin: 0;
+  padding: 2rem;
+}

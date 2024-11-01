@@ -10,11 +10,11 @@ body {
 }
 
 .main {
-  position: relative;
+  margin: 0 auto;
+  max-width: var(--content-width);
 }
 
 .finos-calendar {
-  max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
 }
@@ -40,7 +40,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 8px 0;
+  padding: 0.6rem 0;
   position: sticky;
   background-color: white;
   top: 0;
@@ -52,7 +52,7 @@ button.fc-button.finos-calendar-event-details-close {
   cursor: pointer;
   display: grid;
   place-content: center;
-  padding: 6px;
+  padding: 0.5rem;
 }
 
 button.fc-button.finos-calendar-event-details-close img {
@@ -60,19 +60,17 @@ button.fc-button.finos-calendar-event-details-close img {
 }
 
 .event-title {
-  margin-bottom: 8px;
+  margin-bottom: 0.6rem;
 }
 
 .event-time {
-  font-size: 14px;
-  margin-bottom: 6px;
+  margin-bottom: 0.5rem;
   display: flex;
   gap: 5px;
 }
 
 .event-timeZone {
-  font-size: 14px;
-  margin-bottom: 6px;
+  margin-bottom: 0.6rem;
   display: flex;
   gap: 5px;
 }
@@ -111,10 +109,6 @@ button.fc-button.finos-calendar-event-details-close img {
 @media only screen and (max-width: 1000px) {
   .finos-calendar {
     min-width: 600px;
-  }
-
-  .fc-daygrid-day-events {
-    font-size: 0.5em;
   }
 
   .fc-daygrid-day-top {

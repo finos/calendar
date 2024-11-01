@@ -1,4 +1,4 @@
-import './App.css';
+import './styles/App.css';
 import Calendar from './components/Calendar';
 import Header from './components/Header';
 
