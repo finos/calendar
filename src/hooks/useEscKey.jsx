@@ -15,7 +15,6 @@ export default function useEscKey(handleClose) {
 
   useEffect(() => {
     document.addEventListener(KEY_EVENT_TYPE, handleEscKey, false);
-
     return () => {
       document.removeEventListener(KEY_EVENT_TYPE, handleEscKey, false);
     };

@@ -1,9 +1,9 @@
-body{
+body {
   padding: 0;
   margin: 0;
 }
 
-#root{
+#root {
   min-width: fit-content;
   width: 100%;
   min-height: 100vh;
@@ -13,13 +13,13 @@ body{
   position: relative;
 }
 
-.finos-calendar{
+.finos-calendar {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
 }
 
-.active-event{
+.active-event {
   background-color: #2c3e5065;
 }
 
@@ -36,8 +36,8 @@ body{
   word-break: break-word;
 }
 
-.event-details-buttons{
-  display:flex;
+.event-details-buttons {
+  display: flex;
   justify-content: space-between;
   align-items: flex-end;
   padding: 8px 0;
@@ -50,39 +50,39 @@ button.fc-button.finos-calendar-event-details-close {
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  display:grid;
+  display: grid;
   place-content: center;
   padding: 6px;
 }
 
-button.fc-button.finos-calendar-event-details-close img{
+button.fc-button.finos-calendar-event-details-close img {
   width: 25px;
 }
 
-.event-title{
+.event-title {
   margin-bottom: 8px;
 }
 
-.event-time{
-  font-size: 14px;
-  margin-bottom: 6px;
-  display:flex;
-  gap: 5px;
-}
-
-.event-timeZone{
+.event-time {
   font-size: 14px;
   margin-bottom: 6px;
   display: flex;
   gap: 5px;
 }
 
-.event-location{
-  display:flex;
+.event-timeZone {
+  font-size: 14px;
+  margin-bottom: 6px;
+  display: flex;
   gap: 5px;
 }
 
-.icon{
+.event-location {
+  display: flex;
+  gap: 5px;
+}
+
+.icon {
   padding-top: 3px;
 }
 
@@ -109,19 +109,18 @@ button.fc-button.finos-calendar-event-details-close img{
 }
 
 @media only screen and (max-width: 1000px) {
-
   .finos-calendar {
     min-width: 600px;
   }
 
   .fc-daygrid-day-events {
-    font-size: .5em;
+    font-size: 0.5em;
   }
 
   .fc-daygrid-day-top {
     max-height: 1.3em;
-    font-size: .75em;
-    margin: 0em 0em .5em 0em
+    font-size: 0.75em;
+    margin: 0em 0em 0.5em 0em;
   }
 
   .fc-popover {
@@ -135,8 +134,8 @@ button.fc-button.finos-calendar-event-details-close img{
   }
 }
 
-@media only screen and (max-width: 600px){
-  .finos-calendar-event-details{
+@media only screen and (max-width: 600px) {
+  .finos-calendar-event-details {
     width: 90%;
     height: 100%;
     top: 0;
@@ -144,22 +143,25 @@ button.fc-button.finos-calendar-event-details-close img{
   }
 }
 
-@media only screen and (prefers-color-scheme : dark){
-  #root, .main, .finos-calendar, .finos-calendar-event-details, .event-details-buttons{
+@media only screen and (prefers-color-scheme: dark) {
+  body,
+  .finos-calendar,
+  .finos-calendar-event-details,
+  .event-details-buttons {
     background-color: #222;
     color: #eee;
   }
-  .fc-event:hover{
+  .fc-event:hover {
     background-color: #3c3c3c;
   }
-  .active-event{
+  .active-event {
     background-color: #eeeeee20;
   }
-  .fc-theme-standard .fc-popover{
+  .fc-theme-standard .fc-popover {
     background-color: #222;
     color: #eee;
   }
-  .finos-calendar-event-details a{
+  .finos-calendar-event-details a {
     color: #343;
   }
 }
