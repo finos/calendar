@@ -1,0 +1,36 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//sebbo.net//ical-generator//EN
+METHOD:REQUEST
+NAME:FINOS Community On-boarding & Office Hours
+X-WR-CALNAME:FINOS Community On-boarding & Office Hours
+BEGIN:VEVENT
+UID:d170e5e5-4a71-40ba-a58a-a348a745fb39
+SEQUENCE:0
+DTSTAMP:20241107T180703Z
+DTSTART:20241101T150000Z
+DTEND:20241101T160000Z
+RRULE:FREQ=WEEKLY;WKST=SU;INTERVAL=2;BYDAY=FR
+SUMMARY:FINOS Community On-boarding & Office Hours
+DESCRIPTION:Karl Moll is inviting you to a scheduled Zoom meeting.\n\nTopi
+ c: FINOS Community Office Hours\nTime: Nov 1\, 2024 11:00 AM Eastern Time 
+ (US and Canada)\n        Every 2 weeks on Fri\, until Jan 10\, 2025\, 
+ 6 occurrence(s)\nPlease download and import the following iCalendar (.ics)
+  files to your calendar system.\nWeekly:\nhttps://zoom.us/meeting/tJYtc-iv
+ rjMoGt3uguHX_Hte0quzct_VVc2V/ics?icsToken=98tyKuCqrj8rHdSdshmORowQAo-gd-3z
+ iFxBjbcOiRjwKxhsShfzZvNXKLFrL-7m&meetingMasterEventId=ppiX_SSwSqaA06CaNK20
+ Lw\n\nJoin Zoom Meeting\nhttps://zoom.us/j/92041708209?pwd=CCiRkap4BGSje3z
+ oRTTbLsNFTnjrGc.1\n\nMeeting ID: 920 4170 8209\nPasscode: 260812\n\n---\n\
+ nOne tap mobile\n+19292056099\,\,92041708209# US (New York)\n+16469313860\
+ ,\,92041708209# US\n\n---\n\nDial by your location\n• +1 929 205 6099 US
+  (New York)\n• +1 646 931 3860 US\n• +1 312 626 6799 US (Chicago)\n•
+  +1 301 715 8592 US (Washington DC)\n• +1 305 224 1968 US\n• +1 309 20
+ 5 3325 US\n• +1 253 205 0468 US\n• +1 253 215 8782 US (Tacoma)\n• +1
+  346 248 7799 US (Houston)\n• +1 360 209 5623 US\n• +1 386 347 5053 US
+ \n• +1 507 473 4847 US\n• +1 564 217 2000 US\n• +1 669 444 9171 US\n
+ • +1 669 900 6833 US (San Jose)\n• +1 689 278 1000 US\n• +1 719 359 
+ 4580 US\n• 888 788 0099 US Toll-free\n• 877 853 5247 US Toll-free\n\nM
+ eeting ID: 920 4170 8209\n\nFind your local number: https://zoom.us/u/abXU
+ Ppvayw
+END:VEVENT
+END:VCALENDAR
