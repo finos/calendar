@@ -5,26 +5,16 @@ METHOD:REQUEST
 NAME:FINOS LLM Exploration Weekly Call
 X-WR-CALNAME:FINOS LLM Exploration Weekly Call
 BEGIN:VEVENT
-UID:6bb94776-aa4c-4936-a601-01b51f15157f
+UID:e56f823f-8556-4b31-9bcb-8491aa28e929
 SEQUENCE:0
-DTSTAMP:20241113T144753Z
+DTSTAMP:20241113T150551Z
 DTSTART:20241114T170000Z
 DTEND:20241114T174500Z
 RRULE:FREQ=WEEKLY;BYDAY=TH
 SUMMARY:FINOS LLM Exploration Weekly Call
-DESCRIPTION:FINOS LLM Exploration Weekly Call\n\nhttps://zoom.us/meeting/t
- JMqdeyrqTkpH9arBRqo2pP-v_vc1koAAU81/ics?icsToken=98tyKuCvqTkvGdOXsxyFRowEB
- 4joZ-nwtnpegvpcjj3XEi8BcjO7IN1UMeN0H_nx\n\nJoin Zoom Meeting\nhttps://zoom
- .us/j/97725372352\n\nMeeting ID: 977 2537 2352\n\n---\n\nOne tap mobile\n+
- 13052241968\,\,97725372352# US\n+13092053325\,\,97725372352# US\n\n---\n\n
- Dial by your location\n• +1 305 224 1968 US\n• +1 309 205 3325 US\n•
-  +1 312 626 6799 US (Chicago)\n• +1 346 248 7799 US (Houston)\n• +1 36
- 0 209 5623 US\n• +1 386 347 5053 US\n• +1 507 473 4847 US\n• +1 564 
- 217 2000 US\n• +1 646 931 3860 US\n• +1 669 444 9171 US\n• +1 669 90
- 0 6833 US (San Jose)\n• +1 689 278 1000 US\n• +1 719 359 4580 US\n• 
- +1 929 205 6099 US (New York)\n• +1 253 205 0468 US\n• +1 253 215 8782
-  US (Tacoma)\n• +1 301 715 8592 US (Washington DC)\n• 877 853 5247 US 
- Toll-free\n• 888 788 0099 US Toll-free\n\nMeeting ID: 977 2537 2352\n\nF
- ind your local number: https://zoom.us/u/ab9N2jHH1
+DESCRIPTION:FINOS LLM Exploration Weekly Call\n\nJoin Zoom Meeting\nhttps:
+ //zoom.us/j/93805835465 [https://zoom.us/j/93805835465?pwd=Ud1gmtTEHpByLoK
+ 7ttOAFtX0EtCuqG.1]\n\nMeeting ID: 938 0583 5465\nPasscode: 724143\n\n---\n
+ \nFind your local number: https://zoom.us/u/adtHY4uWQ8
 END:VEVENT
 END:VCALENDAR
