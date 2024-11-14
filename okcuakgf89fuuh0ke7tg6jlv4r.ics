@@ -5,16 +5,18 @@ METHOD:REQUEST
 NAME:FINOS LLM Exploration Weekly Call
 X-WR-CALNAME:FINOS LLM Exploration Weekly Call
 BEGIN:VEVENT
-UID:2ef7d841-74b1-41cb-834e-a2d00f20ef42
+UID:45848b21-88ef-45be-a213-5e8cbf50c0df
 SEQUENCE:0
-DTSTAMP:20241114T030959Z
+DTSTAMP:20241114T060808Z
 DTSTART:20241121T170000Z
 DTEND:20241121T174500Z
 RRULE:FREQ=WEEKLY;BYDAY=TH
 SUMMARY:FINOS LLM Exploration Weekly Call
 DESCRIPTION:FINOS LLM Exploration Weekly Call\n\nJoin Zoom Meeting\nhttps:
  //zoom.us/j/93805835465 [https://zoom.us/j/93805835465?pwd=Ud1gmtTEHpByLoK
- 7ttOAFtX0EtCuqG.1]\n\nMeeting ID: 938 0583 5465\nPasscode: 724143\n\n---\n
- \nFind your local number: https://zoom.us/u/adtHY4uWQ8
+ 7ttOAFtX0EtCuqG.1]\n\nMeeting ID: 938 0583 5465\nPasscode: 724143\n\nLLM E
+ xploration Initiative GitHub Repo (FINOS Labs):\nhttps://github.com/finos-
+ labs/llm-exploration-project\n\n---\n\nFind your local number: https://zoo
+ m.us/u/adtHY4uWQ8
 END:VEVENT
 END:VCALENDAR
