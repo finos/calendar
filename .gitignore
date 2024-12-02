@@ -12,7 +12,9 @@
 /build
 /dist
 
+# Local Dev
 /public/basic.ics
+/public/events.json
 
 # misc
 .DS_Store
@@ -27,4 +29,3 @@ yarn-error.log*
 
 # secrets
 calendar-service-account.json
-
