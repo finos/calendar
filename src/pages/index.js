@@ -1,4 +1,6 @@
 import React from 'react';
+import { graphql } from 'gatsby';
+
 import '../styles/App.css';
 import Calendar from '../components/Calendar';
 import Header from '../components/Header';
@@ -17,3 +19,18 @@ function App() {
 }
 
 export default App;
+
+export const Head = ({ data }) => {
+  const title = data.site.siteMetadata.title;
+  return <title>{title}</title>;
+};
+
+export const pageQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+  }
+`;
