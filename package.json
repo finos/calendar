@@ -1,17 +1,18 @@
 {
   "name": "calendar",
-  "version": "0.1.0",
+  "version": "0..0",
   "description": "FINOS Community Calendar",
   "license": "Apache-2.0",
-  "type": "module",
   "engines": {
     "node": "^20.11.0",
     "npm": "^10.3.0"
   },
   "scripts": {
-    "start": "npm run get-events && vite",
-    "build": "npm run lint && vite build",
-    "preview": "vite preview",
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
     "lint": "eslint ./src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "lint-fix": "npm run lint -- --fix",
     "get-events": "node ./scripts/googleapi2events.js",
@@ -28,26 +29,13 @@
     "@fullcalendar/timegrid": "^6.1.10",
     "@mdi/js": "^7.3.67",
     "@mdi/react": "^1.6.1",
+    "gatsby": "^5.14.0",
     "googleapis": "^144.0.0",
     "html-react-parser": "^5.0.7",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
+    "react-dom": "^18.2.0"  },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.3.0",
-    "@testing-library/react": "^16.0.0",
-    "@types/react": "^18.2.42",
-    "@types/react-dom": "^18.2.17",
-    "@vitejs/plugin-react": "^4.0.3",
-    "eslint": "^8.45.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.3",
-    "html-to-text": "^9.0.5",
-    "ical-generator": "^8.0.0",
-    "sort-imports": "^1.1.0",
-    "vite": "^5.0.5",
-    "vitest": "^2.0.0"
+      "html-to-text": "^9.0.5",
+      "ical-generator": "^8.0.0"
   }
 }

@@ -13,8 +13,15 @@ import {
 } from '@mdi/js';
 import Icon from '@mdi/react';
 import parse from 'html-react-parser';
-import { createRef, useCallback, useEffect, useMemo, useState } from 'react';
+import React, {
+  createRef,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
+import events from '../../dist/events.json';
 import useEscKey from '../hooks/useEscKey';
 import { printDate, printTime } from '../utils/date-time';
 import { downloadICSFile } from '../utils/ics-download';
@@ -115,7 +122,7 @@ function Calendar() {
     const toTime = printTime(eventDetails.end);
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     let eventTime = '';
-    if (fromDate == toDate) {
+    if (fromDate === toDate) {
       eventTime = fromDate + ' ' + fromTime + ' - ' + toTime;
     } else {
       eventTime =
@@ -202,7 +209,7 @@ function Calendar() {
         aspectRatio={aspectRatio}
         handleWindowResize={true}
         windowResize={windowResize}
-        events="events.json"
+        events={events}
         headerToolbar={{
           left: 'prev,next today',
           center: 'title',

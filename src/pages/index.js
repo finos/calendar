@@ -1,6 +1,7 @@
-import './styles/App.css';
-import Calendar from './components/Calendar';
-import Header from './components/Header';
+import React from 'react';
+import '../styles/App.css';
+import Calendar from '../components/Calendar';
+import Header from '../components/Header';
 
 function App() {
   return (
