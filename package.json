@@ -9,12 +9,13 @@
   },
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop",
+    "develop": "npm run get-mock-events && gatsby develop",
     "start": "gatsby develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "lint": "eslint ./src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "lint-fix": "npm run lint -- --fix",
+    "get-mock-events": "node ./scripts/setMock.js",
     "get-events": "node ./scripts/googleapi2events.js",
     "getEvents": "npm run get-events",
     "test": "vitest"
