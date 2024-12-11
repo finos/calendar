@@ -5,12 +5,12 @@ METHOD:REQUEST
 NAME:Accessibility Theme Builder Community Collaboration Space
 X-WR-CALNAME:Accessibility Theme Builder Community Collaboration Space
 BEGIN:VEVENT
-UID:065b9a27-b384-43d3-a358-278f63bcfe0a
+UID:4407071a-e198-4023-868d-79d3b564b776
 SEQUENCE:0
-DTSTAMP:20241211T150621Z
+DTSTAMP:20241211T164016Z
 DTSTART:20240214T160000Z
 DTEND:20240214T164500Z
-RRULE:FREQ=WEEKLY;WKST=SU;INTERVAL=2;BYDAY=WE
+RRULE:FREQ=WEEKLY;WKST=SU;BYDAY=WE
 SUMMARY:Accessibility Theme Builder Community Collaboration Space
 DESCRIPTION:FINOS Accessibility Theme Builder Community Collaboration Spac
  e\n\nWeekly meeting on Wednesday at 11:00AM EST.\n\nhttps://github.com/fin
