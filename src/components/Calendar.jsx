@@ -31,7 +31,7 @@ import {
   extractUrls,
   replaceUrlsWithAnchorTags,
 } from '../utils/url-to-link';
-import { getAspectRatio, getInitialView, isBrowser, isMinWidth } from '../utils/view-size';
+import { getAspectRatio, getInitialView, isMinWidth } from '../utils/view-size';
 
 function Calendar() {
   const calendarRef = createRef();
