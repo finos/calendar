@@ -8,7 +8,7 @@
     "npm": "^10.3.0"
   },
   "scripts": {
-    "build": "gatsby build",
+    "build": "npm run setup-environment && npm run download-ics && npm run get-events && gatsby build",
     "develop": "npm run get-mock-events && gatsby develop",
     "start": "gatsby develop",
     "serve": "gatsby serve",
@@ -16,6 +16,8 @@
     "lint": "eslint ./src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "lint-fix": "npm run lint -- --fix",
     "get-mock-events": "node ./scripts/setMock.js",
+    "setup-environment": "run: gpg --quiet --batch --yes --decrypt --passphrase=${secrets.GOOGLE_SERVICE_ACCOUNT_PASSPHRASE} --output calendar-service-account.json calendar-service-account.json.gpg",
+    "download-ics": "curl -o dist/basic.ics https: //calendar.google.com/calendar/ical/finos.org_fac8mo1rfc6ehscg0d80fi8jig%40group.calendar.google.com/public/basic.ics",
     "get-events": "node ./scripts/googleapi2events.js",
     "getEvents": "npm run get-events",
     "test": "vitest"
@@ -34,9 +36,10 @@
     "googleapis": "^144.0.0",
     "html-react-parser": "^5.0.7",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"  },
+    "react-dom": "^18.2.0"
+  },
   "devDependencies": {
-      "html-to-text": "^9.0.5",
-      "ical-generator": "^8.0.0"
+    "html-to-text": "^9.0.5",
+    "ical-generator": "^8.0.0"
   }
 }
