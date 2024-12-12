@@ -16,9 +16,9 @@
     "lint": "eslint ./src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "lint-fix": "npm run lint -- --fix",
     "get-mock-events": "node ./scripts/setMock.js",
-    "setup-environment": "run: gpg --quiet --batch --yes --decrypt --passphrase=$GOOGLE_SERVICE_ACCOUNT_PASSPHRASE --output calendar-service-account.json calendar-service-account.json.gpg",
-    "download-ics": "curl -o dist/basic.ics https: //calendar.google.com/calendar/ical/finos.org_fac8mo1rfc6ehscg0d80fi8jig%40group.calendar.google.com/public/basic.ics",
-    "get-events": "node ./scripts/googleapi2events.js",
+    "setup-environment": "gpg --quiet --batch --yes --decrypt --passphrase=${GOOGLE_SERVICE_ACCOUNT_PASSPHRASE} --output calendar-service-account.json calendar-service-account.json.gpg",
+    "download-ics": "npx mkdirp dist && curl -o dist/basic.ics https://calendar.google.com/calendar/ical/finos.org_fac8mo1rfc6ehscg0d80fi8jig%40group.calendar.google.com/public/basic.ics",
+    "get-events": "node ./scripts/googleapi2events.mjs",
     "getEvents": "npm run get-events",
     "test": "vitest"
   },
@@ -40,6 +40,7 @@
   },
   "devDependencies": {
     "html-to-text": "^9.0.5",
-    "ical-generator": "^8.0.0"
+    "ical-generator": "^8.0.0",
+    "mkdirp": "^3.0.1"
   }
 }
