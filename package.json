@@ -8,6 +8,7 @@
     "npm": "^10.3.0"
   },
   "scripts": {
+    "pr-build": "gatsby build",
     "build": "npm run setup-environment && npm run download-ics && npm run get-events && gatsby build",
     "develop": "npm run get-mock-events && gatsby develop",
     "start": "gatsby develop",
