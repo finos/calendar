@@ -43,5 +43,10 @@
     "html-to-text": "^9.0.5",
     "ical-generator": "^8.0.0",
     "mkdirp": "^3.0.1"
+  },
+  "overrides": {
+    "axios": "^1.7.4",
+    "webpack-dev-middleware": "^5.3.4",
+    "path-to-regexp": "^0.1.12"
   }
 }
