@@ -3,18 +3,23 @@
   "version": "0.1.0",
   "description": "FINOS Community Calendar",
   "license": "Apache-2.0",
-  "type": "module",
   "engines": {
     "node": "^20.11.0",
     "npm": "^10.3.0"
   },
   "scripts": {
-    "start": "npm run get-events && vite",
-    "build": "npm run lint && vite build",
-    "preview": "vite preview",
+    "pr-build": "gatsby build",
+    "build": "npm run setup-environment && npm run download-ics && npm run get-events && gatsby build",
+    "develop": "npm run get-mock-events && gatsby develop",
+    "start": "gatsby develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
     "lint": "eslint ./src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "lint-fix": "npm run lint -- --fix",
-    "get-events": "node ./scripts/googleapi2events.js",
+    "get-mock-events": "node ./scripts/setMock.js",
+    "setup-environment": "gpg --quiet --batch --yes --decrypt --passphrase=${GOOGLE_SERVICE_ACCOUNT_PASSPHRASE} --output calendar-service-account.json calendar-service-account.json.gpg",
+    "download-ics": "npx mkdirp dist && curl -o dist/basic.ics https://calendar.google.com/calendar/ical/finos.org_fac8mo1rfc6ehscg0d80fi8jig%40group.calendar.google.com/public/basic.ics",
+    "get-events": "node ./scripts/googleapi2events.mjs",
     "getEvents": "npm run get-events",
     "test": "vitest"
   },
@@ -28,26 +33,21 @@
     "@fullcalendar/timegrid": "^6.1.10",
     "@mdi/js": "^7.3.67",
     "@mdi/react": "^1.6.1",
+    "gatsby": "^5.14.0",
     "googleapis": "^144.0.0",
     "html-react-parser": "^5.0.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.3.0",
-    "@testing-library/react": "^16.0.0",
-    "@types/react": "^18.2.42",
-    "@types/react-dom": "^18.2.17",
-    "@vitejs/plugin-react": "^4.0.3",
-    "eslint": "^8.45.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.3",
     "html-to-text": "^9.0.5",
     "ical-generator": "^8.0.0",
-    "sort-imports": "^1.1.0",
-    "vite": "^5.0.5",
-    "vitest": "^2.0.0"
+    "mkdirp": "^3.0.1"
+  },
+  "overrides": {
+    "async": "^2.6.4",
+    "axios": "^1.7.4",
+    "webpack-dev-middleware": "^5.3.4",
+    "path-to-regexp": "^0.1.12"
   }
 }
