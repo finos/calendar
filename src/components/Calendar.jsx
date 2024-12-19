@@ -13,8 +13,15 @@ import {
 } from '@mdi/js';
 import Icon from '@mdi/react';
 import parse from 'html-react-parser';
-import { createRef, useCallback, useEffect, useMemo, useState } from 'react';
+import React, {
+  createRef,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
+import events from '../../dist/events.json';
 import useEscKey from '../hooks/useEscKey';
 import { printDate, printTime } from '../utils/date-time';
 import { downloadICSFile } from '../utils/ics-download';
@@ -24,6 +31,7 @@ import {
   extractUrls,
   replaceUrlsWithAnchorTags,
 } from '../utils/url-to-link';
+import { getAspectRatio, getInitialView, isMinWidth } from '../utils/view-size';
 
 function Calendar() {
   const calendarRef = createRef();
@@ -33,28 +41,18 @@ function Calendar() {
   const [clickedEvent, setClickedEvent] = useState([]);
   const [showEventDetails, setShowEventDetails] = useState(false);
   const [eventDetails, setEventDetails] = useState(false);
-  const [aspectRatio, setAspectRatio] = useState(
-    window.outerWidth > window.innerHeight
-      ? 1.35
-      : window.innerWidth / window.innerHeight
-  );
-  const [initialView, setInitialView] = useState(
-    window.outerWidth > 600 ? 'dayGridMonth' : 'timeGridWeek'
-  );
+  const [aspectRatio, setAspectRatio] = useState(getAspectRatio());
+  const [initialView, setInitialView] = useState(getInitialView());
 
   useEscKey(() => setShowEventDetails(false));
 
   const [popupPosition, setPopupPosition] = useState({});
 
   const windowResize = () => {
-    setAspectRatio(
-      window.outerWidth > window.innerHeight
-        ? 1.35
-        : window.innerWidth / window.innerHeight
-    );
-    setInitialView(window.outerWidth > 600 ? 'dayGridMonth' : 'timeGridWeek');
+    setAspectRatio(getAspectRatio());
+    setInitialView(isMinWidth() ? 'dayGridMonth' : 'timeGridWeek');
     setShowEventDetails(false);
-    window.outerWidth < 600 && setPopupPosition({ left: 0, top: 0 });
+    !isMinWidth() && setPopupPosition({ left: 0, top: 0 });
   };
 
   const createPopupPosition = (event) => {
@@ -78,7 +76,7 @@ function Calendar() {
 
   const handleEventClick = useCallback(
     (clickInfo) => {
-      window.outerWidth > 600 && createPopupPosition(clickInfo.jsEvent);
+      isMinWidth() && createPopupPosition(clickInfo.jsEvent);
       setEventDetails(clickInfo.event);
       setShowEventDetails(true);
       if (clickedEvent.length) {
@@ -115,7 +113,7 @@ function Calendar() {
     const toTime = printTime(eventDetails.end);
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     let eventTime = '';
-    if (fromDate == toDate) {
+    if (fromDate === toDate) {
       eventTime = fromDate + ' ' + fromTime + ' - ' + toTime;
     } else {
       eventTime =
@@ -158,8 +156,6 @@ function Calendar() {
             <Icon path={mdiClose} size={1} />
           </button>
         </div>
-
-        {/* <div>{seriesICS}</div> */}
         <h2 className="event-title">{eventDetails.title}</h2>
         <div className="event-time">
           <div className="icon">
@@ -202,7 +198,7 @@ function Calendar() {
         aspectRatio={aspectRatio}
         handleWindowResize={true}
         windowResize={windowResize}
-        events="events.json"
+        events={events}
         headerToolbar={{
           left: 'prev,next today',
           center: 'title',

@@ -9,7 +9,7 @@ jobs:
   build:
     strategy:
       matrix:
-        node-version: [20.10.0]
+        node-version: [20.11.0]
 
     runs-on: ubuntu-latest
 
@@ -21,8 +21,10 @@ jobs:
         with:
           node-version: '${{ matrix.node-version }}'
 
+      - name: Get events mock for PR build
+        run: npm run get-mock-events
+
       - name: Build
         run: |
           npm install
-          npm run test
-          npm run build
+          npm run pr-build

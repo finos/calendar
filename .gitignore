@@ -29,3 +29,7 @@ yarn-error.log*
 
 # secrets
 calendar-service-account.json
+
+# gatsby files
+.cache/
+public
