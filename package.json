@@ -12,13 +12,14 @@
     "develop": "npm run get-mock-events && gatsby develop",
     "start": "gatsby develop",
     "serve": "gatsby serve",
-    "clean": "gatsby clean",
+    "clean": "gatsby clean && npx rimraf dist",
     "lint": "eslint ./src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "lint-fix": "npm run lint -- --fix",
     "get-mock-events": "node ./scripts/setMock.js",
-    "setup-environment": "gpg --quiet --batch --yes --decrypt --passphrase=${GOOGLE_SERVICE_ACCOUNT_PASSPHRASE} --output calendar-service-account.json calendar-service-account.json.gpg",
+    "decrypt-service-account": "gpg --quiet --batch --yes --decrypt --passphrase=${GOOGLE_SERVICE_ACCOUNT_PASSPHRASE} --output calendar-service-account.json calendar-service-account.json.gpg",
+    "setup-environment": "GOOGLE_SERVICE_ACCOUNT_PASSPHRASE=`cat calendar-service-account.json`",
     "download-ics": "npx mkdirp dist && curl -o dist/basic.ics https://calendar.google.com/calendar/ical/finos.org_fac8mo1rfc6ehscg0d80fi8jig%40group.calendar.google.com/public/basic.ics",
-    "get-events": "node ./scripts/googleapi2events.mjs",
+    "get-events": "npx mkdirp dist && node ./scripts/googleapi2events.mjs",
     "getEvents": "npm run get-events",
     "test": "vitest"
   },
@@ -36,11 +37,13 @@
     "googleapis": "^144.0.0",
     "html-react-parser": "^5.0.7",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.54.0"
   },
   "devDependencies": {
     "html-to-text": "^9.0.5",
     "ical-generator": "^8.0.0",
-    "mkdirp": "^3.0.1"
+    "mkdirp": "^3.0.1",
+    "rimraf": "^6.0.1"
   }
 }

@@ -143,6 +143,9 @@ function Calendar() {
         style={popupPosition}
       >
         <div className="event-details-buttons">
+          <button onClick={() => window.open(`/signup?eventId=${encodeURIComponent(eventDetails.extendedProps.uid)}&title=${encodeURIComponent(eventDetails.title)}`, '_blank')}
+            className="fc-button">Invite Me</button>
+
           <button
             onClick={() => downloadICSFile(eventDetails)}
             className="fc-button"
