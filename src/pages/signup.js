@@ -28,7 +28,7 @@ export default function App({ location }) {
 
   if (isSubmitted) {
     return (
-      <div className="success-screen">
+     <div className="signup form-container">
         <h2>Thank you for signing up!</h2>
         <p>Please check your inbox for a calendar invite for <b>{params.get("title")}</b>.</p>
       </div>

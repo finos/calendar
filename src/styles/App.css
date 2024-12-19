@@ -48,10 +48,10 @@ body {
 
 button.fc-button {
   flex: 1;
+  height: 2rem;
 }
 
 button.fc-button.finos-calendar-event-details-close {
-  border: none;
   font-size: 1.5rem;
   cursor: pointer;
   display: grid;
