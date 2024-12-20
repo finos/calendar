@@ -30,3 +30,8 @@ jobs:
           npm run build
         env:
           GOOGLE_SERVICE_ACCOUNT_PASSPHRASE: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_PASSPHRASE }}
+
+      - name: Trigger Netlify Build
+        run: |
+          curl -X POST -d {} https://api.netlify.com/build_hooks/676564b824c64e75ebf22bcd
+        
