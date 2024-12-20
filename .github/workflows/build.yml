@@ -6,7 +6,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 */3 * * *'
+    - cron: "0 */3 * * *"
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
-          node-version: '${{ matrix.node-version }}'
+          node-version: "${{ matrix.node-version }}"
 
       - name: Build
         run: |
@@ -30,13 +30,3 @@ jobs:
           npm run build
         env:
           PASSPHRASE: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_PASSPHRASE }}
-
-      - name: Add CNAME in dist folder
-        run: cp CNAME dist
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.ACCESS_TOKEN }}
-          publish_dir: public
-        if: github.event_name != 'pull_request'
