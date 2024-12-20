@@ -30,12 +30,3 @@ jobs:
           npm run build
         env:
           PASSPHRASE: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_PASSPHRASE }}
-
-      - name: Add CNAME in dist folder
-        run: cp CNAME dist
-
-      - name: Deploy to GitHub Pages
-        uses: enriikke/gatsby-gh-pages-action@v2
-        with:
-          access-token: ${{ secrets.ACCESS_TOKEN }}
-        if: github.event_name != 'pull_request'
