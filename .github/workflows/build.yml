@@ -38,5 +38,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.ACCESS_TOKEN }}
-          publish_dir: dist
+          publish_dir: public
         if: github.event_name != 'pull_request'
