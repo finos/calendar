@@ -29,4 +29,4 @@ jobs:
           npm install
           npm run build
         env:
-          PASSPHRASE: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_PASSPHRASE }}
+          GOOGLE_SERVICE_ACCOUNT_PASSPHRASE: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_PASSPHRASE }}
