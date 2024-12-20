@@ -17,7 +17,7 @@
     "lint": "eslint ./src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "lint-fix": "npm run lint -- --fix",
     "get-mock-events": "node ./scripts/setMock.js",
-    "setup-environment": "gpg --quiet --batch --yes --decrypt --passphrase=$PASSPHRASE --output calendar-service-account.json calendar-service-account.json.gpg",
+    "setup-environment": "gpg --quiet --batch --yes --decrypt --passphrase=${GOOGLE_SERVICE_ACCOUNT_PASSPHRASE} --output calendar-service-account.json calendar-service-account.json.gpg",
     "download-ics": "npx mkdirp dist && curl -o dist/basic.ics https://calendar.google.com/calendar/ical/finos.org_fac8mo1rfc6ehscg0d80fi8jig%40group.calendar.google.com/public/basic.ics",
     "get-events": "node ./scripts/googleapi2events.mjs",
     "getEvents": "npm run get-events",
