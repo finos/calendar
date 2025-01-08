@@ -11,15 +11,5 @@ module.exports = {
   siteMetadata: {
     title: `FINOS Event Calendar`,
   },
-  headers: [
-    {
-      source: '*',
-      headers: [
-        {
-          key: 'Content-Security-Policy',
-          value: "frame-ancestors *;", // Allow embedding from 'finos.org' and same origin
-        },
-      ],
-    },
-  ],
+  plugins: [],
 }
