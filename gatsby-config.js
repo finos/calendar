@@ -17,7 +17,7 @@ module.exports = {
       headers: [
         {
           key: 'Content-Security-Policy',
-          value: "frame-ancestors 'self' https://finos.org", // Allow embedding from 'finos.org' and same origin
+          value: "frame-ancestors *;", // Allow embedding from 'finos.org' and same origin
         },
       ],
     },
