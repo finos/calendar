@@ -36,8 +36,8 @@
     "gatsby": "^5.14.0",
     "googleapis": "^144.0.0",
     "html-react-parser": "^5.0.7",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "html-to-text": "^9.0.5",
