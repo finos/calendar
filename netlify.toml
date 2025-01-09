@@ -1,4 +1,4 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "SAMEORIGIN"
+    X-Frame-Options = "ALLOW-FROM https://finos.org"
