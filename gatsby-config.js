@@ -11,17 +11,5 @@ module.exports = {
   siteMetadata: {
     title: `FINOS Event Calendar`,
   },
-  plugins: [
-    {
-      resolve: 'gatsby-plugin-netlify',
-      options: {
-        headers: {
-          '/*': [
-            'X-Frame-Options: SAMEORIGIN',
-            'Content-Security-Policy: frame-ancestors \'self\' https://finos.org',
-          ],
-        },
-      },
-    },
-  ],
+  plugins: [],
 };
