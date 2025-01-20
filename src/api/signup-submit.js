@@ -13,14 +13,19 @@ export default async function handler(req, res) {
 
   // Scopes required for the Google Calendar API
   const SCOPES = [
-    'https://www.googleapis.com/auth/calendar.events'
+    'https://www.googleapis.com/auth/calendar'
   ];
 
   // Create a JWT client using the service account key
   const auth = new google.auth.GoogleAuth({
     keyFile: SERVICE_ACCOUNT_FILE,
     scopes: SCOPES,
+    clientOptions: {
+      subject: 'rob.moffat@finos.org', // Specify the user to impersonate
+    },
   });
+
+  //const client = auth.getClient()
 
   // Create a Calendar API client
   const calendar = google.calendar({ version: 'v3', auth });
@@ -46,11 +51,11 @@ export default async function handler(req, res) {
   }
 
 
-  // const done = await calendar.events.patch({
-  //   calendarId: calendarId,
-  //   eventId: eventId,
-  //   resource: event2
-  // })
+  const done = await calendar.events.patch({
+    calendarId: calendarId,
+    eventId: eventId,
+    resource: event2
+  })
 
   res.json(`ok bebob ${JSON.stringify("hello")}`)
 }
