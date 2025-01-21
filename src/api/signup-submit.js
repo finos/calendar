@@ -1,4 +1,6 @@
 import { google } from 'googleapis';
+import { fs } from 'fs';
+
 
 export default async function handler(req, res) {
   console.log(`submitted form`, req.body, __filename)
@@ -8,7 +10,9 @@ export default async function handler(req, res) {
 
   const eventId = req.body.eventId;
 
-  const CREDENTIALS = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT) ? process.env.GOOGLE_SERVICE_ACCOUNT : require('./calendar-service-account.json')
+  const CREDENTIALS = process.env.GOOGLE_SERVICE_ACCOUNT ?
+    JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT) :
+    fs.readFileSync('./calendar-service-account.json')
 
   console.log(`CREDENTIALS`, CREDENTIALS)
 
