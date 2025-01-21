@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   const eventId = req.body.eventId;
 
   // Replace with the path to your service account JSON file
-  const SERVICE_ACCOUNT_FILE = process.env.SERVICE_ACCOUNT_FILE ?? './calendar-service-account.json'
+  const SERVICE_ACCOUNT_FILE = 'calendar-service-account.json'
 
   // Scopes required for the Google Calendar API
   const SCOPES = [
