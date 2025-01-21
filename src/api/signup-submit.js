@@ -8,7 +8,7 @@ export default async function handler(req, res) {
 
   const eventId = req.body.eventId;
 
-  const CREDENTIALS = JSON.parse(process.env.SERVICE_ACCOUNT) ? process.env.SERVICE_ACCOUNT : require('./calendar-service-account.json')
+  const CREDENTIALS = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT) ? process.env.GOOGLE_SERVICE_ACCOUNT : require('./calendar-service-account.json')
 
   console.log(`CREDENTIALS`, CREDENTIALS)
 

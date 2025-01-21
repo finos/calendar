@@ -8,7 +8,7 @@
     "npm": "^10.3.0"
   },
   "scripts": {
-    "build": "npm run decrypt-service-account && npm run setup-env && npm run download-ics && npm run get-events && gatsby build",
+    "build": "npm run decrypt-service-account && npm run download-ics && npm run get-events && gatsby build",
     "develop": "npm run get-mock-events && gatsby develop",
     "start": "gatsby develop",
     "serve": "gatsby serve",
@@ -18,7 +18,6 @@
     "get-mock-events": "node ./scripts/setMock.js",
     "decrypt-service-account": "gpg --quiet --batch --yes --decrypt --passphrase=${GOOGLE_SERVICE_ACCOUNT_PASSPHRASE} --output calendar-service-account.json calendar-service-account.json.gpg",
     "download-ics": "npx mkdirp dist && curl -o dist/basic.ics https://calendar.google.com/calendar/ical/finos.org_fac8mo1rfc6ehscg0d80fi8jig%40group.calendar.google.com/public/basic.ics",
-    "setup-env": "export SERVICE_ACCOUNT=`cat calendar-service-account.json`",
     "get-events": "npx mkdirp dist && node ./scripts/googleapi2events.mjs",
     "getEvents": "npm run get-events",
     "test": "vitest"
