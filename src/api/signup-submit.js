@@ -1,5 +1,5 @@
 import { google } from 'googleapis';
-import { fs } from 'fs';
+import { readFileSync } from 'fs';
 
 
 export default async function handler(req, res) {
@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 
   const CREDENTIALS = process.env.GOOGLE_SERVICE_ACCOUNT ?
     JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT) :
-    fs.readFileSync('./calendar-service-account.json')
+    JSON.parse(readFileSync('./calendar-service-account.json'))
 
   console.log(`CREDENTIALS`, CREDENTIALS)
 
