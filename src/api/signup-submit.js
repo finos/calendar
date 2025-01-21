@@ -8,8 +8,9 @@ export default async function handler(req, res) {
 
   const eventId = req.body.eventId;
 
-  // Replace with the path to your service account JSON file
-  const SERVICE_ACCOUNT_FILE = '/opt/build/repo/edge-functions/calendar-service-account.json'
+  const CREDENTIALS = JSON.parse(process.env.SERVICE_ACCOUNT) ? process.env.SERVICE_ACCOUNT : require('./calendar-service-account.json')
+
+  console.log(`CREDENTIALS`, CREDENTIALS)
 
   // Scopes required for the Google Calendar API
   const SCOPES = [
@@ -18,17 +19,15 @@ export default async function handler(req, res) {
 
   // Create a JWT client using the service account key
   const auth = new google.auth.GoogleAuth({
-    keyFile: SERVICE_ACCOUNT_FILE,
+    credentials: CREDENTIALS,
     scopes: SCOPES,
     clientOptions: {
       subject: 'rob.moffat@finos.org', // Specify the user to impersonate
     },
   });
 
-  //const client = auth.getClient()
-
   // Create a Calendar API client
-  const calendar = google.calendar({ version: 'v3', auth });
+  const calendar = google.calendar({ version: 'v3', auth: await auth.getClient() });
 
   const event = (await calendar.events.get({
     calendarId: calendarId,

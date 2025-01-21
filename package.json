@@ -18,7 +18,7 @@
     "get-mock-events": "node ./scripts/setMock.js",
     "decrypt-service-account": "gpg --quiet --batch --yes --decrypt --passphrase=${GOOGLE_SERVICE_ACCOUNT_PASSPHRASE} --output calendar-service-account.json calendar-service-account.json.gpg",
     "download-ics": "npx mkdirp dist && curl -o dist/basic.ics https://calendar.google.com/calendar/ical/finos.org_fac8mo1rfc6ehscg0d80fi8jig%40group.calendar.google.com/public/basic.ics",
-    "setup-env": "npx mkdirp /opt/build/repo/edge-functions && cp calendar-service-account.json /opt/build/repo/edge-functions/calendar-service-account.json",
+    "setup-env": "export SERVICE_ACCOUNT=`cat calendar-service-account.json`",
     "get-events": "npx mkdirp dist && node ./scripts/googleapi2events.mjs",
     "getEvents": "npm run get-events",
     "test": "vitest"
