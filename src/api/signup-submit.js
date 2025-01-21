@@ -1,10 +1,10 @@
 import { google } from 'googleapis';
 
 export default async function handler(req, res) {
-  console.log(`submitted form`, req.body,  __filename)
+  console.log(`submitted form`, req.body, __filename)
 
   const calendarId =
-  'finos.org_fac8mo1rfc6ehscg0d80fi8jig@group.calendar.google.com';
+    'finos.org_fac8mo1rfc6ehscg0d80fi8jig@group.calendar.google.com';
 
   const eventId = req.body.eventId;
 
@@ -40,21 +40,17 @@ export default async function handler(req, res) {
 
   const existingAttendees = event.attendees ?? []
 
-  const event2 = {
-    ...event,
-    attendees: [
-      ...existingAttendees,
-      {
-        email: req.body.email,
-      },
-    ]
-  }
-
-
   const done = await calendar.events.patch({
     calendarId: calendarId,
     eventId: eventId,
-    resource: event2
+    resource: {
+      attendees: [
+        ...existingAttendees,
+        {
+          email: req.body.email,
+        },
+      ]
+    }
   })
 
   res.json(`ok bebob ${JSON.stringify("hello")}`)

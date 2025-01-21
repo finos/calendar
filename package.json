@@ -8,7 +8,7 @@
     "npm": "^10.3.0"
   },
   "scripts": {
-    "build": "npm run decrypt-service-account && npm run setup-environment && npm run download-ics && npm run get-events && gatsby build",
+    "build": "npm run decrypt-service-account && npm run setup-netlify-environment && npm run download-ics && npm run get-events && gatsby build",
     "develop": "npm run get-mock-events && gatsby develop",
     "start": "gatsby develop",
     "serve": "gatsby serve",
@@ -17,7 +17,7 @@
     "lint-fix": "npm run lint -- --fix",
     "get-mock-events": "node ./scripts/setMock.js",
     "decrypt-service-account": "gpg --quiet --batch --yes --decrypt --passphrase=${GOOGLE_SERVICE_ACCOUNT_PASSPHRASE} --output calendar-service-account.json calendar-service-account.json.gpg",
-    "setup-environment": "GOOGLE_SERVICE_ACCOUNT=`cat calendar-service-account.json`",
+    "setup-netlify-environment": "npx copyfiles calendar-service-account.json /var/task/calendar-service-account.json",
     "download-ics": "npx mkdirp dist && curl -o dist/basic.ics https://calendar.google.com/calendar/ical/finos.org_fac8mo1rfc6ehscg0d80fi8jig%40group.calendar.google.com/public/basic.ics",
     "get-events": "npx mkdirp dist && node ./scripts/googleapi2events.mjs",
     "getEvents": "npm run get-events",
@@ -42,6 +42,7 @@
     "react-hook-form": "^7.54.0"
   },
   "devDependencies": {
+    "copyfiles": "^2.4.1",
     "html-to-text": "^9.0.5",
     "ical-generator": "^8.0.0",
     "mkdirp": "^3.0.1",
