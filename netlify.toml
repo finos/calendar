@@ -1,2 +1,2 @@
 [build]
-  edge_functions = "my-custom-directory"
+  edge_functions = "edge-functions"
