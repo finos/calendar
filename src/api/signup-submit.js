@@ -53,7 +53,8 @@ export default async function handler(req, res) {
           email: req.body.email,
         },
       ]
-    }
+    },
+    sendUpdates: 'externalOnly'
   })
 
   res.json(`ok bebob ${JSON.stringify("hello")}`)
