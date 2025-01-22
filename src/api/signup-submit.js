@@ -1,6 +1,59 @@
 import { google } from 'googleapis';
 import { readFileSync } from 'fs';
 
+async function updateAttendees(api, calendarId, eventId, newAttendees) {
+  console.log(`Adding attendees to `, eventId, newAttendees)
+
+  await api.events.patch({
+    calendarId: calendarId,
+    eventId: eventId,
+    resource: {
+      attendees: newAttendees
+    },
+    sendUpdates: 'externalOnly'
+  })
+
+}
+
+async function addAttendeeToEvent(api, calendarId, event, email, addForReal) {
+
+  console.log(`Adding attendee to `, event.id, event.start, event.summary, addForReal)
+
+  const newAttendees = [
+    ...event.attendees,
+    {
+      email: email,
+    },
+  ]
+  const eventId = event.id
+
+  if (addForReal) {
+    return updateAttendees(api, calendarId, eventId, newAttendees)
+  }
+}
+
+async function updateEventRequest(api, calendarId, eventId, email) {
+  const event = (await api.events.get({
+    calendarId: calendarId,
+    eventId: eventId,
+  })).data
+
+  console.log(`Original Event:`, event)
+
+  const masterEventId = event.recurringEventId ? event.recurringEventId : event.id
+
+  console.log(`Master Event ID:`, masterEventId)
+
+  // update the series
+  const masterEvent = (masterEventId != eventId) ? (await api.events.get({
+    calendarId: calendarId,
+    eventId: masterEventId,
+  })).data : event
+
+  console.log(`Master Event:`, masterEvent)
+
+  await addAttendeeToEvent(api, calendarId, masterEvent, email, true)
+}
 
 export default async function handler(req, res) {
   console.log(`submitted form`, req.body, __filename)
@@ -13,8 +66,6 @@ export default async function handler(req, res) {
   const CREDENTIALS = process.env.GOOGLE_SERVICE_ACCOUNT ?
     JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT) :
     JSON.parse(readFileSync('./calendar-service-account.json'))
-
-  console.log(`CREDENTIALS`, CREDENTIALS)
 
   // Scopes required for the Google Calendar API
   const SCOPES = [
@@ -31,31 +82,17 @@ export default async function handler(req, res) {
   });
 
   // Create a Calendar API client
-  const calendar = google.calendar({ version: 'v3', auth: await auth.getClient() });
+  const api = google.calendar({ version: 'v3', auth: await auth.getClient() });
 
-  const event = (await calendar.events.get({
-    calendarId: calendarId,
-    eventId: eventId,
-  })).data
+  const individualEvents = eventId.split(',')
 
+  try {
+    for (const individualEventId of individualEvents) {
+      await updateEventRequest(api, calendarId, individualEventId, req.body.email)
+    }
 
-  console.log(`event`, event)
-
-  const existingAttendees = event.attendees ?? []
-
-  const done = await calendar.events.patch({
-    calendarId: calendarId,
-    eventId: eventId,
-    resource: {
-      attendees: [
-        ...existingAttendees,
-        {
-          email: req.body.email,
-        },
-      ]
-    },
-    sendUpdates: 'externalOnly'
-  })
-
-  res.json(`ok bebob ${JSON.stringify("hello")}`)
+    res.json(`success`)
+  } catch (err) {
+    res.json(`Error updating calendar: ${err}`)
+  }
 }

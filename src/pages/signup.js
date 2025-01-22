@@ -10,6 +10,7 @@ export default function App({ location }) {
     formState: { errors },
   } = useForm()
   const onSubmit = data => {
+    setIsSubmitted('spinner')
     fetch(`/api/signup-submit`, {
       method: `POST`,
       body: JSON.stringify(data),
@@ -20,19 +21,36 @@ export default function App({ location }) {
       .then(res => res.json())
       .then(body => {
         console.log(`response from API:`, body)
-        setIsSubmitted(true)
+        setIsSubmitted(body)
+      }).catch(err => {
+        console.error(`Error updating calendar:`, err)
+        setIsSubmitted(`Error updating calendar: ${err}`)
       })
   }
 
   const params = new URLSearchParams(location.search)
 
-  if (isSubmitted) {
+  if (isSubmitted == 'spinner') {
     return (
-     <div className="signup form-container">
-        <h2>Thank you for signing up!</h2>
-        <p>Please check your inbox for a calendar invite for <b>{params.get("title")}</b>.</p>
+      <div className="signup form-container">
+        <h2>Please wait</h2>
+        <p>Updating the calendar and sending invite...</p>
       </div>
     )
+
+  } else if (isSubmitted) {
+    if (isSubmitted == 'success') {
+      return (
+        <div className="signup form-container">
+          <h2>Thank you for signing up!</h2>
+          <p>Please check your inbox for a calendar invite for <b>{params.get("title")}</b>.</p>
+        </div>
+      )
+    } else {
+      return (
+        <div className="signup form-container"><pre>{isSubmitted}</pre></div>
+      )
+    }
   } else {
     return (
       <div className="signup form-container">
