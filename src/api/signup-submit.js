@@ -2,7 +2,7 @@ import { google } from 'googleapis';
 import { readFileSync } from 'fs';
 
 async function updateAttendees(api, calendarId, eventId, newAttendees) {
-  console.log(`Adding attendees to `, eventId, newAttendees)
+  console.log(`Adding attendees to `, eventId, newAttendees, new Date().toISOString)
 
   await api.events.patch({
     calendarId: calendarId,
@@ -13,6 +13,7 @@ async function updateAttendees(api, calendarId, eventId, newAttendees) {
     sendUpdates: 'externalOnly'
   })
 
+  console.log(`Attendees added to `, eventId, new Date().toISOString)
 }
 
 async function addAttendeeToEvent(api, calendarId, event, email, addForReal) {

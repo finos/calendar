@@ -17,6 +17,7 @@ export default function App({ location }) {
       headers: {
         "content-type": `application/json`,
       },
+      signal: AbortSignal.timeout(50000)
     })
       .then(res => res.json())
       .then(body => {
@@ -30,7 +31,7 @@ export default function App({ location }) {
 
   const params = new URLSearchParams(location.search)
 
-  if (isSubmitted == 'spinner') {
+  if (isSubmitted === 'spinner') {
     return (
       <div className="signup form-container">
         <h2>Please wait</h2>
@@ -39,7 +40,7 @@ export default function App({ location }) {
     )
 
   } else if (isSubmitted) {
-    if (isSubmitted == 'success') {
+    if (isSubmitted === 'success') {
       return (
         <div className="signup form-container">
           <h2>Thank you for signing up!</h2>
