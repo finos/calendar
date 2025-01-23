@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "npm run decrypt-service-account && npm run download-ics && npm run get-events && gatsby build",
+    "pr-build": "gatsby build",
     "develop": "npm run get-mock-events && gatsby develop",
     "start": "gatsby develop",
     "serve": "gatsby serve",
@@ -45,5 +46,11 @@
     "ical-generator": "^8.0.0",
     "mkdirp": "^3.0.1",
     "rimraf": "^6.0.1"
+  },
+  "overrides": {
+    "async": "^2.6.4",
+    "axios": "^1.7.4",
+    "webpack-dev-middleware": "^5.3.4",
+    "path-to-regexp": "^0.1.12"
   }
 }
