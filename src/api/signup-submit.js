@@ -115,26 +115,29 @@ export default async function handler(req, res) {
 
   const updatePromises = individualEvents.map(async (e) => await updateEventRequest(api, calendarId, e, req.body.email))
 
-  const results = await Promise.race([
+  Promise.race([
     Promise.allSettled(updatePromises),
     timeoutPromise
-  ])
+  ]).then((results) => {
 
-  console.log(`Results at time of return: |${results}|`)
-  console.log("UpdatePromises at time of return: ", updatePromises)
+    console.log(`Results at time of return: |${results}|`)
+    console.log("UpdatePromises at time of return: ", updatePromises)
 
-  if (results === TIMEOUT_OCCURRED) {
-    const successfulUpdates = updatePromises.filter(result => checkPromiseState(result) === "fulfilled");
-    res.json(`Timeout reached. ${successfulUpdates.length} updates completed within 10 seconds - the others should complete shortly.` + errorDetails)
-  } else {
-    const failedUpdates = results.filter(result => result.status === "rejected");
-    const errorDetails = JSON.stringify(failedUpdates)
+    if (results === TIMEOUT_OCCURRED) {
+      res.json(`Timeout reached,  However, you should still receive your invite. Please check your inbox.\nEvent ID: ${req.body.eventId}\nEmail: ${req.body.email}`);
+      return
 
-    if (failedUpdates.length > 0) {
-      res.json(`${failedUpdates.length} updates failed:` + errorDetails);
     } else {
-      res.json(`success`);
+      const failedUpdates = results.filter(result => result.status === "rejected");
+      const errorDetails = JSON.stringify(failedUpdates)
+
+      if (failedUpdates.length > 0) {
+        res.json(`${failedUpdates.length} updates failed:` + errorDetails);
+      } else {
+        res.json(`success`);
+      }
     }
-  }
+  })
+
 
 }
