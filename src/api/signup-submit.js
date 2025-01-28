@@ -1,10 +1,17 @@
 import { google } from 'googleapis';
 import { readFileSync } from 'fs';
 
-async function updateAttendees(api, calendarId, eventId, newAttendees) {
-  console.log(`Adding attendees to `, eventId, newAttendees, new Date().toISOString)
+function checkPromiseState(promise) {
+  return promise
+    .then(() => "fulfilled")
+    .catch(() => "rejected");
+}
 
-  await api.events.patch({
+
+async function updateAttendees(api, calendarId, eventId, newAttendees) {
+  console.log(`Adding attendees to `, eventId, newAttendees, new Date().toISOString())
+
+  const response = await api.events.patch({
     calendarId: calendarId,
     eventId: eventId,
     resource: {
@@ -13,7 +20,14 @@ async function updateAttendees(api, calendarId, eventId, newAttendees) {
     sendUpdates: 'externalOnly'
   })
 
-  console.log(`Attendees added to `, eventId, new Date().toISOString)
+  console.log(`Response from patch:`, response)
+
+  if (response.status !== 200) {
+    console.error(`Failed to update event ${eventId}`);
+    throw new Error(`Error: ${response.status} ${response.statusText}`);
+  } else {
+    return 'ok';
+  }
 }
 
 async function addAttendeeToEvent(api, calendarId, event, email, addForReal) {
@@ -29,7 +43,7 @@ async function addAttendeeToEvent(api, calendarId, event, email, addForReal) {
   const eventId = event.id
 
   if (addForReal) {
-    return updateAttendees(api, calendarId, eventId, newAttendees)
+    return await updateAttendees(api, calendarId, eventId, newAttendees)
   }
 }
 
@@ -53,10 +67,18 @@ async function updateEventRequest(api, calendarId, eventId, email) {
 
   console.log(`Master Event:`, masterEvent)
 
-  await addAttendeeToEvent(api, calendarId, masterEvent, email, true)
+  return await addAttendeeToEvent(api, calendarId, masterEvent, email, true)
 }
 
 export default async function handler(req, res) {
+
+  /**
+   * After 10 seconds we return a response to the user
+   */
+  const timeout = 10000;
+
+  const TIMEOUT_OCCURRED = 'TIMEOUT'
+
   console.log(`submitted form`, req.body, __filename)
 
   const calendarId =
@@ -87,13 +109,32 @@ export default async function handler(req, res) {
 
   const individualEvents = eventId.split(',')
 
-  try {
-    for (const individualEventId of individualEvents) {
-      await updateEventRequest(api, calendarId, individualEventId, req.body.email)
-    }
+  const timeoutPromise = new Promise((resolve) => {
+    setTimeout(() => { resolve(TIMEOUT_OCCURRED) }, timeout)
+  });
 
-    res.json(`success`)
-  } catch (err) {
-    res.json(`Error updating calendar: ${err}`)
+  const updatePromises = individualEvents.map(async (e) => await updateEventRequest(api, calendarId, e, req.body.email))
+
+  const results = await Promise.race([
+    Promise.allSettled(updatePromises),
+    timeoutPromise
+  ])
+
+  console.log(`Results at time of return: |${results}|`)
+  console.log("UpdatePromises at time of return: ", updatePromises)
+
+  if (results === TIMEOUT_OCCURRED) {
+    const successfulUpdates = updatePromises.filter(result => checkPromiseState(result) === "fulfilled");
+    res.json(`Timeout reached. ${successfulUpdates.length} updates completed within 10 seconds - the others should complete shortly.` + errorDetails)
+  } else {
+    const failedUpdates = results.filter(result => result.status === "rejected");
+    const errorDetails = JSON.stringify(failedUpdates)
+
+    if (failedUpdates.length > 0) {
+      res.json(`${failedUpdates.length} updates failed:` + errorDetails);
+    } else {
+      res.json(`success`);
+    }
   }
+
 }

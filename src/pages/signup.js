@@ -17,7 +17,7 @@ export default function App({ location }) {
       headers: {
         "content-type": `application/json`,
       },
-      signal: AbortSignal.timeout(50000)
+      signal: AbortSignal.timeout(120000)
     })
       .then(res => res.json())
       .then(body => {
@@ -49,7 +49,10 @@ export default function App({ location }) {
       )
     } else {
       return (
-        <div className="signup form-container"><pre>{isSubmitted}</pre></div>
+        <div className="signup result-container">
+          <h2>Possible Issues</h2>
+          <h3>If you need support, please relay this info to help@finos.org:</h3>
+          <pre>{isSubmitted}</pre></div>
       )
     }
   } else {
