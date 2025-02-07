@@ -1,3 +1,5 @@
+[build]
+  edge_functions = "edge-functions"
 [[headers]]
   for = "/*"
   [headers.values]

@@ -38,7 +38,7 @@ body {
 
 .event-details-buttons {
   display: flex;
-  justify-content: space-between;
+  gap: 1rem;
   align-items: flex-end;
   padding: 0.6rem 0;
   position: sticky;
@@ -46,13 +46,18 @@ body {
   top: 0;
 }
 
+button.fc-button {
+  flex: 1;
+  height: 2rem;
+}
+
 button.fc-button.finos-calendar-event-details-close {
-  border: none;
   font-size: 1.5rem;
   cursor: pointer;
   display: grid;
   place-content: center;
   padding: 0.5rem;
+  flex-grow: 0;
 }
 
 button.fc-button.finos-calendar-event-details-close img {
@@ -138,6 +143,7 @@ button.fc-button.finos-calendar-event-details-close img {
 }
 
 @media only screen and (prefers-color-scheme: dark) {
+
   body,
   .finos-calendar,
   .finos-calendar-event-details,
@@ -145,16 +151,20 @@ button.fc-button.finos-calendar-event-details-close img {
     background-color: #222;
     color: #eee;
   }
+
   .fc-event:hover {
     background-color: #3c3c3c;
   }
+
   .active-event {
     background-color: #eeeeee20;
   }
+
   .fc-theme-standard .fc-popover {
     background-color: #222;
     color: #eee;
   }
+
   .finos-calendar-event-details a {
     color: #343;
   }

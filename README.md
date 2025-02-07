@@ -29,6 +29,26 @@ In order to use the Google Calendar API you will need to follow [these 5 steps](
 gpg --symmetric --cipher-algo AES256 calendar-service-account.json
 ```
 
+:::note FINOS-Specific
+
+Following this procedure creates the file `calendar-service-account.json.gpg` which can be safely committed to the repository. The decryption key for the checked-in version of this file can be found in the FINOS 1 Password folder.
+
+:::
+
+### Decrypting Google Service Account key
+
+```
+gpg --decrypt calendar-service-account.json.gpg > calendar-service-account.json
+```
+
+### Creating An Environment Variable for the Google Service Account Key
+
+`````
+export GOOGLE_APPLICATION_CREDENTIALS=`cat calendar-service-account.json````
+`````
+
+This will be used by Gatsby's endpoints for the Google Calendar API.
+
 ### Install the dependencies:
 
 ```bash
@@ -45,13 +65,13 @@ npm run get-events
 
 Copy `events.json` from `dist` to root directory.
 
-### Run development server
+### Run development server (Gatsby)
 
 ```bash
 npm start
 ```
 
-Open browser to `http://localhost:5173/`.
+Open browser to `http://localhost:8000/`.
 
 ### Live environment
 
