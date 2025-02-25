@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "engines": {
     "node": "^20.11.0",
-    "npm": "^10.3.0"
+    "npm": "^11.0.0"
   },
   "scripts": {
     "build": "npm run decrypt-service-account && npm run download-ics && npm run get-events && gatsby build",
