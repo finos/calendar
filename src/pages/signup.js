@@ -50,8 +50,8 @@ export default function App({ location }) {
     } else {
       return (
         <div className="signup result-container">
-          <h2>Possible Issues</h2>
-          <h3>If you need support, please relay this info to help@finos.org:</h3>
+          <h2>Thank you for signing up!</h2>
+          <h3>Your invite should arrive within the hour. If this doesn't happen, please relay this info to help@finos.org:</h3>
           <pre>{isSubmitted}</pre></div>
       )
     }
