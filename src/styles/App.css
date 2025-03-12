@@ -48,7 +48,21 @@ body {
 
 button.fc-button {
   flex: 1;
-  height: 2rem;
+  height: auto !important;
+  min-height: 2rem;
+  text-transform: none !important;
+  font-weight: normal !important;
+  padding: 0.4em 0.6em !important;
+  font-size: 1em !important;
+  line-height: 1.5 !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
 }
 
 button.fc-button.finos-calendar-event-details-close {
@@ -111,6 +125,50 @@ button.fc-button.finos-calendar-event-details-close img {
   z-index: 901;
 }
 
+.fc-button-primary {
+  background-color: #2c3e50 !important;
+  border-color: #2c3e50 !important;
+}
+
+.fc-button-primary:hover {
+  background-color: #34495e !important;
+  border-color: #34495e !important;
+}
+
+.fc-button-primary:disabled {
+  background-color: #95a5a6 !important;
+  border-color: #95a5a6 !important;
+}
+
+.fc-toolbar-title {
+  font-size: 1.2em !important;
+  margin: 0.5em 0 !important;
+}
+
+.fc-toolbar {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0 !important;
+  padding: 0.5em !important;
+}
+
+.fc-toolbar-chunk {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+}
+
+.finos-calendar-event-details a {
+  color: #0066cc !important;
+  text-decoration: underline !important;
+  font-weight: 500 !important;
+}
+
+.finos-calendar-event-details a:hover {
+  color: #004499 !important;
+  text-decoration: none !important;
+}
+
 @media only screen and (max-width: 1000px) {
   .finos-calendar {
     min-width: 600px;
@@ -166,6 +224,13 @@ button.fc-button.finos-calendar-event-details-close img {
   }
 
   .finos-calendar-event-details a {
-    color: #343;
+    color: #66b3ff !important;
+    text-decoration: underline !important;
+    font-weight: 500 !important;
+  }
+
+  .finos-calendar-event-details a:hover {
+    color: #99ccff !important;
+    text-decoration: none !important;
   }
 }

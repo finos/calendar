@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
+import '../utils/encoding-polyfill';
 import '../styles/App.css';
 import Calendar from '../components/Calendar';
 import Header from '../components/Header';
