@@ -34,6 +34,7 @@
     "@mdi/js": "^7.3.67",
     "@mdi/react": "^1.6.1",
     "encoding": "^0.1.13",
+    "fastestsmallesttextencoderdecoder": "^1.0.22",
     "gatsby": "^5.14.0",
     "googleapis": "^144.0.0",
     "html-react-parser": "^5.0.7",
