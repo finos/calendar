@@ -35,7 +35,7 @@
     "@mdi/react": "^1.6.1",
     "encoding": "^0.1.13",
     "gatsby": "^5.14.0",
-    "googleapis": "^144.0.0",
+    "googleapis": "^148.0.0",
     "html-react-parser": "^5.0.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
