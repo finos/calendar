@@ -66,7 +66,7 @@ export default function App({ location }) {
                             return (
                                 <li key={event.eventId}>
                                     <span style={{ color: '#666' }}>
-                                        {formatTime(eventDate, 'Europe/London')} UK / {formatTime(eventDate, 'America/New_York')} NYC
+                                        {formatTime(eventDate, 'America/New_York')} NYC / {formatTime(eventDate, 'Europe/London')} UK
                                     </span> - {event.title} - <a href={`/signup?title=${encodeURIComponent(event.title)}&eventId=${event.uid}`}>Sign Up</a>
                                 </li>
                             )
