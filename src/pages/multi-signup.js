@@ -4,8 +4,8 @@ import "../styles/signup.css"
 import events from '../../dist/events.json'
 
 export default function App({ location }) {
-    const [isSubmitted, setIsSubmitted] = useState(false)
     const [matchingEvents, setMatchingEvents] = useState([])
+    const [submissionStatus, setSubmissionStatus] = useState({})
     const {
         register,
         handleSubmit,
@@ -36,94 +36,95 @@ export default function App({ location }) {
             })
 
             setMatchingEvents(uniqueEvents)
+            // Initialize submission status for each event
+            const initialStatus = {}
+            uniqueEvents.forEach(event => {
+                initialStatus[event.uid] = 'pending'
+            })
+            setSubmissionStatus(initialStatus)
         }
     }, [location.search])
 
-    const onSubmit = data => {
-        setIsSubmitted('spinner')
-        // Ensure eventIds is an array before joining
+    const onSubmit = async data => {
         const eventIds = Array.isArray(data.eventIds) ? data.eventIds : [data.eventIds]
-        const body = JSON.stringify({
-            ...data,
-            eventId: eventIds.join(',')
-        })
-        console.log(`body:`, body)
-        fetch(`/api/signup-submit`, {
-            method: `POST`,
-            body,
-            headers: {
-                "content-type": `application/json`,
-            },
-            signal: AbortSignal.timeout(120000)
-        })
-            .then(res => res.json())
-            .then(body => {
-                console.log(`response from API:`, body)
-                setIsSubmitted(body)
-            }).catch(err => {
-                console.error(`Error updating calendar:`, err)
-                setIsSubmitted(`Error updating calendar: ${err}`)
-            })
-    }
 
-    if (isSubmitted === 'spinner') {
-        return (
-            <div className="signup form-container">
-                <h2>Please wait</h2>
-                <p>Updating the calendar and sending invites...</p>
-            </div>
-        )
-    } else if (isSubmitted) {
-        if (isSubmitted === 'success') {
-            return (
-                <div className="signup form-container">
-                    <h2>Thank you for signing up!</h2>
-                    <p>Please check your inbox for your calendar invites.</p>
-                </div>
-            )
-        } else {
-            return (
-                <div className="signup result-container">
-                    <h2>Thank you for signing up!</h2>
-                    <h3>Your invites should arrive within the hour. If this doesn't happen, please relay this info to help@finos.org:</h3>
-                    <pre>{isSubmitted}</pre>
-                </div>
-            )
+        for (const eventId of eventIds) {
+            setSubmissionStatus(prev => ({ ...prev, [eventId]: 'submitting' }))
+
+            try {
+                const body = JSON.stringify({
+                    ...data,
+                    eventId
+                })
+
+                const response = await fetch(`/api/signup-submit`, {
+                    method: `POST`,
+                    body,
+                    headers: {
+                        "content-type": `application/json`,
+                    },
+                    signal: AbortSignal.timeout(120000)
+                })
+
+                const result = await response.json()
+                setSubmissionStatus(prev => ({ ...prev, [eventId]: 'success' }))
+            } catch (err) {
+                console.error(`Error updating calendar for event ${eventId}:`, err)
+                setSubmissionStatus(prev => ({ ...prev, [eventId]: `Error: ${err.message}` }))
+            }
         }
-    } else {
-        return (
-            <div className="signup form-container">
-                <h2>Sign Up For Events</h2>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input id="email" {...register("email", { required: true })} />
-                        {errors.email && <span className="error">This field is required</span>}
-                    </div>
-
-                    <div className="form-group">
-                        <label>Select Events</label>
-                        <div className="event-checkboxes">
-                            {matchingEvents.map(event => (
-                                <div key={event.uid} className="event-checkbox">
-                                    <input
-                                        type="checkbox"
-                                        id={`event-${event.uid}`}
-                                        value={event.uid}
-                                        {...register("eventIds")}
-                                    />
-                                    <label htmlFor={`event-${event.uid}`}>
-                                        {event.title}
-                                    </label>
-                                </div>
-                            ))}
-                        </div>
-                        {errors.eventIds && <span className="error">Please select at least one event</span>}
-                    </div>
-
-                    <button type="submit">Sign Up</button>
-                </form>
-            </div>
-        )
     }
+
+    const getStatusIcon = (status) => {
+        switch (status) {
+            case 'submitting':
+                return <span className="spinner">⏳</span>
+            case 'success':
+                return <span className="success">✓</span>
+            case 'pending':
+                return null
+            default:
+                return <span className="error">⚠️</span>
+        }
+    }
+
+    return (
+        <div className="signup form-container">
+            <h2>Sign Up For Events</h2>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <input id="email" {...register("email", { required: true })} />
+                    {errors.email && <span className="error">This field is required</span>}
+                </div>
+
+                <div className="form-group">
+                    <label>Select Events</label>
+                    <div className="event-checkboxes">
+                        {matchingEvents.map(event => (
+                            <div key={event.uid} className="event-checkbox">
+                                <input
+                                    type="checkbox"
+                                    id={`event-${event.uid}`}
+                                    value={event.uid}
+                                    {...register("eventIds")}
+                                    disabled={submissionStatus[event.uid] === 'submitting' || submissionStatus[event.uid] === 'success'}
+                                />
+                                <label htmlFor={`event-${event.uid}`}>
+                                    {event.title}
+                                </label>
+                                {getStatusIcon(submissionStatus[event.uid])}
+                                {submissionStatus[event.uid]?.startsWith('Error') && (
+                                    <span className="error-message">{submissionStatus[event.uid]}</span>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                    {errors.eventIds && <span className="error">Please select at least one event</span>}
+                </div>
+
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    )
 }
