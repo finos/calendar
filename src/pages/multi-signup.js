@@ -41,14 +41,16 @@ export default function App({ location }) {
 
     const onSubmit = data => {
         setIsSubmitted('spinner')
-        // Join the selected event IDs with commas to match the existing API format
-        const eventIds = data.eventIds.join(',')
+        // Ensure eventIds is an array before joining
+        const eventIds = Array.isArray(data.eventIds) ? data.eventIds : [data.eventIds]
+        const body = JSON.stringify({
+            ...data,
+            eventId: eventIds.join(',')
+        })
+        console.log(`body:`, body)
         fetch(`/api/signup-submit`, {
             method: `POST`,
-            body: JSON.stringify({
-                ...data,
-                eventId: eventIds
-            }),
+            body,
             headers: {
                 "content-type": `application/json`,
             },
@@ -103,14 +105,14 @@ export default function App({ location }) {
                         <label>Select Events</label>
                         <div className="event-checkboxes">
                             {matchingEvents.map(event => (
-                                <div key={event.id} className="event-checkbox">
+                                <div key={event.uid} className="event-checkbox">
                                     <input
                                         type="checkbox"
-                                        id={`event-${event.id}`}
-                                        value={event.id}
+                                        id={`event-${event.uid}`}
+                                        value={event.uid}
                                         {...register("eventIds")}
                                     />
-                                    <label htmlFor={`event-${event.id}`}>
+                                    <label htmlFor={`event-${event.uid}`}>
                                         {event.title}
                                     </label>
                                 </div>
