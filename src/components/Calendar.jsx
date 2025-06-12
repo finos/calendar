@@ -10,6 +10,7 @@ import {
   mdiClock,
   mdiClose,
   mdiMapMarkerOutline,
+  mdiMagnify,
 } from '@mdi/js';
 import Icon from '@mdi/react';
 import parse from 'html-react-parser';
@@ -43,10 +44,27 @@ function Calendar() {
   const [eventDetails, setEventDetails] = useState(false);
   const [aspectRatio, setAspectRatio] = useState(getAspectRatio());
   const [initialView, setInitialView] = useState(getInitialView());
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEscKey(() => setShowEventDetails(false));
 
   const [popupPosition, setPopupPosition] = useState({});
+
+  // Filter events based on search term
+  const filteredEvents = useMemo(() => {
+    if (!searchTerm) return events;
+
+    const searchLower = searchTerm.toLowerCase();
+    return events.filter(event => {
+      const title = event.title?.toLowerCase() || '';
+      const description = event.extendedProps?.description?.toLowerCase() || '';
+      const location = event.extendedProps?.location?.toLowerCase() || '';
+
+      return title.includes(searchLower) ||
+        description.includes(searchLower) ||
+        location.includes(searchLower);
+    });
+  }, [searchTerm]);
 
   const windowResize = () => {
     setAspectRatio(getAspectRatio());
@@ -201,7 +219,7 @@ function Calendar() {
         aspectRatio={aspectRatio}
         handleWindowResize={true}
         windowResize={windowResize}
-        events={events}
+        events={filteredEvents}
         headerToolbar={{
           left: 'prev,next today',
           center: 'title',
@@ -216,12 +234,41 @@ function Calendar() {
         loading={(isLoading) => setLoading(isLoading)}
       />
     ),
-    [aspectRatio, initialView, calendarRef, handleEventClick]
+    [aspectRatio, initialView, calendarRef, handleEventClick, filteredEvents]
   );
 
   return (
     <div className="content">
       <div data-testid="finos-calendar" className="finos-calendar">
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1rem',
+          marginBottom: '1rem'
+        }}>
+          <div className="search-container" style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            justifyContent: 'center',
+            width: '100%'
+          }}>
+            <Icon path={mdiMagnify} size={1} />
+            <input
+              type="text"
+              placeholder="Search events..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              style={{
+                padding: '0.5rem',
+                borderRadius: '4px',
+                border: '1px solid #ccc',
+                width: '300px',
+                fontSize: '1rem'
+              }}
+            />
+          </div>
+        </div>
         {renderFullCalendar}
       </div>
       {showEventDetails && renderEventDetails()}
