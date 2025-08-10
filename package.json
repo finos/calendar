@@ -52,6 +52,6 @@
     "async": "^2.6.4",
     "axios": "^1.8.3",
     "webpack-dev-middleware": "^5.3.4",
-    "path-to-regexp": "^0.1.12"
+    "path-to-regexp": "^8.0.0"
   }
 }
