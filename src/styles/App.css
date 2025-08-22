@@ -48,21 +48,21 @@ body {
 
 button.fc-button {
   flex: 1;
-  height: auto !important;
+  height: auto;
   min-height: 2rem;
-  text-transform: none !important;
-  font-weight: normal !important;
-  padding: 0.4em 0.6em !important;
-  font-size: 1em !important;
-  line-height: 1.5 !important;
-  white-space: nowrap !important;
-  overflow: visible !important;
-  text-overflow: clip !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  margin: 0 !important;
-  border-radius: 0 !important;
+  text-transform: none;
+  font-weight: normal;
+  padding: 0.4em 0.6em;
+  font-size: 1em;
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  border-radius: 0;
 }
 
 button.fc-button.finos-calendar-event-details-close {
@@ -126,47 +126,46 @@ button.fc-button.finos-calendar-event-details-close img {
 }
 
 .fc-button-primary {
-  background-color: #2c3e50 !important;
-  border-color: #2c3e50 !important;
+  background-color: #2c3e50;
+  border-color: #2c3e50;
 }
 
 .fc-button-primary:hover {
-  background-color: #34495e !important;
-  border-color: #34495e !important;
+  background-color: #34495e;
+  border-color: #34495e;
 }
 
 .fc-button-primary:disabled {
-  background-color: #95a5a6 !important;
-  border-color: #95a5a6 !important;
+  background-color: #95a5a6;
+  border-color: #95a5a6;
 }
 
 .fc-toolbar-title {
-  font-size: 1.2em !important;
-  margin: 0.5em 0 !important;
+  font-size: 1.2em;
+  margin: 0.5em 0;
 }
 
 .fc-toolbar {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 0 !important;
-  padding: 0.5em !important;
+  flex-wrap: wrap;
+  gap: 0;
+  padding: 0.5em;
 }
 
 .fc-toolbar-chunk {
-  display: flex !important;
-  align-items: center !important;
-  gap: 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 0;
 }
 
 .finos-calendar-event-details a {
-  color: #0066cc !important;
-  text-decoration: underline !important;
-  font-weight: 500 !important;
+  color: #0066cc;
+  text-decoration: underline;
+  font-weight: 500;
 }
 
 .finos-calendar-event-details a:hover {
-  color: #004499 !important;
-  text-decoration: none !important;
+  color: #004499;
+  text-decoration: none;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -192,16 +191,38 @@ button.fc-button.finos-calendar-event-details-close img {
 }
 
 @media only screen and (max-width: 600px) {
+  .finos-calendar {
+    min-width: 275px;
+  }
+
+  .fc-toolbar-chunk {
+    display: block;
+    text-align: center;
+    line-height: 3rem;
+  }
+
   .finos-calendar-event-details {
     width: 90%;
     height: 100%;
     top: 0;
     left: 0;
   }
+
+  .fc table {
+    font-size: 1.25em;
+  }
+
+  .fc .fc-daygrid-event {
+    margin-top: 0.5em;
+    white-space: wrap;
+  }
+
+  .fc-event div {
+    display: inline;
+  }
 }
 
 @media only screen and (prefers-color-scheme: dark) {
-
   body,
   .finos-calendar,
   .finos-calendar-event-details,
@@ -224,13 +245,13 @@ button.fc-button.finos-calendar-event-details-close img {
   }
 
   .finos-calendar-event-details a {
-    color: #66b3ff !important;
-    text-decoration: underline !important;
-    font-weight: 500 !important;
+    color: #66b3ff;
+    text-decoration: underline;
+    font-weight: 500;
   }
 
   .finos-calendar-event-details a:hover {
-    color: #99ccff !important;
-    text-decoration: none !important;
+    color: #99ccff;
+    text-decoration: none;
   }
 }
