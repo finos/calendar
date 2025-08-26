@@ -35,7 +35,7 @@ async function addAttendeeToEvent(api, calendarId, event, email, addForReal) {
   console.log(`Adding attendee to `, event.id, event.start, event.summary, addForReal)
 
   const newAttendees = [
-    ...event.attendees,
+    ...(event?.attendees || []),
     {
       email: email,
     },
