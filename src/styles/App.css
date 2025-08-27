@@ -196,6 +196,10 @@ button.fc-button.finos-calendar-event-details-close img {
     font-size: 0.35em;
   }
 
+  .fc-daygrid-event .fc-event-title {
+    font-size: 2em;
+  }
+
   .fc-toolbar-chunk {
     display: block;
     text-align: center;
