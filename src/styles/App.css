@@ -193,6 +193,7 @@ button.fc-button.finos-calendar-event-details-close img {
 @media only screen and (max-width: 600px) {
   .finos-calendar {
     min-width: 275px;
+    font-size: 0.35em;
   }
 
   .fc-toolbar-chunk {
@@ -213,16 +214,41 @@ button.fc-button.finos-calendar-event-details-close img {
   }
 
   .fc .fc-daygrid-event {
-    margin-top: 0.5em;
-    white-space: wrap;
+    min-height: fit-content;
+    white-space: normal;
+  }
+
+  .fc-dayGridWeek-view .fc-daygrid-day-frame {
+    padding-top: 2em;
   }
 
   .fc-event div {
     display: inline;
   }
+
+  .fc .fc-event-time {
+    display: none;
+  }
+
+  .fc-dayGridMonth-view .fc-daygrid-event-dot {
+    border: calc(var(--fc-daygrid-event-dot-width) / 4) solid var(--fc-event-border-color);
+  }
+
+  .fc-dayGridWeek-view .fc-daygrid-event-dot {
+    border: calc(var(--fc-daygrid-event-dot-width) / 4) solid var(--fc-event-border-color);
+  }
+
+  .fc-dayGridDay-view .fc-daygrid-event-dot {
+    border: calc(var(--fc-daygrid-event-dot-width) / 4) solid var(--fc-event-border-color);
+  }
+
+  .fc-popover-body .fc-daygrid-event-dot {
+    border: calc(var(--fc-daygrid-event-dot-width) / 4) solid var(--fc-event-border-color);
+  }
 }
 
 @media only screen and (prefers-color-scheme: dark) {
+
   body,
   .finos-calendar,
   .finos-calendar-event-details,
