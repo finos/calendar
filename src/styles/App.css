@@ -196,7 +196,11 @@ button.fc-button.finos-calendar-event-details-close img {
     font-size: 0.35em;
   }
 
-  .fc-daygrid-event .fc-event-title {
+  .fc-dayGridDay-view .fc-daygrid-event .fc-event-title {
+    font-size: 2em;
+  }
+
+  .fc-dayGridDay-view .fc-daygrid-event .fc-event-time {
     font-size: 2em;
   }
 
@@ -230,7 +234,11 @@ button.fc-button.finos-calendar-event-details-close img {
     display: inline;
   }
 
-  .fc .fc-event-time {
+  .fc-dayGridMonth-view .fc-event-time {
+    display: none;
+  }
+
+  .fc-dayGridWeek-view .fc-event-time {
     display: none;
   }
 
