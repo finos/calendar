@@ -226,6 +226,10 @@ button.fc-button.finos-calendar-event-details-close img {
     white-space: normal;
   }
 
+  .fc .fc-popover {
+    font-size: 2em;
+  }
+
   .fc-dayGridWeek-view .fc-daygrid-day-frame {
     padding-top: 2em;
   }
