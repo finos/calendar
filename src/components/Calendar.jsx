@@ -55,20 +55,22 @@ function Calendar() {
     if (!searchTerm) return events;
 
     const searchLower = searchTerm.toLowerCase();
-    return events.filter(event => {
+    return events.filter((event) => {
       const title = event.title?.toLowerCase() || '';
       const description = event.extendedProps?.description?.toLowerCase() || '';
       const location = event.extendedProps?.location?.toLowerCase() || '';
 
-      return title.includes(searchLower) ||
+      return (
+        title.includes(searchLower) ||
         description.includes(searchLower) ||
-        location.includes(searchLower);
+        location.includes(searchLower)
+      );
     });
   }, [searchTerm]);
 
   const windowResize = () => {
     setAspectRatio(getAspectRatio());
-    setInitialView(isMinWidth() ? 'dayGridMonth' : 'timeGridWeek');
+    setInitialView(isMinWidth() ? 'dayGridMonth' : 'dayGridDay');
     setShowEventDetails(false);
     !isMinWidth() && setPopupPosition({ left: 0, top: 0 });
   };
@@ -168,7 +170,6 @@ function Calendar() {
         style={popupPosition}
       >
         <div className="event-details-buttons">
-
           <button onClick={() => {
             if (zoomLfxLink) {
               window.open(zoomLfxLink, '_blank');
@@ -240,7 +241,7 @@ function Calendar() {
         headerToolbar={{
           left: 'prev,next today',
           center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay',
+          right: 'dayGridMonth,dayGridWeek,dayGridDay',
         }}
         dayMaxEventRows={999}
         initialDate={new Date().toISOString().slice(0, 10)}
@@ -257,19 +258,24 @@ function Calendar() {
   return (
     <div className="content">
       <div data-testid="finos-calendar" className="finos-calendar">
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1rem',
-          marginBottom: '1rem'
-        }}>
-          <div className="search-container" style={{
+        <div
+          style={{
             display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            justifyContent: 'center',
-            width: '100%'
-          }}>
+            flexDirection: 'column',
+            gap: '1rem',
+            marginBottom: '1rem',
+          }}
+        >
+          <div
+            className="search-container"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              justifyContent: 'center',
+              width: '100%',
+            }}
+          >
             <Icon path={mdiMagnify} size={1} />
             <input
               type="text"
@@ -281,7 +287,7 @@ function Calendar() {
                 borderRadius: '4px',
                 border: '1px solid #ccc',
                 width: '300px',
-                fontSize: '1rem'
+                fontSize: '1rem',
               }}
             />
           </div>

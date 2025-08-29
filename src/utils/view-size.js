@@ -15,9 +15,8 @@ export function getAspectRatio() {
 }
 
 export function getInitialView() {
-  return isBrowser()
-    ? window.outerWidth > 600
-      ? 'dayGridMonth'
-      : 'timeGridWeek'
-    : 'dayGridMonth';
+  if (!isBrowser()) {
+    return 'dayGridMonth';
+  }
+  return isMinWidth() ? 'dayGridMonth' : 'dayGridDay';
 }
