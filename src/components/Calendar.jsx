@@ -155,6 +155,13 @@ function Calendar() {
         formattedDescription = replaceUrlsWithAnchorTags(description);
     }
 
+    const zoomLfxLink = (() => {
+      if (!eventDetails.extendedProps.description) return null;
+      const regex = /(https:\/\/zoom-lfx\.platform[^\s"'<>]*\binvite=true\b[^\s"'<>]*)/g;
+      const matches = [...eventDetails.extendedProps.description.matchAll(regex)];
+      return matches.length > 0 ? matches[0][1] : null;
+    })();
+
     return (
       <div
         ref={eventDetailRef}
@@ -163,15 +170,13 @@ function Calendar() {
         style={popupPosition}
       >
         <div className="event-details-buttons">
-          <button
-            onClick={() =>
-              window.open(
-                `/signup?eventId=${encodeURIComponent(
-                  eventDetails.extendedProps.uid
-                )}&title=${encodeURIComponent(eventDetails.title)}`,
-                '_blank'
-              )
+          <button onClick={() => {
+            if (zoomLfxLink) {
+              window.open(zoomLfxLink, '_blank');
+            } else {
+              window.open(`/signup?eventId=${encodeURIComponent(eventDetails.extendedProps.uid)}&title=${encodeURIComponent(eventDetails.title)}`, '_blank');
             }
+          }}
             className="fc-button"
           >
             Invite Me
