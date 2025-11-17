@@ -32,8 +32,10 @@ const calendar = google.calendar({ version: 'v3', auth });
 // Used to divide API requests in 2: past and future,
 // to avoid the 2500 events limit
 // This can be easily improved (TODO)
-const cutoffDate = '2024-01-01T00:00:00Z';
-const limitFutureDate = '2026-01-01T00:00:00Z';
+// Dynamically calculate dates based on current date
+const now = new Date();
+const cutoffDate = new Date(now.getFullYear(), now.getMonth() - 6, now.getDate()).toISOString(); // 6 months ago
+const limitFutureDate = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate()).toISOString(); // 1 year in the future
 
 // We collect the unique root recurring events
 // to generate the correct ICS (iCal) format
@@ -140,29 +142,29 @@ function getApiOptions(options) {
 // If results hit the limit of 2500 entries, an error is thrown
 // Accepts additional options to pass to the API
 async function getGoogleEvents(queryName, dynamicOptions) {
-	let allItems = [];
-	let nextPageToken = null;
+  let allItems = [];
+  let nextPageToken = null;
 
   // Loop to fetch events until there are no more pages
-	do {
+  do {
     // If nextPageToken is not null, set it in dynamicOptions to fetch the next page
-		if (nextPageToken) {
-			dynamicOptions.set('pageToken', nextPageToken);
-		}
+    if (nextPageToken) {
+      dynamicOptions.set('pageToken', nextPageToken);
+    }
 
-		const itemsAsync = await calendar.events.list(getApiOptions(dynamicOptions));
-		const items = itemsAsync.data.items;
-		allItems = allItems.concat(items);
+    const itemsAsync = await calendar.events.list(getApiOptions(dynamicOptions));
+    const items = itemsAsync.data.items;
+    allItems = allItems.concat(items);
     // set page token for the next iteration
-		nextPageToken = itemsAsync.data.nextPageToken;
-	} while (nextPageToken);
+    nextPageToken = itemsAsync.data.nextPageToken;
+  } while (nextPageToken);
 
-	if (allItems.length == 0) {
-		throw new Error(queryName + ' No events returned!');
-	} else {
-		console.log(queryName + ' Events retrieved:', allItems.length);
-	}
-	return allItems;
+  if (allItems.length == 0) {
+    throw new Error(queryName + ' No events returned!');
+  } else {
+    console.log(queryName + ' Events retrieved:', allItems.length);
+  }
+  return allItems;
 }
 
 // Fetches events from Google API and transforms them
