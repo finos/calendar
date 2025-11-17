@@ -32,8 +32,10 @@ const calendar = google.calendar({ version: 'v3', auth });
 // Used to divide API requests in 2: past and future,
 // to avoid the 2500 events limit
 // This can be easily improved (TODO)
-const cutoffDate = '2025-01-01T00:00:00Z';
-const limitFutureDate = '2027-01-01T00:00:00Z';
+// Dynamically calculate dates based on current date
+const now = new Date();
+const cutoffDate = new Date(now.getFullYear(), now.getMonth() - 6, now.getDate()).toISOString(); // 6 months ago
+const limitFutureDate = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate()).toISOString(); // 1 year in the future
 
 // We collect the unique root recurring events
 // to generate the correct ICS (iCal) format
