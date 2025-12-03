@@ -51,7 +51,7 @@
   "overrides": {
     "async": "^2.6.4",
     "axios": "^1.8.3",
-    "webpack-dev-middleware": "^5.3.4",
+    "webpack-dev-middleware": "^7.0.0",
     "path-to-regexp": "^0.1.12"
   }
 }
