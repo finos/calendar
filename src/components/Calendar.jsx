@@ -157,9 +157,14 @@ function Calendar() {
 
     const zoomLfxLink = (() => {
       if (!eventDetails.extendedProps.description) return null;
-      const regex = /(https:\/\/zoom-lfx\.platform[^\s"'<>]*\binvite=true\b[^\s"'<>]*)/g;
+      // Match both & and &amp; patterns for invite=true
+      const regex = /(https:\/\/zoom-lfx\.platform[^\s"'<>]*(?:&|&amp;)invite=true[^\s"'<>]*)/g;
       const matches = [...eventDetails.extendedProps.description.matchAll(regex)];
-      return matches.length > 0 ? matches[0][1] : null;
+      if (matches.length > 0) {
+        // Decode HTML entities (e.g., &amp; -> &)
+        return matches[0][1].replace(/&amp;/g, '&');
+      }
+      return null;
     })();
 
     return (
