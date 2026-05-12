@@ -51,14 +51,11 @@
   "overrides": {
     "async": "^2.6.4",
     "axios": "^1.8.3",
-    "webpack-dev-middleware": "^5.3.4",
-    "path-to-regexp": "^0.1.13",
     "cookie": ">=0.7.0",
     "webpack": ">=5.105.0",
     "serialize-javascript": ">=7.0.5",
     "qs": ">=6.14.2",
     "lodash": ">=4.17.24",
-    "immutable": ">=3.8.3",
-    "tmp": ">=0.2.4"
+    "immutable": ">=3.8.3"
   }
 }
