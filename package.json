@@ -31,6 +31,7 @@
     "@fullcalendar/react": "^6.1.10",
     "@fullcalendar/rrule": "^6.1.10",
     "@fullcalendar/timegrid": "^6.1.10",
+    "@gatsbyjs/reach-router": "^2.0.1",
     "@mdi/js": "^7.3.67",
     "@mdi/react": "^1.6.1",
     "encoding": "^0.1.13",
