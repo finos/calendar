@@ -36,7 +36,7 @@
     "encoding": "^0.1.13",
     "fastestsmallesttextencoderdecoder": "^1.0.22",
     "gatsby": "^5.16.1",
-    "googleapis": "^171.0.0",
+    "googleapis": "^172.0.0",
     "html-react-parser": "^5.0.7",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
