@@ -1,3 +1,11 @@
+[![FINOS - Archived](https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@master/images/badge-archived.svg)](https://community.finos.org/docs/governance/lifecycle-stages/archived)
+
+> [!WARNING]
+> **This repository is archived and in a read-only state.**
+> You are welcome to download, clone, or fork this code, but please be aware that it is no longer actively maintained and may contain bugs or security vulnerabilities.
+>
+> **Interested in reviving this project?** If you would like to restore development activities, please contact the team at help@finos.org.
+
 # FINOS Calendar
 
 This code builds the page hosted on https://calendar.finos.org , which is also embedded on https://www.finos.org/calendar , in order to provide a fully hosted solution that shows all events in the [FINOS Community (Google) Calendar](https://calendar.google.com/calendar/embed?src=symphony.foundation_6g70j7s80813djmj9q7gmgdjuc%40group.calendar.google.com&ctz=Europe%2FMadrid) that can be correctly visualised also behind a corporate firewall.
