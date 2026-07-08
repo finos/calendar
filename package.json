@@ -37,7 +37,7 @@
     "fastestsmallesttextencoderdecoder": "^1.0.22",
     "gatsby": "^5.16.1",
     "googleapis": "^171.0.0",
-    "html-react-parser": "^5.0.7",
+    "html-react-parser": "^6.0.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-hook-form": "^7.54.0"
