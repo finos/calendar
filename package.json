@@ -43,7 +43,7 @@
     "react-hook-form": "^7.54.0"
   },
   "devDependencies": {
-    "html-to-text": "^9.0.5",
+    "html-to-text": "^10.0.0",
     "ical-generator": "^9.0.0",
     "mkdirp": "^3.0.1",
     "rimraf": "^6.0.1"
