@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="FINOS community event calendar — LFX project meetings and custom FINOS events in one place."
+    />
+    <meta name="theme-color" content="#00b5e2" id="theme-color-meta" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="FINOS Event Calendar" />
+    <meta
+      property="og:description"
+      content="FINOS community event calendar — LFX project meetings and custom FINOS events in one place."
+    />
+    <meta property="og:url" content="https://calendar.finos.org/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <title>FINOS Event Calendar</title>
+    <script>
+      (function () {
+        var saved = localStorage.getItem('finos-calendar-theme');
+        var theme =
+          saved === 'light' || saved === 'dark'
+            ? saved
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+        var themeColor = document.getElementById('theme-color-meta');
+        if (themeColor) {
+          themeColor.content = theme === 'dark' ? '#0a3a48' : '#00b5e2';
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

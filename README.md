@@ -1,94 +1,65 @@
-[![FINOS - Archived](https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@master/images/badge-archived.svg)](https://community.finos.org/docs/governance/lifecycle-stages/archived)
-
-> [!WARNING]
-> **This repository is archived and in a read-only state.**
-> You are welcome to download, clone, or fork this code, but please be aware that it is no longer actively maintained and may contain bugs or security vulnerabilities.
->
-> **Interested in reviving this project?** If you would like to restore development activities, please contact the team at help@finos.org.
-
 # FINOS Calendar
 
-This code builds the page hosted on https://calendar.finos.org , which is also embedded on https://www.finos.org/calendar , in order to provide a fully hosted solution that shows all events in the [FINOS Community (Google) Calendar](https://calendar.google.com/calendar/embed?src=symphony.foundation_6g70j7s80813djmj9q7gmgdjuc%40group.calendar.google.com&ctz=Europe%2FMadrid) that can be correctly visualised also behind a corporate firewall.
+This app powers [calendar.finos.org](https://calendar.finos.org), which is also embedded on [finos.org/calendar](https://www.finos.org/calendar). It overlays two **live ICS feeds**:
 
-A Github action runs periodically to fetch events using Google APIs (see [src/googleapi2events.js](src/googleapi2events.js)) and renders out a JSON file in `dist/events.json`.
+- **LFX meetings** from the Linux Foundation LFX calendar Worker
+- **Custom events** from the writable FINOS Google Calendar (`finos.org_fac8mo1rfc6ehscg0d80fi8jig@group.calendar.google.com`)
 
-The calendar is visualized in HTML using React and [FullCalendar](https://fullcalendar.io/).
+The page fetches those feeds at runtime through same-origin proxies (`/feeds/lfx.ics` and `/feeds/custom.ics`). A merged subscribe feed is available at [`/calendar.ics`](/calendar.ics). Feeds only include events from the past month through the next 18 months.
+
+## Adding events
+
+- Recurring LFX project meetings belong in [LFX Project Control Center](https://projectadmin.lfx.linuxfoundation.org/).
+- Events LFX cannot represent yet go on the **old FINOS Google Calendar only**. Do not add LFX meetings there, or they will appear twice. The Google **import** calendar (`@import.calendar.google.com`) is read-only and is not used by this app.
 
 ## Prerequisites
 
-- Node.js, npm and GPG(/GNUPG) installed on your machine.
+- Node.js 20+
 
-## Getting Started
-
-1. Clone the repository:
+## Getting started
 
 ```bash
 git clone https://github.com/finos/calendar.git
 cd calendar
+cp .env.example .env
 ```
 
-2. Download `calendar-service-account.json` into the project's root folder.
-
-In order to use the Google Calendar API you will need to follow [these 5 steps](https://developers.google.com/workspace/guides/get-started) to generate the necessary credentials for a Service Account. Once you have the credentials store them in the root folder of the project in a file named `calendar-service-account.json`.
-
-### Encrypting Google Service Account key
-
-```
-gpg --symmetric --cipher-algo AES256 calendar-service-account.json
-```
-
-:::note FINOS-Specific
-
-Following this procedure creates the file `calendar-service-account.json.gpg` which can be safely committed to the repository. The decryption key for the checked-in version of this file can be found in the FINOS 1 Password folder.
-
-:::
-
-### Decrypting Google Service Account key
-
-```
-gpg --decrypt calendar-service-account.json.gpg > calendar-service-account.json
-```
-
-### Creating An Environment Variable for the Google Service Account Key
-
-`````
-export GOOGLE_APPLICATION_CREDENTIALS=`cat calendar-service-account.json````
-`````
-
-This will be used by Gatsby's endpoints for the Google Calendar API.
-
-### Install the dependencies:
+Set `LFX_ICS_URL` in `.env` to the LFX Worker URL including the token. Optionally override `GOOGLE_CUSTOM_ICS_URL` (it defaults to the public ICS of the writable FINOS Google Calendar).
 
 ```bash
 npm install
-```
-
-### Import events from Google API
-
-Create a new directory named `dist` in the root directory and run :
-
-```bash
-npm run get-events
-```
-
-Copy `events.json` from `dist` to root directory.
-
-### Run development server (Gatsby)
-
-```bash
 npm start
 ```
 
-Open browser to `http://localhost:8000/`.
+Open [http://localhost:5173/](http://localhost:5173/).
 
-### Live environment
+### Production env vars (Netlify)
 
-https://calendar.finos.org is served by Github Pages and deployed by the [build.yml](.github/workflows/build.yml) Github Action.
+| Name | Required | Purpose |
+| --- | --- | --- |
+| `LFX_ICS_URL` | yes | Full LFX Worker ICS URL, including `?token=` |
+| `GOOGLE_CUSTOM_ICS_URL` | no | Public Google Calendar `basic.ics` for custom events |
 
-### Tests
+Do not commit the LFX token. It is only used server-side by the ICS proxy.
 
-Tests are implemented using [testing-library/react](https://testing-library.com/docs/react-testing-library/intro) and [vitest](https://vitest.dev/).
+### Scripts
 
 ```bash
-npm run test
+npm start      # Vite dev server (proxies ICS feeds)
+npm test       # Vitest
+npm run build  # Vite production build
+npm run lint   # ESLint
+```
+
+## Subscribe / embed
+
+- Live combined ICS: `https://calendar.finos.org/calendar.ics`
+- The site may be framed by `https://www.finos.org` and `https://finos.org` (`Content-Security-Policy: frame-ancestors`).
+
+Clicking **Invite Me** on an LFX meeting opens the Zoom LFX registration page (`invite=true`). Custom Google events do not have that flow; use **Event ICS** or the event location instead.
+
+## Tests
+
+```bash
+npm test
 ```

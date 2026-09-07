@@ -5,305 +5,308 @@ import FullCalendar from '@fullcalendar/react';
 import rrulePlugin from '@fullcalendar/rrule';
 import timeGridPlugin from '@fullcalendar/timegrid';
 
-import {
-  mdiCalendarRange,
-  mdiClock,
-  mdiClose,
-  mdiMapMarkerOutline,
-  mdiMagnify,
-} from '@mdi/js';
+import { mdiMagnify } from '@mdi/js';
 import Icon from '@mdi/react';
-import parse from 'html-react-parser';
-import React, {
-  createRef,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import { useMemo, useRef, useState } from 'react';
 
-import events from '../../dist/events.json';
-import useEscKey from '../hooks/useEscKey';
-import { printDate, printTime } from '../utils/date-time';
-import { downloadICSFile } from '../utils/ics-download';
-import { htmlRegex } from '../utils/regex';
+import EventDetails from './EventDetails.jsx';
+import useEscKey from '../hooks/useEscKey.jsx';
+import { eventMatchesSearch } from '../utils/event-search.js';
 import {
-  extractAnchors,
-  extractUrls,
-  replaceUrlsWithAnchorTags,
-} from '../utils/url-to-link';
-import { getAspectRatio, getInitialView, isMinWidth } from '../utils/view-size';
+  eventRangesFromCalendar,
+  hiddenWeekendDays,
+  sameHiddenDays,
+} from '../utils/hidden-weekends.js';
+import { popupPositionFromClick } from '../utils/popup-position.js';
+import { getAspectRatio, getInitialView, isMinWidth } from '../utils/view-size.js';
 
-function Calendar() {
-  const calendarRef = createRef();
-  const eventDetailRef = createRef();
+const LFX_COLOR = {
+  backgroundColor: '#e5f6fb',
+  borderColor: '#00b5e2',
+  textColor: '#063542',
+};
+
+const CUSTOM_COLOR = {
+  backgroundColor: '#fff4e0',
+  borderColor: '#d97706',
+  textColor: '#633806',
+};
+
+const SOURCE_LABELS = {
+  lfx: 'LFX meetings',
+  custom: 'custom events',
+};
+
+function renderDayHeader(arg) {
+  if (arg.view.type === 'dayGridMonth') {
+    return arg.text;
+  }
+
+  return (
+    <span className={arg.isToday ? 'cal-dow cal-dow-today' : 'cal-dow'}>
+      <span className="cal-dow-name">
+        {arg.date.toLocaleDateString(undefined, { weekday: 'short' })}
+      </span>
+      <span className="cal-dow-num">{arg.date.getDate()}</span>
+    </span>
+  );
+}
+
+function feedLabelFromFailure(error) {
+  const message = error?.message?.toLowerCase() || '';
+  const url = error?.xhr?.responseURL || error?.url || '';
+  const target = `${message} ${url}`.toLowerCase();
+  if (target.includes('lfx')) return SOURCE_LABELS.lfx;
+  if (target.includes('custom')) return SOURCE_LABELS.custom;
+  return 'calendar feeds';
+}
+
+function userFacingLoadError(failedSources) {
+  if (failedSources.length === 0) {
+    return 'Could not load calendar events. Please try again.';
+  }
+  if (failedSources.length === 1) {
+    return `Could not load ${failedSources[0]}. Other events may still appear.`;
+  }
+  return 'Could not load calendar events. Please try again.';
+}
+
+export default function Calendar() {
+  const calendarRef = useRef(null);
+  const activeEventEl = useRef(null);
 
   const [loading, setLoading] = useState(true);
-  const [clickedEvent, setClickedEvent] = useState([]);
   const [showEventDetails, setShowEventDetails] = useState(false);
-  const [eventDetails, setEventDetails] = useState(false);
+  const [eventDetails, setEventDetails] = useState(null);
   const [aspectRatio, setAspectRatio] = useState(getAspectRatio());
-  const [initialView, setInitialView] = useState(getInitialView());
+  const [initialView] = useState(getInitialView());
   const [searchTerm, setSearchTerm] = useState('');
-
-  useEscKey(() => setShowEventDetails(false));
-
+  const [searchMatchCount, setSearchMatchCount] = useState(null);
   const [popupPosition, setPopupPosition] = useState({});
+  const [failedSources, setFailedSources] = useState([]);
+  const [hiddenDays, setHiddenDays] = useState([]);
 
-  // Filter events based on search term
-  const filteredEvents = useMemo(() => {
-    if (!searchTerm) return events;
+  const loadError = failedSources.length > 0 ? userFacingLoadError(failedSources) : null;
 
-    const searchLower = searchTerm.toLowerCase();
-    return events.filter((event) => {
-      const title = event.title?.toLowerCase() || '';
-      const description = event.extendedProps?.description?.toLowerCase() || '';
-      const location = event.extendedProps?.location?.toLowerCase() || '';
+  const updateSearchMatchCount = (term) => {
+    const query = term.trim();
+    if (!query) {
+      setSearchMatchCount(null);
+      return;
+    }
+    const api = calendarRef.current?.getApi();
+    if (!api) return;
+    const count = api
+      .getEvents()
+      .filter((event) => eventMatchesSearch(event, term)).length;
+    setSearchMatchCount(count);
+  };
 
-      return (
-        title.includes(searchLower) ||
-        description.includes(searchLower) ||
-        location.includes(searchLower)
-      );
-    });
-  }, [searchTerm]);
+  const closeEventDetails = () => {
+    const eventEl = activeEventEl.current;
+    setShowEventDetails(false);
+    setEventDetails(null);
+    if (eventEl) {
+      eventEl.classList.remove('active-event');
+      activeEventEl.current = null;
+      eventEl.focus();
+    }
+  };
+
+  useEscKey(closeEventDetails);
 
   const windowResize = () => {
     setAspectRatio(getAspectRatio());
-    setInitialView(isMinWidth() ? 'dayGridMonth' : 'dayGridDay');
-    setShowEventDetails(false);
-    !isMinWidth() && setPopupPosition({ left: 0, top: 0 });
+    closeEventDetails();
+    if (!isMinWidth()) setPopupPosition({});
   };
 
-  const createPopupPosition = (event) => {
-    const popup = { width: 330, height: 450 };
-    let position = { top: event.pageY + 20, left: event.pageX + 50 };
-    if (
-      event.pageX + popup.width + 140 > window.outerWidth ||
-      event.pageY + popup.height + 20 > document.body.scrollHeight
-    ) {
-      if (event.pageX + popup.width + 140 > window.outerWidth) {
-        position.left = event.pageX - popup.width - 50;
-        if (position.left < 0) position.left = position.left * -1;
-      }
-      if (event.pageY + popup.height + 20 > document.body.scrollHeight) {
-        position.top = event.pageY - popup.height - 70;
-        if (position.top < 0) position.top = position.top * -1;
-      }
+  const handleEventClick = (clickInfo) => {
+    clickInfo.jsEvent.preventDefault();
+    clickInfo.jsEvent.stopPropagation();
+    setPopupPosition(popupPositionFromClick(clickInfo.jsEvent));
+    setEventDetails(clickInfo.event);
+    setShowEventDetails(true);
+
+    if (activeEventEl.current) {
+      activeEventEl.current.classList.remove('active-event');
     }
-    setPopupPosition({ left: position.left + 'px', top: position.top + 'px' });
+    const eventEl = clickInfo.jsEvent.target.closest('a.fc-event');
+    if (eventEl) {
+      eventEl.classList.add('active-event');
+      activeEventEl.current = eventEl;
+    }
   };
 
-  const handleEventClick = useCallback(
-    (clickInfo) => {
-      isMinWidth() && createPopupPosition(clickInfo.jsEvent);
-      setEventDetails(clickInfo.event);
-      setShowEventDetails(true);
-      if (clickedEvent.length) {
-        clickedEvent[0].classList.remove('active-event');
-        setClickedEvent([]);
-      }
-      const event = clickInfo.jsEvent.target.closest('a.fc-event');
-      event.classList.add('active-event');
-      setClickedEvent([event]);
-    },
-    [clickedEvent]
+  const eventClassNames = (arg) =>
+    eventMatchesSearch(arg.event, searchTerm) ? [] : ['fc-event-filtered'];
+
+  const eventSources = useMemo(
+    () => [
+      {
+        id: 'lfx',
+        url: '/feeds/lfx.ics',
+        format: 'ics',
+        className: 'event-lfx',
+        backgroundColor: LFX_COLOR.backgroundColor,
+        borderColor: LFX_COLOR.borderColor,
+        textColor: LFX_COLOR.textColor,
+        eventDataTransform: (event) => ({
+          ...event,
+          extendedProps: { ...event.extendedProps, source: 'lfx' },
+        }),
+      },
+      {
+        id: 'custom',
+        url: '/feeds/custom.ics',
+        format: 'ics',
+        className: 'event-custom',
+        backgroundColor: CUSTOM_COLOR.backgroundColor,
+        borderColor: CUSTOM_COLOR.borderColor,
+        textColor: CUSTOM_COLOR.textColor,
+        eventDataTransform: (event) => ({
+          ...event,
+          extendedProps: { ...event.extendedProps, source: 'custom' },
+        }),
+      },
+    ],
+    []
   );
 
-  useEffect(() => {
-    const closeOnOutsideClick = (e) => {
-      if (e.target.closest('.fc-event') || eventDetailRef.current == null)
-        return;
-      if (showEventDetails && !eventDetailRef.current.contains(e.target))
-        setShowEventDetails(false);
-    };
-
-    document.body.addEventListener('click', closeOnOutsideClick);
-    return () => document.removeEventListener('click', closeOnOutsideClick);
-  }, [eventDetailRef, showEventDetails]);
-
-  const renderEventDetails = () => {
-    let description = eventDetails.extendedProps.description
-      ? eventDetails.extendedProps.description.replace(htmlRegex, '')
-      : '<i>No description</i>';
-    const eventLocation = eventDetails.extendedProps.location;
-    const fromDate = printDate(eventDetails.start);
-    const toDate = printDate(eventDetails.end);
-    const fromTime = printTime(eventDetails.start);
-    const toTime = printTime(eventDetails.end);
-    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    let eventTime = '';
-    if (fromDate === toDate) {
-      eventTime = fromDate + ' ' + fromTime + ' - ' + toTime;
-    } else {
-      eventTime =
-        <strong>From:</strong> +
-        fromDate +
-        ' - ' +
-        toDate +
-        <br /> +
-        <strong>To:</strong> +
-        fromTime +
-        ' ' +
-        toTime;
-    }
-
-    let formattedDescription = description;
-
-    if (description) {
-      if (extractUrls(description).length > extractAnchors(description).length)
-        formattedDescription = replaceUrlsWithAnchorTags(description);
-    }
-
-    const zoomLfxLink = (() => {
-      if (!eventDetails.extendedProps.description) return null;
-      // Match both & and &amp; patterns for invite=true
-      const regex = /(https:\/\/zoom-lfx\.platform[^\s"'<>]*(?:&|&amp;)invite=true[^\s"'<>]*)/g;
-      const matches = [...eventDetails.extendedProps.description.matchAll(regex)];
-      if (matches.length > 0) {
-        // Decode HTML entities (e.g., &amp; -> &)
-        return matches[0][1].replace(/&amp;/g, '&');
-      }
-      return null;
-    })();
-
-    return (
-      <div
-        ref={eventDetailRef}
-        key={description}
-        className="finos-calendar-event-details"
-        style={popupPosition}
-      >
-        <div className="event-details-buttons">
-          <button onClick={() => {
-            if (zoomLfxLink) {
-              window.open(zoomLfxLink, '_blank');
-            } else {
-              window.open(`/signup?eventId=${encodeURIComponent(eventDetails.extendedProps.uid)}&title=${encodeURIComponent(eventDetails.title)}`, '_blank');
-            }
-          }}
-            className="fc-button"
-          >
-            Invite Me
-          </button>
-
-          <button
-            onClick={() => downloadICSFile(eventDetails)}
-            className="fc-button"
-          >
-            Event ICS
-          </button>
-          <button
-            onClick={() => setShowEventDetails(false)}
-            className="fc-button finos-calendar-event-details-close"
-          >
-            <Icon path={mdiClose} size={1} />
-          </button>
-        </div>
-        <h2 className="event-title">{eventDetails.title}</h2>
-        <div className="event-time">
-          <div className="icon">
-            <Icon path={mdiCalendarRange} size={0.75} />
-          </div>
-          <div>{eventTime}</div>
-        </div>
-        <div className="event-timeZone">
-          <div className="icon">
-            <Icon path={mdiClock} size={0.75} />
-          </div>
-          <div>Time Zone: {timeZone}</div>
-        </div>
-        {eventLocation && (
-          <div className="event-location">
-            <div className="icon">
-              <Icon path={mdiMapMarkerOutline} size={0.75} />
-            </div>
-            <div>{eventLocation}</div>
-          </div>
-        )}
-        <br />
-        {parse(formattedDescription)}
-      </div>
+  const refreshHiddenWeekends = () => {
+    const api = calendarRef.current?.getApi();
+    if (!api) return;
+    const next = hiddenWeekendDays(
+      eventRangesFromCalendar(api),
+      api.view.activeStart,
+      api.view.activeEnd
     );
+    setHiddenDays((prev) => (sameHiddenDays(prev, next) ? prev : next));
+    updateSearchMatchCount(searchTerm);
   };
 
-  const renderFullCalendar = useMemo(
-    () => (
-      <FullCalendar
-        ref={calendarRef}
-        plugins={[
-          dayGridPlugin,
-          iCalendarPlugin,
-          interactionPlugin,
-          timeGridPlugin,
-          rrulePlugin,
-        ]}
-        initialView={initialView}
-        aspectRatio={aspectRatio}
-        handleWindowResize={true}
-        windowResize={windowResize}
-        events={filteredEvents}
-        headerToolbar={{
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,dayGridWeek,dayGridDay',
-        }}
-        dayMaxEventRows={999}
-        initialDate={new Date().toISOString().slice(0, 10)}
-        navLinks
-        editable
-        dayMaxEvents
-        eventClick={handleEventClick}
-        loading={(isLoading) => setLoading(isLoading)}
-      />
-    ),
-    [aspectRatio, initialView, calendarRef, handleEventClick, filteredEvents]
-  );
+  const handleEventSourceFailure = (error) => {
+    const label = feedLabelFromFailure(error);
+    setFailedSources((prev) =>
+      prev.includes(label) ? prev : [...prev, label]
+    );
+    setLoading(false);
+  };
+
+  const retryFeeds = () => {
+    setFailedSources([]);
+    setLoading(true);
+    calendarRef.current?.getApi()?.refetchEvents();
+  };
+
+  const handleSearchChange = (event) => {
+    const term = event.target.value;
+    setSearchTerm(term);
+    updateSearchMatchCount(term);
+  };
+
+  const searchStatusMessage = useMemo(() => {
+    if (!searchTerm.trim() || searchMatchCount === null) return '';
+    if (searchMatchCount === 0) return 'No events match your search.';
+    if (searchMatchCount === 1) return '1 event matches your search.';
+    return `${searchMatchCount} events match your search.`;
+  }, [searchMatchCount, searchTerm]);
 
   return (
     <div className="content">
       <div data-testid="finos-calendar" className="finos-calendar">
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem',
-            marginBottom: '1rem',
-          }}
-        >
-          <div
-            className="search-container"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              justifyContent: 'center',
-              width: '100%',
-            }}
-          >
-            <Icon path={mdiMagnify} size={1} />
+        <div className="calendar-toolbar">
+          <div className="search-container">
+            <Icon path={mdiMagnify} size={1} aria-hidden="true" />
             <input
-              type="text"
+              type="search"
               placeholder="Search events..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              style={{
-                padding: '0.5rem',
-                borderRadius: '4px',
-                border: '1px solid #ccc',
-                width: '300px',
-                fontSize: '1rem',
-              }}
+              onChange={handleSearchChange}
+              aria-label="Search events"
             />
           </div>
+          {searchStatusMessage && (
+            <p className="search-status" role="status" aria-live="polite">
+              {searchStatusMessage}
+            </p>
+          )}
+          {loadError && (
+            <div className="calendar-load-error-panel" role="alert">
+              <p className="calendar-load-error">{loadError}</p>
+              <button
+                type="button"
+                className="calendar-retry-btn"
+                onClick={retryFeeds}
+              >
+                Retry
+              </button>
+            </div>
+          )}
         </div>
-        {renderFullCalendar}
+        <FullCalendar
+          ref={calendarRef}
+          plugins={[
+            dayGridPlugin,
+            iCalendarPlugin,
+            interactionPlugin,
+            timeGridPlugin,
+            rrulePlugin,
+          ]}
+          initialView={initialView}
+          aspectRatio={aspectRatio}
+          handleWindowResize={true}
+          windowResize={windowResize}
+          eventSources={eventSources}
+          eventClassNames={eventClassNames}
+          headerToolbar={{
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,dayGridWeek,dayGridDay',
+          }}
+          dayHeaderContent={renderDayHeader}
+          dayMaxEventRows={999}
+          initialDate={new Date().toISOString().slice(0, 10)}
+          navLinks
+          editable={false}
+          dayMaxEvents
+          hiddenDays={hiddenDays}
+          datesSet={refreshHiddenWeekends}
+          eventsSet={refreshHiddenWeekends}
+          eventClick={handleEventClick}
+          eventSourceFailure={handleEventSourceFailure}
+          loading={(isLoading) => setLoading(isLoading)}
+        />
       </div>
-      {showEventDetails && renderEventDetails()}
-      {loading && <div className="finos-calendar-overlay" />}
-      {loading && <div className="finos-calendar-loading">Loading...</div>}
+      {showEventDetails && eventDetails && (
+        <>
+          <button
+            type="button"
+            className="event-popover-backdrop"
+            aria-label="Close event details"
+            onClick={closeEventDetails}
+          />
+          <EventDetails
+            key={eventDetails.id}
+            event={eventDetails}
+            position={popupPosition}
+            onClose={closeEventDetails}
+          />
+        </>
+      )}
+      {loading && (
+        <>
+          <div className="finos-calendar-overlay" aria-hidden="true" />
+          <div
+            className="finos-calendar-loading"
+            role="status"
+            aria-live="polite"
+          >
+            <span className="finos-calendar-spinner" aria-hidden="true" />
+            Loading calendar events…
+          </div>
+        </>
+      )}
     </div>
   );
 }
-
-export default Calendar;

@@ -13,12 +13,13 @@ const timeOptions = {
 export function printDate(date) {
   if (date) {
     return date.toLocaleDateString(undefined, dateOptions);
-  } else return 'NONE';
+  }
+  return 'NONE';
 }
 
 export function printTime(date) {
   if (date) {
-    const str = date.toLocaleDateString(undefined, timeOptions);
-    return str.split(',')[1].trim();
-  } else return 'NONE';
+    return date.toLocaleTimeString(undefined, timeOptions);
+  }
+  return 'NONE';
 }

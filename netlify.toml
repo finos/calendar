@@ -1,6 +1,29 @@
 [build]
+  command = "npm run build"
+  publish = "dist"
   edge_functions = "edge-functions"
+
+[build.environment]
+  NODE_VERSION = "24"
+
+[[edge_functions]]
+  function = "lfx-ics"
+  path = "/feeds/lfx.ics"
+
+[[edge_functions]]
+  function = "custom-ics"
+  path = "/feeds/custom.ics"
+
+[[edge_functions]]
+  function = "calendar-ics"
+  path = "/calendar.ics"
+
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "ALLOW-FROM https://finos.org"
+    Content-Security-Policy = "frame-ancestors 'self' https://www.finos.org https://finos.org"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
