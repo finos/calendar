@@ -1,4 +1,4 @@
-import { handleIcsRequest } from '../shared/ics-feed.js';
+import { handleIcsRequest } from './ics-feed.js';
 
 function getEnv(name) {
   const netlify = globalThis.Netlify;

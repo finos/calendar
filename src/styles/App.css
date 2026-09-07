@@ -59,33 +59,6 @@ body {
   text-align: center;
 }
 
-.calendar-legend {
-  display: flex;
-  gap: 1.25rem;
-  font-size: 0.9rem;
-}
-
-.legend-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.legend-swatch {
-  width: 0.85rem;
-  height: 0.85rem;
-  border-radius: 3px;
-  display: inline-block;
-}
-
-.legend-swatch-lfx {
-  background: var(--event-lfx-border);
-}
-
-.legend-swatch-custom {
-  background: var(--event-custom-border);
-}
-
 .fc-event-filtered {
   display: none !important;
 }
@@ -472,7 +445,6 @@ body {
 }
 
 .fc .fc-daygrid-event,
-.fc .fc-timegrid-event,
 .fc a.fc-event {
   border-radius: 4px;
   font-weight: 600;
@@ -621,13 +593,6 @@ body {
 
   .calendar-toolbar {
     gap: 0.5rem;
-  }
-
-  .calendar-legend {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.75rem;
-    font-size: 0.85rem;
   }
 
   .search-container {
