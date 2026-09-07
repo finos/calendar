@@ -78,6 +78,9 @@ export default function Calendar() {
   const [showEventDetails, setShowEventDetails] = useState(false);
   const [eventDetails, setEventDetails] = useState(null);
   const [aspectRatio, setAspectRatio] = useState(getAspectRatio());
+  const [calendarHeight, setCalendarHeight] = useState(
+    () => (getInitialView() === 'dayGridDay' ? 'auto' : undefined)
+  );
   const [initialView] = useState(getInitialView());
   const [searchTerm, setSearchTerm] = useState('');
   const [searchMatchCount, setSearchMatchCount] = useState(null);
@@ -172,7 +175,11 @@ export default function Calendar() {
     []
   );
 
-  const refreshHiddenWeekends = () => {
+  const refreshHiddenWeekends = (dateInfo) => {
+    const viewType = dateInfo?.view?.type;
+    if (viewType) {
+      setCalendarHeight(viewType === 'dayGridDay' ? 'auto' : undefined);
+    }
     const api = calendarRef.current?.getApi();
     if (!api) return;
     const next = hiddenWeekendDays(
@@ -242,6 +249,12 @@ export default function Calendar() {
               </button>
             </div>
           )}
+          {loading && (
+            <p className="calendar-loading-inline" role="status" aria-live="polite">
+              <span className="finos-calendar-spinner" aria-hidden="true" />
+              Loading calendar events…
+            </p>
+          )}
         </div>
         <FullCalendar
           ref={calendarRef}
@@ -252,7 +265,8 @@ export default function Calendar() {
             rrulePlugin,
           ]}
           initialView={initialView}
-          aspectRatio={aspectRatio}
+          height={calendarHeight}
+          aspectRatio={calendarHeight === 'auto' ? undefined : aspectRatio}
           handleWindowResize={true}
           windowResize={windowResize}
           eventSources={eventSources}
@@ -290,19 +304,6 @@ export default function Calendar() {
             position={popupPosition}
             onClose={closeEventDetails}
           />
-        </>
-      )}
-      {loading && (
-        <>
-          <div className="finos-calendar-overlay" aria-hidden="true" />
-          <div
-            className="finos-calendar-loading"
-            role="status"
-            aria-live="polite"
-          >
-            <span className="finos-calendar-spinner" aria-hidden="true" />
-            Loading calendar events…
-          </div>
         </>
       )}
     </div>

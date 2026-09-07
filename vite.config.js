@@ -10,6 +10,18 @@ export default defineConfig(({ mode }) => {
     plugins: [react(), icsFeedsPlugin({ env, mode, root: process.cwd() })],
     build: {
       outDir: 'dist',
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules/@fullcalendar')) {
+              return 'fullcalendar';
+            }
+            if (id.includes('node_modules/ical.js') || id.includes('node_modules/rrule')) {
+              return 'ics-parse';
+            }
+          },
+        },
+      },
     },
     test: {
       environment: 'node',
