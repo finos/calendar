@@ -5,33 +5,30 @@ on:
   push:
     branches:
       - main
-  schedule:
-    - cron: "0 */3 * * *"
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
-    strategy:
-      matrix:
-        node-version: [20.10.0]
-
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v6
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 24
         uses: actions/setup-node@v6
         with:
-          node-version: "${{ matrix.node-version }}"
+          node-version: '24'
+          cache: npm
 
-      - name: Build
+      - name: Install, test, and build
         run: |
-          npm install
+          npm ci
+          npm test
           npm run build
-        env:
-          GOOGLE_SERVICE_ACCOUNT_PASSPHRASE: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_PASSPHRASE }}
 
       - name: Trigger Netlify Build
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           curl -X POST -d {} https://api.netlify.com/build_hooks/676564b824c64e75ebf22bcd
-        

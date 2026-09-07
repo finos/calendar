@@ -4,24 +4,19 @@
   "description": "FINOS Community Calendar",
   "license": "Apache-2.0",
   "engines": {
-    "node": "^24.0.0",
-    "npm": "^11.0.0"
+    "node": ">=20"
   },
+  "type": "module",
   "scripts": {
-    "build": "npm run decrypt-service-account && npm run download-ics && npm run get-events && gatsby build",
-    "pr-build": "gatsby build",
-    "develop": "npm run get-mock-events && gatsby develop",
-    "start": "gatsby develop",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean && npx rimraf dist",
-    "lint": "eslint ./src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "clean": "npx rimraf dist",
+    "lint": "eslint ./src ./shared --max-warnings 0",
     "lint-fix": "npm run lint -- --fix",
-    "get-mock-events": "node ./scripts/setMock.js",
-    "decrypt-service-account": "gpg --quiet --batch --yes --decrypt --passphrase=${GOOGLE_SERVICE_ACCOUNT_PASSPHRASE} --output calendar-service-account.json calendar-service-account.json.gpg",
-    "download-ics": "npx mkdirp dist && curl -o dist/basic.ics https://calendar.google.com/calendar/ical/finos.org_fac8mo1rfc6ehscg0d80fi8jig%40group.calendar.google.com/public/basic.ics",
-    "get-events": "npx mkdirp dist && node ./scripts/googleapi2events.mjs",
-    "getEvents": "npm run get-events",
-    "test": "vitest"
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.10",
@@ -33,30 +28,22 @@
     "@fullcalendar/timegrid": "^6.1.10",
     "@mdi/js": "^7.3.67",
     "@mdi/react": "^1.6.1",
-    "encoding": "^0.1.13",
-    "fastestsmallesttextencoderdecoder": "^1.0.22",
-    "gatsby": "^5.16.1",
-    "googleapis": "^171.0.0",
     "html-react-parser": "^5.0.7",
+    "ical.js": "^1.5.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "react-hook-form": "^7.54.0"
+    "react-router-dom": "^7.9.4"
   },
   "devDependencies": {
-    "html-to-text": "^9.0.5",
-    "ical-generator": "^9.0.0",
-    "mkdirp": "^3.0.1",
-    "rimraf": "^6.0.1"
-  },
-  "overrides": {
-    "async": "^2.6.4",
-    "axios": "^1.8.3",
-    "cookie": ">=0.7.0",
-    "fast-uri": "^3.1.2",
-    "webpack": ">=5.105.0",
-    "serialize-javascript": ">=7.0.5",
-    "qs": ">=6.14.2",
-    "lodash": ">=4.17.24",
-    "immutable": ">=3.8.3"
+    "@eslint/js": "^9.39.1",
+    "@vitejs/plugin-react": "^5.1.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "globals": "^16.5.0",
+    "jsdom": "^30.0.1",
+    "rimraf": "^6.0.1",
+    "vite": "^7.2.7",
+    "vitest": "^3.2.4"
   }
 }

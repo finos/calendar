@@ -13,15 +13,14 @@
 /dist
 
 # Local Dev
-/public/basic.ics
-/public/events.json
-
-# misc
-.DS_Store
+.env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+
+# misc
+.DS_Store
 
 npm-debug.log*
 yarn-debug.log*
@@ -30,7 +29,3 @@ yarn-error.log*
 # secrets
 calendar-service-account.json
 calendar-service-account2.json
-
-# gatsby files
-.cache/
-public
