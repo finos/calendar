@@ -1,5 +1,3 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
 /.pnp
@@ -9,7 +7,6 @@
 /coverage
 
 # production
-/build
 /dist
 
 # Local Dev
@@ -25,7 +22,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# secrets
-calendar-service-account.json
-calendar-service-account2.json

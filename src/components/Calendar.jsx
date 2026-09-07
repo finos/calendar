@@ -3,7 +3,6 @@ import iCalendarPlugin from '@fullcalendar/icalendar';
 import interactionPlugin from '@fullcalendar/interaction';
 import FullCalendar from '@fullcalendar/react';
 import rrulePlugin from '@fullcalendar/rrule';
-import timeGridPlugin from '@fullcalendar/timegrid';
 
 import { mdiMagnify } from '@mdi/js';
 import Icon from '@mdi/react';
@@ -250,7 +249,6 @@ export default function Calendar() {
             dayGridPlugin,
             iCalendarPlugin,
             interactionPlugin,
-            timeGridPlugin,
             rrulePlugin,
           ]}
           initialView={initialView}
