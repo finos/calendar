@@ -31,17 +31,15 @@ export function hiddenWeekendDays(ranges, viewStart, viewEnd) {
   return hidden;
 }
 
-export function eventRangesFromCalendar(api) {
-  const instances = api.getCurrentData?.()?.eventStore?.instances;
-  if (instances) {
-    return Object.values(instances).map((instance) => ({
-      start: instance.range.start,
-      end: instance.range.end,
+export function eventRangesFromCalendar(api, sourceFilter = 'all') {
+  return api
+    .getEvents()
+    .filter((event) => {
+      if (sourceFilter === 'all') return true;
+      return event.extendedProps?.source === sourceFilter;
+    })
+    .map((event) => ({
+      start: event.start,
+      end: event.end || event.start,
     }));
-  }
-
-  return api.getEvents().map((event) => ({
-    start: event.start,
-    end: event.end || event.start,
-  }));
 }

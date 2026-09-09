@@ -11,6 +11,7 @@ The page fetches those feeds at runtime through same-origin proxies (`/feeds/lfx
 
 - Recurring LFX project meetings belong in [LFX Project Control Center](https://projectadmin.lfx.linuxfoundation.org/).
 - Events LFX cannot represent yet go on the **old FINOS Google Calendar only**. Do not add LFX meetings there, or they will appear twice. The Google **import** calendar (`@import.calendar.google.com`) is read-only and is not used by this app.
+- To feature a custom event, put `[highlight]` in its Google Calendar title (for example `[highlight] FINOS Summit`). It appears at the top of that day, bolded, under the **Events** tab.
 
 ## Prerequisites
 
