@@ -47,6 +47,7 @@ export default function EventDetails({ event, position, onClose }) {
   const inviteUrl = eventInviteUrl(event);
   const location = event.extendedProps?.location || '';
   const source = event.extendedProps?.source;
+  const highlighted = Boolean(event.extendedProps?.highlighted);
   const { summary, details } = splitMeetingDescription(
     event.extendedProps?.description
   );
@@ -76,9 +77,14 @@ export default function EventDetails({ event, position, onClose }) {
       onClick={(e) => e.stopPropagation()}
     >
       <div className="event-popover-header">
-        <h2 id={titleId} className="event-popover-title">
-          {event.title}
-        </h2>
+        <div className="event-popover-heading">
+          {highlighted && (
+            <span className="event-popover-featured">Featured</span>
+          )}
+          <h2 id={titleId} className="event-popover-title">
+            {event.title}
+          </h2>
+        </div>
         <button
           ref={closeRef}
           type="button"

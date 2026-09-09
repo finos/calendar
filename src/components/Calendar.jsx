@@ -6,10 +6,11 @@ import rrulePlugin from '@fullcalendar/rrule';
 
 import { mdiMagnify } from '@mdi/js';
 import Icon from '@mdi/react';
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import EventDetails from './EventDetails.jsx';
 import useEscKey from '../hooks/useEscKey.jsx';
+import { parseHighlightTitle } from '../utils/event-highlight.js';
 import { eventMatchesSearch } from '../utils/event-search.js';
 import {
   eventRangesFromCalendar,
@@ -31,9 +32,17 @@ const CUSTOM_COLOR = {
   textColor: '#633806',
 };
 
-const SOURCE_LABELS = {
-  lfx: 'LFX meetings',
-  custom: 'custom events',
+const FEEDS = {
+  lfx: {
+    id: 'lfx',
+    label: 'Project Meetings',
+    failureLabel: 'LFX meetings',
+  },
+  custom: {
+    id: 'custom',
+    label: 'Events',
+    failureLabel: 'custom events',
+  },
 };
 
 function renderDayHeader(arg) {
@@ -55,9 +64,14 @@ function feedLabelFromFailure(error) {
   const message = error?.message?.toLowerCase() || '';
   const url = error?.xhr?.responseURL || error?.url || '';
   const target = `${message} ${url}`.toLowerCase();
-  if (target.includes('lfx')) return SOURCE_LABELS.lfx;
-  if (target.includes('custom')) return SOURCE_LABELS.custom;
+  if (target.includes('lfx')) return FEEDS.lfx.failureLabel;
+  if (target.includes('custom')) return FEEDS.custom.failureLabel;
   return 'calendar feeds';
+}
+
+function eventMatchesFeed(event, feedFilter) {
+  if (feedFilter === 'all') return true;
+  return event.extendedProps?.source === feedFilter;
 }
 
 function userFacingLoadError(failedSources) {
@@ -68,6 +82,21 @@ function userFacingLoadError(failedSources) {
     return `Could not load ${failedSources[0]}. Other events may still appear.`;
   }
   return 'Could not load calendar events. Please try again.';
+}
+
+function transformCustomEvent(event) {
+  const { title, highlighted } = parseHighlightTitle(event.title);
+  return {
+    ...event,
+    title,
+    order: highlighted ? -100 : 0,
+    classNames: highlighted ? ['event-highlight'] : [],
+    extendedProps: {
+      ...event.extendedProps,
+      source: 'custom',
+      highlighted,
+    },
+  };
 }
 
 export default function Calendar() {
@@ -82,6 +111,7 @@ export default function Calendar() {
     () => (getInitialView() === 'dayGridDay' ? 'auto' : undefined)
   );
   const [initialView] = useState(getInitialView());
+  const [feedFilter, setFeedFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [searchMatchCount, setSearchMatchCount] = useState(null);
   const [popupPosition, setPopupPosition] = useState({});
@@ -90,7 +120,7 @@ export default function Calendar() {
 
   const loadError = failedSources.length > 0 ? userFacingLoadError(failedSources) : null;
 
-  const updateSearchMatchCount = (term) => {
+  const updateSearchMatchCount = (term, filter = feedFilter) => {
     const query = term.trim();
     if (!query) {
       setSearchMatchCount(null);
@@ -100,7 +130,10 @@ export default function Calendar() {
     if (!api) return;
     const count = api
       .getEvents()
-      .filter((event) => eventMatchesSearch(event, term)).length;
+      .filter(
+        (event) =>
+          eventMatchesFeed(event, filter) && eventMatchesSearch(event, term)
+      ).length;
     setSearchMatchCount(count);
   };
 
@@ -116,6 +149,17 @@ export default function Calendar() {
   };
 
   useEscKey(closeEventDetails);
+
+  useEffect(() => {
+    const api = calendarRef.current?.getApi();
+    if (!api) return;
+    const next = hiddenWeekendDays(
+      eventRangesFromCalendar(api, feedFilter),
+      api.view.activeStart,
+      api.view.activeEnd
+    );
+    setHiddenDays((prev) => (sameHiddenDays(prev, next) ? prev : next));
+  }, [feedFilter]);
 
   const windowResize = () => {
     setAspectRatio(getAspectRatio());
@@ -140,8 +184,25 @@ export default function Calendar() {
     }
   };
 
-  const eventClassNames = (arg) =>
-    eventMatchesSearch(arg.event, searchTerm) ? [] : ['fc-event-filtered'];
+  const eventClassNames = (arg) => {
+    const classes = [];
+    if (arg.event.extendedProps?.highlighted) {
+      classes.push('event-highlight');
+    }
+    if (!eventMatchesFeed(arg.event, feedFilter)) {
+      classes.push('fc-event-filtered');
+    }
+    if (!eventMatchesSearch(arg.event, searchTerm)) {
+      classes.push('fc-event-filtered');
+    }
+    return classes;
+  };
+
+  const eventOrder = (a, b) => {
+    const ha = a.extendedProps?.highlighted ? 0 : 1;
+    const hb = b.extendedProps?.highlighted ? 0 : 1;
+    return ha - hb;
+  };
 
   const eventSources = useMemo(
     () => [
@@ -166,10 +227,7 @@ export default function Calendar() {
         backgroundColor: CUSTOM_COLOR.backgroundColor,
         borderColor: CUSTOM_COLOR.borderColor,
         textColor: CUSTOM_COLOR.textColor,
-        eventDataTransform: (event) => ({
-          ...event,
-          extendedProps: { ...event.extendedProps, source: 'custom' },
-        }),
+        eventDataTransform: transformCustomEvent,
       },
     ],
     []
@@ -183,12 +241,12 @@ export default function Calendar() {
     const api = calendarRef.current?.getApi();
     if (!api) return;
     const next = hiddenWeekendDays(
-      eventRangesFromCalendar(api),
+      eventRangesFromCalendar(api, feedFilter),
       api.view.activeStart,
       api.view.activeEnd
     );
     setHiddenDays((prev) => (sameHiddenDays(prev, next) ? prev : next));
-    updateSearchMatchCount(searchTerm);
+    updateSearchMatchCount(searchTerm, feedFilter);
   };
 
   const handleEventSourceFailure = (error) => {
@@ -203,6 +261,13 @@ export default function Calendar() {
     setFailedSources([]);
     setLoading(true);
     calendarRef.current?.getApi()?.refetchEvents();
+  };
+
+  const handleFeedFilterChange = (feed) => {
+    const next = feedFilter === feed ? 'all' : feed;
+    closeEventDetails();
+    setFeedFilter(next);
+    updateSearchMatchCount(searchTerm, next);
   };
 
   const handleSearchChange = (event) => {
@@ -222,16 +287,55 @@ export default function Calendar() {
     <div className="content">
       <div data-testid="finos-calendar" className="finos-calendar">
         <div className="calendar-toolbar">
-          <div className="search-container">
-            <Icon path={mdiMagnify} size={1} aria-hidden="true" />
-            <input
-              type="search"
-              placeholder="Search events..."
-              value={searchTerm}
-              onChange={handleSearchChange}
-              aria-label="Search events"
-            />
+          <div className="calendar-toolbar-row">
+            <div className="calendar-feed-filter">
+              <div
+                className={
+                  feedFilter === 'all'
+                    ? 'calendar-feed-toggle'
+                    : 'calendar-feed-toggle calendar-feed-toggle-active'
+                }
+                role="group"
+                aria-label="Filter calendar events"
+              >
+                {Object.values(FEEDS).map((feed) => (
+                  <button
+                    key={feed.id}
+                    type="button"
+                    className={
+                      feedFilter === feed.id
+                        ? 'calendar-feed-btn calendar-feed-btn-active'
+                        : 'calendar-feed-btn'
+                    }
+                    aria-pressed={feedFilter === feed.id}
+                    title={
+                      feedFilter === feed.id
+                        ? `Clear ${feed.label} filter`
+                        : `Show only ${feed.label}`
+                    }
+                    onClick={() => handleFeedFilterChange(feed.id)}
+                  >
+                    {feed.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="search-container">
+              <Icon path={mdiMagnify} size={0.9} aria-hidden="true" />
+              <input
+                type="search"
+                placeholder="Search events..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+                aria-label="Search events"
+              />
+            </div>
           </div>
+          <p className="calendar-feed-filter-status" role="status" aria-live="polite">
+            {feedFilter === 'all'
+              ? 'Showing all calendars'
+              : `Showing ${FEEDS[feedFilter].label} only`}
+          </p>
           {searchStatusMessage && (
             <p className="search-status" role="status" aria-live="polite">
               {searchStatusMessage}
@@ -271,6 +375,7 @@ export default function Calendar() {
           windowResize={windowResize}
           eventSources={eventSources}
           eventClassNames={eventClassNames}
+          eventOrder={eventOrder}
           headerToolbar={{
             left: 'prev,next today',
             center: 'title',
