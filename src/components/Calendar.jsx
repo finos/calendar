@@ -7,9 +7,18 @@ import rrulePlugin from '@fullcalendar/rrule';
 import { mdiMagnify } from '@mdi/js';
 import Icon from '@mdi/react';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import EventDetails from './EventDetails.jsx';
 import useEscKey from '../hooks/useEscKey.jsx';
+import {
+  calendarUrlNeedsUpdate,
+  calendarUrlState,
+  formatCalendarDate,
+  parseCalendarDate,
+  parseCalendarView,
+  todayCalendarDate,
+} from '../utils/calendar-url.js';
 import { parseHighlightTitle } from '../utils/event-highlight.js';
 import { eventMatchesSearch } from '../utils/event-search.js';
 import {
@@ -102,15 +111,23 @@ function transformCustomEvent(event) {
 export default function Calendar() {
   const calendarRef = useRef(null);
   const activeEventEl = useRef(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const applyingUrlRef = useRef(false);
+
+  const [initialView] = useState(() =>
+    parseCalendarView(searchParams.get('view'), getInitialView())
+  );
+  const [initialDate] = useState(() =>
+    parseCalendarDate(searchParams.get('date'), todayCalendarDate())
+  );
 
   const [loading, setLoading] = useState(true);
   const [showEventDetails, setShowEventDetails] = useState(false);
   const [eventDetails, setEventDetails] = useState(null);
   const [aspectRatio, setAspectRatio] = useState(getAspectRatio());
   const [calendarHeight, setCalendarHeight] = useState(
-    () => (getInitialView() === 'dayGridDay' ? 'auto' : undefined)
+    () => (initialView === 'dayGridDay' ? 'auto' : undefined)
   );
-  const [initialView] = useState(getInitialView());
   const [feedFilter, setFeedFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [searchMatchCount, setSearchMatchCount] = useState(null);
@@ -233,6 +250,21 @@ export default function Calendar() {
     []
   );
 
+  const syncUrlFromCalendar = (api) => {
+    if (!api || applyingUrlRef.current) return;
+    const next = calendarUrlState(api.view.type, api.getDate());
+    setSearchParams(
+      (prev) => {
+        if (!calendarUrlNeedsUpdate(prev, next)) return prev;
+        const params = new URLSearchParams(prev);
+        params.set('view', next.view);
+        params.set('date', next.date);
+        return params;
+      },
+      { replace: true }
+    );
+  };
+
   const refreshHiddenWeekends = (dateInfo) => {
     const viewType = dateInfo?.view?.type;
     if (viewType) {
@@ -247,7 +279,25 @@ export default function Calendar() {
     );
     setHiddenDays((prev) => (sameHiddenDays(prev, next) ? prev : next));
     updateSearchMatchCount(searchTerm, feedFilter);
+    syncUrlFromCalendar(api);
   };
+
+  useEffect(() => {
+    const api = calendarRef.current?.getApi();
+    if (!api) return;
+
+    const view = parseCalendarView(searchParams.get('view'), null);
+    const date = parseCalendarDate(searchParams.get('date'), null);
+    const nextView = view && api.view.type !== view ? view : null;
+    const currentDate = formatCalendarDate(api.getDate());
+    const nextDate = date && date !== currentDate ? date : null;
+    if (!nextView && !nextDate) return;
+
+    applyingUrlRef.current = true;
+    if (nextView) api.changeView(nextView);
+    if (nextDate) api.gotoDate(nextDate);
+    applyingUrlRef.current = false;
+  }, [searchParams]);
 
   const handleEventSourceFailure = (error) => {
     const label = feedLabelFromFailure(error);
@@ -383,7 +433,7 @@ export default function Calendar() {
           }}
           dayHeaderContent={renderDayHeader}
           dayMaxEventRows={999}
-          initialDate={new Date().toISOString().slice(0, 10)}
+          initialDate={initialDate}
           navLinks
           editable={false}
           dayMaxEvents
