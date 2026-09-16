@@ -8,6 +8,7 @@ const dateOptions = {
 const timeOptions = {
   hour: '2-digit',
   minute: '2-digit',
+  timeZoneName: 'short',
 };
 
 export function printDate(date) {
@@ -22,4 +23,8 @@ export function printTime(date) {
     return date.toLocaleTimeString(undefined, timeOptions);
   }
   return 'NONE';
+}
+
+export function userTimeZone() {
+  return Intl.DateTimeFormat().resolvedOptions().timeZone || 'local';
 }
