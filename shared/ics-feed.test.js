@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  clearUpstreamIcsCache,
   extractIcsBlocks,
+  fetchIcs,
   foldIcsText,
   mergeIcsCalendars,
   pathToIcsKind,
@@ -119,5 +121,34 @@ END:VCALENDAR
       return match ? match[1] : '';
     });
     expect(uids).toEqual(['this-month']);
+  });
+});
+
+describe('fetchIcs cache', () => {
+  it('reuses in-flight and cached upstream responses', async () => {
+    clearUpstreamIcsCache();
+    let calls = 0;
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = async () => {
+      calls += 1;
+      return new Response('BEGIN:VCALENDAR\nEND:VCALENDAR\n', { status: 200 });
+    };
+
+    try {
+      const [a, b] = await Promise.all([
+        fetchIcs('https://example.test/a.ics'),
+        fetchIcs('https://example.test/a.ics'),
+      ]);
+      expect(a).toContain('BEGIN:VCALENDAR');
+      expect(b).toContain('BEGIN:VCALENDAR');
+      expect(calls).toBe(1);
+
+      const c = await fetchIcs('https://example.test/a.ics');
+      expect(c).toContain('BEGIN:VCALENDAR');
+      expect(calls).toBe(1);
+    } finally {
+      globalThis.fetch = originalFetch;
+      clearUpstreamIcsCache();
+    }
   });
 });

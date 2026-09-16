@@ -1,5 +1,8 @@
-import Calendar from '../components/Calendar.jsx';
+import { lazy, Suspense } from 'react';
+
 import Header from '../components/Header.jsx';
+
+const Calendar = lazy(() => import('../components/Calendar.jsx'));
 
 export default function Home({ theme, onToggleTheme }) {
   return (
@@ -8,7 +11,18 @@ export default function Home({ theme, onToggleTheme }) {
         <Header theme={theme} onToggleTheme={onToggleTheme} />
       </header>
       <main className="body-main">
-        <Calendar />
+        <Suspense
+          fallback={
+            <div className="content finos-calendar">
+              <p className="calendar-loading-inline" role="status" aria-live="polite">
+                <span className="finos-calendar-spinner" aria-hidden="true" />
+                Loading calendar…
+              </p>
+            </div>
+          }
+        >
+          <Calendar />
+        </Suspense>
       </main>
     </div>
   );

@@ -3,11 +3,19 @@ export const DEFAULT_GOOGLE_ICS_URL =
 
 export const ICS_CACHE_CONTROL = 'public, max-age=300';
 export const ICS_CONTENT_TYPE = 'text/calendar; charset=utf-8';
+export const UPSTREAM_CACHE_TTL_MS = 5 * 60 * 1000;
 
 const FETCH_HEADERS = {
   'User-Agent': 'FINOS-Calendar/1.0 (https://calendar.finos.org)',
   Accept: 'text/calendar, text/plain, */*',
 };
+
+/** @type {Map<string, { body?: string, expires: number, inflight?: Promise<string> }>} */
+const upstreamCache = new Map();
+
+export function clearUpstreamIcsCache() {
+  upstreamCache.clear();
+}
 
 export function unfoldIcs(ics) {
   return String(ics || '')
@@ -153,12 +161,38 @@ export function mergeIcsCalendars(
   );
 }
 
-export async function fetchIcs(url) {
-  const res = await fetch(url, { headers: FETCH_HEADERS });
-  if (!res.ok) {
-    throw new Error(`ICS fetch failed ${res.status}`);
+export async function fetchIcs(url, { bypassCache = false } = {}) {
+  if (!bypassCache) {
+    const cached = upstreamCache.get(url);
+    if (cached?.body != null && cached.expires > Date.now()) {
+      return cached.body;
+    }
+    if (cached?.inflight) {
+      return cached.inflight;
+    }
   }
-  return res.text();
+
+  const inflight = (async () => {
+    const res = await fetch(url, { headers: FETCH_HEADERS });
+    if (!res.ok) {
+      throw new Error(`ICS fetch failed ${res.status}`);
+    }
+    const body = await res.text();
+    upstreamCache.set(url, {
+      body,
+      expires: Date.now() + UPSTREAM_CACHE_TTL_MS,
+    });
+    return body;
+  })().catch((err) => {
+    const current = upstreamCache.get(url);
+    if (current?.inflight) {
+      upstreamCache.delete(url);
+    }
+    throw err;
+  });
+
+  upstreamCache.set(url, { expires: 0, inflight });
+  return inflight;
 }
 
 export function icsResponse(body, status = 200) {
