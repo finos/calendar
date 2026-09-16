@@ -1,5 +1,4 @@
 import dayGridPlugin from '@fullcalendar/daygrid';
-import iCalendarPlugin from '@fullcalendar/icalendar';
 import interactionPlugin from '@fullcalendar/interaction';
 import FullCalendar from '@fullcalendar/react';
 import rrulePlugin from '@fullcalendar/rrule';
@@ -12,10 +11,13 @@ import { useSearchParams } from 'react-router-dom';
 import EventDetails from './EventDetails.jsx';
 import useEscKey from '../hooks/useEscKey.jsx';
 import {
+  applyCalendarUrlState,
   calendarUrlNeedsUpdate,
   calendarUrlState,
   formatCalendarDate,
   parseCalendarDate,
+  parseCalendarFilter,
+  parseCalendarSearch,
   parseCalendarView,
   todayCalendarDate,
 } from '../utils/calendar-url.js';
@@ -26,6 +28,7 @@ import {
   hiddenWeekendDays,
   sameHiddenDays,
 } from '../utils/hidden-weekends.js';
+import { createIcsEventSource } from '../utils/ics-parse.js';
 import { popupPositionFromClick } from '../utils/popup-position.js';
 import { getAspectRatio, getInitialView, isMinWidth } from '../utils/view-size.js';
 
@@ -108,6 +111,19 @@ function transformCustomEvent(event) {
   };
 }
 
+function toStartMs(event) {
+  const start = event?.start;
+  if (start == null) return 0;
+  if (typeof start === 'number') return start;
+  if (start instanceof Date) return start.valueOf();
+  if (typeof start?.valueOf === 'function') {
+    const value = start.valueOf();
+    if (typeof value === 'number' && !Number.isNaN(value)) return value;
+  }
+  const parsed = Date.parse(start);
+  return Number.isNaN(parsed) ? 0 : parsed;
+}
+
 export default function Calendar() {
   const calendarRef = useRef(null);
   const activeEventEl = useRef(null);
@@ -128,8 +144,12 @@ export default function Calendar() {
   const [calendarHeight, setCalendarHeight] = useState(
     () => (initialView === 'dayGridDay' ? 'auto' : undefined)
   );
-  const [feedFilter, setFeedFilter] = useState('all');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [feedFilter, setFeedFilter] = useState(() =>
+    parseCalendarFilter(searchParams.get('filter'), 'all')
+  );
+  const [searchTerm, setSearchTerm] = useState(() =>
+    parseCalendarSearch(searchParams.get('q'), '')
+  );
   const [searchMatchCount, setSearchMatchCount] = useState(null);
   const [popupPosition, setPopupPosition] = useState({});
   const [failedSources, setFailedSources] = useState([]);
@@ -218,15 +238,24 @@ export default function Calendar() {
   const eventOrder = (a, b) => {
     const ha = a.extendedProps?.highlighted ? 0 : 1;
     const hb = b.extendedProps?.highlighted ? 0 : 1;
-    return ha - hb;
+    if (ha !== hb) return ha - hb;
+
+    const startA = toStartMs(a);
+    const startB = toStartMs(b);
+    if (startA !== startB) return startA - startB;
+
+    const allDayA = a.allDay ? 1 : 0;
+    const allDayB = b.allDay ? 1 : 0;
+    if (allDayA !== allDayB) return allDayA - allDayB;
+
+    return String(a.title || '').localeCompare(String(b.title || ''));
   };
 
   const eventSources = useMemo(
     () => [
       {
         id: 'lfx',
-        url: '/feeds/lfx.ics',
-        format: 'ics',
+        events: createIcsEventSource('/feeds/lfx.ics'),
         className: 'event-lfx',
         backgroundColor: LFX_COLOR.backgroundColor,
         borderColor: LFX_COLOR.borderColor,
@@ -238,8 +267,7 @@ export default function Calendar() {
       },
       {
         id: 'custom',
-        url: '/feeds/custom.ics',
-        format: 'ics',
+        events: createIcsEventSource('/feeds/custom.ics'),
         className: 'event-custom',
         backgroundColor: CUSTOM_COLOR.backgroundColor,
         borderColor: CUSTOM_COLOR.borderColor,
@@ -250,16 +278,17 @@ export default function Calendar() {
     []
   );
 
-  const syncUrlFromCalendar = (api) => {
+  const syncUrlFromCalendar = (
+    api,
+    filter = feedFilter,
+    search = searchTerm
+  ) => {
     if (!api || applyingUrlRef.current) return;
-    const next = calendarUrlState(api.view.type, api.getDate());
+    const next = calendarUrlState(api.view.type, api.getDate(), filter, search);
     setSearchParams(
       (prev) => {
         if (!calendarUrlNeedsUpdate(prev, next)) return prev;
-        const params = new URLSearchParams(prev);
-        params.set('view', next.view);
-        params.set('date', next.date);
-        return params;
+        return applyCalendarUrlState(prev, next);
       },
       { replace: true }
     );
@@ -284,6 +313,12 @@ export default function Calendar() {
 
   useEffect(() => {
     const api = calendarRef.current?.getApi();
+    const filter = parseCalendarFilter(searchParams.get('filter'), 'all');
+    const q = parseCalendarSearch(searchParams.get('q'), '');
+    setFeedFilter((prev) => (prev === filter ? prev : filter));
+    setSearchTerm((prev) => (prev === q ? prev : q));
+    updateSearchMatchCount(q, filter);
+
     if (!api) return;
 
     const view = parseCalendarView(searchParams.get('view'), null);
@@ -318,12 +353,16 @@ export default function Calendar() {
     closeEventDetails();
     setFeedFilter(next);
     updateSearchMatchCount(searchTerm, next);
+    const api = calendarRef.current?.getApi();
+    if (api) syncUrlFromCalendar(api, next);
   };
 
   const handleSearchChange = (event) => {
     const term = event.target.value;
     setSearchTerm(term);
     updateSearchMatchCount(term);
+    const api = calendarRef.current?.getApi();
+    if (api) syncUrlFromCalendar(api, feedFilter, term);
   };
 
   const searchStatusMessage = useMemo(() => {
@@ -412,12 +451,13 @@ export default function Calendar() {
         </div>
         <FullCalendar
           ref={calendarRef}
-          plugins={[
-            dayGridPlugin,
-            iCalendarPlugin,
-            interactionPlugin,
-            rrulePlugin,
-          ]}
+          plugins={[dayGridPlugin, interactionPlugin, rrulePlugin]}
+          timeZone="local"
+          eventTimeFormat={{
+            hour: 'numeric',
+            minute: '2-digit',
+            meridiem: 'short',
+          }}
           initialView={initialView}
           height={calendarHeight}
           aspectRatio={calendarHeight === 'auto' ? undefined : aspectRatio}

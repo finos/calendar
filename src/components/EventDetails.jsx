@@ -16,7 +16,7 @@ import {
   isHttpUrl,
   splitMeetingDescription,
 } from '../utils/event-description.js';
-import { printDate, printTime } from '../utils/date-time.js';
+import { printDate, printTime, userTimeZone } from '../utils/date-time.js';
 import { downloadICSFile } from '../utils/ics-download.js';
 import { eventInviteUrl } from '../utils/lfx-invite.js';
 import { htmlRegex } from '../utils/regex.js';
@@ -51,7 +51,7 @@ export default function EventDetails({ event, position, onClose }) {
   const { summary, details } = splitMeetingDescription(
     event.extendedProps?.description
   );
-  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const timeZone = userTimeZone();
   const fromDate = printDate(event.start);
   const toDate = printDate(event.end);
   const fromTime = printTime(event.start);
@@ -111,7 +111,7 @@ export default function EventDetails({ event, position, onClose }) {
           </dt>
           <dd>
             {fromTime} – {toTime}
-            <span className="event-popover-tz">{timeZone}</span>
+            <span className="event-popover-tz">Your time ({timeZone})</span>
           </dd>
         </div>
         {location && !locationIsJoinLink && (

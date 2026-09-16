@@ -10,6 +10,23 @@ const VIEW_TO_ALIAS = {
   dayGridDay: 'day',
 };
 
+const FILTER_ALIASES = {
+  all: 'all',
+  events: 'custom',
+  event: 'custom',
+  custom: 'custom',
+  meetings: 'lfx',
+  meeting: 'lfx',
+  'project-meetings': 'lfx',
+  'project-meeting': 'lfx',
+  lfx: 'lfx',
+};
+
+const FILTER_TO_ALIAS = {
+  custom: 'events',
+  lfx: 'meetings',
+};
+
 export function parseCalendarView(value, fallback) {
   if (value == null || value === '') return fallback;
   const alias = String(value).trim().toLowerCase();
@@ -20,6 +37,28 @@ export function parseCalendarView(value, fallback) {
 
 export function viewAliasFromType(viewType) {
   return VIEW_TO_ALIAS[viewType] || null;
+}
+
+export function parseCalendarFilter(value, fallback = 'all') {
+  if (value == null || value === '') return fallback;
+  const alias = String(value).trim().toLowerCase();
+  return Object.prototype.hasOwnProperty.call(FILTER_ALIASES, alias)
+    ? FILTER_ALIASES[alias]
+    : fallback;
+}
+
+export function filterAliasFromId(feedFilter) {
+  return FILTER_TO_ALIAS[feedFilter] || null;
+}
+
+export function parseCalendarSearch(value, fallback = '') {
+  if (value == null) return fallback;
+  return String(value);
+}
+
+export function searchAliasFromTerm(searchTerm) {
+  const value = String(searchTerm || '');
+  return value.trim() ? value : null;
 }
 
 export function parseCalendarDate(value, fallback = null) {
@@ -54,17 +93,49 @@ export function todayCalendarDate() {
   return formatCalendarDate(new Date());
 }
 
-export function calendarUrlState(viewType, date) {
+export function calendarUrlState(
+  viewType,
+  date,
+  feedFilter = 'all',
+  searchTerm = ''
+) {
   return {
     view: viewAliasFromType(viewType),
     date: formatCalendarDate(date),
+    filter: filterAliasFromId(feedFilter),
+    q: searchAliasFromTerm(searchTerm),
   };
 }
 
 export function calendarUrlNeedsUpdate(searchParams, next) {
   if (!next.view || !next.date) return false;
+  const currentFilter = searchParams.get('filter');
+  const filterMismatch = next.filter
+    ? currentFilter !== next.filter
+    : currentFilter != null && currentFilter !== '';
+  const currentQ = searchParams.get('q') || '';
+  const nextQ = next.q || '';
   return (
     searchParams.get('view') !== next.view ||
-    searchParams.get('date') !== next.date
+    searchParams.get('date') !== next.date ||
+    filterMismatch ||
+    currentQ !== nextQ
   );
+}
+
+export function applyCalendarUrlState(params, next) {
+  const nextParams = new URLSearchParams(params);
+  nextParams.set('view', next.view);
+  nextParams.set('date', next.date);
+  if (next.filter) {
+    nextParams.set('filter', next.filter);
+  } else {
+    nextParams.delete('filter');
+  }
+  if (next.q) {
+    nextParams.set('q', next.q);
+  } else {
+    nextParams.delete('q');
+  }
+  return nextParams;
 }

@@ -329,7 +329,7 @@ body {
   margin: 0 0 1rem;
 }
 
-.event-popover-meta > div {
+.event-popover-meta>div {
   display: grid;
   gap: 0.15rem;
 }
@@ -863,8 +863,7 @@ body {
   background: var(--finos-surface);
 }
 
-[data-theme='dark'] .calendar-toolbar:has(.calendar-feed-btn-active)
-  .calendar-feed-filter-status {
+[data-theme='dark'] .calendar-toolbar:has(.calendar-feed-btn-active) .calendar-feed-filter-status {
   color: var(--finos-accent);
 }
 
