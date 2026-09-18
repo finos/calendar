@@ -23,19 +23,26 @@ import { htmlRegex } from '../utils/regex.js';
 import {
   extractAnchors,
   extractUrls,
+  replaceMeetingJoinUrlsWithAnchorTags,
   replaceUrlsWithAnchorTags,
 } from '../utils/url-to-link.js';
 
 function formatHtml(text) {
   if (!text) return '';
   let html = text.replace(htmlRegex, '');
+  // Preserve line breaks before linkifying — anchors would otherwise skip this step.
+  html = html.replace(/\n/g, '<br />');
   if (extractUrls(html).length > extractAnchors(html).length) {
     html = replaceUrlsWithAnchorTags(html);
   }
-  if (!/<[a-z][\s\S]*>/i.test(html)) {
-    html = html.replace(/\n/g, '<br />');
-  }
   return html;
+}
+
+function formatDialInHtml(text) {
+  if (!text) return '';
+  const plain = text.replace(htmlRegex, '');
+  // Linkify on plain text first so <br /> markers are not swallowed into URLs.
+  return replaceMeetingJoinUrlsWithAnchorTags(plain).replace(/\n/g, '<br />');
 }
 
 export default function EventDetails({ event, position, onClose }) {
@@ -142,7 +149,7 @@ export default function EventDetails({ event, position, onClose }) {
           </button>
           {showJoinDetails && (
             <div id={detailsId} className="event-popover-details-body">
-              {parse(formatHtml(details))}
+              {parse(formatDialInHtml(details))}
             </div>
           )}
         </div>

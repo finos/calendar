@@ -25,25 +25,32 @@ h1.logo {
 
 .header-actions {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  align-items: stretch;
+  gap: 0.5rem;
   margin: 0 2rem 0 0;
 }
 
+.header-action,
 .theme-toggle,
 .subscribe-link,
 .subscribe-link:visited {
+  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.45rem 0.8rem;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 2.35rem;
+  padding: 0.45rem 0.75rem;
   color: #063542;
   background: rgba(255, 255, 255, 0.35);
   border: 1px solid rgba(6, 53, 66, 0.25);
-  border-radius: 4px;
+  border-radius: 6px;
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 0.875rem;
+  font-weight: 600;
   font-family: inherit;
+  line-height: 1.2;
+  white-space: nowrap;
   cursor: pointer;
 }
 
@@ -59,6 +66,42 @@ h1.logo {
 .logo-link:focus-visible {
   outline: 2px solid #063542;
   outline-offset: 2px;
+}
+
+@media only screen and (max-width: 700px) {
+  .header-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    padding-bottom: 0.85rem;
+  }
+
+  h1.logo {
+    padding: 1rem 1rem 0;
+    font-size: 1.35rem;
+    line-height: 1.25;
+  }
+
+  .header-actions {
+    margin: 0 1rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.4rem;
+  }
+
+  .header-action,
+  .theme-toggle,
+  .subscribe-link,
+  .subscribe-link:visited {
+    width: 100%;
+    min-height: 2.5rem;
+    padding: 0.5rem 0.35rem;
+    font-size: 0.78rem;
+  }
+
+  .header-action-label-full {
+    display: none;
+  }
 }
 
 [data-theme='dark'] header {
