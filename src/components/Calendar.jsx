@@ -207,7 +207,9 @@ export default function Calendar() {
   const handleEventClick = (clickInfo) => {
     clickInfo.jsEvent.preventDefault();
     clickInfo.jsEvent.stopPropagation();
-    setPopupPosition(popupPositionFromClick(clickInfo.jsEvent));
+    setPopupPosition(
+      isMinWidth() ? popupPositionFromClick(clickInfo.jsEvent) : {}
+    );
     setEventDetails(clickInfo.event);
     setShowEventDetails(true);
 

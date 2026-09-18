@@ -388,9 +388,14 @@ body {
   border-radius: 8px;
   background: var(--finos-page);
   font-size: 0.85rem;
-  line-height: 1.4;
-  max-height: 160px;
+  line-height: 1.55;
+  max-height: 220px;
   overflow: auto;
+}
+
+.event-popover-details-body a {
+  display: inline;
+  word-break: break-word;
 }
 
 .event-popover-actions {
@@ -764,20 +769,33 @@ body {
 
 @media only screen and (max-width: 600px) {
   .finos-calendar {
-    padding: 1rem;
+    padding: 0.75rem;
   }
 
   .calendar-toolbar {
-    gap: 0.5rem;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+    align-items: stretch;
   }
 
   .calendar-toolbar-row {
     grid-template-columns: 1fr;
     justify-items: stretch;
+    gap: 0.5rem;
   }
 
   .calendar-feed-filter {
-    justify-self: start;
+    justify-self: stretch;
+  }
+
+  .calendar-feed-toggle {
+    width: 100%;
+  }
+
+  .calendar-feed-btn {
+    flex: 1;
+    text-align: center;
+    padding: 0.4rem 0.5rem;
   }
 
   .search-container {
@@ -791,24 +809,75 @@ body {
     min-width: 0;
   }
 
+  .calendar-feed-filter-status,
+  .search-status {
+    font-size: 0.8rem;
+  }
+
+  .fc .fc-toolbar {
+    flex-direction: column;
+    gap: 0.45rem;
+    margin-bottom: 0.75rem;
+  }
+
   .fc-toolbar-chunk {
-    display: block;
-    text-align: center;
-    line-height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    line-height: normal;
   }
 
   .fc-toolbar-title {
-    font-size: 1rem;
+    font-size: 1.05rem;
   }
 
   .fc .fc-button {
-    font-size: 0.85rem;
-    padding: 0.35em 0.55em;
+    font-size: 0.8rem;
+    padding: 0.4em 0.6em;
+  }
+
+  .fc-col-header-cell-cushion {
+    font-size: 0.72rem;
+    padding: 0.25rem 0;
+  }
+
+  .fc .fc-daygrid-day-number {
+    font-size: 0.75rem;
+    padding: 0.15rem 0.25rem;
+  }
+
+  .fc-daygrid-day-top {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  /* Month view: keep cells scannable — short single-line chips */
+  .fc-dayGridMonth-view .fc-daygrid-event,
+  .fc-dayGridMonth-view a.fc-event {
+    font-size: 0.65rem;
+    line-height: 1.2;
+    padding: 0.1rem 0.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .fc-dayGridMonth-view .fc-event-title,
+  .fc-dayGridMonth-view .fc-event-main {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    -webkit-line-clamp: unset;
+  }
+
+  .fc-dayGridMonth-view .fc-event-time {
+    display: none;
   }
 
   .fc .fc-daygrid-event {
     min-height: fit-content;
-    white-space: normal;
     font-size: 0.8rem;
   }
 
@@ -816,20 +885,19 @@ body {
     padding-top: 0.5rem;
   }
 
-  .event-popover {
-    left: 16px !important;
-    right: 16px !important;
-    top: 16px !important;
-    width: auto;
-    max-height: calc(100vh - 32px);
-  }
-
-  .fc-dayGridMonth-view .fc-event-time {
-    display: none;
-  }
-
   .fc-dayGridWeek-view .fc-event-time {
     display: none;
+  }
+
+  .event-popover {
+    position: fixed;
+    left: 50% !important;
+    top: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: translate(-50%, -50%);
+    width: min(400px, calc(100vw - 32px));
+    max-height: calc(100vh - 32px);
   }
 }
 

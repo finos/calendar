@@ -42,38 +42,44 @@ export default function Header({ theme, onToggleTheme }) {
       <div className="header-actions">
         <button
           type="button"
-          className="theme-toggle"
+          className="header-action theme-toggle"
           onClick={onToggleTheme}
           aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
           title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
         >
           <Icon
             path={isDark ? mdiWhiteBalanceSunny : mdiWeatherNight}
-            size={0.9}
+            size={0.85}
             aria-hidden="true"
           />
-          {isDark ? 'Light' : 'Dark'}
+          <span className="header-action-label">{isDark ? 'Light' : 'Dark'}</span>
         </button>
         <a
-          className="subscribe-link"
+          className="header-action subscribe-link"
           href={LFX_CALENDAR_URL}
           target="_blank"
           rel="noreferrer"
           title="Open the LFX Meetings calendar"
         >
           <Icon path={mdiOpenInNew} size={0.8} aria-hidden="true" />
-          LFX calendar
+          <span className="header-action-label">LFX</span>
+          <span className="header-action-label-full"> calendar</span>
           <span className="sr-only"> (opens in new tab)</span>
         </a>
         <button
           type="button"
-          className="subscribe-link"
+          className="header-action subscribe-link"
           onClick={copySubscribeLink}
           title={SUBSCRIBE_HINT}
           aria-label={copied ? 'Subscribe link copied' : 'Copy calendar subscribe link'}
         >
           <Icon path={copied ? mdiContentCopy : mdiRss} size={0.8} aria-hidden="true" />
-          {copied ? 'Copied!' : 'Copy subscribe link'}
+          <span className="header-action-label">
+            {copied ? 'Copied!' : 'Subscribe'}
+          </span>
+          <span className="header-action-label-full">
+            {copied ? '' : ' link'}
+          </span>
         </button>
       </div>
     </div>
