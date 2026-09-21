@@ -1,11 +1,11 @@
 # FINOS Calendar
 
-This app powers [calendar.finos.org](https://calendar.finos.org), which is also embedded on [finos.org/calendar](https://www.finos.org/calendar). It overlays two **live ICS feeds**:
+This app powers [calendar.finos.org](https://calendar.finos.org), which is also embedded on [finos.org/calendar](https://www.finos.org/calendar). It overlays two **live feeds**:
 
-- **LFX meetings** from the Linux Foundation LFX calendar Worker
+- **LFX meetings** from the Linux Foundation public meetings JSON API (Project Meetings)
 - **Custom events** from the writable FINOS Google Calendar (`finos.org_fac8mo1rfc6ehscg0d80fi8jig@group.calendar.google.com`)
 
-The page fetches those feeds at runtime through same-origin proxies (`/feeds/lfx.ics` and `/feeds/custom.ics`). A merged subscribe feed is available at [`/calendar.ics`](/calendar.ics). Feeds only include events from the past month through the next 18 months.
+The page loads LFX meetings via `/api/lfx-meetings` (range-filtered) and custom events via `/feeds/custom.ics`. A merged subscribe feed remains at [`/calendar.ics`](/calendar.ics) (LFX + Google ICS). The Google ICS window covers the past month through the next 18 months.
 
 ## Adding events
 
