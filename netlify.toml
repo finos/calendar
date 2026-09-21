@@ -18,6 +18,10 @@
   function = "calendar-ics"
   path = "/calendar.ics"
 
+[[edge_functions]]
+  function = "lfx-meetings"
+  path = "/api/lfx-meetings"
+
 [[headers]]
   for = "/*"
   [headers.values]

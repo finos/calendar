@@ -28,3 +28,12 @@ export function printTime(date) {
 export function userTimeZone() {
   return Intl.DateTimeFormat().resolvedOptions().timeZone || 'local';
 }
+
+/** True when the event's end (or start if no end) is before now. */
+export function eventHasEnded(event, now = Date.now()) {
+  if (!event) return false;
+  const end = event.end || event.start;
+  if (!end) return false;
+  const endMs = end instanceof Date ? +end : Date.parse(end);
+  return !Number.isNaN(endMs) && endMs < now;
+}

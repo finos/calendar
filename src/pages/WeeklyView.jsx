@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { parseIcsEvents } from '../utils/ics-parse.js';
+import { eventHasEnded } from '../utils/date-time.js';
 import { eventInviteUrl } from '../utils/lfx-invite.js';
 
 function formatDate(date) {
@@ -120,7 +121,9 @@ export default function WeeklyView() {
           </h2>
           <ul>
             {events.map((event) => {
-              const inviteUrl = eventInviteUrl(event);
+              const inviteUrl = !eventHasEnded(event)
+                ? eventInviteUrl(event)
+                : null;
               return (
                 <li key={`${event.uid}-${event.start.toISOString()}`}>
                   <span style={{ color: '#666' }}>

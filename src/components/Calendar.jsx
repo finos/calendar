@@ -29,6 +29,7 @@ import {
   sameHiddenDays,
 } from '../utils/hidden-weekends.js';
 import { createIcsEventSource } from '../utils/ics-parse.js';
+import { createLfxMeetingsEventSource } from '../utils/lfx-meetings.js';
 import { popupPositionFromClick } from '../utils/popup-position.js';
 import { getAspectRatio, getInitialView, isMinWidth } from '../utils/view-size.js';
 
@@ -257,7 +258,7 @@ export default function Calendar() {
     () => [
       {
         id: 'lfx',
-        events: createIcsEventSource('/feeds/lfx.ics'),
+        events: createLfxMeetingsEventSource('/api/lfx-meetings'),
         className: 'event-lfx',
         backgroundColor: LFX_COLOR.backgroundColor,
         borderColor: LFX_COLOR.borderColor,
