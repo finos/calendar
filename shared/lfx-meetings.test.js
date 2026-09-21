@@ -44,6 +44,7 @@ describe('mapLfxMeetingToEvent', () => {
         projectSlug: 'fdc3',
         projectName: 'FDC3',
         meetingId: '1',
+        recurrence: null,
       },
     });
   });
@@ -62,11 +63,13 @@ describe('mapLfxMeetingToEvent', () => {
       extendedProps: { meeting_id: '99536057059' },
     });
     expect(a.id).not.toBe(b.id);
-    expect(lfxMeetingInstanceKey({
-      id: '1791381600',
-      start: '2026-10-07T14:00:00Z',
-      extendedProps: { meeting_id: '97158459687' },
-    })).toBe('97158459687:2026-10-07T14:00:00Z');
+    expect(
+      lfxMeetingInstanceKey({
+        id: '1791381600',
+        start: '2026-10-07T14:00:00Z',
+        extendedProps: { meeting_id: '97158459687' },
+      })
+    ).toBe('97158459687:2026-10-07T14:00:00Z');
   });
 });
 

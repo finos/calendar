@@ -50,6 +50,15 @@ export function lfxMeetingInstanceKey(meeting) {
   return `id:${meeting?.id ?? ''}:${start}`;
 }
 
+/** When past/upcoming overlap, keep the copy that still has a join link. */
+function preferMeetingWithShareUrl(existing, candidate) {
+  if (!existing) return candidate;
+  const existingShare = existing.extendedProps?.share_url;
+  const candidateShare = candidate.extendedProps?.share_url;
+  if (!existingShare && candidateShare) return candidate;
+  return existing;
+}
+
 export function mapLfxMeetingToEvent(meeting) {
   const props = meeting?.extendedProps || {};
   const shareUrl = props.share_url || '';
@@ -71,6 +80,7 @@ export function mapLfxMeetingToEvent(meeting) {
       projectSlug: props.project_slug || props.project?.Slug || '',
       projectName: props.project?.Name || '',
       meetingId,
+      recurrence: props.recurrence || null,
     },
   };
 }
@@ -150,10 +160,11 @@ export async function loadLfxMeetingsInRange(rangeStart, rangeEnd) {
   }
 
   const filtered = filterMeetingsByRange(meetings, rangeStartMs, rangeEndMs);
-  // De-dupe past/upcoming overlap near "now" — not by raw id (that's start time)
+  // De-dupe past/upcoming overlap near "now" — prefer the copy with share_url
   const byKey = new Map();
   for (const meeting of filtered) {
-    byKey.set(lfxMeetingInstanceKey(meeting), meeting);
+    const key = lfxMeetingInstanceKey(meeting);
+    byKey.set(key, preferMeetingWithShareUrl(byKey.get(key), meeting));
   }
   return [...byKey.values()].map(mapLfxMeetingToEvent);
 }

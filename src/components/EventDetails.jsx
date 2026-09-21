@@ -16,7 +16,7 @@ import {
   isHttpUrl,
   splitMeetingDescription,
 } from '../utils/event-description.js';
-import { printDate, printTime, userTimeZone } from '../utils/date-time.js';
+import { printDate, printTime, userTimeZone, eventHasEnded } from '../utils/date-time.js';
 import { downloadICSFile } from '../utils/ics-download.js';
 import { eventInviteUrl } from '../utils/lfx-invite.js';
 import { htmlRegex } from '../utils/regex.js';
@@ -51,7 +51,8 @@ export default function EventDetails({ event, position, onClose }) {
   const dialogRef = useRef(null);
   const closeRef = useRef(null);
   const [showJoinDetails, setShowJoinDetails] = useState(false);
-  const inviteUrl = eventInviteUrl(event);
+  const isPast = eventHasEnded(event);
+  const inviteUrl = !isPast ? eventInviteUrl(event) : null;
   const location = event.extendedProps?.location || '';
   const source = event.extendedProps?.source;
   const highlighted = Boolean(event.extendedProps?.highlighted);
@@ -66,6 +67,9 @@ export default function EventDetails({ event, position, onClose }) {
   const sameDay = fromDate === toDate;
 
   const locationIsJoinLink = isHttpUrl(location);
+  const showOpenLocation = !isPast && locationIsJoinLink && !inviteUrl;
+  const showDownloadIcs = !isPast;
+  const showActions = Boolean(inviteUrl || showOpenLocation || showDownloadIcs);
 
   useFocusTrap(dialogRef, true);
 
@@ -136,7 +140,7 @@ export default function EventDetails({ event, position, onClose }) {
         <div className="event-popover-summary">{parse(formatHtml(summary))}</div>
       )}
 
-      {details && (
+      {details && !isPast && (
         <div className="event-popover-details">
           <button
             type="button"
@@ -155,40 +159,44 @@ export default function EventDetails({ event, position, onClose }) {
         </div>
       )}
 
-      <div className="event-popover-actions">
-        {inviteUrl && (
-          <a
-            className="event-popover-btn event-popover-btn-primary"
-            href={inviteUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Icon path={mdiAccountPlus} size={0.75} aria-hidden="true" />
-            Invite me
-            <span className="sr-only"> (opens in new tab)</span>
-          </a>
-        )}
-        {locationIsJoinLink && !inviteUrl && (
-          <a
-            className="event-popover-btn event-popover-btn-primary"
-            href={location}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Icon path={mdiOpenInNew} size={0.75} aria-hidden="true" />
-            Open location
-            <span className="sr-only"> (opens in new tab)</span>
-          </a>
-        )}
-        <button
-          type="button"
-          className="event-popover-btn"
-          onClick={() => downloadICSFile(event)}
-        >
-          <Icon path={mdiDownload} size={0.75} aria-hidden="true" />
-          Download ICS
-        </button>
-      </div>
+      {showActions && (
+        <div className="event-popover-actions">
+          {inviteUrl && (
+            <a
+              className="event-popover-btn event-popover-btn-primary"
+              href={inviteUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Icon path={mdiAccountPlus} size={0.75} aria-hidden="true" />
+              Invite me
+              <span className="sr-only"> (opens in new tab)</span>
+            </a>
+          )}
+          {showOpenLocation && (
+            <a
+              className="event-popover-btn event-popover-btn-primary"
+              href={location}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Icon path={mdiOpenInNew} size={0.75} aria-hidden="true" />
+              Open location
+              <span className="sr-only"> (opens in new tab)</span>
+            </a>
+          )}
+          {showDownloadIcs && (
+            <button
+              type="button"
+              className="event-popover-btn"
+              onClick={() => downloadICSFile(event)}
+            >
+              <Icon path={mdiDownload} size={0.75} aria-hidden="true" />
+              Download ICS
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }
