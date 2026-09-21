@@ -564,6 +564,11 @@ body {
   white-space: normal;
 }
 
+/* Block cards already have a left accent — FC's list-style dot sits off-center. */
+.fc .fc-daygrid-event-dot {
+  display: none;
+}
+
 .fc-dayGridDay-view .fc-daygrid-event .fc-event-main,
 .fc-dayGridDay-view .fc-daygrid-event .fc-event-title,
 .fc-dayGridDay-view .fc-daygrid-event .fc-event-time {
@@ -601,6 +606,51 @@ body {
   width: 2.35rem;
   height: 2.35rem;
   font-size: 1.15rem;
+}
+
+/* Month: keep chips compact to fit more events in each cell */
+.fc-dayGridMonth-view .fc-daygrid-day-frame {
+  padding: 0.2rem 0.15rem 0.25rem;
+}
+
+.fc-dayGridMonth-view .fc-daygrid-day-events {
+  margin-top: 0.1rem;
+}
+
+.fc-dayGridMonth-view .fc-daygrid-event-harness {
+  margin-bottom: 1px;
+}
+
+.fc-dayGridMonth-view .fc-daygrid-event,
+.fc-dayGridMonth-view a.fc-event {
+  padding: 0.1rem 0.25rem;
+  border-radius: 3px;
+  line-height: 1.25;
+}
+
+/* Week: a bit more breathing room around cells and event chips */
+.fc-dayGridWeek-view .fc-daygrid-day-frame {
+  min-height: 12rem;
+  padding: 0.5rem 0.4rem 0.65rem;
+}
+
+.fc-dayGridWeek-view .fc-daygrid-day-events {
+  margin-top: 0.2rem;
+}
+
+.fc-dayGridWeek-view .fc-daygrid-event-harness {
+  margin-bottom: 0.4rem;
+}
+
+.fc-dayGridWeek-view .fc-daygrid-event,
+.fc-dayGridWeek-view a.fc-event {
+  padding: 0.4rem 0.5rem;
+  border-radius: 6px;
+  line-height: 1.3;
+}
+
+.fc-dayGridWeek-view .fc-col-header-cell {
+  padding: 0.45rem 0;
 }
 
 .fc .fc-daygrid-event,

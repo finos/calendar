@@ -44,6 +44,42 @@ END:VEVENT
 END:VCALENDAR
 `;
 
+const exceptionIcs = `BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VTIMEZONE
+TZID:America/New_York
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:sail-1
+SUMMARY:FDC3 Sail Project Meeting
+DTSTART;TZID=America/New_York:20260720T090000
+DTEND;TZID=America/New_York:20260720T100000
+RRULE:FREQ=WEEKLY;INTERVAL=2;BYDAY=MO
+END:VEVENT
+BEGIN:VEVENT
+UID:sail-1
+RECURRENCE-ID;TZID=America/New_York:20260831T090000
+DTSTART;TZID=America/New_York:20260901T090000
+DTEND;TZID=America/New_York:20260901T100000
+SUMMARY:FDC3 Sail Project Meeting
+END:VEVENT
+END:VCALENDAR
+`;
+
 afterEach(() => {
   ICAL.TimezoneService.reset();
 });
@@ -77,6 +113,18 @@ describe('parseIcsEvents', () => {
     // 10:00 America/New_York (EDT, UTC-4) => 14:00Z
     expect(events[0].start.toISOString()).toBe('2026-10-25T14:00:00.000Z');
     expect(events[0].end.toISOString()).toBe('2026-10-25T15:00:00.000Z');
+  });
+
+  it('applies RECURRENCE-ID exceptions once without duplicating', () => {
+    const events = parseIcsEvents(
+      exceptionIcs,
+      new Date('2026-08-30T00:00:00Z'),
+      new Date('2026-09-02T00:00:00Z')
+    );
+    const sail = events.filter((event) => event.title.includes('FDC3 Sail'));
+    expect(sail).toHaveLength(1);
+    // Moved from Mon Aug 31 9:00 ET to Tue Sep 1 9:00 ET => 13:00Z
+    expect(sail[0].start.toISOString()).toBe('2026-09-01T13:00:00.000Z');
   });
 });
 
