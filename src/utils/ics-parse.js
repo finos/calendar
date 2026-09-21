@@ -40,6 +40,10 @@ export function parseIcsEvents(icsText, rangeStart, rangeEnd) {
 
   for (const vevent of comp.getAllSubcomponents('vevent')) {
     const event = new ICAL.Event(vevent);
+    // Exception instances are already applied via getOccurrenceDetails on the
+    // master series — adding them again duplicates the moved occurrence.
+    if (event.isRecurrenceException()) continue;
+
     const allDay = Boolean(event.startDate?.isDate);
 
     if (event.isRecurring()) {
@@ -49,15 +53,15 @@ export function parseIcsEvents(icsText, rangeStart, rangeEnd) {
       while ((next = iterator.next())) {
         iterations += 1;
         if (iterations > 1000) break;
-        const start = next.toJSDate();
+        const occ = event.getOccurrenceDetails(next);
+        const start = occ.startDate.toJSDate();
         if (start > rangeEnd) break;
         if (start < rangeStart) continue;
-        const occ = event.getOccurrenceDetails(next);
         events.push(
           toEventRecord(
             event,
             vevent,
-            occ.startDate.toJSDate(),
+            start,
             occ.endDate.toJSDate(),
             allDay
           )
