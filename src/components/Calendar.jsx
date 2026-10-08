@@ -98,16 +98,16 @@ function userFacingLoadError(failedSources) {
 }
 
 function transformCustomEvent(event) {
-  const { title, highlighted } = parseHighlightTitle(event.title);
+  const { title } = parseHighlightTitle(event.title);
   return {
     ...event,
     title,
-    order: highlighted ? -100 : 0,
-    classNames: highlighted ? ['event-highlight'] : [],
+    order: -100,
+    classNames: ['event-highlight'],
     extendedProps: {
       ...event.extendedProps,
       source: 'custom',
-      highlighted,
+      highlighted: true,
     },
   };
 }
